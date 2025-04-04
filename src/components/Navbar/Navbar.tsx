@@ -2,7 +2,12 @@ import React, { useState } from "react";
 import { Link } from "react-router-dom";
 import "./Navbar.css";
 
-const Navbar: React.FC = () => {
+interface NavbarProps {
+  onCartClick: () => void;
+  onAuthClick: () => void;
+}
+
+const Navbar: React.FC<NavbarProps> = ({ onCartClick, onAuthClick }) => {
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
   const [isSearchOpen, setIsSearchOpen] = useState(false);
   const [isPhoneModalOpen, setIsPhoneModalOpen] = useState(false);
@@ -33,13 +38,13 @@ const Navbar: React.FC = () => {
           >
             <i className="fas fa-search"></i>
           </button>
-          <Link to="/login" className="icon-button">
+          <button className="icon-button" onClick={onAuthClick}>
             <i className="fas fa-user"></i>
-          </Link>
-          <Link to="/cart" className="icon-button cart-icon">
+          </button>
+          <button className="icon-button cart-icon" onClick={onCartClick}>
             <i className="fas fa-shopping-cart"></i>
             <span className="cart-count">0</span>
-          </Link>
+          </button>
         </div>
       </div>
 
@@ -192,10 +197,10 @@ const Navbar: React.FC = () => {
             </li>
           </ul>
           <div className="nav-right">
-            <Link to="/login" className="icon-button">
+            <button className="icon-button" onClick={onAuthClick}>
               <i className="fas fa-user"></i>
               Вход
-            </Link>
+            </button>
           </div>
         </div>
 
@@ -226,7 +231,7 @@ const Navbar: React.FC = () => {
               <button className="icon-button">
                 <i className="fas fa-chart-bar"></i>
               </button>
-              <button className="icon-button">
+              <button className="icon-button" onClick={onCartClick}>
                 <i className="fas fa-shopping-cart"></i>
                 <span className="cart-count">0</span>
               </button>
