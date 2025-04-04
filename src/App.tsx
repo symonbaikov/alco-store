@@ -12,8 +12,8 @@ function App() {
   return (
     <Router>
       <div className="app">
-        <Navbar
-          onCartClick={() => setIsCartOpen(true)}
+        <Navbar 
+          onCartClick={() => setIsCartOpen(true)} 
           onAuthClick={() => setIsAuthOpen(true)}
         />
         <Routes>
