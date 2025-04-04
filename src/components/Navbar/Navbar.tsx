@@ -11,6 +11,7 @@ const Navbar: React.FC<NavbarProps> = ({ onCartClick, onAuthClick }) => {
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
   const [isSearchOpen, setIsSearchOpen] = useState(false);
   const [isPhoneModalOpen, setIsPhoneModalOpen] = useState(false);
+  const [isLanguageMenuOpen, setIsLanguageMenuOpen] = useState(false);
 
   return (
     <nav className="navbar">
@@ -105,7 +106,10 @@ const Navbar: React.FC<NavbarProps> = ({ onCartClick, onAuthClick }) => {
 
       {/* Меню для мобильных */}
       <div className={`mobile-menu ${isMobileMenuOpen ? "open" : ""}`}>
-        <div className="language-selector">
+        <div
+          className="language-selector"
+          onClick={() => setIsLanguageMenuOpen(true)}
+        >
           <div className="language-icon">
             <i className="fas fa-globe"></i>
           </div>
@@ -114,6 +118,26 @@ const Navbar: React.FC<NavbarProps> = ({ onCartClick, onAuthClick }) => {
             <div className="language-subtitle">Език на сайта</div>
           </div>
           <i className="fas fa-chevron-right"></i>
+        </div>
+
+        <div className={`language-menu ${isLanguageMenuOpen ? "open" : ""}`}>
+          <div className="language-menu-header">
+            <button
+              className="back-button"
+              onClick={() => setIsLanguageMenuOpen(false)}
+            >
+              <i className="fas fa-arrow-left"></i>
+              Назад
+            </button>
+          </div>
+          <div className="language-options">
+            <div className="language-option active">
+              <span>Български</span>
+            </div>
+            <div className="language-option">
+              <span>English</span>
+            </div>
+          </div>
         </div>
 
         <div className="mobile-catalog">
@@ -224,10 +248,26 @@ const Navbar: React.FC<NavbarProps> = ({ onCartClick, onAuthClick }) => {
               +38 (097) 974-06-60
             </a>
             <div className="icons-container">
-              <button className="icon-button">
-                <i className="fas fa-globe"></i>
-                BG
-              </button>
+              <div className="language-selector desktop">
+                <button className="icon-button">
+                  <i className="fas fa-globe"></i>
+                  BG
+                </button>
+                <div className="language-dropdown">
+                  <div className="language-option active">
+                    <div className="language-content">
+                      <div className="language-title">Български</div>
+                      <div className="language-subtitle">Език на сайта</div>
+                    </div>
+                  </div>
+                  <div className="language-option">
+                    <div className="language-content">
+                      <div className="language-title">English</div>
+                      <div className="language-subtitle">Site language</div>
+                    </div>
+                  </div>
+                </div>
+              </div>
               <button className="icon-button">
                 <i className="fas fa-chart-bar"></i>
               </button>
