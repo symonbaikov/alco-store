@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="bg">
+<html lang="bg" style="background: white">
   <head>
     <meta charset="UTF-8" />
     <link rel="icon" type="image/svg+xml" href="/vite.svg" />
@@ -14,9 +14,23 @@
       href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;700;900&display=swap"
       rel="stylesheet"
     />
+    <style>
+      html,
+      body {
+        margin: 0;
+        padding: 0;
+        background: white !important;
+        min-height: 100%;
+        overflow-x: hidden;
+      }
+      #root {
+        background: white !important;
+        min-height: 100vh;
+      }
+    </style>
     <title>Alcomag - Алкохолен магазин</title>
   </head>
-  <body>
+  <body style="background: white">
     <div id="root"></div>
     <script type="module" src="/src/main.tsx"></script>
   </body>
