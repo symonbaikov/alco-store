@@ -31,6 +31,20 @@ const slides: Slide[] = [
     description: "Beluga 1L на изгодна цена",
     link: "/weekly",
   },
+  {
+    id: 4,
+    image: "/images/01.04-Shok-Cena-Uzo-12.webp",
+    title: "Специална оферта",
+    description: "Узо 12 на промоционална цена",
+    link: "/promotions",
+  },
+  {
+    id: 5,
+    image: "/images/01.04-Shok-Cena-Jim-Beam-Honey.webp",
+    title: "Нова промоция",
+    description: "Jim Beam Honey на специална цена",
+    link: "/promotions",
+  },
 ];
 
 const Slider: React.FC = () => {
