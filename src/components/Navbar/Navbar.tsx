@@ -86,7 +86,7 @@ const Navbar: React.FC<NavbarProps> = ({ onCartClick, onAuthClick }) => {
               </div>
               <div className="phone-info">
                 <div className="phone-number">+38 (093) 874-06-60</div>
-                <div className="phone-description">Обработка на желания</div>
+                <div className="phone-description">Обработка на запитвания</div>
               </div>
             </a>
           </div>
@@ -157,13 +157,13 @@ const Navbar: React.FC<NavbarProps> = ({ onCartClick, onAuthClick }) => {
             <li>
               <Link to="/profile" className="mobile-footer-item">
                 <i className="fas fa-user"></i>
-                <span>Личен кабинет</span>
+                <span>Личен профил</span>
               </Link>
             </li>
             <li>
               <Link to="/cart" className="mobile-footer-item">
                 <i className="fas fa-shopping-cart"></i>
-                <span>Кошница</span>
+                <span>Количка</span>
                 <span className="cart-badge">0</span>
               </Link>
             </li>

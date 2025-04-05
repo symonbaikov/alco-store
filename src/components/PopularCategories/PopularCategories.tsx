@@ -53,4 +53,4 @@ const PopularCategories: React.FC = () => {
   );
 };
 
-export default PopularCategories; 
+export default PopularCategories;
