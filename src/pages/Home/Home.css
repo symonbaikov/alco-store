@@ -1,7 +1,7 @@
 .home {
   width: 100%;
   background: white;
-  padding: 20px 0;
+  padding: 0;
 }
 
 .section-title {
@@ -90,10 +90,6 @@
 /* Убираем отступы у слайдера */
 .home .slider {
   margin: 0;
-  width: 100vw;
+  width: 100%;
   position: relative;
-  left: 50%;
-  right: 50%;
-  margin-left: -50vw;
-  margin-right: -50vw;
 }
