@@ -1,4 +1,6 @@
 import React, { useState, useEffect } from "react";
+import { getSlides } from "../../api/slides";
+import SliderSkeleton from "./SliderSkeleton";
 import "./Slider.css";
 
 interface Slide {
@@ -9,56 +11,34 @@ interface Slide {
   link: string;
 }
 
-const slides: Slide[] = [
-  {
-    id: 1,
-    image: "/images/14.03-SHOK-CENA-DOMAINE-BOYAR-3l.webp",
-    title: "Специално предложение",
-    description: "Domaine Boyar 3L на шокова цена",
-    link: "/promotions",
-  },
-  {
-    id: 2,
-    image: "/images/01.04-Shok-Cena-Jack-Daniels.webp",
-    title: "Нови продукти",
-    description: "Jack Daniel's на специална цена",
-    link: "/new",
-  },
-  {
-    id: 3,
-    image: "/images/01.04-Shok-Cena-Beluga-1l.webp",
-    title: "Промоция на седмицата",
-    description: "Beluga 1L на изгодна цена",
-    link: "/weekly",
-  },
-  {
-    id: 4,
-    image: "/images/01.04-Shok-Cena-Uzo-12.webp",
-    title: "Специална оферта",
-    description: "Узо 12 на промоционална цена",
-    link: "/promotions",
-  },
-  {
-    id: 5,
-    image: "/images/01.04-Shok-Cena-Jim-Beam-Honey.webp",
-    title: "Нова промоция",
-    description: "Jim Beam Honey на специална цена",
-    link: "/promotions",
-  },
-];
-
 const Slider: React.FC = () => {
+  const [slides, setSlides] = useState<Slide[]>([]);
   const [currentSlide, setCurrentSlide] = useState(0);
   const [isPaused, setIsPaused] = useState(false);
+  const [isLoading, setIsLoading] = useState(true);
 
   useEffect(() => {
-    if (!isPaused) {
+    const loadSlides = async () => {
+      try {
+        const data = await getSlides();
+        setSlides(data);
+      } catch (error) {
+        console.error("Error loading slides:", error);
+      } finally {
+        setIsLoading(false);
+      }
+    };
+    loadSlides();
+  }, []);
+
+  useEffect(() => {
+    if (!isPaused && slides.length > 0) {
       const timer = setInterval(() => {
         setCurrentSlide((prev) => (prev + 1) % slides.length);
       }, 3000);
       return () => clearInterval(timer);
     }
-  }, [isPaused]);
+  }, [isPaused, slides.length]);
 
   const goToSlide = (index: number) => {
     setCurrentSlide(index);
@@ -71,6 +51,14 @@ const Slider: React.FC = () => {
   const prevSlide = () => {
     setCurrentSlide((prev) => (prev - 1 + slides.length) % slides.length);
   };
+
+  if (isLoading) {
+    return <SliderSkeleton />;
+  }
+
+  if (slides.length === 0) {
+    return null;
+  }
 
   return (
     <div
@@ -89,7 +77,7 @@ const Slider: React.FC = () => {
               <h2>{slide.title}</h2>
               <p>{slide.description}</p>
               <a href={slide.link} className="slide-button">
-                Подробнее
+                Повече информация
               </a>
             </div>
           </div>
