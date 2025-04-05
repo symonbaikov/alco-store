@@ -284,9 +284,7 @@ const Navbar: React.FC<NavbarProps> = ({ onCartClick, onAuthClick }) => {
           <div className="bottom-nav-container">
             <ul className="catalog-menu">
               <li className="catalog-item">
-                <Link to="/catalog">
-                  <i className="fas fa-bars"></i> ЦЯЛ КАТАЛОГ
-                </Link>
+                <Link to="/catalog">ЦЯЛ КАТАЛОГ</Link>
               </li>
               <li className="catalog-item">
                 <Link to="/wine">ВИНА</Link>
