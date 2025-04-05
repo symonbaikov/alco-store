@@ -12,23 +12,23 @@ interface Slide {
 const slides: Slide[] = [
   {
     id: 1,
-    image: "/images/slides/slide1.jpg",
-    title: "Специальное предложение",
-    description: "Скидка 20% на все вина",
+    image: "/images/14.03-SHOK-CENA-DOMAINE-BOYAR-3l.webp",
+    title: "Специално предложение",
+    description: "Domaine Boyar 3L на шокова цена",
     link: "/promotions",
   },
   {
     id: 2,
-    image: "/images/slides/slide2.jpg",
-    title: "Новые поступления",
-    description: "Свежие напитки уже в продаже",
+    image: "/images/01.04-Shok-Cena-Jack-Daniels.webp",
+    title: "Нови продукти",
+    description: "Jack Daniel's на специална цена",
     link: "/new",
   },
   {
     id: 3,
-    image: "/images/slides/slide3.jpg",
-    title: "Акция недели",
-    description: "Покупайте 2 бутылки по цене 1",
+    image: "/images/01.04-Shok-Cena-Beluga-1l.webp",
+    title: "Промоция на седмицата",
+    description: "Beluga 1L на изгодна цена",
     link: "/weekly",
   },
 ];
@@ -41,7 +41,7 @@ const Slider: React.FC = () => {
     if (!isPaused) {
       const timer = setInterval(() => {
         setCurrentSlide((prev) => (prev + 1) % slides.length);
-      }, 5000);
+      }, 3000);
       return () => clearInterval(timer);
     }
   }, [isPaused]);
