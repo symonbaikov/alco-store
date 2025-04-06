@@ -9,14 +9,18 @@ i18n
   .use(initReactI18next)
   .init({
     fallbackLng: "bg",
-    debug: true,
+    debug: false,
     detection: {
-      order: ["queryString", "cookie"],
-      caches: ["cookie"],
+      order: ["localStorage", "navigator"],
+      caches: ["localStorage"]
     },
     interpolation: {
-      escapeValue: false,
-    },
+      escapeValue: false
+    }
   });
+
+if (!localStorage.getItem("i18nextLng")) {
+  i18n.changeLanguage("bg");
+}
 
 export default i18n;
