@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { Link } from "react-router-dom";
 import "./Navbar.css";
 
@@ -12,6 +12,16 @@ const Navbar: React.FC<NavbarProps> = ({ onCartClick, onAuthClick }) => {
   const [isSearchOpen, setIsSearchOpen] = useState(false);
   const [isPhoneModalOpen, setIsPhoneModalOpen] = useState(false);
   const [isLanguageMenuOpen, setIsLanguageMenuOpen] = useState(false);
+  const [isScrolled, setIsScrolled] = useState(false);
+
+  useEffect(() => {
+    const handleScroll = () => {
+      setIsScrolled(window.scrollY > 50);
+    };
+
+    window.addEventListener("scroll", handleScroll);
+    return () => window.removeEventListener("scroll", handleScroll);
+  }, []);
 
   return (
     <nav className="navbar">
@@ -190,6 +200,59 @@ const Navbar: React.FC<NavbarProps> = ({ onCartClick, onAuthClick }) => {
               <Link to="/contacts">Контакти</Link>
             </li>
           </ul>
+        </div>
+      </div>
+
+      {/* Компактное меню */}
+      <div className={`compact-nav ${isScrolled ? "show" : ""}`}>
+        <div className="top-nav">
+          <div className="nav-left">
+            <Link to="/" className="navbar-logo">
+              ALCOMAG
+            </Link>
+            <div className="search-container">
+              <input type="text" placeholder="Търсене" />
+              <button>
+                <i className="fas fa-search"></i>
+              </button>
+            </div>
+          </div>
+
+          <div className="nav-right">
+            <a href="tel:+380979740660" className="phone-number">
+              <i className="fas fa-phone"></i>
+              +38 (097) 974-06-60
+            </a>
+            <div className="icons-container">
+              <div className="language-selector desktop">
+                <button className="icon-button">
+                  <i className="fas fa-globe"></i>
+                  BG
+                </button>
+                <div className="language-dropdown">
+                  <div className="language-option active">
+                    <div className="language-content">
+                      <div className="language-title">Български</div>
+                      <div className="language-subtitle">Език на сайта</div>
+                    </div>
+                  </div>
+                  <div className="language-option">
+                    <div className="language-content">
+                      <div className="language-title">English</div>
+                      <div className="language-subtitle">Site language</div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+              <button className="icon-button" onClick={onAuthClick}>
+                <i className="fas fa-user"></i>
+              </button>
+              <button className="icon-button" onClick={onCartClick}>
+                <i className="fas fa-shopping-cart"></i>
+                <span className="cart-count">0</span>
+              </button>
+            </div>
+          </div>
         </div>
       </div>
 

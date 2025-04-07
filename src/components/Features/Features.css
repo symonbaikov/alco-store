@@ -5,12 +5,24 @@
 }
 
 .features-container {
-  max-width: 1200px;
+  max-width: 1500px;
   margin: 0 auto;
   padding: 0 20px;
   display: grid;
   grid-template-columns: repeat(4, 1fr);
   gap: 30px;
+}
+
+.feature-card {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+  padding: 20px;
+  background: white;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  border-radius: 0;
+  transition: all 0.3s ease;
 }
 
 .feature-item {
