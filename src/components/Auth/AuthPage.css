@@ -10,7 +10,6 @@
 .auth-box {
   background: white;
   padding: 30px;
-  border-radius: 10px;
   box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
   width: 100%;
   max-width: 400px;
@@ -31,7 +30,6 @@
   width: 100%;
   padding: 12px;
   border: 1px solid #ddd;
-  border-radius: 5px;
   font-size: 16px;
   transition: border-color 0.3s;
 }
@@ -47,7 +45,6 @@
   background: #8b0000;
   color: white;
   border: none;
-  border-radius: 5px;
   font-size: 16px;
   cursor: pointer;
   transition: background-color 0.3s;
@@ -89,7 +86,6 @@
   background: white;
   color: #757575;
   border: 1px solid #ddd;
-  border-radius: 4px;
   font-size: 14px;
   font-weight: 500;
   cursor: pointer;
@@ -168,8 +164,7 @@
   background: rgba(0, 0, 0, 0.5);
   display: flex;
   justify-content: center;
-  align-items: flex-start;
-  padding-top: 50px;
+  align-items: center;
   z-index: 1000;
 }
 
@@ -177,7 +172,6 @@
   background: white;
   width: 100%;
   max-width: 450px;
-  border-radius: 8px;
   overflow: hidden;
 }
 
@@ -216,7 +210,6 @@ form {
   width: 100%;
   padding: 12px;
   border: 1px solid #ddd;
-  border-radius: 4px;
   font-size: 14px;
 }
 
@@ -263,7 +256,6 @@ form {
   background: #8b0000;
   color: white;
   border: none;
-  border-radius: 4px;
   font-size: 14px;
   cursor: pointer;
   margin-bottom: 10px;
@@ -279,7 +271,6 @@ form {
   background: white;
   color: #8b0000;
   border: 1px solid #8b0000;
-  border-radius: 4px;
   font-size: 14px;
   cursor: pointer;
   margin-bottom: 20px;
@@ -291,13 +282,12 @@ form {
 
 @media (max-width: 480px) {
   .modal-overlay {
-    padding: 0;
+    align-items: flex-start;
+    padding-top: 20px;
   }
 
   .modal-content {
-    height: 100%;
-    max-width: none;
-    border-radius: 0;
+    max-width: 90%;
   }
 }
 
@@ -348,7 +338,6 @@ form {
   width: 100%;
   padding: 12px;
   border: 1px solid #ddd;
-  border-radius: 4px;
   font-size: 16px;
 }
 
@@ -395,7 +384,6 @@ form {
   background: #8b0000;
   color: white;
   border: none;
-  border-radius: 4px;
   font-size: 16px;
   cursor: pointer;
   margin-bottom: 10px;
@@ -411,7 +399,6 @@ form {
   background: white;
   color: #8b0000;
   border: 1px solid #8b0000;
-  border-radius: 4px;
   font-size: 16px;
   cursor: pointer;
   margin-bottom: 20px;
@@ -427,7 +414,6 @@ form {
   background: white;
   color: #757575;
   border: 1px solid #ddd;
-  border-radius: 4px;
   font-size: 14px;
   font-weight: 500;
   cursor: pointer;

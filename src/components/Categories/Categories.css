@@ -1,12 +1,12 @@
 .categories {
-  padding: 60px 0;
+  padding: 20px 0;
   background: white;
   width: 100%;
 }
 
 .categories-container {
   width: 100%;
-  max-width: 1600px;
+  max-width: 1585px;
   margin: 0 auto;
   padding: 0 40px;
   display: grid;
@@ -20,6 +20,7 @@
   aspect-ratio: 24/9;
   cursor: pointer;
   width: 100%;
+  border-radius: 0;
 }
 
 .category-card img {
