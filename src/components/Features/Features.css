@@ -13,18 +13,6 @@
   gap: 30px;
 }
 
-.feature-card {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  text-align: center;
-  padding: 20px;
-  background: white;
-  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
-  border-radius: 0;
-  transition: all 0.3s ease;
-}
-
 .feature-item {
   display: flex;
   flex-direction: column;

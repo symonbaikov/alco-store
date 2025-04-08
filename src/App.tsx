@@ -5,6 +5,7 @@ import Navbar from "./components/Navbar/Navbar";
 import Cart from "./components/Cart/Cart";
 import AuthPage from "./components/Auth/AuthPage";
 import Home from "./pages/Home/Home";
+import Contacts from "./pages/Contacts/Contacts";
 
 const App: React.FC = () => {
   const [isCartOpen, setIsCartOpen] = React.useState(false);
@@ -21,7 +22,7 @@ const App: React.FC = () => {
           <Route path="/" element={<Home />} />
           <Route path="/catalog" element={<div>Каталог</div>} />
           <Route path="/about" element={<div>О нас</div>} />
-          <Route path="/contacts" element={<div>Контакты</div>} />
+          <Route path="/contacts" element={<Contacts />} />
         </Routes>
       </main>
       <Cart isOpen={isCartOpen} onClose={() => setIsCartOpen(false)} />
