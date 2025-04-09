@@ -19,25 +19,18 @@ async function main() {
       order: 2,
     },
     {
-      image: "/images/01.04-Shok-Cena-Beluga-1l.webp",
-      title: "Промоция на седмицата",
-      description: "Beluga 1L на изгодна цена",
-      link: "/weekly",
-      order: 3,
-    },
-    {
       image: "/images/01.04-Shok-Cena-Uzo-12.webp",
       title: "Специална оферта",
       description: "Узо 12 на промоционална цена",
       link: "/promotions",
-      order: 4,
+      order: 3,
     },
     {
       image: "/images/01.04-Shok-Cena-Jim-Beam-Honey.webp",
       title: "Нова промоция",
       description: "Jim Beam Honey на специална цена",
       link: "/promotions",
-      order: 5,
+      order: 4,
     },
   ];
 
