@@ -1,6 +1,6 @@
 import express from "express";
 import cors from "cors";
-import prisma from "./lib/prisma.ts";
+import slideRoutes from "./routes/slideRoutes.ts";
 
 const app = express();
 const port = 3001;
@@ -11,26 +11,10 @@ app.use(
     credentials: true,
   })
 );
-
 app.use(express.json());
 
-app.get("/api/slides", async (req, res) => {
-  try {
-    const slides = await prisma.slide.findMany({
-      where: {
-        isActive: true,
-      },
-      orderBy: {
-        order: "asc",
-      },
-    });
-    res.json(slides);
-  } catch (error) {
-    console.error("Error fetching slides:", error);
-    res.status(500).json({ error: "Failed to fetch slides" });
-  }
-});
+app.use("/api/slides", slideRoutes);
 
 app.listen(port, () => {
-  console.log(`Server is running on port ${port}`);
+  console.log(`Server is running on port 🚀 ${port}`);
 });
