@@ -181,12 +181,18 @@
 .map-container {
   height: 450px;
   margin-bottom: 40px;
+  overflow: hidden;
 }
 
 .map-wrapper {
   position: relative;
   flex: 1;
   width: 100%;
+  pointer-events: none;
+  user-select: none;
+  -webkit-user-select: none;
+  -moz-user-select: none;
+  -ms-user-select: none;
 }
 
 .map-wrapper iframe {

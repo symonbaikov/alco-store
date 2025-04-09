@@ -30,13 +30,19 @@
   width: 100%;
   padding: 12px;
   border: 1px solid #ddd;
-  font-size: 16px;
-  transition: border-color 0.3s;
+  font-size: 14px;
+  background: white;
+  color: #333;
+}
+
+.form-group input::placeholder {
+  color: #999;
 }
 
 .form-group input:focus {
   outline: none;
   border-color: #8b0000;
+  background: white;
 }
 
 .submit-button {
@@ -238,6 +244,35 @@ form {
   width: 16px;
   height: 16px;
   margin: 0;
+  background: white;
+  border: 1px solid #ddd;
+  cursor: pointer;
+  appearance: none;
+  -webkit-appearance: none;
+  -moz-appearance: none;
+  position: relative;
+}
+
+.remember-label input[type="checkbox"]:checked {
+  background: white;
+  border-color: #8b0000;
+}
+
+.remember-label input[type="checkbox"]:checked::after {
+  content: "";
+  position: absolute;
+  left: 4px;
+  top: 1px;
+  width: 6px;
+  height: 10px;
+  border: solid #8b0000;
+  border-width: 0 2px 2px 0;
+  transform: rotate(45deg);
+}
+
+.remember-label input[type="checkbox"]:focus {
+  outline: none;
+  border-color: #8b0000;
 }
 
 .forgot-link {
@@ -338,7 +373,7 @@ form {
   width: 100%;
   padding: 12px;
   border: 1px solid #ddd;
-  font-size: 16px;
+  font-size: 14px;
 }
 
 .form-group input:focus {
@@ -366,6 +401,35 @@ form {
   width: 16px;
   height: 16px;
   margin: 0;
+  background: white;
+  border: 1px solid #ddd;
+  cursor: pointer;
+  appearance: none;
+  -webkit-appearance: none;
+  -moz-appearance: none;
+  position: relative;
+}
+
+.remember-label input[type="checkbox"]:checked {
+  background: white;
+  border-color: #8b0000;
+}
+
+.remember-label input[type="checkbox"]:checked::after {
+  content: "";
+  position: absolute;
+  left: 4px;
+  top: 1px;
+  width: 6px;
+  height: 10px;
+  border: solid #8b0000;
+  border-width: 0 2px 2px 0;
+  transform: rotate(45deg);
+}
+
+.remember-label input[type="checkbox"]:focus {
+  outline: none;
+  border-color: #8b0000;
 }
 
 .forgot-link {
