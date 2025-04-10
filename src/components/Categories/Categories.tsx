@@ -41,5 +41,4 @@ const Categories: React.FC = () => {
     </section>
   );
 };
-
 export default Categories;
