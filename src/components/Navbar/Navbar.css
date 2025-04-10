@@ -828,105 +828,26 @@
   position: fixed;
   top: 0;
   left: 0;
-  width: 100%;
-  height: 70px;
-  background: #fff;
-  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  right: 0;
+  background: white;
+  padding: 10px 20px;
   transform: translateY(-100%);
   transition: transform 0.3s ease;
-  z-index: 1001;
-  display: flex;
-  flex-direction: column;
+  z-index: 1000;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
 }
 
 .compact-nav.show {
   transform: translateY(0);
 }
 
-.compact-nav .top-nav {
-  padding: 10px 20px;
-  height: 60px;
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  border: none;
-}
-
-.compact-nav .nav-left {
-  display: flex;
-  align-items: center;
-}
-
-.compact-nav .navbar-logo {
-  font-size: 30px;
-  color: #000;
-  font-weight: bold;
-}
-
-.compact-nav .search-container {
-  width: 650px;
-  padding: 8px 16px;
-  border: 1px solid #ddd;
-  border-radius: 4px;
-  display: flex;
-  align-items: center;
-}
-
-.compact-nav .search-container input {
-  flex: 1;
-  border: none;
-  outline: none;
-  font-size: 14px;
-}
-
-.compact-nav .search-container button {
-  background: none;
-  border: none;
-  cursor: pointer;
-  padding: 0 8px;
-}
-
-.compact-nav .nav-right {
-  display: flex;
-  align-items: center;
-  gap: 20px;
-}
-
-.compact-nav .icons-container {
-  display: flex;
-  align-items: center;
-  gap: 15px;
-}
-
-.compact-nav .icon-button {
-  background: none;
-  border: none;
-  cursor: pointer;
-  font-size: 14px;
-  padding: 5px;
-  display: flex;
-  align-items: center;
-  gap: 5px;
-  color: #333;
-}
-
-.compact-nav .phone-number {
-  color: #333;
-  font-weight: 500;
-  text-decoration: none;
-  display: flex;
-  align-items: center;
-  gap: 5px;
-}
-
-.compact-nav .phone-number:hover {
-  color: #8b0000;
-}
-
-@media screen and (max-width: 960px) {
-  .compact-nav {
-    display: none;
-  }
+.scroll-indicator {
+  position: absolute;
+  bottom: -2px;
+  left: 0;
+  height: 3px;
+  background-color: #8b0000;
+  transition: width 0.3s ease;
 }
 
 .auth-modal {
