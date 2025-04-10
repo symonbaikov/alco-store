@@ -10,8 +10,8 @@ const Features: React.FC = () => {
             <i className="fas fa-certificate"></i>
           </div>
           <div className="feature-content">
-            <h3>Гарантированно</h3>
-            <p>100% оригинальная продукция</p>
+            <h3>Гарантирано</h3>
+            <p>100% оригинални продукти</p>
           </div>
         </div>
 
@@ -20,8 +20,8 @@ const Features: React.FC = () => {
             <i className="fas fa-truck"></i>
           </div>
           <div className="feature-content">
-            <h3>Быстрая доставка</h3>
-            <p>Отправка заказов в течение 24 часов</p>
+            <h3>Бърза доставка</h3>
+            <p>Изпращане на поръчки в рамките на 24 часа</p>
           </div>
         </div>
 
@@ -30,8 +30,8 @@ const Features: React.FC = () => {
             <i className="fas fa-headset"></i>
           </div>
           <div className="feature-content">
-            <h3>Обратная связь</h3>
-            <p>Менеджер свяжется с вами в течение 15 минут</p>
+            <h3>Обратна връзка</h3>
+            <p>Мениджър ще се свърже с вас до 15 минути</p>
           </div>
         </div>
 
@@ -40,8 +40,8 @@ const Features: React.FC = () => {
             <i className="fas fa-wine-bottle"></i>
           </div>
           <div className="feature-content">
-            <h3>Собственный импорт</h3>
-            <p>Качественные алкогольные напитки из 37 стран мира</p>
+            <h3>Собствен внос</h3>
+            <p>Качествени алкохолни напитки от 37 държави по света</p>
           </div>
         </div>
       </div>

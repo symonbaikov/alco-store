@@ -11,7 +11,7 @@ interface Slide {
   link: string;
 }
 
-const Slider: React.FC = () => {
+export const Slider = () => {
   const [slides, setSlides] = useState<Slide[]>([]);
   const [currentSlide, setCurrentSlide] = useState(0);
   const [isPaused, setIsPaused] = useState(false);
@@ -103,5 +103,3 @@ const Slider: React.FC = () => {
     </div>
   );
 };
-export default Slider;
-

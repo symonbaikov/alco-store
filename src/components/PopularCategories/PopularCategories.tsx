@@ -10,7 +10,7 @@ import RestaurantIcon from "@mui/icons-material/Restaurant";
 const PopularCategories: React.FC = () => {
   return (
     <section className="popular-categories">
-      <h2 className="section-title">Популярные категории</h2>
+      <h2 className="section-title">Популярни категории</h2>
       <div className="categories-grid">
         <div className="category-item">
           <div className="icon-wrapper">
@@ -22,13 +22,13 @@ const PopularCategories: React.FC = () => {
           <div className="icon-wrapper">
             <LocalBarIcon className="category-icon" />
           </div>
-          <span>Крепкие напитки</span>
+          <span>Високоалкохолни напитки</span>
         </div>
         <div className="category-item">
           <div className="icon-wrapper">
             <LiquorIcon className="category-icon" />
           </div>
-          <span>Ликеры</span>
+          <span>Ликьори</span>
         </div>
         <div className="category-item">
           <div className="icon-wrapper">
@@ -40,13 +40,13 @@ const PopularCategories: React.FC = () => {
           <div className="icon-wrapper">
             <SportsBarIcon className="category-icon" />
           </div>
-          <span>Пиво</span>
+          <span>Бира</span>
         </div>
         <div className="category-item">
           <div className="icon-wrapper">
             <RestaurantIcon className="category-icon" />
           </div>
-          <span>Закуски</span>
+          <span>Мезета</span>
         </div>
       </div>
     </section>
