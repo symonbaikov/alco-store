@@ -13,10 +13,19 @@ const Navbar: React.FC<NavbarProps> = ({ onCartClick, onAuthClick }) => {
   const [isPhoneModalOpen, setIsPhoneModalOpen] = useState(false);
   const [isLanguageMenuOpen, setIsLanguageMenuOpen] = useState(false);
   const [isScrolled, setIsScrolled] = useState(false);
+  const [scrollProgress, setScrollProgress] = useState(0);
 
   useEffect(() => {
     const handleScroll = () => {
-      setIsScrolled(window.scrollY > 50);
+      const scrolled = window.scrollY > 100;
+      setIsScrolled(scrolled);
+
+      // Вычисляем прогресс прокрутки
+      const windowHeight =
+        document.documentElement.scrollHeight -
+        document.documentElement.clientHeight;
+      const scrolled_progress = (window.scrollY / windowHeight) * 100;
+      setScrollProgress(scrolled_progress);
     };
 
     window.addEventListener("scroll", handleScroll);
@@ -254,6 +263,10 @@ const Navbar: React.FC<NavbarProps> = ({ onCartClick, onAuthClick }) => {
             </div>
           </div>
         </div>
+        <div
+          className="scroll-indicator"
+          style={{ width: `${scrollProgress}%` }}
+        ></div>
       </div>
 
       {/* Десктоп навигация */}
