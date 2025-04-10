@@ -3,8 +3,10 @@
   grid-template-columns: repeat(2, 1fr);
   gap: 30px;
   padding: 20px;
-  max-width: 1550px;
+  max-width: 1500px;
   margin: 0 auto;
+  margin-top: 30px;
+  margin-bottom: 30px;
 }
 
 .drink-category {

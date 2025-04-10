@@ -12,7 +12,7 @@ const AuthPage: React.FC<AuthPageProps> = ({ isOpen, onClose }) => {
     <Modal isOpen={isOpen} onClose={onClose}>
       <div className="auth">
         <div className="auth-header">
-          <h2>Вход</h2>
+          <h2></h2>
           <button className="close-button" onClick={onClose}>
             &times;
           </button>
