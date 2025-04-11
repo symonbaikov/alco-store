@@ -15,11 +15,14 @@
     "postinstall": "prisma generate"
   },
   "dependencies": {
+    "@auth/express": "^0.9.0",
     "@emotion/react": "^11.14.0",
     "@emotion/styled": "^11.14.0",
     "@mui/icons-material": "^7.0.1",
     "@mui/material": "^7.0.1",
     "@prisma/client": "^6.5.0",
+    "bcrypt": "^5.1.1",
+    "cookie-parser": "^1.4.7",
     "cors": "^2.8.5",
     "dotenv": "^16.4.7",
     "express": "^5.1.0",
