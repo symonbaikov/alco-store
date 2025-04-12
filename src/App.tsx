@@ -4,12 +4,24 @@ import { Routes, Route } from "react-router-dom";
 import Navbar from "./components/Navbar/Navbar";
 import Cart from "./components/Cart/Cart";
 import AuthPage from "./components/Auth/AuthPage";
+import RegisterPage from "./components/Auth/RegisterPage";
 import Home from "./pages/Home/Home";
 import Contacts from "./pages/Contacts/Contacts";
 
 const App: React.FC = () => {
   const [isCartOpen, setIsCartOpen] = React.useState(false);
   const [isAuthOpen, setIsAuthOpen] = React.useState(false);
+  const [isRegisterOpen, setIsRegisterOpen] = React.useState(false);
+
+  const handleRegisterClick = () => {
+    setIsAuthOpen(false);
+    setIsRegisterOpen(true);
+  };
+
+  const handleLoginClick = () => {
+    setIsRegisterOpen(false);
+    setIsAuthOpen(true);
+  };
 
   return (
     <div className="app">
@@ -26,7 +38,16 @@ const App: React.FC = () => {
         </Routes>
       </main>
       <Cart isOpen={isCartOpen} onClose={() => setIsCartOpen(false)} />
-      <AuthPage isOpen={isAuthOpen} onClose={() => setIsAuthOpen(false)} />
+      <AuthPage
+        isOpen={isAuthOpen}
+        onClose={() => setIsAuthOpen(false)}
+        onRegisterClick={handleRegisterClick}
+      />
+      <RegisterPage
+        isOpen={isRegisterOpen}
+        onClose={() => setIsRegisterOpen(false)}
+        onLoginClick={handleLoginClick}
+      />
     </div>
   );
 };

@@ -1,14 +1,20 @@
 // 📁 src/components/Auth/AuthPage.tsx
 import React from "react";
 import Modal from "../Modal/Modal";
+import GoogleIcon from "../Icons/GoogleIcon";
 import "./AuthPage.css";
 
 interface AuthPageProps {
   isOpen: boolean;
   onClose: () => void;
+  onRegisterClick: () => void;
 }
 
-const AuthPage: React.FC<AuthPageProps> = ({ isOpen, onClose }) => {
+const AuthPage: React.FC<AuthPageProps> = ({
+  isOpen,
+  onClose,
+  onRegisterClick,
+}) => {
   const [email, setEmail] = React.useState("");
   const [password, setPassword] = React.useState("");
 
@@ -42,7 +48,7 @@ const AuthPage: React.FC<AuthPageProps> = ({ isOpen, onClose }) => {
     <Modal isOpen={isOpen} onClose={onClose}>
       <div className="auth">
         <div className="auth-header">
-          <h2>Вход в аккаунт</h2>
+          <h2 className="auth-title">Вход в аккаунт</h2>
           <button className="close-button" onClick={onClose}>
             &times;
           </button>
@@ -80,11 +86,16 @@ const AuthPage: React.FC<AuthPageProps> = ({ isOpen, onClose }) => {
             <button type="submit" className="submit-button">
               Вход
             </button>
-            <button type="button" className="register-button">
+            <button
+              type="button"
+              className="register-button"
+              onClick={onRegisterClick}
+            >
               Регистрация
             </button>
             <div className="divider">или</div>
             <button type="button" className="google-button">
+              <GoogleIcon />
               Влизане с Google
             </button>
           </form>

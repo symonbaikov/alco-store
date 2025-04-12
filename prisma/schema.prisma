@@ -24,3 +24,11 @@ model Slide {
   isActive    Boolean  @default(true)
   order       Int      @default(0)
 }
+
+model User {
+  id        String   @id @default(cuid())
+  email     String   @unique
+  password  String
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+}
