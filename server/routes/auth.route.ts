@@ -6,47 +6,54 @@ const prisma = new PrismaClient();
 
 const router = Router();
 
-router.post("/login", (req, res) => {
+router.post("/login", async (req, res) => {
   const { email, password } = req.body;
 
-  if (email === "test@test.com" && password === "123456") {
-    req.session.user = { email };
-    return res.json({ message: "Logged in!" });
+  if (!email || !password) {
+    return res.status(400).json({ error: "Email and password required" });
   }
 
-  return res.status(401).json({ error: "Invalid credentials" });
-});
+  const user = await prisma.user.findUnique({ where: { email } });
 
-router.post("/logout", (req, res) => {
-  req.session.destroy(() => {
-    res.clearCookie("connect.sid");
-    res.json({ message: "Logged out" });
-  });
+  if (!user) {
+    return res.status(401).json({ error: "User not found" });
+  }
+
+  const isMatch = await bcrypt.compare(password, user.password);
+
+  if (!isMatch) {
+    return res.status(401).json({ error: "Incorrect password" });
+  }
+
+  // ✅ Всё хорошо — сохраняем юзера в сессию
+  req.session.user = { id: user.id, email: user.email };
+
+  res.json({ message: "Logged in", user: { email: user.email } });
 });
 
 router.post("/register", async (req, res) => {
-    const { email, password } = req.body;
-  
-    if (!email || !password) {
-      return res.status(400).json({ error: "Email and password required" });
-    }
-  
-    const existingUser = await prisma.user.findUnique({ where: { email } });
-    if (existingUser) {
-      return res.status(400).json({ error: "Email already registered" });
-    }
-  
-    const hashedPassword = await bcrypt.hash(password, 10);
-  
-    const user = await prisma.user.create({
-      data: {
-        email,
-        password: hashedPassword,
-      },
-    });
-  
-    req.session.user = { id: user.id, email: user.email };
-    res.json({ message: "Registered", user: { email: user.email } });
+  const { email, password } = req.body;
+
+  if (!email || !password) {
+    return res.status(400).json({ error: "Email and password required" });
+  }
+
+  const existingUser = await prisma.user.findUnique({ where: { email } });
+  if (existingUser) {
+    return res.status(400).json({ error: "Email already registered" });
+  }
+
+  const hashedPassword = await bcrypt.hash(password, 10);
+
+  const user = await prisma.user.create({
+    data: {
+      email,
+      password: hashedPassword,
+    },
   });
+
+  req.session.user = { id: user.id, email: user.email };
+  res.json({ message: "Registered", user: { email: user.email } });
+});
 
 export default router;

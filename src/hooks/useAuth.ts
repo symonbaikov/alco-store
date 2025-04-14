@@ -38,6 +38,7 @@ export function useAuth() {
       console.error("Ошибка при выходе:", err);
     }
   };
+  
 
   return { user, loading, isLoggedIn: !!user, logout, refetch: fetchProfile };
 }
