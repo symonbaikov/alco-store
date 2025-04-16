@@ -38,7 +38,6 @@ const AuthPage: React.FC<AuthPageProps> = ({
         onClose();
       } else {
         const error = await res.json();
-        alert("Ошибка входа: " + error.error);
         toast.error("Ошибка входа: " + error.error);
       }
     } catch (err) {
