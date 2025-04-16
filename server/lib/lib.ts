@@ -1,5 +1,14 @@
 import type { Request, Response, NextFunction } from "express";
 
+declare module "express-session" {
+  interface SessionData {
+    user?: {
+      id: string;
+      email: string;
+    };
+  }
+}
+
 export function authenticatedUser(
   req: Request,
   res: Response,

@@ -2,6 +2,7 @@
 import React from "react";
 import Modal from "../Modal/Modal";
 import GoogleIcon from "../Icons/GoogleIcon";
+import toast, { Toaster } from 'react-hot-toast';
 import "./AuthPage.css";
 
 interface AuthPageProps {
@@ -33,10 +34,12 @@ const AuthPage: React.FC<AuthPageProps> = ({
       if (res.ok) {
         const data = await res.json();
         console.log("✅ Вход успешен:", data);
+        toast.success("Вход выполнен успешно");
         onClose();
       } else {
         const error = await res.json();
         alert("Ошибка входа: " + error.error);
+        toast.error("Ошибка входа: " + error.error);
       }
     } catch (err) {
       console.error("Login error:", err);
@@ -45,63 +48,66 @@ const AuthPage: React.FC<AuthPageProps> = ({
   };
 
   return (
-    <Modal isOpen={isOpen} onClose={onClose}>
-      <div className="auth">
-        <div className="auth-header">
-          <h2 className="auth-title">Вход в аккаунт</h2>
-          <button className="close-button" onClick={onClose}>
-            &times;
-          </button>
-        </div>
+    <>
+      <Toaster position="top-center" />
+      <Modal isOpen={isOpen} onClose={onClose}>
+        <div className="auth">
+          <div className="auth-header">
+            <h2 className="auth-title">Вход в аккаунт</h2>
+            <button className="close-button" onClick={onClose}>
+              &times;
+            </button>
+          </div>
 
-        <div className="auth-body">
-          <form className="auth-form" onSubmit={handleLogin}>
-            <div className="form-group">
-              <input
-                type="text"
-                placeholder="Имейл"
-                name="email"
-                value={email}
-                onChange={(e) => setEmail(e.target.value)}
-              />
-            </div>
-            <div className="form-group">
-              <input
-                type="password"
-                placeholder="Парола"
-                name="password"
-                value={password}
-                onChange={(e) => setPassword(e.target.value)}
-              />
-            </div>
-            <div className="form-options">
-              <label className="remember-label">
-                <input type="checkbox" name="remember" />
-                Запомни ме
-              </label>
-              <a href="#" className="forgot-link">
-                Забравена парола?
-              </a>
-            </div>
-            <button type="submit" className="submit-button">
-              Вход
-            </button>
-            <button
-              type="button"
-              className="register-button"
-              onClick={onRegisterClick}
-            >
-              Регистрация
-            </button>
-            <div className="divider">или</div>
-            <button type="button" className="google-button">
-              <GoogleIcon />
-              Влизане с Google
-            </button>
-          </form>
+          <div className="auth-body">
+            <form className="auth-form" onSubmit={handleLogin}>
+              <div className="form-group">
+                <input
+                  type="text"
+                  placeholder="Имейл"
+                  name="email"
+                  value={email}
+                  onChange={(e) => setEmail(e.target.value)}
+                />
+              </div>
+              <div className="form-group">
+                <input
+                  type="password"
+                  placeholder="Парола"
+                  name="password"
+                  value={password}
+                  onChange={(e) => setPassword(e.target.value)}
+                />
+              </div>
+              <div className="form-options">
+                <label className="remember-label">
+                  <input type="checkbox" name="remember" />
+                  Запомни ме
+                </label>
+                <a href="#" className="forgot-link">
+                  Забравена парола?
+                </a>
+              </div>
+              <button type="submit" className="submit-button">
+                Вход
+              </button>
+              <button
+                type="button"
+                className="register-button"
+                onClick={onRegisterClick}
+              >
+                Регистрация
+              </button>
+              <div className="divider">или</div>
+              <button type="button" className="google-button">
+                <GoogleIcon />
+                Влизане с Google
+              </button>
+            </form>
+          </div>
         </div>
-      </div>
-    </Modal>
+      </Modal>
+    </>
   );
 };
 

@@ -1,4 +1,3 @@
-import React from "react";
 import "./DrinkCategories.css";
 
 interface DrinkCategory {

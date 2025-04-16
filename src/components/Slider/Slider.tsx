@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import { useState, useEffect } from "react";
 import { getSlides } from "../../api/slides";
 import SliderSkeleton from "./SliderSkeleton";
 import "./Slider.css";
