@@ -5,6 +5,8 @@ import cookieParser from "cookie-parser";
 
 import slideRoutes from "./routes/slideRoutes.ts";
 import authRoutes from "./routes/auth.route.ts";
+import registerRoutes from "./routes/register.route.ts";
+import forgotPasswordRoutes from "./routes/forgot-password.route.ts";
 import { authenticatedUser } from "./lib/lib.ts";
 
 const app = express();
@@ -40,7 +42,8 @@ app.get("/profile", authenticatedUser, (req, res) => {
 // Routes
 app.use("/api/slides", slideRoutes);
 app.use("/api/auth", authRoutes);
-
+app.use("/api/register", registerRoutes);
+app.use("/api/forgot-password", forgotPasswordRoutes);
 app.listen(port, () => {
   console.log(`🚀 Server is running on http://localhost:${port}`);
 });

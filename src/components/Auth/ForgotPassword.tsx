@@ -1,7 +1,6 @@
 import React, { useState } from "react";
 import Modal from "../Modal/Modal";
 import toast, { Toaster } from 'react-hot-toast';
-import GoogleIcon from "../Icons/GoogleIcon";
 import "./AuthPage.css";
 
 interface Props {
@@ -12,28 +11,22 @@ interface Props {
 
 const RegisterPage: React.FC<Props> = ({ isOpen, onClose, onLoginClick }) => {
   const [email, setEmail] = useState("");
-  const [password, setPassword] = useState("");
-  const [confirmPassword, setConfirmPassword] = useState("");
 
   const handleRegister = async (e: React.FormEvent) => {
     e.preventDefault();
 
-    if (password !== confirmPassword) {
-      alert("Пароли не совпадают");
-      return;
-    }
 
-    const res = await fetch("http://localhost:3001/api/register/register", {
+    const res = await fetch("http://localhost:3001/api/forgot-password/forgot-password", {
       method: "POST",
       credentials: "include",
       headers: { "Content-Type": "application/json" },
-      body: JSON.stringify({ email, password }),
+      body: JSON.stringify({ email}),
     });
 
     if (res.ok) {
       const data = await res.json();
-      console.log("✅ Регистрация прошла:", data);
-      toast.success("Успешна регистрация");
+      console.log("✅ Востановяване на паролата е изпратено на имейла:", data);
+      toast.success("Востановяване на паролата е изпратено на имейла");
       onClose();
     } else {
       const err = await res.json();
@@ -47,7 +40,7 @@ const RegisterPage: React.FC<Props> = ({ isOpen, onClose, onLoginClick }) => {
     <Modal isOpen={isOpen} onClose={onClose}>
       <div className="auth">
         <div className="auth-header">
-          <h2 className="auth-title">Регистрация</h2>
+          <h2 className="auth-title">Восстановление на парола</h2>
           <button className="close-button" onClick={onClose}>
             &times;
           </button>
@@ -55,7 +48,7 @@ const RegisterPage: React.FC<Props> = ({ isOpen, onClose, onLoginClick }) => {
 
         <div className="auth-body">
           <form className="auth-form" onSubmit={handleRegister}>
-            <div className="form-group">
+          <div className="form-group">
               <input
                 type="text"
                 placeholder="Имейл"
@@ -64,26 +57,8 @@ const RegisterPage: React.FC<Props> = ({ isOpen, onClose, onLoginClick }) => {
                 onChange={(e) => setEmail(e.target.value)}
               />
             </div>
-            <div className="form-group">
-              <input
-                type="password"
-                placeholder="Парола"
-                name="password"
-                value={password}
-                onChange={(e) => setPassword(e.target.value)}
-              />
-            </div>
-            <div className="form-group">
-              <input
-                type="password"
-                placeholder="Потвърди паролата"
-                name="confirmPassword"
-                value={confirmPassword}
-                onChange={(e) => setConfirmPassword(e.target.value)}
-              />
-            </div>
             <button type="submit" className="submit-button">
-              Регистрация
+              Востанови паролата
             </button>
             <button
               type="button"
@@ -91,11 +66,6 @@ const RegisterPage: React.FC<Props> = ({ isOpen, onClose, onLoginClick }) => {
               onClick={onLoginClick}
             >
               Вход в аккаунт
-            </button>
-            <div className="divider">или</div>
-            <button type="button" className="google-button">
-              <GoogleIcon />
-              Регистрация с Google
             </button>
           </form>
         </div>

@@ -9,12 +9,14 @@ interface AuthPageProps {
   isOpen: boolean;
   onClose: () => void;
   onRegisterClick: () => void;
+  onForgotPasswordClick: () => void;
 }
 
 const AuthPage: React.FC<AuthPageProps> = ({
   isOpen,
   onClose,
   onRegisterClick,
+  onForgotPasswordClick,
 }) => {
   const [email, setEmail] = React.useState("");
   const [password, setPassword] = React.useState("");
@@ -83,7 +85,10 @@ const AuthPage: React.FC<AuthPageProps> = ({
                   <input type="checkbox" name="remember" />
                   Запомни ме
                 </label>
-                <a href="#" className="forgot-link">
+                <a href="#"
+                  onClick={onForgotPasswordClick}
+                  className="forgot-link"
+                >
                   Забравена парола?
                 </a>
               </div>

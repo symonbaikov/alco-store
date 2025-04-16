@@ -7,11 +7,14 @@ import AuthPage from "./components/Auth/AuthPage";
 import RegisterPage from "./components/Auth/RegisterPage";
 import Home from "./pages/Home/Home";
 import Contacts from "./pages/Contacts/Contacts";
+import ForgotPassword from "./components/Auth/ForgotPassword";
+
 
 const App: React.FC = () => {
   const [isCartOpen, setIsCartOpen] = React.useState(false);
   const [isAuthOpen, setIsAuthOpen] = React.useState(false);
   const [isRegisterOpen, setIsRegisterOpen] = React.useState(false);
+  const [isForgotPasswordOpen, setIsForgotPasswordOpen] = React.useState(false);
 
   const handleRegisterClick = () => {
     setIsAuthOpen(false);
@@ -21,6 +24,12 @@ const App: React.FC = () => {
   const handleLoginClick = () => {
     setIsRegisterOpen(false);
     setIsAuthOpen(true);
+    setIsForgotPasswordOpen(false);
+  };
+
+  const handleForgotPasswordClick = () => {
+    setIsAuthOpen(false);
+    setIsForgotPasswordOpen(true);
   };
 
   return (
@@ -42,10 +51,16 @@ const App: React.FC = () => {
         isOpen={isAuthOpen}
         onClose={() => setIsAuthOpen(false)}
         onRegisterClick={handleRegisterClick}
+        onForgotPasswordClick={handleForgotPasswordClick}
       />
       <RegisterPage
         isOpen={isRegisterOpen}
         onClose={() => setIsRegisterOpen(false)}
+        onLoginClick={handleLoginClick}
+      />
+      <ForgotPassword
+        isOpen={isForgotPasswordOpen}
+        onClose={() => setIsForgotPasswordOpen(false)}
         onLoginClick={handleLoginClick}
       />
     </div>
