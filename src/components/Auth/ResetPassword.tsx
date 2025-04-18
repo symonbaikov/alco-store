@@ -3,6 +3,16 @@ import { useSearchParams } from "react-router-dom";
 import toast, { Toaster } from 'react-hot-toast';
 import "./AuthPage.css";
 
+const isPasswordValid = (password: string) => {
+  if (password.length < 8) {
+    return { isValid: false, error: "Пароль должен содержать минимум 8 символов" };
+  }
+  if (!/\d/.test(password)) {
+    return { isValid: false, error: "Пароль должен содержать хотя бы одну цифру" };
+  }
+  return { isValid: true, error: "" };
+};
+
 const ResetPassword: React.FC = () => {
   const [searchParams] = useSearchParams();
   const [password, setPassword] = useState("");
@@ -11,6 +21,12 @@ const ResetPassword: React.FC = () => {
 
   const handleResetPassword = async (e: React.FormEvent) => {
     e.preventDefault();
+
+    const passwordValidation = isPasswordValid(password);
+    if (!passwordValidation.isValid) {
+      toast.error(passwordValidation.error);
+      return;
+    }
 
     if (password !== confirmPassword) {
       toast.error("Пароли не совпадают");
@@ -31,8 +47,8 @@ const ResetPassword: React.FC = () => {
 
       if (res.ok) {
         toast.success("Пароль успешно изменен");
-        // Перенаправляем на страницу входа
-        window.location.href = "/login";
+        // Перенаправляем на главную страницу
+        window.location.href = "/";
       } else {
         const err = await res.json();
         toast.error(err.error);
@@ -44,22 +60,24 @@ const ResetPassword: React.FC = () => {
 
   return (
     <>
-      <Toaster position="top-center" />
       <div className="auth">
         <div className="auth-header">
           <h2 className="auth-title">Сброс пароля</h2>
         </div>
 
         <div className="auth-body">
-          <form className="auth-form" onSubmit={handleResetPassword}>
+          <form className="auth-form" onSubmit={handleResetPassword} noValidate>
             <div className="form-group">
               <input
                 type="password"
                 placeholder="Новый пароль"
                 value={password}
                 onChange={(e) => setPassword(e.target.value)}
-                required
+                pattern=".*"
               />
+              <small className="password-requirements">
+                Пароль должен содержать минимум 8 символов и хотя бы одну цифру
+              </small>
             </div>
             <div className="form-group">
               <input
@@ -67,7 +85,7 @@ const ResetPassword: React.FC = () => {
                 placeholder="Подтвердите пароль"
                 value={confirmPassword}
                 onChange={(e) => setConfirmPassword(e.target.value)}
-                required
+                pattern=".*"
               />
             </div>
             <button type="submit" className="submit-button">
