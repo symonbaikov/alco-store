@@ -109,6 +109,10 @@ const RegisterPage: React.FC<Props> = ({ isOpen, onClose, onLoginClick }) => {
     }
   };
 
+  const handleGoogleLogin = () => {
+    window.location.href = 'http://localhost:3001/api/auth/google';
+  };
+
   return (
     <>
       <Toaster position="top-center" />
@@ -164,7 +168,11 @@ const RegisterPage: React.FC<Props> = ({ isOpen, onClose, onLoginClick }) => {
                 Вход в аккаунт
               </button>
               <div className="divider">или</div>
-              <button type="button" className="google-button">
+              <button 
+                type="button" 
+                className="google-button"
+                onClick={handleGoogleLogin}
+              >
                 <GoogleIcon />
                 Регистрация с Google
               </button>

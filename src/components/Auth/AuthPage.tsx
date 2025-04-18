@@ -48,6 +48,10 @@ const AuthPage: React.FC<AuthPageProps> = ({
     }
   };
 
+  const handleGoogleLogin = () => {
+    window.location.href = 'http://localhost:3001/api/auth/google';
+  };
+
   return (
     <>
       <Toaster position="top-center" />
@@ -103,7 +107,11 @@ const AuthPage: React.FC<AuthPageProps> = ({
                 Регистрация
               </button>
               <div className="divider">или</div>
-              <button type="button" className="google-button">
+              <button 
+                type="button" 
+                className="google-button"
+                onClick={handleGoogleLogin}
+              >
                 <GoogleIcon />
                 Влизане с Google
               </button>
