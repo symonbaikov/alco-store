@@ -6,6 +6,32 @@ import nodemailer from "nodemailer";
 const prisma = new PrismaClient();
 const router = Router();
 
+// Функция для проверки валидности пароля
+function isPasswordValid(password: string): { isValid: boolean; error: string } {
+  if (password.length < 8) {
+    return { 
+      isValid: false, 
+      error: "Пароль должен содержать минимум 8 символов" 
+    };
+  }
+  
+  if (!/[A-Za-z]/.test(password)) {
+    return { 
+      isValid: false, 
+      error: "Пароль должен содержать хотя бы одну букву" 
+    };
+  }
+  
+  if (!/\d/.test(password)) {
+    return { 
+      isValid: false, 
+      error: "Пароль должен содержать хотя бы одну цифру" 
+    };
+  }
+  
+  return { isValid: true, error: "" };
+}
+
 // Настройка nodemailer
 const transporter = nodemailer.createTransport({
   host: "smtp.gmail.com",
@@ -31,6 +57,12 @@ router.post("/register", async (req, res) => {
 
   if (!email || !password) {
     return res.status(400).json({ error: "Email и пароль обязательны" });
+  }
+
+  // Проверяем валидность пароля
+  const passwordValidation = isPasswordValid(password);
+  if (!passwordValidation.isValid) {
+    return res.status(400).json({ error: passwordValidation.error });
   }
 
   try {
@@ -72,7 +104,7 @@ router.post("/register", async (req, res) => {
     res.json({ 
       message: "Код подтверждения отправлен",
       email,
-      hashedPassword, // Будет использоваться при подтверждении
+      hashedPassword,
     });
   } catch (error) {
     console.error("Ошибка при регистрации:", error);

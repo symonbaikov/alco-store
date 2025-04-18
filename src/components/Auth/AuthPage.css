@@ -553,3 +553,11 @@ form {
   font-size: 18px;
   text-align: center;
 }
+
+.password-requirements {
+  display: block;
+  margin-top: 5px;
+  color: #666;
+  font-size: 12px;
+  line-height: 1.4;
+}

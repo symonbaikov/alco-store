@@ -10,6 +10,32 @@ interface Props {
   onLoginClick: () => void;
 }
 
+// Функция для проверки валидности пароля
+const isPasswordValid = (password: string): { isValid: boolean; error: string } => {
+  if (password.length < 8) {
+    return { 
+      isValid: false, 
+      error: "Пароль должен содержать минимум 8 символов" 
+    };
+  }
+  
+  if (!/[A-Za-z]/.test(password)) {
+    return { 
+      isValid: false, 
+      error: "Пароль должен содержать хотя бы одну букву" 
+    };
+  }
+  
+  if (!/\d/.test(password)) {
+    return { 
+      isValid: false, 
+      error: "Пароль должен содержать хотя бы одну цифру" 
+    };
+  }
+  
+  return { isValid: true, error: "" };
+};
+
 const RegisterPage: React.FC<Props> = ({ isOpen, onClose, onLoginClick }) => {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
@@ -20,6 +46,13 @@ const RegisterPage: React.FC<Props> = ({ isOpen, onClose, onLoginClick }) => {
 
   const handleRegister = async (e: React.FormEvent) => {
     e.preventDefault();
+
+    // Проверяем валидность пароля
+    const passwordValidation = isPasswordValid(password);
+    if (!passwordValidation.isValid) {
+      toast.error(passwordValidation.error);
+      return;
+    }
 
     if (password !== confirmPassword) {
       toast.error("Пароли не совпадают");
@@ -107,6 +140,9 @@ const RegisterPage: React.FC<Props> = ({ isOpen, onClose, onLoginClick }) => {
                   value={password}
                   onChange={(e) => setPassword(e.target.value)}
                 />
+                <small className="password-requirements">
+                  Пароль должен содержать минимум 8 символов, буквы и хотя бы одну цифру
+                </small>
               </div>
               <div className="form-group">
                 <input
