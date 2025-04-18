@@ -42,3 +42,11 @@ model ResetToken {
   expiresAt DateTime
   createdAt DateTime @default(now())
 }
+
+model EmailVerification {
+  id        String   @id @default(cuid())
+  code      String
+  email     String
+  expiresAt DateTime
+  createdAt DateTime @default(now())
+}

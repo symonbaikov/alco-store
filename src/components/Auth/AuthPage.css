@@ -540,3 +540,16 @@ form {
 .google-button svg {
   flex-shrink: 0;
 }
+
+.verification-text {
+  text-align: center;
+  margin-bottom: 20px;
+  color: #666;
+  font-size: 14px;
+}
+
+.form-group input[maxlength="6"] {
+  letter-spacing: 4px;
+  font-size: 18px;
+  text-align: center;
+}
