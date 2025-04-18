@@ -8,6 +8,7 @@ import RegisterPage from "./components/Auth/RegisterPage";
 import Home from "./pages/Home/Home";
 import Contacts from "./pages/Contacts/Contacts";
 import ForgotPassword from "./components/Auth/ForgotPassword";
+import ResetPassword from "./components/Auth/ResetPassword";
 
 
 const App: React.FC = () => {
@@ -44,6 +45,7 @@ const App: React.FC = () => {
           <Route path="/catalog" element={<div>Каталог</div>} />
           <Route path="/about" element={<div>О нас</div>} />
           <Route path="/contacts" element={<Contacts />} />
+          <Route path="/reset-password" element={<ResetPassword />} />
         </Routes>
       </main>
       <Cart isOpen={isCartOpen} onClose={() => setIsCartOpen(false)} />
