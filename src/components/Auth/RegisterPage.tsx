@@ -2,6 +2,7 @@ import React, { useState } from "react";
 import Modal from "../Modal/Modal";
 import toast, { Toaster } from 'react-hot-toast';
 import GoogleIcon from "../Icons/GoogleIcon";
+import { useTranslation } from 'react-i18next';
 import "./AuthPage.css";
 
 interface Props {
@@ -11,25 +12,25 @@ interface Props {
 }
 
 // Функция для проверки валидности пароля
-const isPasswordValid = (password: string): { isValid: boolean; error: string } => {
+const isPasswordValid = (password: string, t: (key: string) => string): { isValid: boolean; error: string } => {
   if (password.length < 8) {
     return { 
       isValid: false, 
-      error: "Пароль должен содержать минимум 8 символов" 
+      error: t('register.passwordErrors.length')
     };
   }
   
   if (!/[A-Za-z]/.test(password)) {
     return { 
       isValid: false, 
-      error: "Пароль должен содержать хотя бы одну букву" 
+      error: t('register.passwordErrors.letter')
     };
   }
   
   if (!/\d/.test(password)) {
     return { 
       isValid: false, 
-      error: "Пароль должен содержать хотя бы одну цифру" 
+      error: t('register.passwordErrors.digit')
     };
   }
   
@@ -43,19 +44,20 @@ const RegisterPage: React.FC<Props> = ({ isOpen, onClose, onLoginClick }) => {
   const [verificationCode, setVerificationCode] = useState("");
   const [showVerificationModal, setShowVerificationModal] = useState(false);
   const [tempHashedPassword, setTempHashedPassword] = useState("");
+  const { t } = useTranslation();
 
   const handleRegister = async (e: React.FormEvent) => {
     e.preventDefault();
 
     // Проверяем валидность пароля
-    const passwordValidation = isPasswordValid(password);
+    const passwordValidation = isPasswordValid(password, t);
     if (!passwordValidation.isValid) {
       toast.error(passwordValidation.error);
       return;
     }
 
     if (password !== confirmPassword) {
-      toast.error("Пароли не совпадают");
+      toast.error(t('register.passwordsNotMatch'));
       return;
     }
 
@@ -71,13 +73,13 @@ const RegisterPage: React.FC<Props> = ({ isOpen, onClose, onLoginClick }) => {
         const data = await res.json();
         setTempHashedPassword(data.hashedPassword);
         setShowVerificationModal(true);
-        toast.success("Код подтверждения отправлен на ваш email");
+        toast.success(t('register.verificationSent'));
       } else {
         const err = await res.json();
-        toast.error("Ошибка: " + err.error);
+        toast.error(t('register.registrationError') + ": " + err.error);
       }
     } catch (error) {
-      toast.error("Ошибка при регистрации");
+      toast.error(t('register.registrationError'));
     }
   };
 
@@ -97,15 +99,15 @@ const RegisterPage: React.FC<Props> = ({ isOpen, onClose, onLoginClick }) => {
       });
 
       if (res.ok) {
-        toast.success("Регистрация успешно завершена");
+        toast.success(t('register.registrationSuccess'));
         setShowVerificationModal(false);
         onClose();
       } else {
         const err = await res.json();
-        toast.error("Ошибка: " + err.error);
+        toast.error(t('register.verificationError') + ": " + err.error);
       }
     } catch (error) {
-      toast.error("Ошибка при подтверждении кода");
+      toast.error(t('register.verificationError'));
     }
   };
 
@@ -119,7 +121,7 @@ const RegisterPage: React.FC<Props> = ({ isOpen, onClose, onLoginClick }) => {
       <Modal isOpen={isOpen && !showVerificationModal} onClose={onClose}>
         <div className="auth">
           <div className="auth-header">
-            <h2 className="auth-title">Регистрация</h2>
+            <h2 className="auth-title">{t('register.title')}</h2>
             <button className="close-button" onClick={onClose}>
               &times;
             </button>
@@ -130,7 +132,7 @@ const RegisterPage: React.FC<Props> = ({ isOpen, onClose, onLoginClick }) => {
               <div className="form-group">
                 <input
                   type="text"
-                  placeholder="Email"
+                  placeholder={t('register.email')}
                   name="email"
                   value={email}
                   onChange={(e) => setEmail(e.target.value)}
@@ -139,42 +141,42 @@ const RegisterPage: React.FC<Props> = ({ isOpen, onClose, onLoginClick }) => {
               <div className="form-group">
                 <input
                   type="password"
-                  placeholder="Пароль"
+                  placeholder={t('register.password')}
                   name="password"
                   value={password}
                   onChange={(e) => setPassword(e.target.value)}
                 />
                 <small className="password-requirements">
-                  Пароль должен содержать минимум 8 символов, буквы и хотя бы одну цифру
+                  {t('register.passwordRequirements')}
                 </small>
               </div>
               <div className="form-group">
                 <input
                   type="password"
-                  placeholder="Подтвердите пароль"
+                  placeholder={t('register.confirmPassword')}
                   name="confirmPassword"
                   value={confirmPassword}
                   onChange={(e) => setConfirmPassword(e.target.value)}
                 />
               </div>
               <button type="submit" className="submit-button">
-                Регистрация
+                {t('register.submit')}
               </button>
               <button
                 type="button"
                 className="register-button"
                 onClick={onLoginClick}
               >
-                Вход в аккаунт
+                {t('register.login')}
               </button>
-              <div className="divider">или</div>
+              <div className="divider">{t('auth.or')}</div>
               <button 
                 type="button" 
                 className="google-button"
                 onClick={handleGoogleLogin}
               >
                 <GoogleIcon />
-                Регистрация с Google
+                {t('register.googleRegister')}
               </button>
             </form>
           </div>
@@ -184,7 +186,7 @@ const RegisterPage: React.FC<Props> = ({ isOpen, onClose, onLoginClick }) => {
       <Modal isOpen={showVerificationModal} onClose={() => setShowVerificationModal(false)}>
         <div className="auth">
           <div className="auth-header">
-            <h2 className="auth-title">Подтверждение email</h2>
+            <h2 className="auth-title">{t('register.verificationTitle')}</h2>
             <button className="close-button" onClick={() => setShowVerificationModal(false)}>
               &times;
             </button>
@@ -193,19 +195,19 @@ const RegisterPage: React.FC<Props> = ({ isOpen, onClose, onLoginClick }) => {
           <div className="auth-body">
             <form className="auth-form" onSubmit={handleVerifyCode}>
               <p className="verification-text">
-                Мы отправили код подтверждения на ваш email: {email}
+                {t('register.verificationText')} {email}
               </p>
               <div className="form-group">
                 <input
                   type="text"
-                  placeholder="Введите код"
+                  placeholder={t('register.verificationCode')}
                   value={verificationCode}
                   onChange={(e) => setVerificationCode(e.target.value)}
                   maxLength={6}
                 />
               </div>
               <button type="submit" className="submit-button">
-                Подтвердить
+                {t('register.verify')}
               </button>
             </form>
           </div>

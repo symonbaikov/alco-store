@@ -1,14 +1,15 @@
 import React, { useState } from "react";
 import { useSearchParams } from "react-router-dom";
 import toast, { Toaster } from 'react-hot-toast';
+import { useTranslation } from 'react-i18next';
 import "./AuthPage.css";
 
-const isPasswordValid = (password: string) => {
+const isPasswordValid = (password: string, t: (key: string) => string) => {
   if (password.length < 8) {
-    return { isValid: false, error: "Пароль должен содержать минимум 8 символов" };
+    return { isValid: false, error: t('resetPassword.passwordErrors.length') };
   }
   if (!/\d/.test(password)) {
-    return { isValid: false, error: "Пароль должен содержать хотя бы одну цифру" };
+    return { isValid: false, error: t('resetPassword.passwordErrors.digit') };
   }
   return { isValid: true, error: "" };
 };
@@ -18,23 +19,24 @@ const ResetPassword: React.FC = () => {
   const [password, setPassword] = useState("");
   const [confirmPassword, setConfirmPassword] = useState("");
   const token = searchParams.get("token");
+  const { t } = useTranslation();
 
   const handleResetPassword = async (e: React.FormEvent) => {
     e.preventDefault();
 
-    const passwordValidation = isPasswordValid(password);
+    const passwordValidation = isPasswordValid(password, t);
     if (!passwordValidation.isValid) {
       toast.error(passwordValidation.error);
       return;
     }
 
     if (password !== confirmPassword) {
-      toast.error("Пароли не совпадают");
+      toast.error(t('resetPassword.passwordsNotMatch'));
       return;
     }
 
     if (!token) {
-      toast.error("Неверная ссылка для сброса пароля");
+      toast.error(t('resetPassword.invalidLink'));
       return;
     }
 
@@ -46,7 +48,7 @@ const ResetPassword: React.FC = () => {
       });
 
       if (res.ok) {
-        toast.success("Пароль успешно изменен");
+        toast.success(t('resetPassword.success'));
         // Перенаправляем на главную страницу
         window.location.href = "/";
       } else {
@@ -54,7 +56,7 @@ const ResetPassword: React.FC = () => {
         toast.error(err.error);
       }
     } catch (error) {
-      toast.error("Произошла ошибка при сбросе пароля");
+      toast.error(t('resetPassword.error'));
     }
   };
 
@@ -62,7 +64,7 @@ const ResetPassword: React.FC = () => {
     <>
       <div className="auth">
         <div className="auth-header">
-          <h2 className="auth-title">Сброс пароля</h2>
+          <h2 className="auth-title">{t('resetPassword.title')}</h2>
         </div>
 
         <div className="auth-body">
@@ -70,26 +72,26 @@ const ResetPassword: React.FC = () => {
             <div className="form-group">
               <input
                 type="password"
-                placeholder="Новый пароль"
+                placeholder={t('resetPassword.newPassword')}
                 value={password}
                 onChange={(e) => setPassword(e.target.value)}
                 pattern=".*"
               />
               <small className="password-requirements">
-                Пароль должен содержать минимум 8 символов и хотя бы одну цифру
+                {t('resetPassword.passwordRequirements')}
               </small>
             </div>
             <div className="form-group">
               <input
                 type="password"
-                placeholder="Подтвердите пароль"
+                placeholder={t('resetPassword.confirmPassword')}
                 value={confirmPassword}
                 onChange={(e) => setConfirmPassword(e.target.value)}
                 pattern=".*"
               />
             </div>
             <button type="submit" className="submit-button">
-              Сбросить пароль
+              {t('resetPassword.submit')}
             </button>
           </form>
         </div>

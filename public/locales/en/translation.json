@@ -53,5 +53,52 @@
     "success": "Successfully signed in",
     "error": "Sign in error: ",
     "somethingWentWrong": "Something went wrong"
+  },
+  "register": {
+    "title": "Registration",
+    "email": "Email",
+    "password": "Password",
+    "confirmPassword": "Confirm password",
+    "passwordRequirements": "Password must contain at least 8 characters, letters and at least one digit",
+    "submit": "Register",
+    "login": "Sign In",
+    "googleRegister": "Register with Google",
+    "verificationTitle": "Email verification",
+    "verificationText": "We have sent a verification code to your email: ",
+    "verificationCode": "Enter the code",
+    "verify": "Verify",
+    "passwordsNotMatch": "Passwords do not match",
+    "verificationSent": "Verification code has been sent to your email",
+    "registrationSuccess": "Registration completed successfully",
+    "verificationError": "Error verifying the code",
+    "registrationError": "Registration error",
+    "passwordErrors": {
+      "length": "Password must contain at least 8 characters",
+      "letter": "Password must contain at least one letter",
+      "digit": "Password must contain at least one digit"
+    }
+  },
+  "resetPassword": {
+    "title": "Reset Password",
+    "newPassword": "New password",
+    "confirmPassword": "Confirm password",
+    "passwordRequirements": "Password must contain at least 8 characters and at least one digit",
+    "submit": "Reset Password",
+    "success": "Password has been successfully changed",
+    "invalidLink": "Invalid password reset link",
+    "error": "An error occurred while resetting the password",
+    "passwordsNotMatch": "Passwords do not match",
+    "passwordErrors": {
+      "length": "Password must contain at least 8 characters",
+      "digit": "Password must contain at least one digit"
+    }
+  },
+  "forgotPassword": {
+    "title": "Password Recovery",
+    "email": "Email",
+    "submit": "Recover Password",
+    "login": "Sign In",
+    "success": "Password recovery has been sent to your email",
+    "error": "Error: "
   }
 } 
