@@ -9,6 +9,7 @@ import Home from "./pages/Home/Home";
 import Contacts from "./pages/Contacts/Contacts";
 import ForgotPassword from "./components/Auth/ForgotPassword";
 import ResetPassword from "./components/Auth/ResetPassword";
+import ProfilePage from "./pages/Profile/ProfilePage";
 
 
 const App: React.FC = () => {
@@ -46,6 +47,7 @@ const App: React.FC = () => {
           <Route path="/about" element={<div>О нас</div>} />
           <Route path="/contacts" element={<Contacts />} />
           <Route path="/reset-password" element={<ResetPassword />} />
+          <Route path="/profile" element={<ProfilePage />} />
         </Routes>
       </main>
       <Cart isOpen={isCartOpen} onClose={() => setIsCartOpen(false)} />

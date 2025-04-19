@@ -1,0 +1,117 @@
+.profile-container {
+  max-width: 800px;
+  margin: 2rem auto;
+  padding: 1rem;
+}
+
+.profile-title {
+  font-size: 2rem;
+  color: #333;
+  margin-bottom: 2rem;
+}
+
+.profile-info {
+  background: white;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  padding: 2rem;
+}
+
+.profile-section {
+  margin-bottom: 2rem;
+}
+
+.profile-section h2 {
+  font-size: 1.5rem;
+  color: #444;
+  margin-bottom: 1rem;
+  padding-bottom: 0.5rem;
+  border-bottom: 2px solid #8b0000;
+}
+
+.info-item {
+  display: flex;
+  margin: 1rem 0;
+  padding: 0.5rem 0;
+}
+
+.info-label {
+  font-weight: 600;
+  width: 150px;
+  color: #666;
+}
+
+.info-value {
+  color: #333;
+}
+
+.profile-loading {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 300px;
+  font-size: 1.2rem;
+  color: #666;
+}
+
+.profile-actions {
+  display: flex;
+  gap: 1rem;
+  margin-top: 1rem;
+}
+
+.profile-button {
+  padding: 0.75rem 1.5rem;
+  border: none;
+  font-size: 1rem;
+  cursor: pointer;
+  transition: background-color 0.2s;
+  background-color: #8b0000;
+  color: white;
+}
+
+.profile-button:hover {
+  background-color: #a00000;
+}
+
+.logout-button {
+  background-color: #666;
+}
+
+.logout-button:hover {
+  background-color: #777;
+}
+
+.cancel-button {
+  background-color: #999;
+}
+
+.cancel-button:hover {
+  background-color: #888;
+}
+
+.change-password-form {
+  margin-top: 1rem;
+  max-width: 400px;
+}
+
+.change-password-form .form-group {
+  margin-bottom: 1rem;
+}
+
+.change-password-form input {
+  width: 100%;
+  padding: 0.75rem;
+  border: 1px solid #ddd;
+  font-size: 1rem;
+}
+
+.change-password-form input:focus {
+  outline: none;
+  border-color: #8b0000;
+}
+
+.form-actions {
+  display: flex;
+  gap: 1rem;
+  margin-top: 1.5rem;
+} 

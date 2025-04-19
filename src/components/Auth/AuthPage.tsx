@@ -4,6 +4,7 @@ import Modal from "../Modal/Modal";
 import GoogleIcon from "../Icons/GoogleIcon";
 import toast, { Toaster } from 'react-hot-toast';
 import { useTranslation } from 'react-i18next';
+import { useAuthContext } from "../../context/AuthContext";
 import "./AuthPage.css";
 
 interface AuthPageProps {
@@ -22,6 +23,7 @@ const AuthPage: React.FC<AuthPageProps> = ({
   const [email, setEmail] = React.useState("");
   const [password, setPassword] = React.useState("");
   const { t } = useTranslation();
+  const { refetch } = useAuthContext();
 
   const handleLogin = async (e: React.FormEvent) => {
     e.preventDefault();
@@ -38,6 +40,7 @@ const AuthPage: React.FC<AuthPageProps> = ({
       if (res.ok) {
         const data = await res.json();
         console.log("✅ Вход успешен:", data);
+        await refetch();
         toast.success(t('auth.success'));
         onClose();
       } else {

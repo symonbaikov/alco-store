@@ -186,5 +186,24 @@
       "title": "New Promotion",
       "description": "Jim Beam Honey at special price"
     }
+  },
+  "profile": {
+    "personalInfo": "Personal Information",
+    "security": "Security",
+    "changePassword": "Change Password",
+    "currentPassword": "Current Password",
+    "newPassword": "New Password",
+    "confirmNewPassword": "Confirm New Password",
+    "savePassword": "Save",
+    "cancel": "Cancel",
+    "logout": "Logout",
+    "passwordsNotMatch": "Passwords do not match",
+    "passwordChanged": "Password changed successfully",
+    "changePasswordError": "Error changing password",
+    "allFieldsRequired": "All fields are required",
+    "passwordTooShort": "Password must be at least 8 characters long",
+    "invalidCurrentPassword": "Invalid current password",
+    "passwordRequirementsNotMet": "Password does not meet requirements",
+    "passwordRequirements": "Password must contain at least 8 characters, letters and at least one number"
   }
 } 

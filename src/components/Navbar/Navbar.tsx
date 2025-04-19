@@ -1,7 +1,8 @@
 import React, { useState, useEffect } from "react";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import { useTranslation } from 'react-i18next';
 import { ROUTES, PHONE_NUMBERS } from "../../../server/config/routes";
+import { useAuthContext } from "../../context/AuthContext";
 import "./Navbar.css";
 
 interface NavbarProps {
@@ -11,6 +12,7 @@ interface NavbarProps {
 
 const Navbar: React.FC<NavbarProps> = ({ onCartClick, onAuthClick }) => {
   const { t, i18n } = useTranslation();
+  const navigate = useNavigate();
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
   const [isSearchOpen, setIsSearchOpen] = useState(false);
   const [isPhoneModalOpen, setIsPhoneModalOpen] = useState(false);
@@ -18,6 +20,7 @@ const Navbar: React.FC<NavbarProps> = ({ onCartClick, onAuthClick }) => {
   const [isScrolled, setIsScrolled] = useState(false);
   const [scrollProgress, setScrollProgress] = useState(0);
   const [isLanguageLoading, setIsLanguageLoading] = useState(false);
+  const { isLoggedIn } = useAuthContext();
 
   const changeLanguage = async (lng: string) => {
     try {
@@ -48,6 +51,14 @@ const Navbar: React.FC<NavbarProps> = ({ onCartClick, onAuthClick }) => {
     window.addEventListener("scroll", handleScroll);
     return () => window.removeEventListener("scroll", handleScroll);
   }, []);
+
+  const handleAuthClick = () => {
+    if (isLoggedIn) {
+      navigate(ROUTES.PROFILE);
+    } else {
+      onAuthClick();
+    }
+  };
 
   return (
     <nav className="navbar">
@@ -326,9 +337,9 @@ const Navbar: React.FC<NavbarProps> = ({ onCartClick, onAuthClick }) => {
             </li>
           </ul>
           <div className="nav-right">
-            <button className="icon-button" onClick={onAuthClick}>
+            <button className="icon-button" onClick={handleAuthClick}>
               <i className="fas fa-user"></i>
-              {t('navbar.login')}
+              {isLoggedIn ? t('navbar.profile') : t('navbar.login')}
             </button>
           </div>
         </div>

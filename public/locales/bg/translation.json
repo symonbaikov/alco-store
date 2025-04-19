@@ -186,5 +186,24 @@
       "title": "Нова промоция",
       "description": "Jim Beam Honey на специална цена"
     }
+  },
+  "profile": {
+    "personalInfo": "Лична информация",
+    "security": "Сигурност",
+    "changePassword": "Смяна на парола",
+    "currentPassword": "Текуща парола",
+    "newPassword": "Нова парола",
+    "confirmNewPassword": "Потвърди нова парола",
+    "savePassword": "Запази",
+    "cancel": "Отказ",
+    "logout": "Изход",
+    "passwordsNotMatch": "Паролите не съвпадат",
+    "passwordChanged": "Паролата е променена успешно",
+    "changePasswordError": "Грешка при смяна на паролата",
+    "allFieldsRequired": "Всички полета са задължителни",
+    "passwordTooShort": "Паролата трябва да бъде поне 8 символа",
+    "invalidCurrentPassword": "Невалидна текуща парола",
+    "passwordRequirementsNotMet": "Паролата не отговаря на изискванията",
+    "passwordRequirements": "Паролата трябва да съдържа минимум 8 символа, букви и поне една цифра"
   }
 } 
