@@ -1,4 +1,5 @@
 import { useState, useEffect } from "react";
+import { useTranslation } from "react-i18next";
 import { getSlides } from "../../api/slides";
 import SliderSkeleton from "./SliderSkeleton";
 import "./Slider.css";
@@ -12,6 +13,7 @@ interface Slide {
 }
 
 export const Slider = () => {
+  const { t } = useTranslation();
   const [slides, setSlides] = useState<Slide[]>([]);
   const [currentSlide, setCurrentSlide] = useState(0);
   const [isPaused, setIsPaused] = useState(false);
@@ -74,10 +76,10 @@ export const Slider = () => {
             style={{ backgroundImage: `url(${slide.image})` }}
           >
             <div className="slide-content">
-              <h2>{slide.title}</h2>
-              <p>{slide.description}</p>
+              <h2>{t(`slides.${slide.id}.title`)}</h2>
+              <p>{t(`slides.${slide.id}.description`)}</p>
               <a href={slide.link} className="slide-button">
-                Повече информация
+                {t('common.moreInfo')}
               </a>
             </div>
           </div>

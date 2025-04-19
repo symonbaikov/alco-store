@@ -165,5 +165,26 @@
       "label": "PROMOTION",
       "title": "Current Special Offers for Favorite Drinks"
     }
+  },
+  "common": {
+    "moreInfo": "More Information"
+  },
+  "slides": {
+    "1": {
+      "title": "Special Offer",
+      "description": "Domaine Boyar 3L at shock price"
+    },
+    "2": {
+      "title": "New Products",
+      "description": "Jack Daniel's at special price"
+    },
+    "3": {
+      "title": "Special Offer",
+      "description": "Ouzo 12 at promotional price"
+    },
+    "4": {
+      "title": "New Promotion",
+      "description": "Jim Beam Honey at special price"
+    }
   }
 } 

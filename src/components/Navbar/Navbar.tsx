@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from "react";
 import { Link } from "react-router-dom";
 import { useTranslation } from 'react-i18next';
+import { ROUTES, PHONE_NUMBERS } from "../../../server/config/routes";
 import "./Navbar.css";
 
 interface NavbarProps {
@@ -23,9 +24,7 @@ const Navbar: React.FC<NavbarProps> = ({ onCartClick, onAuthClick }) => {
       setIsLanguageLoading(true);
       await i18n.changeLanguage(lng);
       setIsLanguageMenuOpen(false);
-      // Сохраняем текущий путь
       const currentPath = window.location.pathname;
-      // Перезагружаем страницу
       window.location.href = currentPath;
     } catch (error) {
       console.error('Failed to load language:', error);
@@ -60,7 +59,7 @@ const Navbar: React.FC<NavbarProps> = ({ onCartClick, onAuthClick }) => {
         >
           <i className={`fas ${isMobileMenuOpen ? "fa-times" : "fa-bars"}`}></i>
         </button>
-        <Link to="/" className="navbar-logo">
+        <Link to={ROUTES.HOME} className="navbar-logo">
           ALCOMAG
         </Link>
         <div className="mobile-icons">
@@ -99,30 +98,30 @@ const Navbar: React.FC<NavbarProps> = ({ onCartClick, onAuthClick }) => {
             </button>
           </div>
           <div className="phone-list">
-            <a href="tel:+380979740660" className="phone-item">
+            <a href={`tel:${PHONE_NUMBERS.KYIVSTAR}`} className="phone-item">
               <div className="phone-icon kyivstar">
                 <i className="fas fa-phone"></i>
               </div>
               <div className="phone-info">
-                <div className="phone-number">+38 (097) 974-06-60</div>
+                <div className="phone-number">{PHONE_NUMBERS.KYIVSTAR}</div>
                 <div className="phone-description">{t('navbar.salesDepartment')}</div>
               </div>
             </a>
-            <a href="tel:+380509740660" className="phone-item">
+            <a href={`tel:${PHONE_NUMBERS.VODAFONE}`} className="phone-item">
               <div className="phone-icon vodafone">
                 <i className="fas fa-phone"></i>
               </div>
               <div className="phone-info">
-                <div className="phone-number">+38 (050) 974-06-60</div>
+                <div className="phone-number">{PHONE_NUMBERS.VODAFONE}</div>
                 <div className="phone-description">{t('navbar.orderProcessing')}</div>
               </div>
             </a>
-            <a href="tel:+380938740660" className="phone-item">
+            <a href={`tel:${PHONE_NUMBERS.LIFECELL}`} className="phone-item">
               <div className="phone-icon lifecell">
                 <i className="fas fa-phone"></i>
               </div>
               <div className="phone-info">
-                <div className="phone-number">+38 (093) 874-06-60</div>
+                <div className="phone-number">{PHONE_NUMBERS.LIFECELL}</div>
                 <div className="phone-description">{t('navbar.inquiryProcessing')}</div>
               </div>
             </a>
@@ -186,51 +185,51 @@ const Navbar: React.FC<NavbarProps> = ({ onCartClick, onAuthClick }) => {
         <div className="mobile-catalog">
           <ul className="mobile-catalog-list">
             <li>
-              <Link to="/wine">{t('navbar.wine')}</Link>
+              <Link to={ROUTES.WINE}>{t('navbar.wine')}</Link>
             </li>
             <li>
-              <Link to="/strong">{t('navbar.strong')}</Link>
+              <Link to={ROUTES.STRONG}>{t('navbar.strong')}</Link>
             </li>
             <li>
-              <Link to="/liquor">{t('navbar.liquor')}</Link>
+              <Link to={ROUTES.LIQUOR}>{t('navbar.liquor')}</Link>
             </li>
             <li>
-              <Link to="/drinks">{t('navbar.drinks')}</Link>
+              <Link to={ROUTES.DRINKS}>{t('navbar.drinks')}</Link>
             </li>
             <li>
-              <Link to="/profile" className="mobile-footer-item">
+              <Link to={ROUTES.PROFILE} className="mobile-footer-item">
                 <i className="fas fa-user"></i>
                 <span>{t('navbar.profile')}</span>
               </Link>
             </li>
             <li>
-              <Link to="/cart" className="mobile-footer-item">
+              <Link to={ROUTES.CART} className="mobile-footer-item">
                 <i className="fas fa-shopping-cart"></i>
                 <span>{t('navbar.cart')}</span>
                 <span className="cart-badge">0</span>
               </Link>
             </li>
             <li>
-              <Link to="/compare" className="mobile-footer-item">
+              <Link to={ROUTES.COMPARE} className="mobile-footer-item">
                 <i className="fas fa-chart-bar"></i>
                 <span>{t('navbar.compare')}</span>
                 <span className="compare-badge">0</span>
               </Link>
             </li>
             <li>
-              <Link to="/beer">{t('navbar.beer')}</Link>
+              <Link to={ROUTES.BEER}>{t('navbar.beer')}</Link>
             </li>
             <li>
-              <Link to="/snacks">{t('navbar.snacks')}</Link>
+              <Link to={ROUTES.SNACKS}>{t('navbar.snacks')}</Link>
             </li>
             <li>
-              <Link to="/confectionery">{t('navbar.confectionery')}</Link>
+              <Link to={ROUTES.CONFECTIONERY}>{t('navbar.confectionery')}</Link>
             </li>
             <li>
-              <Link to="/sales">{t('navbar.sales')}</Link>
+              <Link to={ROUTES.SALES}>{t('navbar.sales')}</Link>
             </li>
             <li>
-              <Link to="/contacts">{t('navbar.contacts')}</Link>
+              <Link to={ROUTES.CONTACTS}>{t('navbar.contacts')}</Link>
             </li>
           </ul>
         </div>
@@ -240,7 +239,7 @@ const Navbar: React.FC<NavbarProps> = ({ onCartClick, onAuthClick }) => {
       <div className={`compact-nav ${isScrolled ? "show" : ""}`}>
         <div className="top-nav">
           <div className="nav-left">
-            <Link to="/" className="navbar-logo">
+            <Link to={ROUTES.HOME} className="navbar-logo">
               ALCOMAG
             </Link>
             <div className="search-container">
@@ -252,9 +251,9 @@ const Navbar: React.FC<NavbarProps> = ({ onCartClick, onAuthClick }) => {
           </div>
 
           <div className="nav-right">
-            <a href="tel:+380979740660" className="phone-number">
+            <a href={`tel:${PHONE_NUMBERS.KYIVSTAR}`} className="phone-number">
               <i className="fas fa-phone"></i>
-              +38 (097) 974-06-60
+              {PHONE_NUMBERS.KYIVSTAR}
             </a>
             <div className="icons-container">
               <div className="language-selector desktop">
@@ -305,25 +304,25 @@ const Navbar: React.FC<NavbarProps> = ({ onCartClick, onAuthClick }) => {
         <div className="top-nav">
           <ul className="top-menu">
             <li className="top-menu-item">
-              <Link to="/">{t('navbar.home')}</Link>
+              <Link to={ROUTES.HOME}>{t('navbar.home')}</Link>
             </li>
             <li className="top-menu-item">
-              <Link to="/manufacturers">{t('navbar.manufacturers')}</Link>
+              <Link to={ROUTES.MANUFACTURERS}>{t('navbar.manufacturers')}</Link>
             </li>
             <li className="top-menu-item">
-              <Link to="/about">{t('navbar.about')}</Link>
+              <Link to={ROUTES.ABOUT}>{t('navbar.about')}</Link>
             </li>
             <li className="top-menu-item">
-              <Link to="/delivery">{t('navbar.delivery')}</Link>
+              <Link to={ROUTES.DELIVERY}>{t('navbar.delivery')}</Link>
             </li>
             <li className="top-menu-item">
-              <Link to="/reviews">{t('navbar.reviews')}</Link>
+              <Link to={ROUTES.REVIEWS}>{t('navbar.reviews')}</Link>
             </li>
             <li className="top-menu-item">
-              <Link to="/cooperation">{t('navbar.cooperation')}</Link>
+              <Link to={ROUTES.COOPERATION}>{t('navbar.cooperation')}</Link>
             </li>
             <li className="top-menu-item">
-              <Link to="/contacts">{t('navbar.contacts')}</Link>
+              <Link to={ROUTES.CONTACTS}>{t('navbar.contacts')}</Link>
             </li>
           </ul>
           <div className="nav-right">
@@ -337,7 +336,7 @@ const Navbar: React.FC<NavbarProps> = ({ onCartClick, onAuthClick }) => {
         {/* Средняя секция */}
         <div className="top-nav">
           <div className="nav-left">
-            <Link to="/" className="navbar-logo">
+            <Link to={ROUTES.HOME} className="navbar-logo">
               ALCOMAG
             </Link>
             <div className="search-container">
@@ -349,9 +348,9 @@ const Navbar: React.FC<NavbarProps> = ({ onCartClick, onAuthClick }) => {
           </div>
 
           <div className="nav-right">
-            <a href="tel:+380979740660" className="phone-number">
+            <a href={`tel:${PHONE_NUMBERS.KYIVSTAR}`} className="phone-number">
               <i className="fas fa-phone"></i>
-              +38 (097) 974-06-60
+              {PHONE_NUMBERS.KYIVSTAR}
             </a>
             <div className="icons-container">
               <div className="language-selector desktop">
@@ -396,31 +395,31 @@ const Navbar: React.FC<NavbarProps> = ({ onCartClick, onAuthClick }) => {
           <div className="bottom-nav-container">
             <ul className="catalog-menu">
               <li className="catalog-item">
-                <Link to="/catalog">{t('navbar.fullCatalog')}</Link>
+                <Link to={ROUTES.CATALOG}>{t('navbar.fullCatalog')}</Link>
               </li>
               <li className="catalog-item">
-                <Link to="/wine">{t('navbar.wineCaps')}</Link>
+                <Link to={ROUTES.WINE}>{t('navbar.wineCaps')}</Link>
               </li>
               <li className="catalog-item">
-                <Link to="/strong">{t('navbar.strongCaps')}</Link>
+                <Link to={ROUTES.STRONG}>{t('navbar.strongCaps')}</Link>
               </li>
               <li className="catalog-item">
-                <Link to="/liquor">{t('navbar.liquorCaps')}</Link>
+                <Link to={ROUTES.LIQUOR}>{t('navbar.liquorCaps')}</Link>
               </li>
               <li className="catalog-item">
-                <Link to="/drinks">{t('navbar.drinksCaps')}</Link>
+                <Link to={ROUTES.DRINKS}>{t('navbar.drinksCaps')}</Link>
               </li>
               <li className="catalog-item">
-                <Link to="/beer">{t('navbar.beerCaps')}</Link>
+                <Link to={ROUTES.BEER}>{t('navbar.beerCaps')}</Link>
               </li>
               <li className="catalog-item">
-                <Link to="/snacks">{t('navbar.snacksCaps')}</Link>
+                <Link to={ROUTES.SNACKS}>{t('navbar.snacksCaps')}</Link>
               </li>
               <li className="catalog-item">
-                <Link to="/confectionery">{t('navbar.confectioneryCaps')}</Link>
+                <Link to={ROUTES.CONFECTIONERY}>{t('navbar.confectioneryCaps')}</Link>
               </li>
               <li className="catalog-item">
-                <Link to="/sales">{t('navbar.salesCaps')}</Link>
+                <Link to={ROUTES.SALES}>{t('navbar.salesCaps')}</Link>
               </li>
             </ul>
           </div>

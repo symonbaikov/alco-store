@@ -9,25 +9,32 @@ async function main() {
   // Создаем слайды
   const slides = [
     {
-      image: '/slides/slide1.jpg',
-      title: 'Премиальные вина',
-      description: 'Широкий выбор вин из лучших виноделен мира',
-      link: '/wines',
+      image: '/images/14.03-SHOK-CENA-DOMAINE-BOYAR-3l.webp',
+      title: 'Специално предложение',
+      description: 'Domaine Boyar 3L на шокова цена',
+      link: '/promotions',
       order: 1,
     },
     {
-      image: '/slides/slide2.jpg',
-      title: 'Элитные крепкие напитки',
-      description: 'Коллекция редких и эксклюзивных спиртных напитков',
-      link: '/spirits',
+      image: '/images/01.04-Shok-Cena-Jack-Daniels.webp',
+      title: 'Нови продукти',
+      description: "Jack Daniel's на специална цена",
+      link: '/new',
       order: 2,
     },
     {
-      image: '/slides/slide3.jpg',
-      title: 'Подарочные наборы',
-      description: 'Идеальные подарки для ценителей качественного алкоголя',
-      link: '/gift-sets',
+      image: '/images/01.04-Shok-Cena-Uzo-12.webp',
+      title: 'Специална оферта',
+      description: 'Узо 12 на промоционална цена',
+      link: '/promotions',
       order: 3,
+    },
+    {
+      image: '/images/01.04-Shok-Cena-Jim-Beam-Honey.webp',
+      title: 'Нова промоция',
+      description: 'Jim Beam Honey на специална цена',
+      link: '/promotions',
+      order: 4,
     },
   ];
 
