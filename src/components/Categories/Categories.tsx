@@ -1,44 +1,54 @@
 import React from "react";
+import { useTranslation } from "react-i18next";
 import "./Categories.css";
 
+interface CategoryCard {
+  id: string;
+  image: string;
+  imageAlt: string;
+}
+
+const categoryCards: CategoryCard[] = [
+  {
+    id: "service",
+    image: "/images/mir4hh1fc4wnc9c678752h2z6j0dpd8k.jpg",
+    imageAlt: "wine-tasting"
+  },
+  {
+    id: "blog",
+    image: "/images/1usfz2uztycqbh8eupl35fb1xmlro1x4.jpg",
+    imageAlt: "refreshing-drinks"
+  },
+  {
+    id: "promotion",
+    image: "/images/ygye22g21kty21m5vmrz24lqv97zqe2v.jpg",
+    imageAlt: "special-offers"
+  }
+];
+
 const Categories: React.FC = () => {
+  const { t } = useTranslation();
+
   return (
     <section className="categories">
       <div className="categories-container">
-        <div className="category-card">
-          <span className="category-label">УСЛУГА</span>
-          <img
-            src="/images/mir4hh1fc4wnc9c678752h2z6j0dpd8k.jpg"
-            alt="Дегустация на вина"
-          />
-          <div className="category-content">
-            <h3>Дегустация на вина и сирена от Италия</h3>
+        {categoryCards.map((card) => (
+          <div key={card.id} className="category-card">
+            <span className="category-label">
+              {t(`categoryCards.${card.id}.label`)}
+            </span>
+            <img
+              src={card.image}
+              alt={t(`categoryCards.${card.id}.title`)}
+            />
+            <div className="category-content">
+              <h3>{t(`categoryCards.${card.id}.title`)}</h3>
+            </div>
           </div>
-        </div>
-
-        <div className="category-card">
-          <span className="category-label">БЛОГ</span>
-          <img
-            src="/images/1usfz2uztycqbh8eupl35fb1xmlro1x4.jpg"
-            alt="Освежаващи напитки"
-          />
-          <div className="category-content">
-            <h3>Освежаващи и студени напитки</h3>
-          </div>
-        </div>
-
-        <div className="category-card">
-          <span className="category-label">ПРОМОЦИЯ</span>
-          <img
-            src="/images/ygye22g21kty21m5vmrz24lqv97zqe2v.jpg"
-            alt="Специални предложения"
-          />
-          <div className="category-content">
-            <h3>Актуални специални предложения за любими напитки</h3>
-          </div>
-        </div>
+        ))}
       </div>
     </section>
   );
 };
+
 export default Categories;

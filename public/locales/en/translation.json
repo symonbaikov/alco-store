@@ -129,5 +129,41 @@
       "beer": "Beer",
       "snacks": "Snacks"
     }
+  },
+  "categories": {
+    "whiskey": {
+      "title": "WHISKEY",
+      "subtitle": "YOUR ACCESS TO A NEW LEVEL",
+      "description": "We present exclusively licensed products from leading brands, including Chivas Brothers, John Jameson & Son, Ballantine's, William Lawson's and many other manufacturers"
+    },
+    "vodka": {
+      "title": "VODKA",
+      "subtitle": "BEST OFFER",
+      "description": "An important characteristic of this drink is its filtration, thanks to which the drink can get a maximally pure taste, distinguishing the products from the elite segment."
+    },
+    "liquor": {
+      "title": "LIQUEURS AND VERMOUTHS",
+      "subtitle": "TASTES ARE NOT ARGUED, THEY ARE CHOSEN",
+      "description": "Liqueur is an alcoholic drink that has a sweet taste and is prepared on the basis of fruits, forest fruits, herbal infusions with the addition of spices, nuts, cocoa. At the heart of every liqueur is excellent"
+    },
+    "wine": {
+      "title": "WINE",
+      "subtitle": "TRUST YOUR FEELINGS",
+      "description": "Wines are a broad and diverse category of alcoholic beverages. They are divided into sparkling and still wines. Thus, the first category contains carbon dioxide, which causes their effervescence. Still wines are:"
+    }
+  },
+  "categoryCards": {
+    "service": {
+      "label": "SERVICE",
+      "title": "Wine and Cheese Tasting from Italy"
+    },
+    "blog": {
+      "label": "BLOG",
+      "title": "Refreshing and Cold Drinks"
+    },
+    "promotion": {
+      "label": "PROMOTION",
+      "title": "Current Special Offers for Favorite Drinks"
+    }
   }
 } 
