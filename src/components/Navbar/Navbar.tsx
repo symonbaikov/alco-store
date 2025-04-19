@@ -86,7 +86,7 @@ const Navbar: React.FC<NavbarProps> = ({ onCartClick, onAuthClick }) => {
           >
             <i className="fas fa-search"></i>
           </button>
-          <button className="icon-button" onClick={onAuthClick}>
+          <button className="icon-button" onClick={handleAuthClick}>
             <i className="fas fa-user"></i>
           </button>
           <button className="icon-button cart-icon" onClick={onCartClick}>
@@ -293,7 +293,7 @@ const Navbar: React.FC<NavbarProps> = ({ onCartClick, onAuthClick }) => {
                   </div>
                 </div>
               </div>
-              <button className="icon-button" onClick={onAuthClick}>
+              <button className="icon-button" onClick={handleAuthClick}>
                 <i className="fas fa-user"></i>
               </button>
               <button className="icon-button" onClick={onCartClick}>
@@ -390,8 +390,8 @@ const Navbar: React.FC<NavbarProps> = ({ onCartClick, onAuthClick }) => {
                   </div>
                 </div>
               </div>
-              <button className="icon-button">
-                <i className="fas fa-chart-bar"></i>
+              <button className="icon-button" onClick={handleAuthClick}>
+                <i className="fas fa-user"></i>
               </button>
               <button className="icon-button" onClick={onCartClick}>
                 <i className="fas fa-shopping-cart"></i>
