@@ -1,58 +1,61 @@
 import React from "react";
+import { useTranslation } from 'react-i18next';
 import "./PopularCategories.css";
 
 const PopularCategories: React.FC = () => {
+  const { t } = useTranslation();
+
   return (
     <section className="popular-categories">
-      <h2 className="section-title">Популярни категории стоки</h2>
+      <h2 className="section-title">{t('popularCategories.title')}</h2>
       <div className="categories-grid">
         <div className="category-item">
           <img
             src="/images/categories-wine.png"
-            alt="Вино"
+            alt={t('popularCategories.categories.wine')}
             className="category-image"
           />
-          <span>Вино</span>
+          <span>{t('popularCategories.categories.wine')}</span>
         </div>
         <div className="category-item">
           <img
             src="/images/categories-whiskey.jpg"
-            alt="Високоалкохолни напитки"
+            alt={t('popularCategories.categories.strongAlcohol')}
             className="category-image"
           />
-          <span>Високоалкохолни напитки</span>
+          <span>{t('popularCategories.categories.strongAlcohol')}</span>
         </div>
         <div className="category-item">
           <img
             src="/images/categories-liquor.jpg"
-            alt="Ликьори, вермути"
+            alt={t('popularCategories.categories.liquor')}
             className="category-image"
           />
-          <span>Ликьори, вермути</span>
+          <span>{t('popularCategories.categories.liquor')}</span>
         </div>
         <div className="category-item">
           <img
             src="/images/categories-drinks.jpg"
-            alt="Напитки"
+            alt={t('popularCategories.categories.drinks')}
             className="category-image"
           />
-          <span>Напитки</span>
+          <span>{t('popularCategories.categories.drinks')}</span>
         </div>
         <div className="category-item">
           <img
             src="/images/categories-beer.jpg"
-            alt="Бира"
+            alt={t('popularCategories.categories.beer')}
             className="category-image"
           />
-          <span>Бира</span>
+          <span>{t('popularCategories.categories.beer')}</span>
         </div>
         <div className="category-item">
           <img
             src="/images/categories-snacks.jpg"
-            alt="Мезета"
+            alt={t('popularCategories.categories.snacks')}
             className="category-image"
           />
-          <span>Мезета</span>
+          <span>{t('popularCategories.categories.snacks')}</span>
         </div>
       </div>
     </section>

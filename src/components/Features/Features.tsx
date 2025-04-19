@@ -1,7 +1,10 @@
 import React from "react";
+import { useTranslation } from 'react-i18next';
 import "./Features.css";
 
 const Features: React.FC = () => {
+  const { t } = useTranslation();
+
   return (
     <section className="features">
       <div className="features-container">
@@ -10,8 +13,8 @@ const Features: React.FC = () => {
             <i className="fas fa-certificate"></i>
           </div>
           <div className="feature-content">
-            <h3>Гарантирано</h3>
-            <p>100% оригинални продукти</p>
+            <h3>{t('features.guaranteed.title')}</h3>
+            <p>{t('features.guaranteed.description')}</p>
           </div>
         </div>
 
@@ -20,8 +23,8 @@ const Features: React.FC = () => {
             <i className="fas fa-truck"></i>
           </div>
           <div className="feature-content">
-            <h3>Бърза доставка</h3>
-            <p>Изпращане на поръчки в рамките на 24 часа</p>
+            <h3>{t('features.fastDelivery.title')}</h3>
+            <p>{t('features.fastDelivery.description')}</p>
           </div>
         </div>
 
@@ -30,8 +33,8 @@ const Features: React.FC = () => {
             <i className="fas fa-headset"></i>
           </div>
           <div className="feature-content">
-            <h3>Обратна връзка</h3>
-            <p>Мениджър ще се свърже с вас до 15 минути</p>
+            <h3>{t('features.feedback.title')}</h3>
+            <p>{t('features.feedback.description')}</p>
           </div>
         </div>
 
@@ -40,8 +43,8 @@ const Features: React.FC = () => {
             <i className="fas fa-wine-bottle"></i>
           </div>
           <div className="feature-content">
-            <h3>Собствен внос</h3>
-            <p>Качествени алкохолни напитки от 37 държави по света</p>
+            <h3>{t('features.import.title')}</h3>
+            <p>{t('features.import.description')}</p>
           </div>
         </div>
       </div>

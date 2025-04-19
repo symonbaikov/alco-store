@@ -100,5 +100,34 @@
     "login": "Sign In",
     "success": "Password recovery has been sent to your email",
     "error": "Error: "
+  },
+  "features": {
+    "guaranteed": {
+      "title": "Guaranteed",
+      "description": "100% original products"
+    },
+    "fastDelivery": {
+      "title": "Fast Delivery",
+      "description": "Order shipping within 24 hours"
+    },
+    "feedback": {
+      "title": "Feedback",
+      "description": "Manager will contact you within 15 minutes"
+    },
+    "import": {
+      "title": "Direct Import",
+      "description": "Quality alcoholic beverages from 37 countries worldwide"
+    }
+  },
+  "popularCategories": {
+    "title": "Popular Product Categories",
+    "categories": {
+      "wine": "Wine",
+      "strongAlcohol": "Strong Alcohol",
+      "liquor": "Liquors, Vermouths",
+      "drinks": "Drinks",
+      "beer": "Beer",
+      "snacks": "Snacks"
+    }
   }
 } 
