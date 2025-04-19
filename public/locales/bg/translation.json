@@ -39,5 +39,19 @@
     "salesDepartment": "Отдел продажби",
     "orderProcessing": "Обработка на поръчки",
     "inquiryProcessing": "Обработка на запитвания"
+  },
+  "auth": {
+    "title": "Вход в акаунт",
+    "email": "Имейл",
+    "password": "Парола",
+    "rememberMe": "Запомни ме",
+    "forgotPassword": "Забравена парола?",
+    "submit": "Вход",
+    "register": "Регистрация",
+    "or": "или",
+    "googleSignIn": "Влизане с Google",
+    "success": "Входът е успешен",
+    "error": "Грешка при влизане: ",
+    "somethingWentWrong": "Нещо се обърка"
   }
 } 

@@ -3,6 +3,7 @@ import React from "react";
 import Modal from "../Modal/Modal";
 import GoogleIcon from "../Icons/GoogleIcon";
 import toast, { Toaster } from 'react-hot-toast';
+import { useTranslation } from 'react-i18next';
 import "./AuthPage.css";
 
 interface AuthPageProps {
@@ -20,6 +21,7 @@ const AuthPage: React.FC<AuthPageProps> = ({
 }) => {
   const [email, setEmail] = React.useState("");
   const [password, setPassword] = React.useState("");
+  const { t } = useTranslation();
 
   const handleLogin = async (e: React.FormEvent) => {
     e.preventDefault();
@@ -36,15 +38,15 @@ const AuthPage: React.FC<AuthPageProps> = ({
       if (res.ok) {
         const data = await res.json();
         console.log("✅ Вход успешен:", data);
-        toast.success("Вход выполнен успешно");
+        toast.success(t('auth.success'));
         onClose();
       } else {
         const error = await res.json();
-        toast.error("Ошибка входа: " + error.error);
+        toast.error(t('auth.error') + error.error);
       }
     } catch (err) {
       console.error("Login error:", err);
-      alert("Что-то пошло не так");
+      toast.error(t('auth.somethingWentWrong'));
     }
   };
 
@@ -58,7 +60,7 @@ const AuthPage: React.FC<AuthPageProps> = ({
       <Modal isOpen={isOpen} onClose={onClose}>
         <div className="auth">
           <div className="auth-header">
-            <h2 className="auth-title">Вход в аккаунт</h2>
+            <h2 className="auth-title">{t('auth.title')}</h2>
             <button className="close-button" onClick={onClose}>
               &times;
             </button>
@@ -69,7 +71,7 @@ const AuthPage: React.FC<AuthPageProps> = ({
               <div className="form-group">
                 <input
                   type="text"
-                  placeholder="Имейл"
+                  placeholder={t('auth.email')}
                   name="email"
                   value={email}
                   onChange={(e) => setEmail(e.target.value)}
@@ -78,7 +80,7 @@ const AuthPage: React.FC<AuthPageProps> = ({
               <div className="form-group">
                 <input
                   type="password"
-                  placeholder="Парола"
+                  placeholder={t('auth.password')}
                   name="password"
                   value={password}
                   onChange={(e) => setPassword(e.target.value)}
@@ -87,33 +89,33 @@ const AuthPage: React.FC<AuthPageProps> = ({
               <div className="form-options">
                 <label className="remember-label">
                   <input type="checkbox" name="remember" />
-                  Запомни ме
+                  {t('auth.rememberMe')}
                 </label>
                 <a href="#"
                   onClick={onForgotPasswordClick}
                   className="forgot-link"
                 >
-                  Забравена парола?
+                  {t('auth.forgotPassword')}
                 </a>
               </div>
               <button type="submit" className="submit-button">
-                Вход
+                {t('auth.submit')}
               </button>
               <button
                 type="button"
                 className="register-button"
                 onClick={onRegisterClick}
               >
-                Регистрация
+                {t('auth.register')}
               </button>
-              <div className="divider">или</div>
+              <div className="divider">{t('auth.or')}</div>
               <button 
                 type="button" 
                 className="google-button"
                 onClick={handleGoogleLogin}
               >
                 <GoogleIcon />
-                Влизане с Google
+                {t('auth.googleSignIn')}
               </button>
             </form>
           </div>

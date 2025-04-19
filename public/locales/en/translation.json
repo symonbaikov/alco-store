@@ -39,5 +39,19 @@
     "salesDepartment": "Sales department",
     "orderProcessing": "Order processing",
     "inquiryProcessing": "Inquiry processing"
+  },
+  "auth": {
+    "title": "Sign In",
+    "email": "Email",
+    "password": "Password",
+    "rememberMe": "Remember me",
+    "forgotPassword": "Forgot password?",
+    "submit": "Sign In",
+    "register": "Register",
+    "or": "or",
+    "googleSignIn": "Sign in with Google",
+    "success": "Successfully signed in",
+    "error": "Sign in error: ",
+    "somethingWentWrong": "Something went wrong"
   }
 } 
