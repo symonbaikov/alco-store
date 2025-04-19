@@ -46,7 +46,7 @@ const ProfilePage: React.FC = () => {
     }
 
     try {
-      const response = await fetch('http://localhost:3001/api/auth/change-password', {
+      const response = await fetch('http://localhost:3001/api/change-password', {
         method: 'POST',
         credentials: 'include',
         headers: {
@@ -55,7 +55,6 @@ const ProfilePage: React.FC = () => {
         body: JSON.stringify({
           currentPassword,
           newPassword,
-          email: user?.email, // Добавляем email для дополнительной проверки
         }),
       });
 

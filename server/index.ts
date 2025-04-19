@@ -3,12 +3,14 @@ import cors from "cors";
 import session from "express-session";
 import cookieParser from "cookie-parser";
 import passport from "passport";
+import type { Request, Response } from "express";
 
 import slideRoutes from "./routes/slideRoutes.ts";
 import authRoutes from "./routes/auth.route.ts";
 import registerRoutes from "./routes/register.route.ts";
 import forgotPasswordRoutes from "./routes/forgot-password.route.ts";
 import resetPasswordRoutes from "./routes/reset-password.route.ts";
+import changePasswordRoutes from "./routes/change-password.route.ts";
 import { authenticatedUser } from "./lib/lib.ts";
 
 // Импортируем конфигурацию passport
@@ -50,8 +52,8 @@ app.get("/", (req, res) => {
 });
 
 // Protected route
-app.get("/profile", authenticatedUser, (req, res) => {
-  res.json({ user: req.session.user }); // 🔥 теперь работает!
+app.get("/profile", authenticatedUser, async (req: Request, res: Response): Promise<void> => {
+  res.json({ user: req.session.user });
 });
 
 // Routes
@@ -60,6 +62,7 @@ app.use("/api/auth", authRoutes);
 app.use("/api/register", registerRoutes);
 app.use("/api/forgot-password", forgotPasswordRoutes);
 app.use("/api/reset-password", resetPasswordRoutes);
+app.use("/api/change-password", changePasswordRoutes);
 app.listen(port, () => {
   console.log(`🚀 Server is running on http://localhost:${port}`);
 });
