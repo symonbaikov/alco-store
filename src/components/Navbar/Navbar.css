@@ -6,6 +6,11 @@
   box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
 }
 
+/* Добавляем оверлей */
+.navbar::after {
+  display: none;
+}
+
 .nav-content {
   width: 100%;
 }
@@ -128,24 +133,62 @@
 
 .bottom-nav {
   background: #8b0000;
-  padding: 18px 0;
+  padding: 0;
+  width: 100%;
+  position: relative;
+  z-index: 1000;
 }
 
 .bottom-nav-container {
   display: flex;
-  justify-content: space-between;
+  justify-content: center;
   align-items: center;
   max-width: 1300px;
   margin: 0 auto;
   padding: 0 20px;
+  position: relative;
 }
 
 .catalog-menu {
   display: flex;
-  gap: 35px;
   list-style: none;
   margin: 0;
   padding: 0;
+  height: 60px;
+  flex-wrap: nowrap;
+  white-space: nowrap;
+  position: relative;
+  z-index: 1001;
+  gap: 0;
+}
+
+.catalog-item {
+  position: relative;
+  height: 100%;
+  display: flex;
+  align-items: stretch;
+  flex-shrink: 0;
+}
+
+.catalog-item::before {
+  content: '';
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background-color: rgba(0, 0, 0, 0.2);
+  opacity: 0;
+  visibility: hidden;
+  transition: all 0.3s ease;
+  transition-delay: 0.5s;
+  pointer-events: none;
+  z-index: 999;
+}
+
+.catalog-item:hover::before {
+  opacity: 1;
+  visibility: visible;
 }
 
 .catalog-item a {
@@ -156,13 +199,34 @@
   font-size: 14px;
   display: flex;
   align-items: center;
-  gap: 5px;
-  letter-spacing: 1.8px;
-  font-family: "Roboto Condensed", sans-serif;
+  justify-content: center;
+  letter-spacing: 0.5px;
+  font-family: "Roboto", sans-serif;
+  height: 100%;
+  padding: 0 25px;
+  position: relative;
+  transition: all 0.3s ease;
+  white-space: nowrap;
+  z-index: 1002;
+  width: 100%;
+  border: none;
+  border-bottom: none !important;
 }
 
-.catalog-item a:hover {
-  color: #ffd700;
+.catalog-item a:hover,
+.catalog-item a:focus,
+.catalog-item a:active {
+  color: #fff;
+  background-color: rgba(255, 255, 255, 0.1);
+  border: none;
+  border-bottom: none !important;
+  text-decoration: none;
+  outline: none;
+}
+
+.catalog-item a::after,
+.catalog-item a::before {
+  display: none !important;
 }
 
 .top-menu {
@@ -188,6 +252,7 @@
   color: #666;
   text-decoration: none;
   font-size: 14px;
+  transition: color 0.3s ease;
 }
 
 .top-menu-item a:hover {
@@ -426,6 +491,7 @@
 .language-selector {
   position: relative;
   cursor: pointer;
+  z-index: 1005;
 }
 
 .language-selector .icon-button {
@@ -444,14 +510,14 @@
   background-color: rgba(0, 0, 0, 0.05);
 }
 
-.language-dropdown {
+.language-selector .language-dropdown {
   position: absolute;
   top: 100%;
   right: 0;
   width: 200px;
   background: white;
   box-shadow: 0 2px 8px rgba(0, 0, 0, 0.15);
-  z-index: 1000;
+  z-index: 1005;
   opacity: 0;
   visibility: hidden;
   transform: translateY(-10px);
@@ -791,6 +857,7 @@
 
 .language-selector.desktop {
   position: relative;
+  z-index: 1005;
 }
 
 .language-selector.desktop .icon-button {
@@ -816,7 +883,7 @@
   background: white;
   box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
   min-width: 200px;
-  z-index: 1000;
+  z-index: 1005;
   margin-top: 0;
   padding: 0;
   overflow: hidden;
@@ -957,4 +1024,30 @@
     width: 90%;
     padding: 20px;
   }
+}
+
+/* Оверлей с задержкой */
+.page-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background-color: rgba(0, 0, 0, 0.2);
+  opacity: 0;
+  visibility: hidden;
+  transition: all 0.3s ease;
+  transition-delay: 0.5s;
+  pointer-events: none;
+  z-index: 999;
+}
+
+.catalog-item:hover ~ .page-overlay {
+  opacity: 1;
+  visibility: visible;
+}
+
+/* Убираем задержку при уходе курсора */
+.catalog-item:not(:hover) ~ .page-overlay {
+  transition-delay: 0s;
 }
