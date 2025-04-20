@@ -430,7 +430,7 @@ const Navbar: React.FC<NavbarProps> = ({ onCartClick, onAuthClick }) => {
                 <Link to={ROUTES.CONFECTIONERY}>{t('navbar.confectioneryCaps')}</Link>
               </li>
               <li className="catalog-item">
-                <Link to={ROUTES.SALES}>{t('navbar.salesCaps')}</Link>
+                <Link to={ROUTES.SALES}><i className="fas fa-bolt"></i>{t('navbar.salesCaps')}</Link>
               </li>
             </ul>
             <div className="page-overlay"></div>

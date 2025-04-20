@@ -211,6 +211,7 @@
   width: 100%;
   border: none;
   border-bottom: none !important;
+  gap: 8px;
 }
 
 .catalog-item a:hover,
@@ -227,6 +228,17 @@
 .catalog-item a::after,
 .catalog-item a::before {
   display: none !important;
+}
+
+.catalog-item a i {
+  font-size: 16px;
+}
+
+/* Стили для иконки акций */
+.catalog-item a i.fa-bolt {
+  color: #ffd700;
+  text-shadow: 0 0 5px rgba(255, 215, 0, 0.5);
+  font-size: 16px;
 }
 
 .top-menu {
