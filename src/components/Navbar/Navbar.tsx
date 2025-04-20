@@ -4,6 +4,7 @@ import { useTranslation } from 'react-i18next';
 import { ROUTES, PHONE_NUMBERS } from "../../../server/config/routes";
 import { useAuthContext } from "../../context/AuthContext";
 import "./Navbar.css";
+import Catalog from "../Catalog/Catalog";
 
 interface NavbarProps {
   onCartClick: () => void;
@@ -402,40 +403,7 @@ const Navbar: React.FC<NavbarProps> = ({ onCartClick, onAuthClick }) => {
         </div>
 
         {/* Нижняя навигация */}
-        <div className="bottom-nav">
-          <div className="bottom-nav-container">
-            <ul className="catalog-menu">
-              <li className="catalog-item">
-                <Link to={ROUTES.CATALOG}>{t('navbar.fullCatalog')}</Link>
-              </li>
-              <li className="catalog-item">
-                <Link to={ROUTES.WINE}>{t('navbar.wineCaps')}</Link>
-              </li>
-              <li className="catalog-item">
-                <Link to={ROUTES.STRONG}>{t('navbar.strongCaps')}</Link>
-              </li>
-              <li className="catalog-item">
-                <Link to={ROUTES.LIQUOR}>{t('navbar.liquorCaps')}</Link>
-              </li>
-              <li className="catalog-item">
-                <Link to={ROUTES.DRINKS}>{t('navbar.drinksCaps')}</Link>
-              </li>
-              <li className="catalog-item">
-                <Link to={ROUTES.BEER}>{t('navbar.beerCaps')}</Link>
-              </li>
-              <li className="catalog-item">
-                <Link to={ROUTES.SNACKS}>{t('navbar.snacksCaps')}</Link>
-              </li>
-              <li className="catalog-item">
-                <Link to={ROUTES.CONFECTIONERY}>{t('navbar.confectioneryCaps')}</Link>
-              </li>
-              <li className="catalog-item">
-                <Link to={ROUTES.SALES}><i className="fas fa-bolt"></i>{t('navbar.salesCaps')}</Link>
-              </li>
-            </ul>
-            <div className="page-overlay"></div>
-          </div>
-        </div>
+        <Catalog />
       </div>
     </nav>
   );
