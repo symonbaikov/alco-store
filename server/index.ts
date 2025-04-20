@@ -11,6 +11,7 @@ import registerRoutes from "./routes/register.route.ts";
 import forgotPasswordRoutes from "./routes/forgot-password.route.ts";
 import resetPasswordRoutes from "./routes/reset-password.route.ts";
 import changePasswordRoutes from "./routes/change-password.route.ts";
+import categoryRoutes from "./routes/categories.route.ts";
 import { authenticatedUser } from "./lib/lib.ts";
 
 // Импортируем конфигурацию passport
@@ -63,6 +64,8 @@ app.use("/api/register", registerRoutes);
 app.use("/api/forgot-password", forgotPasswordRoutes);
 app.use("/api/reset-password", resetPasswordRoutes);
 app.use("/api/change-password", changePasswordRoutes);
+app.use("/api/categories", categoryRoutes);
+
 app.listen(port, () => {
   console.log(`🚀 Server is running on http://localhost:${port}`);
 });

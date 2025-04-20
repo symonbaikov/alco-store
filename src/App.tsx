@@ -10,7 +10,7 @@ import Contacts from "./pages/Contacts/Contacts";
 import ForgotPassword from "./components/Auth/ForgotPassword";
 import ResetPassword from "./components/Auth/ResetPassword";
 import ProfilePage from "./pages/Profile/ProfilePage";
-
+import { AuthProvider } from "./context/AuthContext";
 
 const App: React.FC = () => {
   const [isCartOpen, setIsCartOpen] = React.useState(false);
@@ -35,39 +35,41 @@ const App: React.FC = () => {
   };
 
   return (
-    <div className="app">
-      <Navbar
-        onCartClick={() => setIsCartOpen(true)}
-        onAuthClick={() => setIsAuthOpen(true)}
-      />
-      <main>
-        <Routes>
-          <Route path="/" element={<Home />} />
-          <Route path="/catalog" element={<div>Каталог</div>} />
-          <Route path="/about" element={<div>О нас</div>} />
-          <Route path="/contacts" element={<Contacts />} />
-          <Route path="/reset-password" element={<ResetPassword />} />
-          <Route path="/profile" element={<ProfilePage />} />
-        </Routes>
-      </main>
-      <Cart isOpen={isCartOpen} onClose={() => setIsCartOpen(false)} />
-      <AuthPage
-        isOpen={isAuthOpen}
-        onClose={() => setIsAuthOpen(false)}
-        onRegisterClick={handleRegisterClick}
-        onForgotPasswordClick={handleForgotPasswordClick}
-      />
-      <RegisterPage
-        isOpen={isRegisterOpen}
-        onClose={() => setIsRegisterOpen(false)}
-        onLoginClick={handleLoginClick}
-      />
-      <ForgotPassword
-        isOpen={isForgotPasswordOpen}
-        onClose={() => setIsForgotPasswordOpen(false)}
-        onLoginClick={handleLoginClick}
-      />
-    </div>
+    <AuthProvider>
+      <div className="app">
+        <Navbar
+          onCartClick={() => setIsCartOpen(true)}
+          onAuthClick={() => setIsAuthOpen(true)}
+        />
+        <main>
+          <Routes>
+            <Route path="/" element={<Home />} />
+            <Route path="/catalog" element={<div>Каталог</div>} />
+            <Route path="/about" element={<div>О нас</div>} />
+            <Route path="/contacts" element={<Contacts />} />
+            <Route path="/reset-password" element={<ResetPassword />} />
+            <Route path="/profile" element={<ProfilePage />} />
+          </Routes>
+        </main>
+        <Cart isOpen={isCartOpen} onClose={() => setIsCartOpen(false)} />
+        <AuthPage
+          isOpen={isAuthOpen}
+          onClose={() => setIsAuthOpen(false)}
+          onRegisterClick={handleRegisterClick}
+          onForgotPasswordClick={handleForgotPasswordClick}
+        />
+        <RegisterPage
+          isOpen={isRegisterOpen}
+          onClose={() => setIsRegisterOpen(false)}
+          onLoginClick={handleLoginClick}
+        />
+        <ForgotPassword
+          isOpen={isForgotPasswordOpen}
+          onClose={() => setIsForgotPasswordOpen(false)}
+          onLoginClick={handleLoginClick}
+        />
+      </div>
+    </AuthProvider>
   );
 };
 

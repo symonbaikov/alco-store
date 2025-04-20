@@ -51,3 +51,14 @@ model EmailVerification {
   expiresAt DateTime
   createdAt DateTime @default(now())
 }
+
+model Category {
+  id          Int      @id @default(autoincrement())
+  name        String   @unique
+  manufacturer String[]
+  country     String[]
+  volume      String[]
+  strength    String[]
+  createdAt   DateTime @default(now())
+  updatedAt   DateTime @updatedAt
+}
