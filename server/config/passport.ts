@@ -4,14 +4,25 @@ import { PrismaClient } from '@prisma/client';
 
 const prisma = new PrismaClient();
 
+// Сериализация: сохраняем в сессии только id пользователя
 passport.serializeUser((user: any, done) => {
   done(null, user.id);
 });
 
+// Десериализация: получаем пользователя из БД и сохраняем в req.session.user
 passport.deserializeUser(async (id: string, done) => {
   try {
     const user = await prisma.user.findUnique({ where: { id } });
-    done(null, user);
+    if (user) {
+      // Сохраняем только нужные поля в сессии
+      const sessionUser = {
+        id: user.id,
+        email: user.email
+      };
+      done(null, sessionUser);
+    } else {
+      done(new Error('User not found'), null);
+    }
   } catch (error) {
     done(error, null);
   }
@@ -48,7 +59,11 @@ passport.use(
           });
         }
 
-        return done(null, user);
+        // Возвращаем только нужные поля
+        return done(null, {
+          id: user.id,
+          email: user.email
+        });
       } catch (error) {
         return done(error as Error, undefined);
       }

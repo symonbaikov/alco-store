@@ -121,9 +121,25 @@ router.get(
 router.get(
   "/google/callback",
   passport.authenticate("google", { failureRedirect: "/login" }),
-  (req, res) => {
-    // Успешная аутентификация
-    res.redirect("http://localhost:5173");
+  (req: any, res) => {
+    // После успешной аутентификации через Google
+    if (req.user) {
+      // Устанавливаем пользователя в сессию
+      req.session.user = {
+        id: req.user.id,
+        email: req.user.email
+      };
+      req.session.save((err) => {
+        if (err) {
+          console.error('Ошибка сохранения сессии:', err);
+          res.redirect("http://localhost:5173?auth=error");
+        } else {
+          res.redirect("http://localhost:5173?auth=success");
+        }
+      });
+    } else {
+      res.redirect("http://localhost:5173?auth=error");
+    }
   }
 );
 

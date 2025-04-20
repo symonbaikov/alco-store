@@ -6,7 +6,7 @@ export function useAuth() {
 
   const fetchProfile = useCallback(async () => {
     try {
-      const res = await fetch("http://localhost:3001/profile", {
+      const res = await fetch("http://localhost:3001/api/auth/profile", {
         credentials: "include",
       });
       if (res.ok) {
