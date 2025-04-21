@@ -167,8 +167,7 @@
     }
   },
   "common": {
-    "moreInfo": "More Info",
-    "loading": "Loading..."
+    "moreInfo": "More Information"
   },
   "slides": {
     "1": {
@@ -186,8 +185,7 @@
     "4": {
       "title": "New Promotion",
       "description": "Jim Beam Honey at special price"
-    },
-    "priceLabel": "Special Offer"
+    }
   },
   "profile": {
     "personalInfo": "Personal Information",

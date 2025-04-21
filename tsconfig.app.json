@@ -22,5 +22,5 @@
     "noFallthroughCasesInSwitch": true,
     "noUncheckedSideEffectImports": true
   },
-  "include": ["src", "18n.ts", "server/lib/lib.ts", "server/config/routes.ts"]
+  "include": ["src", "18n.ts", "server/lib/lib.ts", "server/config/routes.ts", "server/services/slides-service.ts", "server/types/vite-env.d.ts"]
 }

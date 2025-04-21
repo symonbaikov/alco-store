@@ -1,6 +1,6 @@
 import { useState, useEffect } from "react";
 import { useTranslation } from "react-i18next";
-import { getSlides } from "../../api/slides";
+import { getSlides } from "../../../server/services/slides-service";
 import SliderSkeleton from "./SliderSkeleton";
 import "./Slider.css";
 
@@ -10,6 +10,7 @@ interface Slide {
   title: string;
   description: string;
   link: string;
+  order: number;
 }
 
 export const Slider = () => {
@@ -76,8 +77,8 @@ export const Slider = () => {
             style={{ backgroundImage: `url(${slide.image})` }}
           >
             <div className="slide-content">
-              <h2>{slide.title}</h2>
-              <p>{slide.description}</p>
+              <h2>{t(`slides.${slide.order}.title`)}</h2>
+              <p>{t(`slides.${slide.order}.description`)}</p>
               <a href={slide.link} className="slide-button">
                 {t('common.moreInfo')}
               </a>
