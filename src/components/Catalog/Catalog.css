@@ -10,9 +10,9 @@
 
 .bottom-nav-container {
   display: flex;
-  justify-content: flex-start;
+  justify-content: space-between;
   align-items: center;
-  width: 1300px;
+  width: 1500px;
   padding: 0;
   position: static;
 }
@@ -24,6 +24,7 @@
   padding: 0;
   height: 60px;
   position: static;
+  width: 100%;
 }
 
 .catalog-item {
@@ -31,39 +32,41 @@
   height: 100%;
   display: flex;
   align-items: stretch;
-  flex-shrink: 0;
+  flex: 1;
 }
 
-.catalog-item > a {
+.catalog-item > a,
+.catalog-item-link {
   color: #fff;
   text-decoration: none;
-  font-weight: 800;
+  font-weight: 900;
   text-transform: uppercase;
-  font-size: 14px;
+  font-size: 13px;
   display: flex;
   align-items: center;
   justify-content: center;
-  letter-spacing: 0.5px;
-  font-family: "Roboto", sans-serif;
+  letter-spacing: 1.5px;
+  font-family: "Montserrat", sans-serif;
   height: 100%;
+  width: 100%;
   padding: 0 25px;
   position: relative;
   white-space: nowrap;
   z-index: 1002;
-  width: 100%;
-  gap: 10px;
+  background-color: #8b0000;
+  transition: background-color 0.2s ease;
 }
 
 .catalog-item > a i.fa-bolt {
   color: #ffd700;
   text-shadow: 0 0 5px rgba(255, 215, 0, 0.5);
-  font-size: 16px;
+  font-size: 14px;
   margin-right: 5px;
 }
 
 .catalog-item:hover > a,
-.catalog-dropdown:hover > a {
-  background-color: rgba(255, 255, 255, 0.1);
+.catalog-item:hover .catalog-item-link {
+  background-color: #9b0000;
 }
 
 .catalog-dropdown {
@@ -76,7 +79,7 @@
   left: 50%;
   transform: translateX(-50%);
   background-color: #fff;
-  width: 1300px;
+  width: 1500px;
   box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
   opacity: 0;
   visibility: hidden;
@@ -106,8 +109,9 @@
 .catalog-column.categories {
   display: flex;
   flex-direction: column;
-  gap: 8px;
-  padding: 15px 0;
+  padding: 0;
+  min-width: 250px;
+  border-right: 1px solid #e5e5e5;
 }
 
 .catalog-column.categories a {
@@ -194,6 +198,50 @@
 
 .catalog-item:not(:hover) ~ .page-overlay {
   transition-delay: 0s;
+}
+
+.catalog-item:first-child > a,
+.catalog-item:first-child .catalog-item-link {
+  margin-left: 0;
+}
+
+.catalog-item:last-child > a,
+.catalog-item:last-child .catalog-item-link {
+  margin-right: 0;
+}
+
+.category-link {
+  color: black;
+  text-decoration: none;
+  padding: 0;
+  margin: 0;
+  font-size: 15px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  font-weight: 400;
+  transition: all 0.2s ease;
+  text-transform: none;
+  letter-spacing: normal;
+  text-align: left;
+  line-height: 1.2;
+  cursor: pointer;
+}
+
+.category-link .arrow {
+  color: #999;
+  font-size: 10px;
+  margin-right: 10px;
+}
+
+.category-link:hover {
+  color: #8b0000;
+  background-color: #f5f5f5;
+  font-weight: 500;
+}
+
+.category-link:hover .arrow {
+  color: #8b0000;
 }
 
 @media screen and (max-width: 960px) {

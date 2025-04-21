@@ -55,6 +55,7 @@ model EmailVerification {
 model Category {
   id          Int      @id @default(autoincrement())
   name        String   @unique
+  displayName String
   manufacturer String[]
   country     String[]
   volume      String[]

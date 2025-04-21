@@ -37,7 +37,7 @@ export const Slider = () => {
     if (!isPaused && slides.length > 0) {
       const timer = setInterval(() => {
         setCurrentSlide((prev) => (prev + 1) % slides.length);
-      }, 3000);
+      }, 5000);
       return () => clearInterval(timer);
     }
   }, [isPaused, slides.length]);
@@ -76,8 +76,8 @@ export const Slider = () => {
             style={{ backgroundImage: `url(${slide.image})` }}
           >
             <div className="slide-content">
-              <h2>{t(`slides.${slide.id}.title`)}</h2>
-              <p>{t(`slides.${slide.id}.description`)}</p>
+              <h2>{slide.title}</h2>
+              <p>{slide.description}</p>
               <a href={slide.link} className="slide-button">
                 {t('common.moreInfo')}
               </a>

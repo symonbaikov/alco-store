@@ -2,6 +2,30 @@ import { PrismaClient } from '@prisma/client';
 
 const prisma = new PrismaClient();
 
+export const categoryNames = {
+  armanyak: "Арманьяк",
+  brendy: "Бренди",
+  wine: "Вино",
+  vermut: "Вермут",
+  whiskey: "Виски",
+  vodka: "Водка",
+  grappa: "Граппа",
+  gin: "Джин",
+  calvados: "Кальвадос",
+  cognac: "Коньяк",
+  liquor: "Ликер",
+  drinks: "Напитки",
+  beer: "Пиво",
+  rum: "Ром",
+  tequila: "Текила",
+  chacha: "Чача",
+  snacks: "Снеки",
+  accessories: "Аксессуары",
+  confectionery: "Кондитерские изделия",
+  "gift-sets": "Подарочные наборы",
+  miniatures: "Миниатюры"
+} as const;
+
 const categoryData = {
   armanyak: {
     manufacturer: ["Clos Martin", "La Martiniquaise", "Château de Laubade", "Baron de Lustrac", "Marquis de Montesquiou"],
@@ -133,15 +157,31 @@ async function main() {
   ];
 
   // Создаем категории
-  for (const [name, details] of Object.entries(categoryData)) {
-    await prisma.category.create({
-      data: {
-        name,
+  for (const [name, displayName] of Object.entries(categoryNames)) {
+    const details = categoryData[name as keyof typeof categoryData] || {
+      manufacturer: [],
+      country: [],
+      volume: [],
+      strength: []
+    };
+
+    await prisma.category.upsert({
+      where: { name },
+      update: {
+        displayName,
         manufacturer: details.manufacturer,
         country: details.country,
         volume: details.volume,
-        strength: details.strength,
+        strength: details.strength
       },
+      create: {
+        name,
+        displayName,
+        manufacturer: details.manufacturer,
+        country: details.country,
+        volume: details.volume,
+        strength: details.strength
+      }
     });
   }
 

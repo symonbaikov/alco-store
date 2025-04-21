@@ -1,111 +1,132 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { Link } from "react-router-dom";
 import { useTranslation } from 'react-i18next';
 import { ROUTES } from "../../../server/config/routes";
+import { FaChevronRight } from 'react-icons/fa';
 import "./Catalog.css";
 
-interface CategoryDetails {
+interface Category {
+  name: string;
+  displayName: string;
   manufacturer: string[];
   country: string[];
   volume: string[];
   strength: string[];
 }
 
-const categoryDetailsMap: Record<string, CategoryDetails> = {
-  armanyak: {
-    manufacturer: ["Clos Martin", "La Martiniquaise"],
-    country: ["Франция"],
-    volume: ["0,7 л"],
-    strength: ["40%"]
-  },
-  whiskey: {
-    manufacturer: ["Johnnie Walker", "Jack Daniel's"],
-    country: ["Шотландия", "США"],
-    volume: ["0,7 л", "1 л"],
-    strength: ["40%", "43%"]
-  },
-  // Добавьте остальные категории по аналогии
-};
+const nonAlcoholCategories = ['accessories', 'confectionery', 'gift-sets', 'miniatures', 'snacks'];
 
 const Catalog: React.FC = () => {
   const { t } = useTranslation();
   const [selectedCategory, setSelectedCategory] = useState<string>("armanyak");
+  const [categories, setCategories] = useState<Category[]>([]);
+  const [currentDetails, setCurrentDetails] = useState<Category | null>(null);
+  const [loading, setLoading] = useState(true);
+
+  // Загрузка всех категорий при монтировании компонента
+  useEffect(() => {
+    const fetchCategories = async () => {
+      try {
+        const response = await fetch("http://localhost:3001/api/categories");
+        if (response.ok) {
+          const data = await response.json();
+          setCategories(data);
+        }
+      } catch (error) {
+        console.error("Ошибка при загрузке категорий:", error);
+      } finally {
+        setLoading(false);
+      }
+    };
+
+    fetchCategories();
+  }, []);
+
+  // Загрузка деталей выбранной категории
+  useEffect(() => {
+    const fetchCategoryDetails = async () => {
+      try {
+        const response = await fetch(`http://localhost:3001/api/categories/${selectedCategory}`);
+        if (response.ok) {
+          const data = await response.json();
+          setCurrentDetails(data);
+        }
+      } catch (error) {
+        console.error("Ошибка при загрузке деталей категории:", error);
+      }
+    };
+
+    if (selectedCategory) {
+      fetchCategoryDetails();
+    }
+  }, [selectedCategory]);
 
   const handleCategoryClick = (category: string) => {
     setSelectedCategory(category);
   };
 
-  const getCategoryDetails = (category: string): CategoryDetails => {
-    return categoryDetailsMap[category] || categoryDetailsMap.armanyak;
-  };
-
-  const details = getCategoryDetails(selectedCategory);
+  if (loading) {
+    return <div>Загрузка...</div>;
+  }
 
   return (
     <div className="bottom-nav">
       <div className="bottom-nav-container">
         <ul className="catalog-menu">
           <li className="catalog-item catalog-dropdown">
-            <Link to={ROUTES.CATALOG}>{t('navbar.fullCatalog')}</Link>
+            <div className="catalog-item-link">{t('navbar.fullCatalog')}</div>
             <div className="catalog-dropdown-content">
               <div className="catalog-grid">
                 <div className="catalog-column categories">
-                  <Link to="/category/armanyak" onClick={() => handleCategoryClick("armanyak")}>Арманьяк</Link>
-                  <Link to="/category/brendy" onClick={() => handleCategoryClick("brendy")}>Бренди</Link>
-                  <Link to="/category/wine" onClick={() => handleCategoryClick("wine")}>Вино</Link>
-                  <Link to="/category/vermut" onClick={() => handleCategoryClick("vermut")}>Вермут</Link>
-                  <Link to="/category/whiskey" onClick={() => handleCategoryClick("whiskey")}>Виски</Link>
-                  <Link to="/category/vodka" onClick={() => handleCategoryClick("vodka")}>Водка</Link>
-                  <Link to="/category/grappa" onClick={() => handleCategoryClick("grappa")}>Граппа</Link>
-                  <Link to="/category/gin" onClick={() => handleCategoryClick("gin")}>Джин</Link>
-                  <Link to="/category/calvados" onClick={() => handleCategoryClick("calvados")}>Кальвадос</Link>
-                  <Link to="/category/cognac" onClick={() => handleCategoryClick("cognac")}>Коньяк</Link>
-                  <Link to="/category/liquor" onClick={() => handleCategoryClick("liquor")}>Ликер</Link>
-                  <Link to="/category/drinks" onClick={() => handleCategoryClick("drinks")}>Напитки</Link>
-                  <Link to="/category/beer" onClick={() => handleCategoryClick("beer")}>Пиво</Link>
-                  <Link to="/category/rum" onClick={() => handleCategoryClick("rum")}>Ром</Link>
-                  <Link to="/category/tequila" onClick={() => handleCategoryClick("tequila")}>Текила</Link>
-                  <Link to="/category/chacha" onClick={() => handleCategoryClick("chacha")}>Чача</Link>
-                  <Link to="/category/snacks" onClick={() => handleCategoryClick("snacks")}>Снеки</Link>
-                  <Link to="/category/accessories" onClick={() => handleCategoryClick("accessories")}>Аксессуары</Link>
-                  <Link to="/category/confectionery" onClick={() => handleCategoryClick("confectionery")}>Кондитерские изделия</Link>
-                  <Link to="/category/gift-sets" onClick={() => handleCategoryClick("gift-sets")}>Подарочные наборы</Link>
-                  <Link to="/category/miniatures" onClick={() => handleCategoryClick("miniatures")}>Миниатюры</Link>
+                  {categories.map((category) => (
+                    <div
+                      key={category.name}
+                      className="category-link"
+                      onMouseEnter={() => handleCategoryClick(category.name)}
+                    >
+                      {category.displayName}
+                      {!nonAlcoholCategories.includes(category.name) && (
+                        <FaChevronRight className="arrow" />
+                      )}
+                    </div>
+                  ))}
                 </div>
-                <div className="catalog-details">
-                  <div className="catalog-section">
-                    <div className="catalog-header">Производитель</div>
-                    <div className="catalog-values">
-                      {details.manufacturer.map((manufacturer, index) => (
-                        <div key={index} className="catalog-value">{manufacturer}</div>
-                      ))}
+                {currentDetails && (
+                  <div className="catalog-details">
+                    <div className="catalog-section">
+                      <div className="catalog-header">Производитель</div>
+                      <div className="catalog-values">
+                        {currentDetails.manufacturer.map((manufacturer, index) => (
+                          <div key={index} className="catalog-value">{manufacturer}</div>
+                        ))}
+                      </div>
+                    </div>
+                    <div className="catalog-section">
+                      <div className="catalog-header">Страна</div>
+                      <div className="catalog-values">
+                        {currentDetails.country.map((country, index) => (
+                          <div key={index} className="catalog-value">{country}</div>
+                        ))}
+                      </div>
+                    </div>
+                    <div className="catalog-section">
+                      <div className="catalog-header">Объём</div>
+                      <div className="catalog-values">
+                        {currentDetails.volume.map((volume, index) => (
+                          <div key={index} className="catalog-value">{volume}</div>
+                        ))}
+                      </div>
+                    </div>
+                    <div className="catalog-section">
+                      <div className="catalog-header">Крепость</div>
+                      <div className="catalog-values">
+                        {currentDetails.strength.map((strength, index) => (
+                          <div key={index} className="catalog-value">{strength}</div>
+                        ))}
+                      </div>
                     </div>
                   </div>
-                  <div className="catalog-section">
-                    <div className="catalog-header">Страна</div>
-                    <div className="catalog-values">
-                      {details.country.map((country, index) => (
-                        <div key={index} className="catalog-value">{country}</div>
-                      ))}
-                    </div>
-                  </div>
-                  <div className="catalog-section">
-                    <div className="catalog-header">Объём</div>
-                    <div className="catalog-values">
-                      {details.volume.map((volume, index) => (
-                        <div key={index} className="catalog-value">{volume}</div>
-                      ))}
-                    </div>
-                  </div>
-                  <div className="catalog-section">
-                    <div className="catalog-header">Крепость</div>
-                    <div className="catalog-values">
-                      {details.strength.map((strength, index) => (
-                        <div key={index} className="catalog-value">{strength}</div>
-                      ))}
-                    </div>
-                  </div>
-                </div>
+                )}
               </div>
             </div>
           </li>

@@ -1,38 +1,36 @@
-import express from "express";
+import { Router } from 'express';
 import { PrismaClient } from '@prisma/client';
-import type { Request, Response } from "express";
 
-const router = express.Router();
+const router = Router();
 const prisma = new PrismaClient();
 
 // Получение всех категорий
-router.get("/", async (req: Request, res: Response) => {
+router.get('/', async (req, res) => {
   try {
     const categories = await prisma.category.findMany();
     res.json(categories);
   } catch (error) {
-    console.error('Error fetching categories:', error);
-    res.status(500).json({ message: 'Internal server error' });
+    console.error('Ошибка при получении категорий:', error);
+    res.status(500).json({ error: 'Ошибка при получении категорий' });
   }
 });
 
-// Получение категории по имени
-router.get("/:name", async (req: Request, res: Response) => {
+// Получение конкретной категории по имени
+router.get('/:name', async (req, res) => {
   try {
-    const category = await prisma.category.findFirst({
-      where: {
-        name: req.params.name
-      }
+    const { name } = req.params;
+    const category = await prisma.category.findUnique({
+      where: { name }
     });
-    
+
     if (!category) {
-      return res.status(404).json({ message: 'Category not found' });
+      return res.status(404).json({ error: 'Категория не найдена' });
     }
-    
+
     res.json(category);
   } catch (error) {
-    console.error('Error fetching category:', error);
-    res.status(500).json({ message: 'Internal server error' });
+    console.error('Ошибка при получении категории:', error);
+    res.status(500).json({ error: 'Ошибка при получении категории' });
   }
 });
 

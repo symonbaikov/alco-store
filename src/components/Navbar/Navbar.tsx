@@ -87,9 +87,10 @@ const Navbar: React.FC<NavbarProps> = ({ onCartClick, onAuthClick }) => {
           >
             <i className="fas fa-search"></i>
           </button>
-          <button className="icon-button" onClick={handleAuthClick}>
-            <i className="fas fa-user"></i>
-          </button>
+          <Link to={ROUTES.COMPARE} className="icon-button">
+            <i className="fas fa-chart-bar"></i>
+            <span className="compare-count">0</span>
+          </Link>
           <button className="icon-button cart-icon" onClick={onCartClick}>
             <i className="fas fa-shopping-cart"></i>
             <span className="cart-count">0</span>
@@ -197,16 +198,16 @@ const Navbar: React.FC<NavbarProps> = ({ onCartClick, onAuthClick }) => {
         <div className="mobile-catalog">
           <ul className="mobile-catalog-list">
             <li>
-              <Link to={ROUTES.WINE}>{t('navbar.wine')}</Link>
+              <div className="mobile-catalog-item">{t('navbar.wine')}</div>
             </li>
             <li>
-              <Link to={ROUTES.STRONG}>{t('navbar.strong')}</Link>
+              <div className="mobile-catalog-item">{t('navbar.strong')}</div>
             </li>
             <li>
-              <Link to={ROUTES.LIQUOR}>{t('navbar.liquor')}</Link>
+              <div className="mobile-catalog-item">{t('navbar.liquor')}</div>
             </li>
             <li>
-              <Link to={ROUTES.DRINKS}>{t('navbar.drinks')}</Link>
+              <div className="mobile-catalog-item">{t('navbar.drinks')}</div>
             </li>
             <li>
               <Link to={ROUTES.PROFILE} className="mobile-footer-item">
@@ -294,9 +295,10 @@ const Navbar: React.FC<NavbarProps> = ({ onCartClick, onAuthClick }) => {
                   </div>
                 </div>
               </div>
-              <button className="icon-button" onClick={handleAuthClick}>
-                <i className="fas fa-user"></i>
-              </button>
+              <Link to={ROUTES.COMPARE} className="icon-button">
+                <i className="fas fa-chart-bar"></i>
+                <span className="compare-count">0</span>
+              </Link>
               <button className="icon-button" onClick={onCartClick}>
                 <i className="fas fa-shopping-cart"></i>
                 <span className="cart-count">0</span>
@@ -391,9 +393,10 @@ const Navbar: React.FC<NavbarProps> = ({ onCartClick, onAuthClick }) => {
                   </div>
                 </div>
               </div>
-              <button className="icon-button" onClick={handleAuthClick}>
-                <i className="fas fa-user"></i>
-              </button>
+              <Link to={ROUTES.COMPARE} className="icon-button">
+                <i className="fas fa-chart-bar"></i>
+                <span className="compare-count">0</span>
+              </Link>
               <button className="icon-button" onClick={onCartClick}>
                 <i className="fas fa-shopping-cart"></i>
                 <span className="cart-count">0</span>
