@@ -41,7 +41,7 @@
   text-decoration: none;
   font-weight: 900;
   text-transform: uppercase;
-  font-size: 13px;
+  font-size: 12px;
   display: flex;
   align-items: center;
   justify-content: center;
@@ -156,8 +156,8 @@
 
 .catalog-header {
   color: #8b0000;
-  font-size: 14px;
-  font-weight: 500;
+  font-size: 15px;
+  font-weight: 700;
   margin-bottom: 10px;
   text-align: left;
 }
@@ -166,6 +166,7 @@
   display: flex;
   flex-direction: column;
   gap: 6px;
+  margin-left: 10px;
   text-align: left;
 }
 
