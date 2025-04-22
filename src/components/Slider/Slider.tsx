@@ -66,6 +66,8 @@ export const Slider = () => {
   return (
     <div
       className="slider"
+      role="region"
+      aria-label="slider"
       onMouseEnter={() => setIsPaused(true)}
       onMouseLeave={() => setIsPaused(false)}
     >
@@ -75,6 +77,9 @@ export const Slider = () => {
             key={slide.id}
             className={`slide ${index === currentSlide ? "active" : ""}`}
             style={{ backgroundImage: `url(${slide.image})` }}
+            role="article"
+            aria-label={`slide ${index + 1}`}
+            aria-hidden={index !== currentSlide}
           >
             <div className="slide-content">
               <h2>{t(`slides.${slide.order}.title`)}</h2>
@@ -87,19 +92,30 @@ export const Slider = () => {
         ))}
       </div>
 
-      <button className="slider-button prev" onClick={prevSlide}>
+      <button 
+        className="slider-button prev" 
+        onClick={prevSlide}
+        aria-label="previous slide"
+      >
         <i className="fas fa-chevron-left"></i>
       </button>
-      <button className="slider-button next" onClick={nextSlide}>
+      <button 
+        className="slider-button next" 
+        onClick={nextSlide}
+        aria-label="next slide"
+      >
         <i className="fas fa-chevron-right"></i>
       </button>
 
-      <div className="slider-dots">
+      <div className="slider-dots" role="tablist">
         {slides.map((_, index) => (
           <button
             key={index}
             className={`dot ${index === currentSlide ? "active" : ""}`}
             onClick={() => goToSlide(index)}
+            role="tab"
+            aria-selected={index === currentSlide}
+            aria-label={`Go to slide ${index + 1}`}
           />
         ))}
       </div>

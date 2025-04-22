@@ -1,0 +1,95 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Slider Component matches snapshot 1`] = `
+<div
+  aria-label="slider"
+  class="slider"
+  role="region"
+>
+  <div
+    class="slider-container"
+  >
+    <div
+      aria-hidden="false"
+      aria-label="slide 1"
+      class="slide active"
+      role="article"
+      style="background-image: url(/images/slide1.jpg);"
+    >
+      <div
+        class="slide-content"
+      >
+        <h2>
+          slides.1.title
+        </h2>
+        <p>
+          slides.1.description
+        </p>
+        <a
+          class="slide-button"
+          href="/link1"
+        >
+          common.moreInfo
+        </a>
+      </div>
+    </div>
+    <div
+      aria-hidden="true"
+      aria-label="slide 2"
+      class="slide "
+      role="article"
+      style="background-image: url(/images/slide2.jpg);"
+    >
+      <div
+        class="slide-content"
+      >
+        <h2>
+          slides.2.title
+        </h2>
+        <p>
+          slides.2.description
+        </p>
+        <a
+          class="slide-button"
+          href="/link2"
+        >
+          common.moreInfo
+        </a>
+      </div>
+    </div>
+  </div>
+  <button
+    aria-label="previous slide"
+    class="slider-button prev"
+  >
+    <i
+      class="fas fa-chevron-left"
+    />
+  </button>
+  <button
+    aria-label="next slide"
+    class="slider-button next"
+  >
+    <i
+      class="fas fa-chevron-right"
+    />
+  </button>
+  <div
+    class="slider-dots"
+    role="tablist"
+  >
+    <button
+      aria-label="Go to slide 1"
+      aria-selected="true"
+      class="dot active"
+      role="tab"
+    />
+    <button
+      aria-label="Go to slide 2"
+      aria-selected="false"
+      class="dot "
+      role="tab"
+    />
+  </div>
+</div>
+`;
