@@ -29,4 +29,18 @@ i18n.use(initReactI18next).init({
   interpolation: {
     escapeValue: false
   }
-}); 
+});
+
+// Подавляем ошибки консоли в тестах
+const originalError = console.error;
+console.error = (...args) => {
+  if (
+    typeof args[0] === 'string' &&
+    (args[0].includes('Ошибка при загрузке категорий') || 
+     args[0].includes('Ошибка при загрузке деталей категории') ||
+     args[0].includes('Ошибка при проверке сессии'))
+  ) {
+    return;
+  }
+  originalError.call(console, ...args);
+}; 

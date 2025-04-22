@@ -278,6 +278,7 @@ const Navbar: React.FC<NavbarProps> = ({ onCartClick, onAuthClick }) => {
                   <div 
                     className={`language-option ${i18n.language === 'bg' ? 'active' : ''}`}
                     onClick={() => !isLanguageLoading && changeLanguage('bg')}
+                    data-language="bg"
                   >
                     <div className="language-content">
                       <div className="language-title">Български</div>
@@ -287,6 +288,7 @@ const Navbar: React.FC<NavbarProps> = ({ onCartClick, onAuthClick }) => {
                   <div 
                     className={`language-option ${i18n.language === 'en' ? 'active' : ''}`}
                     onClick={() => !isLanguageLoading && changeLanguage('en')}
+                    data-language="en"
                   >
                     <div className="language-content">
                       <div className="language-title">English</div>
@@ -376,6 +378,7 @@ const Navbar: React.FC<NavbarProps> = ({ onCartClick, onAuthClick }) => {
                   <div 
                     className={`language-option ${i18n.language === 'bg' ? 'active' : ''}`}
                     onClick={() => !isLanguageLoading && changeLanguage('bg')}
+                    data-language="bg"
                   >
                     <div className="language-content">
                       <div className="language-title">Български</div>
@@ -385,6 +388,7 @@ const Navbar: React.FC<NavbarProps> = ({ onCartClick, onAuthClick }) => {
                   <div 
                     className={`language-option ${i18n.language === 'en' ? 'active' : ''}`}
                     onClick={() => !isLanguageLoading && changeLanguage('en')}
+                    data-language="en"
                   >
                     <div className="language-content">
                       <div className="language-title">English</div>

@@ -127,5 +127,5 @@ const AuthPage: React.FC<AuthPageProps> = ({
     </>
   );
 };
-
 export default AuthPage;
+

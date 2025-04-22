@@ -21,6 +21,6 @@
     "noUnusedParameters": true,
     "noFallthroughCasesInSwitch": true
   },
-  "include": ["src"],
+  "include": ["src", "server/services/popular-categories-service.ts"],
   "references": [{ "path": "./tsconfig.node.json" }]
 }
