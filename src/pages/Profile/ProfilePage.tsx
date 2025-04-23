@@ -5,10 +5,18 @@ import { Navigate, useNavigate } from 'react-router-dom';
 import toast, { Toaster } from 'react-hot-toast';
 import './ProfilePage.css';
 
+interface User {
+  email: string;
+  googleId?: string;
+}
+
 const ProfilePage: React.FC = () => {
   const { user, isLoggedIn, loading, logout } = useAuthContext();
   const { t } = useTranslation();
   const navigate = useNavigate();
+  
+  console.log('User data:', user);
+  
   const [isChangingPassword, setIsChangingPassword] = useState(false);
   const [currentPassword, setCurrentPassword] = useState('');
   const [newPassword, setNewPassword] = useState('');
@@ -46,7 +54,7 @@ const ProfilePage: React.FC = () => {
     }
 
     try {
-      const response = await fetch('http://localhost:3001/api/change-password', {
+      const response = await fetch('http://localhost:3001/api/auth/change-password', {
         method: 'POST',
         credentials: 'include',
         headers: {
@@ -95,11 +103,29 @@ const ProfilePage: React.FC = () => {
             <span className="info-label">Email:</span>
             <span className="info-value">{user?.email}</span>
           </div>
+          <div className="info-item">
+            <span className="info-label">{t('profile.loginMethod')}</span>
+            <span className="info-value">
+              {console.log('Current user:', user)}
+              {user?.googleId ? (
+                <span className="google-login-badge">
+                  <img 
+                    src="https://www.google.com/favicon.ico" 
+                    alt="Google" 
+                    className="google-icon" 
+                  />
+                  {t('profile.googleAccount')}
+                </span>
+              ) : (
+                <span>{t('profile.emailPassword')}</span>
+              )}
+            </span>
+          </div>
         </div>
 
         <div className="profile-section">
           <h2>{t('profile.security')}</h2>
-          {!isChangingPassword ? (
+          {!isChangingPassword && !user?.googleId && (
             <div className="profile-actions">
               <button 
                 className="profile-button"
@@ -114,7 +140,18 @@ const ProfilePage: React.FC = () => {
                 {t('profile.logout')}
               </button>
             </div>
-          ) : (
+          )}
+          {!isChangingPassword && user?.googleId && (
+            <div className="profile-actions">
+              <button 
+                className="profile-button logout-button"
+                onClick={handleLogout}
+              >
+                {t('profile.logout')}
+              </button>
+            </div>
+          )}
+          {isChangingPassword && (
             <form onSubmit={handleChangePassword} className="change-password-form">
               <div className="form-group">
                 <input

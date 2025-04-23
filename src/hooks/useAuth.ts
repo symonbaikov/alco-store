@@ -1,7 +1,12 @@
 import { useState, useEffect, useCallback } from "react";
 
+interface User {
+  email: string;
+  googleId?: string;
+}
+
 export function useAuth() {
-  const [user, setUser] = useState<null | { email: string }>(null);
+  const [user, setUser] = useState<User | null>(null);
   const [loading, setLoading] = useState(true);
 
   const fetchProfile = useCallback(async () => {

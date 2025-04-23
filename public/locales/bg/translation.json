@@ -193,17 +193,20 @@
     "changePassword": "Смяна на парола",
     "currentPassword": "Текуща парола",
     "newPassword": "Нова парола",
-    "confirmNewPassword": "Потвърди нова парола",
+    "confirmNewPassword": "Потвърдете новата парола",
     "savePassword": "Запази",
     "cancel": "Отказ",
     "logout": "Изход",
     "passwordsNotMatch": "Паролите не съвпадат",
-    "passwordChanged": "Паролата е променена успешно",
-    "changePasswordError": "Грешка при смяна на паролата",
+    "loginMethod": "Метод на вход",
+    "googleAccount": "Google акаунт",
+    "emailPassword": "Имейл и парола",
     "allFieldsRequired": "Всички полета са задължителни",
-    "passwordTooShort": "Паролата трябва да бъде поне 8 символа",
-    "invalidCurrentPassword": "Невалидна текуща парола",
+    "passwordTooShort": "Паролата трябва да е поне 8 символа",
+    "passwordChanged": "Паролата е променена успешно",
+    "invalidCurrentPassword": "Текущата парола е неправилна",
     "passwordRequirementsNotMet": "Паролата не отговаря на изискванията",
-    "passwordRequirements": "Паролата трябва да съдържа минимум 8 символа, букви и поне една цифра"
+    "changePasswordError": "Грешка при промяна на паролата",
+    "passwordRequirements": "Паролата трябва да е поне 8 символа и да съдържа поне една цифра"
   }
 } 

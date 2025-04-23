@@ -17,7 +17,8 @@ passport.deserializeUser(async (id: string, done) => {
       // Сохраняем только нужные поля в сессии
       const sessionUser = {
         id: user.id,
-        email: user.email
+        email: user.email,
+        googleId: user.googleId
       };
       done(null, sessionUser);
     } else {
@@ -37,10 +38,13 @@ passport.use(
     },
     async (accessToken, refreshToken, profile, done) => {
       try {
+        console.log('Google profile:', profile);
         // Проверяем, существует ли пользователь
         let user = await prisma.user.findFirst({
           where: { email: profile.emails?.[0]?.value },
         });
+
+        console.log('Found user:', user);
 
         if (!user) {
           // Если пользователя нет, создаем нового
@@ -51,19 +55,23 @@ passport.use(
               googleId: profile.id,
             },
           });
+          console.log('Created new user:', user);
         } else if (!user.googleId) {
           // Если пользователь существует, но не имеет googleId, обновляем его
           user = await prisma.user.update({
             where: { id: user.id },
             data: { googleId: profile.id },
           });
+          console.log('Updated user with googleId:', user);
         }
 
-        // Возвращаем только нужные поля
-        return done(null, {
+        const sessionUser = {
           id: user.id,
-          email: user.email
-        });
+          email: user.email,
+          googleId: user.googleId
+        };
+        console.log('Returning session user:', sessionUser);
+        return done(null, sessionUser);
       } catch (error) {
         return done(error as Error, undefined);
       }

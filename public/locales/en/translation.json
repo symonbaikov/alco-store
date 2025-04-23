@@ -198,12 +198,15 @@
     "cancel": "Cancel",
     "logout": "Logout",
     "passwordsNotMatch": "Passwords do not match",
-    "passwordChanged": "Password changed successfully",
-    "changePasswordError": "Error changing password",
+    "loginMethod": "Login Method",
+    "googleAccount": "Google Account",
+    "emailPassword": "Email and Password",
     "allFieldsRequired": "All fields are required",
     "passwordTooShort": "Password must be at least 8 characters long",
-    "invalidCurrentPassword": "Invalid current password",
-    "passwordRequirementsNotMet": "Password does not meet requirements",
-    "passwordRequirements": "Password must contain at least 8 characters, letters and at least one number"
+    "passwordChanged": "Password changed successfully",
+    "invalidCurrentPassword": "Current password is incorrect",
+    "passwordRequirementsNotMet": "Password requirements not met",
+    "changePasswordError": "Error changing password",
+    "passwordRequirements": "Password must be at least 8 characters long and contain at least one number"
   }
 } 

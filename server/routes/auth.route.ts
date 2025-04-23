@@ -10,6 +10,7 @@ declare module 'express-session' {
     user?: {
       id: string;
       email: string;
+      googleId?: string;
     };
   }
 }
@@ -38,6 +39,7 @@ const profileHandler: RequestHandler = (req, res) => {
     res.status(401).json({ message: "Не авторизован" });
     return;
   }
+  console.log('Profile request - session user:', req.session.user);
   res.json({ user: req.session.user });
 };
 
@@ -124,10 +126,12 @@ router.get(
   (req: any, res) => {
     // После успешной аутентификации через Google
     if (req.user) {
+      console.log('Google auth callback - user data:', req.user);
       // Устанавливаем пользователя в сессию
       req.session.user = {
         id: req.user.id,
-        email: req.user.email
+        email: req.user.email,
+        googleId: req.user.googleId
       };
       req.session.save((err) => {
         if (err) {

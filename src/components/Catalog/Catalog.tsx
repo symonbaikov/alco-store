@@ -18,7 +18,7 @@ const nonAlcoholCategories = ['accessories', 'confectionery', 'gift-sets', 'mini
 
 const Catalog: React.FC = () => {
   const { t } = useTranslation();
-  const [selectedCategory, setSelectedCategory] = useState<string>("armanyak");
+  const [selectedCategory, setSelectedCategory] = useState<string>("");
   const [categories, setCategories] = useState<Category[]>([]);
   const [currentDetails, setCurrentDetails] = useState<Category | null>(null);
   const [loading, setLoading] = useState(true);
@@ -31,6 +31,10 @@ const Catalog: React.FC = () => {
         if (response.ok) {
           const data = await response.json();
           setCategories(data);
+          // Устанавливаем первую категорию как выбранную
+          if (data.length > 0 && !selectedCategory) {
+            setSelectedCategory(data[0].name);
+          }
         }
       } catch (error) {
         console.error("Ошибка при загрузке категорий:", error);
@@ -40,7 +44,7 @@ const Catalog: React.FC = () => {
     };
 
     fetchCategories();
-  }, []);
+  }, [selectedCategory]);
 
   // Загрузка деталей выбранной категории
   useEffect(() => {
