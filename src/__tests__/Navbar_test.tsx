@@ -32,8 +32,8 @@ jest.mock('../i18n', () => ({
 }));
 
 // Мокаем сервисы
-jest.mock('../server/services/categories-service');
-jest.mock('../server/services/auth-service');
+jest.mock('../../server/services/categories-service');
+jest.mock('../../server/services/auth-service');
 
 describe('Navbar Component', () => {
   const mockProps = {
