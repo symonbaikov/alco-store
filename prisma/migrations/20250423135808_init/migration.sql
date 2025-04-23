@@ -51,6 +51,7 @@ CREATE TABLE "EmailVerification" (
 CREATE TABLE "Category" (
     "id" SERIAL NOT NULL,
     "name" TEXT NOT NULL,
+    "displayName" TEXT NOT NULL,
     "manufacturer" TEXT[],
     "country" TEXT[],
     "volume" TEXT[],
@@ -69,6 +70,12 @@ CREATE UNIQUE INDEX "User_googleId_key" ON "User"("googleId");
 
 -- CreateIndex
 CREATE UNIQUE INDEX "ResetToken_token_key" ON "ResetToken"("token");
+
+-- CreateIndex
+CREATE INDEX "Category_name_idx" ON "Category"("name");
+
+-- CreateIndex
+CREATE UNIQUE INDEX "categories_name_key" ON "Category"("name");
 
 -- AddForeignKey
 ALTER TABLE "ResetToken" ADD CONSTRAINT "ResetToken_userId_fkey" FOREIGN KEY ("userId") REFERENCES "User"("id") ON DELETE RESTRICT ON UPDATE CASCADE;

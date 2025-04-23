@@ -54,7 +54,7 @@ model EmailVerification {
 
 model Category {
   id          Int      @id @default(autoincrement())
-  name        String   @unique
+  name        String   
   displayName String
   manufacturer String[]
   country     String[]
@@ -62,4 +62,7 @@ model Category {
   strength    String[]
   createdAt   DateTime @default(now())
   updatedAt   DateTime @updatedAt
+
+  @@unique([name], map: "categories_name_key")
+  @@index([name])
 }
