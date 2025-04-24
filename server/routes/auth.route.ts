@@ -36,7 +36,7 @@ type Response = express.Response;
 // Получение данных текущего пользователя
 const profileHandler: RequestHandler = (req, res) => {
   if (!req.session.user) {
-    res.status(401).json({ message: "Не авторизован" });
+    res.status(401).json({ message: "auth.invalidCredentials" });
     return;
   }
   console.log('Profile request - session user:', req.session.user);
@@ -45,29 +45,50 @@ const profileHandler: RequestHandler = (req, res) => {
 
 // Вход в аккаунт
 const loginHandler: RequestHandler = async (req, res) => {
-  const { email, password } = req.body as LoginBody;
+  try {
+    const { email, password } = req.body as LoginBody;
 
-  if (!email || !password) {
-    res.status(400).json({ message: "Email и пароль обязательны" });
-    return;
+    if (!email || !password) {
+      return res.status(400).json({ message: "auth.allFieldsRequired" });
+    }
+
+    const user = await prisma.user.findUnique({ 
+      where: { email },
+      select: {
+        id: true,
+        email: true,
+        password: true,
+        googleId: true
+      }
+    });
+
+    if (!user) {
+      return res.status(401).json({ message: "auth.invalidCredentials" });
+    }
+
+    // Сначала проверяем пароль
+    const isValidPassword = await bcrypt.compare(password, user.password);
+
+    if (!isValidPassword) {
+      return res.status(401).json({ message: "auth.invalidCredentials" });
+    }
+
+    // Только после проверки пароля проверяем тип аккаунта
+    if (user.googleId) {
+      return res.status(400).json({ message: "auth.googleAccount" });
+    }
+
+    req.session.user = { 
+      id: user.id, 
+      email: user.email,
+      googleId: user.googleId 
+    };
+    
+    res.json({ message: "auth.success", user: { email: user.email } });
+  } catch (error) {
+    console.error('Login error:', error);
+    res.status(500).json({ message: "auth.somethingWentWrong" });
   }
-
-  const user = await prisma.user.findUnique({ where: { email } });
-
-  if (!user) {
-    res.status(401).json({ message: "Неверные учетные данные" });
-    return;
-  }
-
-  const isValidPassword = await bcrypt.compare(password, user.password);
-
-  if (!isValidPassword) {
-    res.status(401).json({ message: "Неверные учетные данные" });
-    return;
-  }
-
-  req.session.user = { id: user.id, email: user.email };
-  res.json({ message: "Успешный вход", user: { email: user.email } });
 };
 
 // Регистрация
@@ -75,14 +96,14 @@ const registerHandler: RequestHandler = async (req, res) => {
   const { email, password } = req.body as RegisterBody;
 
   if (!email || !password) {
-    res.status(400).json({ message: "Email и пароль обязательны" });
+    res.status(400).json({ message: "auth.allFieldsRequired" });
     return;
   }
 
   const existingUser = await prisma.user.findUnique({ where: { email } });
 
   if (existingUser) {
-    res.status(400).json({ message: "Пользователь уже существует" });
+    res.status(400).json({ message: "register.registrationError" });
     return;
   }
 
@@ -95,16 +116,16 @@ const registerHandler: RequestHandler = async (req, res) => {
   });
 
   req.session.user = { id: user.id, email: user.email };
-  res.status(201).json({ message: "Пользователь создан", user: { email: user.email } });
+  res.status(201).json({ message: "register.registrationSuccess", user: { email: user.email } });
 };
 
 // Выход из системы
 const logoutHandler: RequestHandler = (req, res) => {
   req.session.destroy((err) => {
     if (err) {
-      return res.status(500).json({ message: "Ошибка при выходе" });
+      return res.status(500).json({ message: "auth.somethingWentWrong" });
     }
-    res.json({ message: "Успешный выход" });
+    res.json({ message: "auth.success" });
   });
 };
 

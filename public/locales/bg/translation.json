@@ -52,7 +52,11 @@
     "googleSignIn": "Влизане с Google",
     "success": "Входът е успешен",
     "error": "Грешка при влизане: ",
-    "somethingWentWrong": "Нещо се обърка"
+    "somethingWentWrong": "Нещо се обърка",
+    "allFieldsRequired": "Имейл и парола са задължителни",
+    "invalidCredentials": "Невалиден имейл или парола",
+    "googleError": "Грешка при влизане с Google",
+    "googleAccount": "Този акаунт използва вход с Google"
   },
   "register": {
     "title": "Регистрация",

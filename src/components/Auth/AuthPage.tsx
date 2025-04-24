@@ -27,6 +27,13 @@ const AuthPage: React.FC<AuthPageProps> = ({
 
   const handleLogin = async (e: React.FormEvent) => {
     e.preventDefault();
+    
+    // Валидация на клиенте
+    if (!email || !password) {
+      toast.error(t('auth.allFieldsRequired'));
+      return;
+    }
+
     try {
       const res = await fetch("http://localhost:3001/api/auth/login", {
         method: "POST",
@@ -37,15 +44,16 @@ const AuthPage: React.FC<AuthPageProps> = ({
         body: JSON.stringify({ email, password }),
       });
 
+      const data = await res.json();
+
       if (res.ok) {
-        const data = await res.json();
         console.log("✅ Вход успешен:", data);
         await refetch();
         toast.success(t('auth.success'));
         onClose();
       } else {
-        const error = await res.json();
-        toast.error(t('auth.error') + error.error);
+        console.error("Ошибка входа:", data);
+        toast.error(t(data.message) || t('auth.somethingWentWrong'));
       }
     } catch (err) {
       console.error("Login error:", err);
@@ -56,6 +64,16 @@ const AuthPage: React.FC<AuthPageProps> = ({
   const handleGoogleLogin = () => {
     window.location.href = 'http://localhost:3001/api/auth/google';
   };
+
+  // Добавляем обработку параметров URL для Google Auth
+  React.useEffect(() => {
+    const params = new URLSearchParams(window.location.search);
+    const authStatus = params.get('auth');
+    
+    if (authStatus === 'error') {
+      toast.error(t('auth.googleError'));
+    }
+  }, [t]);
 
   return (
     <>

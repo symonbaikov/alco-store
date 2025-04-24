@@ -52,7 +52,11 @@
     "googleSignIn": "Sign in with Google",
     "success": "Successfully signed in",
     "error": "Sign in error: ",
-    "somethingWentWrong": "Something went wrong"
+    "somethingWentWrong": "Something went wrong",
+    "allFieldsRequired": "Email and password are required",
+    "invalidCredentials": "Invalid email or password",
+    "googleError": "Error signing in with Google",
+    "googleAccount": "This account uses Google Sign In"
   },
   "register": {
     "title": "Registration",
