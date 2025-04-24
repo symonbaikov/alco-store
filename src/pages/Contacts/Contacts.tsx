@@ -23,9 +23,9 @@ const Contacts: React.FC = () => {
               <span className="label">СПРАВОЧНАЯ СЛУЖБА</span>
               <span className="value">+380979740660</span>
             </div>
-            <div className="email">
-              <span className="label">E-MAIL</span>
-              <span className="value">info@alcomag.com.ua</span>
+            <div className="contact-item">
+              <span className="label">Email:</span>
+              <span className="value">info@tramonti.com.ua</span>
             </div>
           </div>
 

@@ -7,6 +7,11 @@ datasource db {
   url      = env("DATABASE_URL")
 }
 
+enum Role {
+  USER
+  ADMIN
+}
+
 model Slide {
   id          Int      @id @default(autoincrement())
   image       String
@@ -24,6 +29,7 @@ model User {
   email       String       @unique
   password    String
   googleId    String?      @unique
+  role        Role        @default(USER)
   createdAt   DateTime     @default(now())
   updatedAt   DateTime     @updatedAt
   firstName   String?

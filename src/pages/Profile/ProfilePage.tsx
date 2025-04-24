@@ -3,6 +3,7 @@ import { useAuthContext } from '../../context/AuthContext';
 import { useTranslation } from 'react-i18next';
 import { Navigate, useNavigate } from 'react-router-dom';
 import toast, { Toaster } from 'react-hot-toast';
+import { AdminBadge } from '../../components/AdminBadge';
 import './ProfilePage.css';
 
 interface User {
@@ -10,6 +11,7 @@ interface User {
   googleId?: string;
   firstName?: string;
   lastName?: string;
+  role: 'USER' | 'ADMIN';
 }
 
 const ProfilePage: React.FC = () => {
@@ -135,6 +137,7 @@ const ProfilePage: React.FC = () => {
       <div className="profile-info">
         <div className="profile-section">
           <h2>{t('profile.personalInfo')}</h2>
+          {user?.role === 'ADMIN' && <AdminBadge />}
           {user?.googleId && (
             <div className="profile-name">
               {isEditingName ? (

@@ -53,7 +53,8 @@ const profileHandler: RequestHandler = async (req, res) => {
         email: true,
         googleId: true,
         firstName: true,
-        lastName: true
+        lastName: true,
+        role: true
       }
     });
 

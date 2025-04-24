@@ -3,7 +3,9 @@
   min-height: 100vh;
   margin: 0;
   padding: 0;
-  background: white;
+  background: #fff;
+  display: flex;
+  flex-direction: column;
 }
 
 .logo {
@@ -46,18 +48,19 @@
   min-height: 100vh;
   display: flex;
   flex-direction: column;
-  background: white;
+  background-color: #fff;
+  flex: 1;
 }
 
-main {
+.main-content {
   flex: 1;
+  padding: 20px 0 60px;
+  background-color: #fff;
+  min-height: 100%;
   width: 100%;
-  margin: 0;
-  padding: 0;
 }
 
 /* Убираем отступ сверху для контента */
 .app > *:not(nav) {
-  padding-top: 0;
   width: 100%;
 }

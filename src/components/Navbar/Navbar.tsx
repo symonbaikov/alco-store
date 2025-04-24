@@ -72,7 +72,7 @@ const Navbar: React.FC<NavbarProps> = ({ onCartClick, onAuthClick }) => {
           <i className={`fas ${isMobileMenuOpen ? "fa-times" : "fa-bars"}`}></i>
         </button>
         <Link to={ROUTES.HOME} className="navbar-logo">
-          ALCOMAG
+          TRAMONTI
         </Link>
         <div className="mobile-icons">
           <button
@@ -253,7 +253,7 @@ const Navbar: React.FC<NavbarProps> = ({ onCartClick, onAuthClick }) => {
         <div className="top-nav">
           <div className="nav-left">
             <Link to={ROUTES.HOME} className="navbar-logo">
-              ALCOMAG
+              TRAMONTI
             </Link>
             <div className="search-container">
               <input type="text" placeholder={t('navbar.search')} />
@@ -353,7 +353,7 @@ const Navbar: React.FC<NavbarProps> = ({ onCartClick, onAuthClick }) => {
         <div className="top-nav">
           <div className="nav-left">
             <Link to={ROUTES.HOME} className="navbar-logo">
-              ALCOMAG
+              TRAMONTI
             </Link>
             <div className="search-container">
               <input type="text" placeholder={t('navbar.search')} />

@@ -1,0 +1,265 @@
+.footer {
+  background-color: #2b2b2b;
+  color: #fff;
+  padding: 40px 0 20px;
+  margin-top: auto;
+  width: 100%;
+  position: relative;
+  bottom: 0;
+}
+
+.footer-content {
+  max-width: 1500px;
+  margin: 0 auto;
+  display: grid;
+  grid-template-columns: repeat(5, 1fr);
+  gap: 40px;
+  padding: 0 40px;
+}
+
+.footer-section {
+  position: relative;
+}
+
+.footer-section h3 {
+  color: #fff;
+  font-family: 'Helvetica Neue', Arial, sans-serif;
+  font-size: 13px;
+  font-weight: 600;
+  text-transform: uppercase;
+  margin-bottom: 15px;
+  letter-spacing: 0.5px;
+}
+
+.footer-section ul {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+
+.footer-section ul li {
+  margin-bottom: 8px;
+}
+
+.footer-section ul li a {
+  color: #999;
+  text-decoration: none;
+  font-size: 13px;
+  transition: color 0.3s ease;
+}
+
+.footer-section ul li a:hover {
+  color: #fff;
+}
+
+.contact-section {
+  color: #999;
+}
+
+.contact-info {
+  display: flex;
+  flex-direction: column;
+  gap: 15px;
+}
+
+.contact-item {
+  display: grid;
+  grid-template-columns: 16px 1fr;
+  align-items: center;
+  gap: 10px;
+  text-decoration: none;
+}
+
+.contact-item i {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 16px;
+  height: 16px;
+  color: #fff;
+  font-size: 14px;
+}
+
+.contact-item.phone {
+  color: #fff;
+  font-size: 16px;
+  font-weight: 500;
+}
+
+.contact-item.email {
+  color: #999;
+  font-size: 13px;
+}
+
+.contact-item.address {
+  color: #999;
+  font-size: 13px;
+}
+
+.working-hours {
+  margin-top: 8px;
+  padding-left: 26px;
+}
+
+.working-hours p {
+  margin: 5px 0;
+  color: #999;
+  font-size: 13px;
+}
+
+.working-hours p:first-child {
+  margin-bottom: 10px;
+}
+
+.footer-bottom {
+  margin-top: 30px;
+  padding-top: 20px;
+  border-top: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+.footer-bottom-content {
+  max-width: 1500px;
+  margin: 0 auto;
+  padding: 0 40px;
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+}
+
+.copyright {
+  color: #666;
+  font-size: 12px;
+  max-width: 70%;
+}
+
+.copyright p {
+  margin: 4px 0;
+}
+
+.social-payment {
+  display: flex;
+  flex-direction: column;
+  gap: 15px;
+  align-items: flex-end;
+}
+
+.social-links {
+  display: flex;
+  gap: 15px;
+}
+
+.social-links a {
+  color: #666;
+  text-decoration: none;
+  font-size: 16px;
+  transition: color 0.3s ease;
+}
+
+.social-links a:hover {
+  color: #fff;
+}
+
+.payment-methods {
+  display: flex;
+  gap: 15px;
+  align-items: center;
+  margin-top: 20px;
+}
+
+.payment-methods span {
+  color: #666;
+  font-size: 13px;
+  transition: color 0.3s ease;
+  cursor: default;
+}
+
+.payment-methods span:hover {
+  color: #fff;
+}
+
+@media (max-width: 1024px) {
+  .footer-content {
+    grid-template-columns: repeat(3, 1fr);
+  }
+
+  .contact-section {
+    grid-column: span 3;
+  }
+}
+
+@media (max-width: 768px) {
+  .footer-content {
+    grid-template-columns: repeat(2, 1fr);
+  }
+
+  .contact-section {
+    grid-column: span 2;
+  }
+
+  .footer-bottom-content {
+    flex-direction: column;
+    gap: 20px;
+    align-items: center;
+    text-align: center;
+  }
+
+  .social-payment {
+    align-items: center;
+  }
+
+  .footer-section {
+    border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+  }
+
+  .footer-section h3 {
+    margin: 0;
+    padding: 15px 0;
+    cursor: pointer;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+  }
+
+  .footer-section h3::after {
+    content: '';
+    width: 10px;
+    height: 10px;
+    border-right: 2px solid #fff;
+    border-bottom: 2px solid #fff;
+    transform: rotate(45deg);
+    transition: transform 0.3s ease;
+  }
+
+  .footer-section.active h3::after {
+    transform: rotate(-135deg);
+  }
+
+  .footer-section ul {
+    max-height: 0;
+    overflow: hidden;
+    transition: max-height 0.3s ease-out;
+  }
+
+  .footer-section.active ul {
+    max-height: 500px;
+    transition: max-height 0.5s ease-in;
+  }
+
+  .footer-section ul li:first-child {
+    margin-top: 10px;
+  }
+
+  .footer-section ul li:last-child {
+    margin-bottom: 20px;
+  }
+}
+
+@media (max-width: 480px) {
+  .footer-content {
+    grid-template-columns: 1fr;
+  }
+  
+  .contact-section {
+    grid-column: span 1;
+  }
+} 

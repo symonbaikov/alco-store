@@ -1,0 +1,16 @@
+.admin-badge {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  background-color: #800020;
+  color: white;
+  padding: 6px 12px;
+  border-radius: 4px;
+  font-size: 14px;
+  font-weight: 500;
+}
+
+.admin-badge svg {
+  width: 16px;
+  height: 16px;
+} 

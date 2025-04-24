@@ -1,4 +1,5 @@
-import { PrismaClient } from '@prisma/client';
+import { PrismaClient, Role } from '@prisma/client';
+import * as bcrypt from 'bcrypt';
 
 const prisma = new PrismaClient();
 
@@ -191,6 +192,22 @@ async function main() {
       data: slide,
     });
   }
+
+  const hashedPassword = await bcrypt.hash('admin123', 10);
+  
+  const admin = await prisma.user.upsert({
+    where: { email: 'admin@example.com' },
+    update: {},
+    create: {
+      email: 'admin@example.com',
+      password: hashedPassword,
+      role: Role.ADMIN,
+      firstName: 'Admin',
+      lastName: 'User'
+    },
+  });
+
+  console.log({ admin });
 
   console.log('База данных успешно заполнена');
 }

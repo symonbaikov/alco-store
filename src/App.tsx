@@ -10,6 +10,7 @@ import Contacts from "./pages/Contacts/Contacts";
 import ForgotPassword from "./components/Auth/ForgotPassword";
 import ResetPassword from "./components/Auth/ResetPassword";
 import ProfilePage from "./pages/Profile/ProfilePage";
+import Footer from "./components/Footer/Footer";
 import { AuthProvider } from "./context/AuthContext";
 
 const App: React.FC = () => {
@@ -69,6 +70,7 @@ const App: React.FC = () => {
           onLoginClick={handleLoginClick}
         />
       </div>
+      <Footer />
     </AuthProvider>
   );
 };

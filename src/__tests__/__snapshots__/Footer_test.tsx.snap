@@ -1,0 +1,1213 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Footer Component должен корректно отображаться на десктопе 1`] = `
+<div>
+  <footer
+    class="footer"
+  >
+    <div
+      class="footer-content"
+    >
+      <div
+        class="footer-section "
+      >
+        <h3>
+          КАТАЛОГ
+        </h3>
+        <ul>
+          <li>
+            <a
+              data-discover="true"
+              href="/wine"
+            >
+              Вино
+            </a>
+          </li>
+          <li>
+            <a
+              data-discover="true"
+              href="/champagne"
+            >
+              Шампанско
+            </a>
+          </li>
+          <li>
+            <a
+              data-discover="true"
+              href="/cognac"
+            >
+              Коняк
+            </a>
+          </li>
+          <li>
+            <a
+              data-discover="true"
+              href="/whiskey"
+            >
+              Уиски
+            </a>
+          </li>
+          <li>
+            <a
+              data-discover="true"
+              href="/vodka"
+            >
+              Водка
+            </a>
+          </li>
+          <li>
+            <a
+              data-discover="true"
+              href="/liquor"
+            >
+              Ликьори
+            </a>
+          </li>
+          <li>
+            <a
+              data-discover="true"
+              href="/tequila"
+            >
+              Текила
+            </a>
+          </li>
+          <li>
+            <a
+              data-discover="true"
+              href="/brandy"
+            >
+              Бренди
+            </a>
+          </li>
+          <li>
+            <a
+              data-discover="true"
+              href="/beer"
+            >
+              Бира
+            </a>
+          </li>
+          <li>
+            <a
+              data-discover="true"
+              href="/vermouth"
+            >
+              Вермути
+            </a>
+          </li>
+          <li>
+            <a
+              data-discover="true"
+              href="/rum"
+            >
+              Ром
+            </a>
+          </li>
+        </ul>
+      </div>
+      <div
+        class="footer-section "
+      >
+        <h3>
+          КОМПАНИЯ
+        </h3>
+        <ul>
+          <li>
+            <a
+              data-discover="true"
+              href="/about"
+            >
+              За нас
+            </a>
+          </li>
+          <li>
+            <a
+              data-discover="true"
+              href="/cooperation"
+            >
+              Сътрудничество
+            </a>
+          </li>
+          <li>
+            <a
+              data-discover="true"
+              href="/rent"
+            >
+              Наем
+            </a>
+          </li>
+          <li>
+            <a
+              data-discover="true"
+              href="/reviews"
+            >
+              Отзиви
+            </a>
+          </li>
+          <li>
+            <a
+              data-discover="true"
+              href="/licenses"
+            >
+              Лицензи
+            </a>
+          </li>
+          <li>
+            <a
+              data-discover="true"
+              href="/documents"
+            >
+              Документи
+            </a>
+          </li>
+          <li>
+            <a
+              data-discover="true"
+              href="/requisites"
+            >
+              Реквизити
+            </a>
+          </li>
+          <li>
+            <a
+              data-discover="true"
+              href="/contacts"
+            >
+              Контакти
+            </a>
+          </li>
+        </ul>
+      </div>
+      <div
+        class="footer-section "
+      >
+        <h3>
+          ПУБЛИКАЦИИ
+        </h3>
+        <ul>
+          <li>
+            <a
+              data-discover="true"
+              href="/sommelier"
+            >
+              Съвети от сомелиер
+            </a>
+          </li>
+          <li>
+            <a
+              data-discover="true"
+              href="/events"
+            >
+              Събития
+            </a>
+          </li>
+          <li>
+            <a
+              data-discover="true"
+              href="/articles"
+            >
+              Статии
+            </a>
+          </li>
+          <li>
+            <a
+              data-discover="true"
+              href="/cocktails"
+            >
+              Коктейли
+            </a>
+          </li>
+        </ul>
+      </div>
+      <div
+        class="footer-section "
+      >
+        <h3>
+          ПОМОЩ
+        </h3>
+        <ul>
+          <li>
+            <a
+              data-discover="true"
+              href="/payment-delivery"
+            >
+              Плащане и доставка
+            </a>
+          </li>
+          <li>
+            <a
+              data-discover="true"
+              href="/return-exchange"
+            >
+              Връщане и замяна
+            </a>
+          </li>
+          <li>
+            <a
+              data-discover="true"
+              href="/public-offer"
+            >
+              Публична оферта
+            </a>
+          </li>
+          <li>
+            <a
+              data-discover="true"
+              href="/privacy-policy"
+            >
+              Политика за поверителност
+            </a>
+          </li>
+          <li>
+            <a
+              data-discover="true"
+              href="/loyalty"
+            >
+              Програма за лоялност
+            </a>
+          </li>
+        </ul>
+      </div>
+      <div
+        class="contact-section"
+      >
+        <div
+          class="contact-info"
+        >
+          <a
+            class="contact-item phone"
+            href="tel:+380979740660"
+          >
+            <i
+              class="fas fa-phone"
+            />
+            +38 (097) 974-06-60
+          </a>
+          <a
+            class="contact-item email"
+            href="mailto:info@tramonti.com.ua"
+          >
+            <i
+              class="fas fa-envelope"
+            />
+            info@tramonti.com.ua
+          </a>
+          <div
+            class="contact-item address"
+          >
+            <i
+              class="fas fa-map-marker-alt"
+            />
+            г. Днепр, ул. Нижнеднепровская, 1/Ж
+          </div>
+          <div
+            class="working-hours"
+          >
+            <p>
+              График за обработка на поръчки:
+            </p>
+            <p>
+              Пон.-Пет. – от 9:00 до 19:00
+            </p>
+            <p>
+              Съб. – Нед. – от 10:00 до 15:00
+            </p>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div
+      class="footer-bottom"
+    >
+      <div
+        class="footer-bottom-content"
+      >
+        <div
+          class="copyright"
+        >
+          <p>
+            2025
+             
+            © Онлайн витрина на магазини TRAMONTI.
+          </p>
+          <p>
+            Не продаваме алкохол на непълнолетни!
+          </p>
+          <p>
+            Разпространението и използването на материали от сайта е забранено!
+          </p>
+          <p>
+            Магазинът работи само за крайния потребител, препродажбата на алкохол е забранена!
+          </p>
+          <p>
+            Прекомерната консумация на алкохол вреди на вашето здраве!
+          </p>
+        </div>
+        <div
+          class="social-payment"
+        >
+          <div
+            class="social-links"
+          >
+            <a
+              href="https://facebook.com"
+              rel="noopener noreferrer"
+              target="_blank"
+            >
+              <i
+                class="fab fa-facebook-f"
+              />
+            </a>
+            <a
+              href="https://instagram.com"
+              rel="noopener noreferrer"
+              target="_blank"
+            >
+              <i
+                class="fab fa-instagram"
+              />
+            </a>
+            <a
+              href="https://youtube.com"
+              rel="noopener noreferrer"
+              target="_blank"
+            >
+              <i
+                class="fab fa-youtube"
+              />
+            </a>
+            <a
+              href="tel:+380979740660"
+            >
+              <i
+                class="fas fa-phone"
+              />
+            </a>
+          </div>
+          <div
+            class="payment-methods"
+          >
+            <span>
+              В брой
+            </span>
+            <span>
+              Mastercard
+            </span>
+            <span>
+              Visa
+            </span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </footer>
+</div>
+`;
+
+exports[`Footer Component должен корректно отображаться на мобильном 1`] = `
+<div>
+  <footer
+    class="footer"
+  >
+    <div
+      class="footer-content"
+    >
+      <div
+        class="footer-section "
+      >
+        <h3>
+          КАТАЛОГ
+        </h3>
+        <ul>
+          <li>
+            <a
+              data-discover="true"
+              href="/wine"
+            >
+              Вино
+            </a>
+          </li>
+          <li>
+            <a
+              data-discover="true"
+              href="/champagne"
+            >
+              Шампанско
+            </a>
+          </li>
+          <li>
+            <a
+              data-discover="true"
+              href="/cognac"
+            >
+              Коняк
+            </a>
+          </li>
+          <li>
+            <a
+              data-discover="true"
+              href="/whiskey"
+            >
+              Уиски
+            </a>
+          </li>
+          <li>
+            <a
+              data-discover="true"
+              href="/vodka"
+            >
+              Водка
+            </a>
+          </li>
+          <li>
+            <a
+              data-discover="true"
+              href="/liquor"
+            >
+              Ликьори
+            </a>
+          </li>
+          <li>
+            <a
+              data-discover="true"
+              href="/tequila"
+            >
+              Текила
+            </a>
+          </li>
+          <li>
+            <a
+              data-discover="true"
+              href="/brandy"
+            >
+              Бренди
+            </a>
+          </li>
+          <li>
+            <a
+              data-discover="true"
+              href="/beer"
+            >
+              Бира
+            </a>
+          </li>
+          <li>
+            <a
+              data-discover="true"
+              href="/vermouth"
+            >
+              Вермути
+            </a>
+          </li>
+          <li>
+            <a
+              data-discover="true"
+              href="/rum"
+            >
+              Ром
+            </a>
+          </li>
+        </ul>
+      </div>
+      <div
+        class="footer-section "
+      >
+        <h3>
+          КОМПАНИЯ
+        </h3>
+        <ul>
+          <li>
+            <a
+              data-discover="true"
+              href="/about"
+            >
+              За нас
+            </a>
+          </li>
+          <li>
+            <a
+              data-discover="true"
+              href="/cooperation"
+            >
+              Сътрудничество
+            </a>
+          </li>
+          <li>
+            <a
+              data-discover="true"
+              href="/rent"
+            >
+              Наем
+            </a>
+          </li>
+          <li>
+            <a
+              data-discover="true"
+              href="/reviews"
+            >
+              Отзиви
+            </a>
+          </li>
+          <li>
+            <a
+              data-discover="true"
+              href="/licenses"
+            >
+              Лицензи
+            </a>
+          </li>
+          <li>
+            <a
+              data-discover="true"
+              href="/documents"
+            >
+              Документи
+            </a>
+          </li>
+          <li>
+            <a
+              data-discover="true"
+              href="/requisites"
+            >
+              Реквизити
+            </a>
+          </li>
+          <li>
+            <a
+              data-discover="true"
+              href="/contacts"
+            >
+              Контакти
+            </a>
+          </li>
+        </ul>
+      </div>
+      <div
+        class="footer-section "
+      >
+        <h3>
+          ПУБЛИКАЦИИ
+        </h3>
+        <ul>
+          <li>
+            <a
+              data-discover="true"
+              href="/sommelier"
+            >
+              Съвети от сомелиер
+            </a>
+          </li>
+          <li>
+            <a
+              data-discover="true"
+              href="/events"
+            >
+              Събития
+            </a>
+          </li>
+          <li>
+            <a
+              data-discover="true"
+              href="/articles"
+            >
+              Статии
+            </a>
+          </li>
+          <li>
+            <a
+              data-discover="true"
+              href="/cocktails"
+            >
+              Коктейли
+            </a>
+          </li>
+        </ul>
+      </div>
+      <div
+        class="footer-section "
+      >
+        <h3>
+          ПОМОЩ
+        </h3>
+        <ul>
+          <li>
+            <a
+              data-discover="true"
+              href="/payment-delivery"
+            >
+              Плащане и доставка
+            </a>
+          </li>
+          <li>
+            <a
+              data-discover="true"
+              href="/return-exchange"
+            >
+              Връщане и замяна
+            </a>
+          </li>
+          <li>
+            <a
+              data-discover="true"
+              href="/public-offer"
+            >
+              Публична оферта
+            </a>
+          </li>
+          <li>
+            <a
+              data-discover="true"
+              href="/privacy-policy"
+            >
+              Политика за поверителност
+            </a>
+          </li>
+          <li>
+            <a
+              data-discover="true"
+              href="/loyalty"
+            >
+              Програма за лоялност
+            </a>
+          </li>
+        </ul>
+      </div>
+      <div
+        class="contact-section"
+      >
+        <div
+          class="contact-info"
+        >
+          <a
+            class="contact-item phone"
+            href="tel:+380979740660"
+          >
+            <i
+              class="fas fa-phone"
+            />
+            +38 (097) 974-06-60
+          </a>
+          <a
+            class="contact-item email"
+            href="mailto:info@tramonti.com.ua"
+          >
+            <i
+              class="fas fa-envelope"
+            />
+            info@tramonti.com.ua
+          </a>
+          <div
+            class="contact-item address"
+          >
+            <i
+              class="fas fa-map-marker-alt"
+            />
+            г. Днепр, ул. Нижнеднепровская, 1/Ж
+          </div>
+          <div
+            class="working-hours"
+          >
+            <p>
+              График за обработка на поръчки:
+            </p>
+            <p>
+              Пон.-Пет. – от 9:00 до 19:00
+            </p>
+            <p>
+              Съб. – Нед. – от 10:00 до 15:00
+            </p>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div
+      class="footer-bottom"
+    >
+      <div
+        class="footer-bottom-content"
+      >
+        <div
+          class="copyright"
+        >
+          <p>
+            2025
+             
+            © Онлайн витрина на магазини TRAMONTI.
+          </p>
+          <p>
+            Не продаваме алкохол на непълнолетни!
+          </p>
+          <p>
+            Разпространението и използването на материали от сайта е забранено!
+          </p>
+          <p>
+            Магазинът работи само за крайния потребител, препродажбата на алкохол е забранена!
+          </p>
+          <p>
+            Прекомерната консумация на алкохол вреди на вашето здраве!
+          </p>
+        </div>
+        <div
+          class="social-payment"
+        >
+          <div
+            class="social-links"
+          >
+            <a
+              href="https://facebook.com"
+              rel="noopener noreferrer"
+              target="_blank"
+            >
+              <i
+                class="fab fa-facebook-f"
+              />
+            </a>
+            <a
+              href="https://instagram.com"
+              rel="noopener noreferrer"
+              target="_blank"
+            >
+              <i
+                class="fab fa-instagram"
+              />
+            </a>
+            <a
+              href="https://youtube.com"
+              rel="noopener noreferrer"
+              target="_blank"
+            >
+              <i
+                class="fab fa-youtube"
+              />
+            </a>
+            <a
+              href="tel:+380979740660"
+            >
+              <i
+                class="fas fa-phone"
+              />
+            </a>
+          </div>
+          <div
+            class="payment-methods"
+          >
+            <span>
+              В брой
+            </span>
+            <span>
+              Mastercard
+            </span>
+            <span>
+              Visa
+            </span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </footer>
+</div>
+`;
+
+exports[`Footer Component должен корректно отображаться на планшете 1`] = `
+<div>
+  <footer
+    class="footer"
+  >
+    <div
+      class="footer-content"
+    >
+      <div
+        class="footer-section "
+      >
+        <h3>
+          КАТАЛОГ
+        </h3>
+        <ul>
+          <li>
+            <a
+              data-discover="true"
+              href="/wine"
+            >
+              Вино
+            </a>
+          </li>
+          <li>
+            <a
+              data-discover="true"
+              href="/champagne"
+            >
+              Шампанско
+            </a>
+          </li>
+          <li>
+            <a
+              data-discover="true"
+              href="/cognac"
+            >
+              Коняк
+            </a>
+          </li>
+          <li>
+            <a
+              data-discover="true"
+              href="/whiskey"
+            >
+              Уиски
+            </a>
+          </li>
+          <li>
+            <a
+              data-discover="true"
+              href="/vodka"
+            >
+              Водка
+            </a>
+          </li>
+          <li>
+            <a
+              data-discover="true"
+              href="/liquor"
+            >
+              Ликьори
+            </a>
+          </li>
+          <li>
+            <a
+              data-discover="true"
+              href="/tequila"
+            >
+              Текила
+            </a>
+          </li>
+          <li>
+            <a
+              data-discover="true"
+              href="/brandy"
+            >
+              Бренди
+            </a>
+          </li>
+          <li>
+            <a
+              data-discover="true"
+              href="/beer"
+            >
+              Бира
+            </a>
+          </li>
+          <li>
+            <a
+              data-discover="true"
+              href="/vermouth"
+            >
+              Вермути
+            </a>
+          </li>
+          <li>
+            <a
+              data-discover="true"
+              href="/rum"
+            >
+              Ром
+            </a>
+          </li>
+        </ul>
+      </div>
+      <div
+        class="footer-section "
+      >
+        <h3>
+          КОМПАНИЯ
+        </h3>
+        <ul>
+          <li>
+            <a
+              data-discover="true"
+              href="/about"
+            >
+              За нас
+            </a>
+          </li>
+          <li>
+            <a
+              data-discover="true"
+              href="/cooperation"
+            >
+              Сътрудничество
+            </a>
+          </li>
+          <li>
+            <a
+              data-discover="true"
+              href="/rent"
+            >
+              Наем
+            </a>
+          </li>
+          <li>
+            <a
+              data-discover="true"
+              href="/reviews"
+            >
+              Отзиви
+            </a>
+          </li>
+          <li>
+            <a
+              data-discover="true"
+              href="/licenses"
+            >
+              Лицензи
+            </a>
+          </li>
+          <li>
+            <a
+              data-discover="true"
+              href="/documents"
+            >
+              Документи
+            </a>
+          </li>
+          <li>
+            <a
+              data-discover="true"
+              href="/requisites"
+            >
+              Реквизити
+            </a>
+          </li>
+          <li>
+            <a
+              data-discover="true"
+              href="/contacts"
+            >
+              Контакти
+            </a>
+          </li>
+        </ul>
+      </div>
+      <div
+        class="footer-section "
+      >
+        <h3>
+          ПУБЛИКАЦИИ
+        </h3>
+        <ul>
+          <li>
+            <a
+              data-discover="true"
+              href="/sommelier"
+            >
+              Съвети от сомелиер
+            </a>
+          </li>
+          <li>
+            <a
+              data-discover="true"
+              href="/events"
+            >
+              Събития
+            </a>
+          </li>
+          <li>
+            <a
+              data-discover="true"
+              href="/articles"
+            >
+              Статии
+            </a>
+          </li>
+          <li>
+            <a
+              data-discover="true"
+              href="/cocktails"
+            >
+              Коктейли
+            </a>
+          </li>
+        </ul>
+      </div>
+      <div
+        class="footer-section "
+      >
+        <h3>
+          ПОМОЩ
+        </h3>
+        <ul>
+          <li>
+            <a
+              data-discover="true"
+              href="/payment-delivery"
+            >
+              Плащане и доставка
+            </a>
+          </li>
+          <li>
+            <a
+              data-discover="true"
+              href="/return-exchange"
+            >
+              Връщане и замяна
+            </a>
+          </li>
+          <li>
+            <a
+              data-discover="true"
+              href="/public-offer"
+            >
+              Публична оферта
+            </a>
+          </li>
+          <li>
+            <a
+              data-discover="true"
+              href="/privacy-policy"
+            >
+              Политика за поверителност
+            </a>
+          </li>
+          <li>
+            <a
+              data-discover="true"
+              href="/loyalty"
+            >
+              Програма за лоялност
+            </a>
+          </li>
+        </ul>
+      </div>
+      <div
+        class="contact-section"
+      >
+        <div
+          class="contact-info"
+        >
+          <a
+            class="contact-item phone"
+            href="tel:+380979740660"
+          >
+            <i
+              class="fas fa-phone"
+            />
+            +38 (097) 974-06-60
+          </a>
+          <a
+            class="contact-item email"
+            href="mailto:info@tramonti.com.ua"
+          >
+            <i
+              class="fas fa-envelope"
+            />
+            info@tramonti.com.ua
+          </a>
+          <div
+            class="contact-item address"
+          >
+            <i
+              class="fas fa-map-marker-alt"
+            />
+            г. Днепр, ул. Нижнеднепровская, 1/Ж
+          </div>
+          <div
+            class="working-hours"
+          >
+            <p>
+              График за обработка на поръчки:
+            </p>
+            <p>
+              Пон.-Пет. – от 9:00 до 19:00
+            </p>
+            <p>
+              Съб. – Нед. – от 10:00 до 15:00
+            </p>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div
+      class="footer-bottom"
+    >
+      <div
+        class="footer-bottom-content"
+      >
+        <div
+          class="copyright"
+        >
+          <p>
+            2025
+             
+            © Онлайн витрина на магазини TRAMONTI.
+          </p>
+          <p>
+            Не продаваме алкохол на непълнолетни!
+          </p>
+          <p>
+            Разпространението и използването на материали от сайта е забранено!
+          </p>
+          <p>
+            Магазинът работи само за крайния потребител, препродажбата на алкохол е забранена!
+          </p>
+          <p>
+            Прекомерната консумация на алкохол вреди на вашето здраве!
+          </p>
+        </div>
+        <div
+          class="social-payment"
+        >
+          <div
+            class="social-links"
+          >
+            <a
+              href="https://facebook.com"
+              rel="noopener noreferrer"
+              target="_blank"
+            >
+              <i
+                class="fab fa-facebook-f"
+              />
+            </a>
+            <a
+              href="https://instagram.com"
+              rel="noopener noreferrer"
+              target="_blank"
+            >
+              <i
+                class="fab fa-instagram"
+              />
+            </a>
+            <a
+              href="https://youtube.com"
+              rel="noopener noreferrer"
+              target="_blank"
+            >
+              <i
+                class="fab fa-youtube"
+              />
+            </a>
+            <a
+              href="tel:+380979740660"
+            >
+              <i
+                class="fas fa-phone"
+              />
+            </a>
+          </div>
+          <div
+            class="payment-methods"
+          >
+            <span>
+              В брой
+            </span>
+            <span>
+              Mastercard
+            </span>
+            <span>
+              Visa
+            </span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </footer>
+</div>
+`;
