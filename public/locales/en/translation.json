@@ -219,7 +219,8 @@
     "editName": "Edit Name",
     "nameUpdateSuccess": "Name updated successfully",
     "nameUpdateError": "Error updating name",
-    "adminBadge": "Administrator"
+    "adminBadge": "Administrator",
+    "nameTooLong": "Name cannot be longer than 15 characters"
   },
   "footer": {
     "catalog": "CATALOG",
