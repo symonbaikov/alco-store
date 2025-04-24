@@ -3,6 +3,8 @@ import { useState, useEffect, useCallback } from "react";
 interface User {
   email: string;
   googleId?: string;
+  firstName?: string;
+  lastName?: string;
 }
 
 export function useAuth() {
@@ -16,6 +18,7 @@ export function useAuth() {
       });
       if (res.ok) {
         const data = await res.json();
+        console.log('Fetched user data:', data);
         setUser(data.user);
       } else {
         setUser(null);

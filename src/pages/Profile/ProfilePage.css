@@ -129,4 +129,140 @@
 .google-icon {
   width: 16px;
   height: 16px;
+}
+
+.profile-name {
+  text-align: center;
+  margin: 20px 0;
+  padding: 20px;
+  background-color: #f8f9fa;
+  transition: all 0.3s ease;
+  width: 100%;
+}
+
+.name-display {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 10px;
+  margin-bottom: 20px;
+  width: 100%;
+}
+
+.user-full-name {
+  font-size: 1.5rem;
+  color: #333;
+  margin: 0;
+  font-weight: 600;
+  text-align: center;
+}
+
+.edit-name-button {
+  background: none;
+  border: none;
+  color: #666;
+  cursor: pointer;
+  padding: 5px;
+  font-size: 0.9rem;
+  transition: color 0.2s;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.edit-name-button:hover {
+  color: #8b0000;
+}
+
+.name-edit-form {
+  width: 100%;
+  max-width: 400px;
+  margin: 0 auto;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 15px;
+}
+
+.name-inputs {
+  display: flex;
+  gap: 15px;
+  margin-bottom: 5px;
+  width: 100%;
+  justify-content: center;
+  padding: 0 20px;
+}
+
+.name-input {
+  flex: 1;
+  max-width: 180px;
+  padding: 10px 15px;
+  border: 2px solid #ddd;
+  font-size: 1rem;
+  transition: all 0.2s ease;
+  background-color: white;
+  text-align: center;
+  color: #000;
+  font-weight: 500;
+}
+
+.name-input:focus {
+  outline: none;
+  border-color: #8b0000;
+  box-shadow: 0 0 0 2px rgba(139, 0, 0, 0.1);
+  color: #000;
+}
+
+.name-input::placeholder {
+  color: #999;
+  text-align: center;
+  font-weight: normal;
+}
+
+.name-edit-actions {
+  display: flex;
+  justify-content: center;
+  gap: 15px;
+  margin-top: 10px;
+  width: 100%;
+}
+
+.save-button,
+.cancel-button {
+  padding: 10px 20px;
+  border: none;
+  cursor: pointer;
+  font-size: 0.95rem;
+  font-weight: 500;
+  transition: all 0.2s ease;
+  min-width: 100px;
+  text-align: center;
+}
+
+.save-button {
+  background-color: #8b0000;
+  color: white;
+}
+
+.save-button:hover {
+  background-color: #a00000;
+  transform: translateY(-1px);
+}
+
+.save-button:active {
+  transform: translateY(0);
+}
+
+.cancel-button {
+  background-color: #666;
+  color: white;
+}
+
+.cancel-button:hover {
+  background-color: #777;
+  transform: translateY(-1px);
+}
+
+.cancel-button:active {
+  transform: translateY(0);
 } 

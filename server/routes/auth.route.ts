@@ -27,6 +27,11 @@ interface LoginBody {
 interface RegisterBody extends LoginBody {
 }
 
+interface UpdateNameBody {
+  firstName: string;
+  lastName: string;
+}
+
 const prisma = new PrismaClient();
 const router = express.Router();
 type RequestHandler = express.RequestHandler;
@@ -34,13 +39,35 @@ type Request = express.Request;
 type Response = express.Response;
 
 // Получение данных текущего пользователя
-const profileHandler: RequestHandler = (req, res) => {
+const profileHandler: RequestHandler = async (req, res) => {
   if (!req.session.user) {
     res.status(401).json({ message: "auth.invalidCredentials" });
     return;
   }
-  console.log('Profile request - session user:', req.session.user);
-  res.json({ user: req.session.user });
+
+  try {
+    const user = await prisma.user.findUnique({
+      where: { id: req.session.user.id },
+      select: {
+        id: true,
+        email: true,
+        googleId: true,
+        firstName: true,
+        lastName: true
+      }
+    });
+
+    if (!user) {
+      res.status(404).json({ message: "User not found" });
+      return;
+    }
+
+    console.log('Profile request - database user:', user);
+    res.json({ user });
+  } catch (error) {
+    console.error('Error fetching user profile:', error);
+    res.status(500).json({ message: "Error fetching profile" });
+  }
 };
 
 // Вход в аккаунт
@@ -129,6 +156,42 @@ const logoutHandler: RequestHandler = (req, res) => {
   });
 };
 
+// Обновление имени пользователя
+const updateNameHandler: RequestHandler = async (req, res) => {
+  if (!req.session.user) {
+    res.status(401).json({ message: "auth.unauthorized" });
+    return;
+  }
+
+  const { firstName, lastName } = req.body as UpdateNameBody;
+
+  try {
+    const updatedUser = await prisma.user.update({
+      where: { id: req.session.user.id },
+      data: { firstName, lastName },
+      select: {
+        id: true,
+        email: true,
+        googleId: true,
+        firstName: true,
+        lastName: true
+      }
+    });
+
+    // Обновляем данные в сессии
+    req.session.user = {
+      ...req.session.user,
+      firstName: updatedUser.firstName,
+      lastName: updatedUser.lastName
+    };
+
+    res.json({ user: updatedUser });
+  } catch (error) {
+    console.error('Error updating user name:', error);
+    res.status(500).json({ message: "profile.nameUpdateError" });
+  }
+};
+
 router.get("/profile", profileHandler);
 router.post("/login", loginHandler);
 router.post("/register", registerHandler);
@@ -152,7 +215,9 @@ router.get(
       req.session.user = {
         id: req.user.id,
         email: req.user.email,
-        googleId: req.user.googleId
+        googleId: req.user.googleId,
+        firstName: req.user.firstName,
+        lastName: req.user.lastName
       };
       req.session.save((err) => {
         if (err) {
@@ -169,5 +234,6 @@ router.get(
 );
 
 router.post("/logout", logoutHandler);
+router.post("/update-name", updateNameHandler);
 
 export default router;

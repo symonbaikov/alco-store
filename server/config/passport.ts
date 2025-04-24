@@ -18,7 +18,9 @@ passport.deserializeUser(async (id: string, done) => {
       const sessionUser = {
         id: user.id,
         email: user.email,
-        googleId: user.googleId
+        googleId: user.googleId,
+        firstName: user.firstName,
+        lastName: user.lastName
       };
       done(null, sessionUser);
     } else {
@@ -47,32 +49,35 @@ passport.use(
         console.log('Found user:', user);
 
         if (!user) {
-          // Если пользователя нет, создаем нового
+          // Если пользователя нет, создаем нового с именем из Google
           user = await prisma.user.create({
             data: {
               email: profile.emails?.[0]?.value || '',
               password: '', // пустой пароль для пользователей Google
               googleId: profile.id,
+              firstName: profile.name?.givenName || '',
+              lastName: profile.name?.familyName || ''
             },
           });
           console.log('Created new user:', user);
         } else if (!user.googleId) {
-          // Если пользователь существует, но не имеет googleId, обновляем его
+          // Если пользователь существует, но не имеет googleId, обновляем только googleId
           user = await prisma.user.update({
             where: { id: user.id },
-            data: { googleId: profile.id },
+            data: { 
+              googleId: profile.id,
+              // Устанавливаем имя из Google только если у пользователя нет своего имени
+              firstName: user.firstName || profile.name?.givenName || '',
+              lastName: user.lastName || profile.name?.familyName || ''
+            },
           });
           console.log('Updated user with googleId:', user);
         }
+        // Больше не обновляем имя при каждом входе
 
-        const sessionUser = {
-          id: user.id,
-          email: user.email,
-          googleId: user.googleId
-        };
-        console.log('Returning session user:', sessionUser);
-        return done(null, sessionUser);
+        return done(null, user);
       } catch (error) {
+        console.error('Error in Google Strategy:', error);
         return done(error as Error, undefined);
       }
     }

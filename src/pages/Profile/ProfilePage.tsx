@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { useAuthContext } from '../../context/AuthContext';
 import { useTranslation } from 'react-i18next';
 import { Navigate, useNavigate } from 'react-router-dom';
@@ -8,19 +8,31 @@ import './ProfilePage.css';
 interface User {
   email: string;
   googleId?: string;
+  firstName?: string;
+  lastName?: string;
 }
 
 const ProfilePage: React.FC = () => {
-  const { user, isLoggedIn, loading, logout } = useAuthContext();
+  const { user, isLoggedIn, loading, logout, refetch } = useAuthContext();
   const { t } = useTranslation();
   const navigate = useNavigate();
   
-  console.log('User data:', user);
+  console.log('User data in profile:', user);
   
   const [isChangingPassword, setIsChangingPassword] = useState(false);
   const [currentPassword, setCurrentPassword] = useState('');
   const [newPassword, setNewPassword] = useState('');
   const [confirmPassword, setConfirmPassword] = useState('');
+  const [isEditingName, setIsEditingName] = useState(false);
+  const [firstName, setFirstName] = useState(user?.firstName || '');
+  const [lastName, setLastName] = useState(user?.lastName || '');
+
+  useEffect(() => {
+    if (user) {
+      setFirstName(user.firstName || '');
+      setLastName(user.lastName || '');
+    }
+  }, [user]);
 
   const handleLogout = async () => {
     await logout();
@@ -85,6 +97,30 @@ const ProfilePage: React.FC = () => {
     }
   };
 
+  const handleSaveName = async () => {
+    try {
+      const response = await fetch('http://localhost:3001/api/auth/update-name', {
+        method: 'POST',
+        credentials: 'include',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({ firstName, lastName }),
+      });
+
+      if (response.ok) {
+        toast.success(t('profile.nameUpdateSuccess'));
+        setIsEditingName(false);
+        refetch(); // Обновляем данные пользователя
+      } else {
+        toast.error(t('profile.nameUpdateError'));
+      }
+    } catch (error) {
+      console.error('Error updating name:', error);
+      toast.error(t('profile.nameUpdateError'));
+    }
+  };
+
   if (loading) {
     return <div className="profile-loading">{t('common.loading')}</div>;
   }
@@ -99,6 +135,58 @@ const ProfilePage: React.FC = () => {
       <div className="profile-info">
         <div className="profile-section">
           <h2>{t('profile.personalInfo')}</h2>
+          {user?.googleId && (
+            <div className="profile-name">
+              {isEditingName ? (
+                <div className="name-edit-form">
+                  <div className="name-inputs">
+                    <input
+                      type="text"
+                      value={firstName}
+                      onChange={(e) => setFirstName(e.target.value)}
+                      placeholder={t('profile.firstName')}
+                      className="name-input"
+                    />
+                    <input
+                      type="text"
+                      value={lastName}
+                      onChange={(e) => setLastName(e.target.value)}
+                      placeholder={t('profile.lastName')}
+                      className="name-input"
+                    />
+                  </div>
+                  <div className="name-edit-actions">
+                    <button onClick={handleSaveName} className="save-button">
+                      {t('profile.save')}
+                    </button>
+                    <button 
+                      onClick={() => {
+                        setIsEditingName(false);
+                        setFirstName(user.firstName || '');
+                        setLastName(user.lastName || '');
+                      }} 
+                      className="cancel-button"
+                    >
+                      {t('profile.cancel')}
+                    </button>
+                  </div>
+                </div>
+              ) : (
+                <div className="name-display">
+                  <h3 className="user-full-name">
+                    {[user.firstName, user.lastName].filter(Boolean).join(' ')}
+                  </h3>
+                  <button 
+                    onClick={() => setIsEditingName(true)}
+                    className="edit-name-button"
+                    title={t('profile.editName')}
+                  >
+                    <i className="fas fa-pencil-alt"></i>
+                  </button>
+                </div>
+              )}
+            </div>
+          )}
           <div className="info-item">
             <span className="info-label">Email:</span>
             <span className="info-value">{user?.email}</span>

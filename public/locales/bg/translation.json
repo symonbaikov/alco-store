@@ -56,7 +56,9 @@
     "allFieldsRequired": "Имейл и парола са задължителни",
     "invalidCredentials": "Невалиден имейл или парола",
     "googleError": "Грешка при влизане с Google",
-    "googleAccount": "Този акаунт използва вход с Google"
+    "googleAccount": "Този акаунт използва вход с Google",
+    "unauthorized": "Неоторизиран достъп",
+    "invalidCredentials": "Невалидни данни за вход"
   },
   "register": {
     "title": "Регистрация",
@@ -194,23 +196,29 @@
   "profile": {
     "personalInfo": "Лична информация",
     "security": "Сигурност",
-    "changePassword": "Смяна на парола",
-    "currentPassword": "Текуща парола",
-    "newPassword": "Нова парола",
-    "confirmNewPassword": "Потвърдете новата парола",
-    "savePassword": "Запази",
+    "editName": "Редактиране на име",
+    "firstName": "Име",
+    "lastName": "Фамилия",
+    "save": "Запази",
     "cancel": "Отказ",
-    "logout": "Изход",
-    "passwordsNotMatch": "Паролите не съвпадат",
+    "nameUpdateSuccess": "Името е успешно актуализирано",
+    "nameUpdateError": "Грешка при актуализиране на името",
     "loginMethod": "Метод на вход",
     "googleAccount": "Google акаунт",
     "emailPassword": "Имейл и парола",
+    "changePassword": "Смяна на парола",
+    "currentPassword": "Текуща парола",
+    "newPassword": "Нова парола",
+    "confirmNewPassword": "Потвърди новата парола",
+    "savePassword": "Запази паролата",
+    "passwordRequirements": "Паролата трябва да съдържа минимум 8 символа и поне една цифра",
+    "logout": "Изход",
+    "userPhoto": "Снимка на потребителя",
     "allFieldsRequired": "Всички полета са задължителни",
-    "passwordTooShort": "Паролата трябва да е поне 8 символа",
-    "passwordChanged": "Паролата е променена успешно",
-    "invalidCurrentPassword": "Текущата парола е неправилна",
-    "passwordRequirementsNotMet": "Паролата не отговаря на изискванията",
-    "changePasswordError": "Грешка при промяна на паролата",
-    "passwordRequirements": "Паролата трябва да е поне 8 символа и да съдържа поне една цифра"
+    "passwordsNotMatch": "Паролите не съвпадат",
+    "passwordTooShort": "Паролата трябва да бъде поне 8 символа",
+    "invalidCurrentPassword": "Невалидна текуща парола",
+    "changePasswordError": "Грешка при смяна на паролата",
+    "passwordChanged": "Паролата е успешно променена"
   }
 } 
