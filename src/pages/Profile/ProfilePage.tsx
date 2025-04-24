@@ -54,7 +54,7 @@ const ProfilePage: React.FC = () => {
     }
 
     try {
-      const response = await fetch('http://localhost:3001/api/auth/change-password', {
+      const response = await fetch('http://localhost:3001/api/change-password', {
         method: 'POST',
         credentials: 'include',
         headers: {
