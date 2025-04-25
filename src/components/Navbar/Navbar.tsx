@@ -33,21 +33,13 @@ const Navbar: React.FC<NavbarProps> = ({ onCartClick, onAuthClick }) => {
       // Сохраняем выбранный язык в localStorage
       localStorage.setItem('i18nextLng', lng);
       
-      // Обновляем состояние без перезагрузки страницы
-      setIsLanguageLoading(false);
+      // Перезагружаем страницу
+      window.location.reload();
     } catch (error) {
       console.error('Failed to load language:', error);
       setIsLanguageLoading(false);
     }
   };
-
-  // Добавляем эффект для синхронизации языка при монтировании
-  useEffect(() => {
-    const savedLang = localStorage.getItem('i18nextLng');
-    if (savedLang && savedLang !== i18n.language) {
-      i18n.changeLanguage(savedLang);
-    }
-  }, []);
 
   useEffect(() => {
     const handleScroll = () => {

@@ -16,11 +16,6 @@ i18n
     backend: {
       loadPath: '/locales/{{lng}}/{{ns}}.json',
     },
-    // Загружаем только болгарский язык по умолчанию
-    preload: ['bg'],
-    // Указываем доступные языки
-    supportedLngs: ['bg', 'en'],
-    // Не загружаем переводы автоматически при обнаружении языка браузера
     detection: {
       order: ['localStorage', 'cookie'],
       caches: ['localStorage', 'cookie']
