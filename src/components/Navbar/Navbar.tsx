@@ -28,13 +28,26 @@ const Navbar: React.FC<NavbarProps> = ({ onCartClick, onAuthClick }) => {
       setIsLanguageLoading(true);
       await i18n.changeLanguage(lng);
       setIsLanguageMenuOpen(false);
-      const currentPath = window.location.pathname;
-      window.location.href = currentPath;
+      handleMobileMenuClose();
+      
+      // Сохраняем выбранный язык в localStorage
+      localStorage.setItem('i18nextLng', lng);
+      
+      // Обновляем состояние без перезагрузки страницы
+      setIsLanguageLoading(false);
     } catch (error) {
       console.error('Failed to load language:', error);
       setIsLanguageLoading(false);
     }
   };
+
+  // Добавляем эффект для синхронизации языка при монтировании
+  useEffect(() => {
+    const savedLang = localStorage.getItem('i18nextLng');
+    if (savedLang && savedLang !== i18n.language) {
+      i18n.changeLanguage(savedLang);
+    }
+  }, []);
 
   useEffect(() => {
     const handleScroll = () => {
@@ -61,6 +74,40 @@ const Navbar: React.FC<NavbarProps> = ({ onCartClick, onAuthClick }) => {
     }
   };
 
+  const handleMobileMenuClose = () => {
+    setIsMobileMenuOpen(false);
+    setIsLanguageMenuOpen(false);
+  };
+
+  const handleNavLinkClick = (path: string) => {
+    navigate(path);
+    handleMobileMenuClose();
+  };
+
+  const handlePhoneModalOpen = () => {
+    setIsPhoneModalOpen(true);
+    handleMobileMenuClose();
+  };
+
+  const handleSearchToggle = () => {
+    setIsSearchOpen(!isSearchOpen);
+    handleMobileMenuClose();
+  };
+
+  const handleAuthButtonClick = () => {
+    if (isLoggedIn) {
+      navigate(ROUTES.PROFILE);
+    } else {
+      onAuthClick();
+    }
+    handleMobileMenuClose();
+  };
+
+  const handleCartButtonClick = () => {
+    onCartClick();
+    handleMobileMenuClose();
+  };
+
   return (
     <nav className="navbar">
       {/* Мобильная навигация */}
@@ -71,27 +118,33 @@ const Navbar: React.FC<NavbarProps> = ({ onCartClick, onAuthClick }) => {
         >
           <i className={`fas ${isMobileMenuOpen ? "fa-times" : "fa-bars"}`}></i>
         </button>
-        <Link to={ROUTES.HOME} className="navbar-logo">
+        <Link to={ROUTES.HOME} className="navbar-logo" onClick={handleMobileMenuClose}>
           TRAMONTI
         </Link>
         <div className="mobile-icons">
           <button
             className="icon-button"
-            onClick={() => setIsPhoneModalOpen(true)}
+            onClick={handlePhoneModalOpen}
           >
             <i className="fas fa-phone"></i>
           </button>
           <button
             className="icon-button"
-            onClick={() => setIsSearchOpen(!isSearchOpen)}
+            onClick={handleSearchToggle}
           >
             <i className="fas fa-search"></i>
           </button>
-          <Link to={ROUTES.COMPARE} className="icon-button">
-            <i className="fas fa-chart-bar"></i>
-            <span className="compare-count">0</span>
-          </Link>
-          <button className="icon-button cart-icon" onClick={onCartClick}>
+          <button 
+            className="icon-button profile-icon" 
+            onClick={handleAuthButtonClick}
+            title={isLoggedIn ? t('navbar.profile') : t('navbar.login')}
+          >
+            <i className="fas fa-user"></i>
+          </button>
+          <button 
+            className="icon-button cart-icon" 
+            onClick={handleCartButtonClick}
+          >
             <i className="fas fa-shopping-cart"></i>
             <span className="cart-count">0</span>
           </button>
@@ -160,11 +213,11 @@ const Navbar: React.FC<NavbarProps> = ({ onCartClick, onAuthClick }) => {
           onClick={() => setIsLanguageMenuOpen(true)}
         >
           <div className="language-icon">
-            <i className="fas fa-globe"></i>
+            <i className={`fas ${isLanguageLoading ? 'fa-spinner fa-spin' : 'fa-globe'}`}></i>
           </div>
           <div className="language-content">
-            <div className="language-title">Български</div>
-            <div className="language-subtitle">Език на сайта</div>
+            <div className="language-title">{i18n.language === 'bg' ? 'Български' : 'English'}</div>
+            <div className="language-subtitle">{t('navbar.language')}</div>
           </div>
           <i className="fas fa-chevron-right"></i>
         </div>
@@ -182,15 +235,17 @@ const Navbar: React.FC<NavbarProps> = ({ onCartClick, onAuthClick }) => {
           <div className="language-options">
             <div 
               className={`language-option ${i18n.language === 'bg' ? 'active' : ''}`}
-              onClick={() => changeLanguage('bg')}
+              onClick={() => !isLanguageLoading && changeLanguage('bg')}
             >
               <span>Български</span>
+              {i18n.language === 'bg' && <i className="fas fa-check"></i>}
             </div>
             <div 
               className={`language-option ${i18n.language === 'en' ? 'active' : ''}`}
-              onClick={() => changeLanguage('en')}
+              onClick={() => !isLanguageLoading && changeLanguage('en')}
             >
               <span>English</span>
+              {i18n.language === 'en' && <i className="fas fa-check"></i>}
             </div>
           </div>
         </div>
@@ -198,51 +253,51 @@ const Navbar: React.FC<NavbarProps> = ({ onCartClick, onAuthClick }) => {
         <div className="mobile-catalog">
           <ul className="mobile-catalog-list">
             <li>
-              <div className="mobile-catalog-item">{t('navbar.wine')}</div>
+              <div className="mobile-catalog-item" onClick={() => handleNavLinkClick(ROUTES.WINE)}>{t('navbar.wine')}</div>
             </li>
             <li>
-              <div className="mobile-catalog-item">{t('navbar.strong')}</div>
+              <div className="mobile-catalog-item" onClick={() => handleNavLinkClick(ROUTES.STRONG)}>{t('navbar.strong')}</div>
             </li>
             <li>
-              <div className="mobile-catalog-item">{t('navbar.liquor')}</div>
+              <div className="mobile-catalog-item" onClick={() => handleNavLinkClick(ROUTES.LIQUOR)}>{t('navbar.liquor')}</div>
             </li>
             <li>
-              <div className="mobile-catalog-item">{t('navbar.drinks')}</div>
+              <div className="mobile-catalog-item" onClick={() => handleNavLinkClick(ROUTES.DRINKS)}>{t('navbar.drinks')}</div>
             </li>
             <li>
-              <Link to={ROUTES.PROFILE} className="mobile-footer-item">
+              <div className="mobile-footer-item" onClick={() => handleNavLinkClick(ROUTES.PROFILE)}>
                 <i className="fas fa-user"></i>
                 <span>{t('navbar.profile')}</span>
-              </Link>
+              </div>
             </li>
             <li>
-              <Link to={ROUTES.CART} className="mobile-footer-item">
+              <div className="mobile-footer-item" onClick={() => { onCartClick(); handleMobileMenuClose(); }}>
                 <i className="fas fa-shopping-cart"></i>
                 <span>{t('navbar.cart')}</span>
                 <span className="cart-badge">0</span>
-              </Link>
+              </div>
             </li>
             <li>
-              <Link to={ROUTES.COMPARE} className="mobile-footer-item">
+              <div className="mobile-footer-item" onClick={() => handleNavLinkClick(ROUTES.COMPARE)}>
                 <i className="fas fa-chart-bar"></i>
                 <span>{t('navbar.compare')}</span>
                 <span className="compare-badge">0</span>
-              </Link>
+              </div>
             </li>
             <li>
-              <Link to={ROUTES.BEER}>{t('navbar.beer')}</Link>
+              <div className="mobile-catalog-item" onClick={() => handleNavLinkClick(ROUTES.BEER)}>{t('navbar.beer')}</div>
             </li>
             <li>
-              <Link to={ROUTES.SNACKS}>{t('navbar.snacks')}</Link>
+              <div className="mobile-catalog-item" onClick={() => handleNavLinkClick(ROUTES.SNACKS)}>{t('navbar.snacks')}</div>
             </li>
             <li>
-              <Link to={ROUTES.CONFECTIONERY}>{t('navbar.confectionery')}</Link>
+              <div className="mobile-catalog-item" onClick={() => handleNavLinkClick(ROUTES.CONFECTIONERY)}>{t('navbar.confectionery')}</div>
             </li>
             <li>
-              <Link to={ROUTES.SALES}>{t('navbar.sales')}</Link>
+              <div className="mobile-catalog-item" onClick={() => handleNavLinkClick(ROUTES.SALES)}>{t('navbar.sales')}</div>
             </li>
             <li>
-              <Link to={ROUTES.CONTACTS}>{t('navbar.contacts')}</Link>
+              <div className="mobile-catalog-item" onClick={() => handleNavLinkClick(ROUTES.CONTACTS)}>{t('navbar.contacts')}</div>
             </li>
           </ul>
         </div>
