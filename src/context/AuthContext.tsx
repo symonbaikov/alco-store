@@ -2,7 +2,10 @@ import React, { createContext, useContext } from "react";
 import { useAuth } from "../hooks/useAuth";
 
 interface AuthContextType {
-  user: { email: string } | null;
+  user: {
+    firstName: any;
+    lastName: any; email: string 
+} | null;
   isLoggedIn: boolean;
   loading: boolean;
   logout: () => void;

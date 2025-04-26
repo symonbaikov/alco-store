@@ -128,7 +128,13 @@
   padding: 0;
   width: 100%;
 }
-
+.loading-container {
+  display: flex;
+  justify-content: center;
+  margin-top: 200px;
+  align-items: center;
+  height: 100%;
+}
 .name-display {
   display: flex;
   align-items: center;

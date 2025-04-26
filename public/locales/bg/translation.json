@@ -221,7 +221,8 @@
     "nameUpdateSuccess": "Името е успешно актуализирано",
     "nameUpdateError": "Грешка при актуализиране на името",
     "nameTooLong": "Името не може да бъде по-дълго от 15 символа",
-    "adminBadge": "Администратор"
+    "adminBadge": "Администратор",
+    "common.loading": "Зареждане..."
   },
   "footer": {
     "catalog": "КАТАЛОГ",

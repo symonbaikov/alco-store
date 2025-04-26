@@ -2,18 +2,11 @@ import React, { useState, useEffect, useRef } from 'react';
 import { useAuthContext } from '../../context/AuthContext';
 import { useTranslation } from 'react-i18next';
 import { Navigate, useNavigate } from 'react-router-dom';
-import toast, { Toaster } from 'react-hot-toast';
+import toast from 'react-hot-toast';
+import { CircleLoader } from "react-spinners";
 import { AdminBadge } from '../../components/AdminBadge';
 import Breadcrumbs from '../../components/Breadcrumbs/Breadcrumbs';
 import './ProfilePage.css';
-
-interface User {
-  email: string;
-  googleId?: string;
-  firstName?: string;
-  lastName?: string;
-  role: 'USER' | 'ADMIN';
-}
 
 const ProfilePage: React.FC = () => {
   const { user, isLoggedIn, loading, logout, refetch } = useAuthContext();
@@ -156,7 +149,11 @@ const ProfilePage: React.FC = () => {
   };
 
   if (loading) {
-    return <div className="profile-loading">{t('common.loading')}</div>;
+    return (
+      <div className="loading-container">
+        <CircleLoader color="red" size={50} />
+      </div>
+    );
   }
 
   if (!isLoggedIn) {
@@ -222,7 +219,6 @@ const ProfilePage: React.FC = () => {
             <div className="info-item">
               <span className="info-label">{t('profile.loginMethod')}</span>
               <span className="info-value">
-                {console.log('Current user:', user)}
                 {user?.googleId ? (
                   <span className="google-login-badge">
                     <img 
