@@ -8,6 +8,8 @@ import { AdminBadge } from '../../components/AdminBadge';
 import Breadcrumbs from '../../components/Breadcrumbs/Breadcrumbs';
 import './ProfilePage.css';
 
+
+
 const ProfilePage: React.FC = () => {
   const { user, isLoggedIn, loading, logout, refetch } = useAuthContext();
   const { t } = useTranslation();

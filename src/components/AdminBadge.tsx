@@ -1,4 +1,3 @@
-import React from 'react';
 import { FaShieldAlt } from 'react-icons/fa';
 import { useTranslation } from 'react-i18next';
 import './AdminBadge.css';

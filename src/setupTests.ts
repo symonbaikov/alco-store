@@ -43,4 +43,28 @@ console.error = (...args) => {
     return;
   }
   originalError.call(console, ...args);
-}; 
+};
+
+const originalReload = window.location.reload;
+
+beforeAll(() => {
+  // Mock window.location.reload
+  Object.defineProperty(window, 'location', {
+    configurable: true,
+    value: {
+      ...window.location,
+      reload: jest.fn(), // Mock reload
+    },
+  });
+});
+
+afterAll(() => {
+  // Restore the original reload method
+  Object.defineProperty(window, 'location', {
+    configurable: true,
+    value: {
+      ...window.location,
+      reload: originalReload,
+    },
+  });
+});

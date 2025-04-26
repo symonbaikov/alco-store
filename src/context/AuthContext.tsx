@@ -3,9 +3,11 @@ import { useAuth } from "../hooks/useAuth";
 
 interface AuthContextType {
   user: {
-    firstName: any;
-    lastName: any; email: string 
-} | null;
+    firstName: string;
+    lastName: string;
+    email: string;
+    role?: string; // Add the role property (optional if not always present)
+  } | null;
   isLoggedIn: boolean;
   loading: boolean;
   logout: () => void;
