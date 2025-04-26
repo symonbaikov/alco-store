@@ -1,0 +1,32 @@
+services:
+  ts-alco-store:
+    build:
+      context: ./alco-store
+    container_name: ts-alco-store
+    restart: unless-stopped
+    init: true
+    ports:
+      - "3000:3000"
+    # env_file: ./alco-store/.env  # Uncomment if .env file exists
+    networks:
+      - appnet
+    depends_on:
+      - ts-server
+    # The frontend may need to communicate with the backend (ts-server)
+
+  ts-server:
+    build:
+      context: ./server
+    container_name: ts-server
+    restart: unless-stopped
+    init: true
+    ports:
+      - "3001:3001"
+    # env_file: ./server/.env  # Uncomment if .env file exists
+    networks:
+      - appnet
+    # If the backend requires a database, add it below and update depends_on
+
+networks:
+  appnet:
+    driver: bridge

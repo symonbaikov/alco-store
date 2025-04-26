@@ -5,7 +5,7 @@ This template provides a minimal setup to get React working in Vite with HMR and
 Currently, two official plugins are available:
 
 - [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react/README.md) uses [Babel](https://babeljs.io/) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
 
 ## Expanding the ESLint configuration
 
@@ -52,36 +52,3 @@ export default tseslint.config({
   },
 })
 ```
-
----
-
-## Running the Project with Docker
-
-This project provides Dockerfiles for both the frontend (`alco-store`) and backend (`server`) applications, along with a `docker-compose.yml` for easy orchestration.
-
-### Requirements
-- Docker and Docker Compose installed
-- The project uses Node.js version `22.13.1` (as specified in the Dockerfiles)
-
-### Services and Ports
-- **Frontend (`ts-alco-store`)**: Exposes port **3000**
-- **Backend (`ts-server`)**: Exposes port **3001**
-
-### Environment Variables
-- If you have environment-specific settings, create `.env` files in `./alco-store` and/or `./server` as needed. Uncomment the `env_file` lines in `docker-compose.yml` to enable them.
-
-### Build and Run
-From the root of the project, run:
-
-```sh
-docker compose up --build
-```
-
-This will build and start both the frontend and backend containers. The frontend will be available at [http://localhost:3000](http://localhost:3000), and the backend at [http://localhost:3001](http://localhost:3001).
-
-### Special Configuration
-- Both services run as non-root users for improved security.
-- The frontend depends on the backend and will wait for it to be available.
-- If you need to connect to a database or add additional services, update the `docker-compose.yml` accordingly.
-
----

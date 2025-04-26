@@ -1,5 +1,5 @@
 .profile-container {
-  max-width: 1200px;
+  max-width: 1500px;
   margin: 0 auto;
   padding: 0 20px;
 }
@@ -308,11 +308,9 @@
 
 .inline-button.save {
   color: #28a745;
+  background-color: #eae7e7;
 }
 
-.inline-button.save:hover {
-  color: #218838;
-}
 
 @media (max-width: 480px) {
   .user-full-name {
@@ -331,7 +329,7 @@
 }
 
 .content-wrapper {
-  max-width: 1200px;
+  max-width: 1500px;
   margin: 0 auto;
   padding: 0 20px;
 }

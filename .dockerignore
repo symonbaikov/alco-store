@@ -1,0 +1,72 @@
+# Node.js dependencies
+node_modules/
+
+# Build outputs and cache
+dist/
+build/
+out/
+.next/
+
+# Test and coverage artifacts
+coverage/
+__tests__/
+__mocks__/
+jest.config.*
+jest.setup.*
+
+# IDE/editor files
+.idea/
+.vscode/
+*.swp
+*.swo
+
+# Version control
+.git/
+.gitignore
+
+# Environment and secrets
+.env*
+*.env
+*.pem
+*.key
+*.crt
+
+# Temporary and local files
+tmp/
+temp/
+*.tmp
+.local/
+
+# Documentation
+README*
+*.md
+
+docs/
+
+# Docker and Compose files
+Dockerfile*
+docker-compose*
+
+# Project-specific
+.cursor/
+
+# Miscellaneous
+npm-debug.log
+yarn-debug.log
+
+# Ignore Prisma migration artifacts except schema and seeds
+prisma/migrations/
+!prisma/schema.prisma
+!prisma/seed.*
+
+# Ignore public images if not needed in build (uncomment if so)
+# public/images/
+
+# Ignore backup and config files
+*.bak
+config.local.*
+*.local.yml
+
+# Ignore CJS/JS config files not needed in production
+babel.config.*
+eslint.config.*
