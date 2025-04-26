@@ -22,5 +22,4 @@
     "noFallthroughCasesInSwitch": true
   },
   "include": ["src", "server/services/popular-categories-service.ts"],
-  "references": [{ "path": "./tsconfig.node.json" }]
 }
