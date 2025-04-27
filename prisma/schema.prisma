@@ -37,6 +37,14 @@ model User {
   resetTokens ResetToken[]
 }
 
+model Review {
+  id        Int      @id @default(autoincrement())
+  author    String
+  text      String
+  rating    Int      @default(5)
+  createdAt DateTime @default(now())
+}
+
 model ResetToken {
   id        String   @id @default(cuid())
   token     String   @unique

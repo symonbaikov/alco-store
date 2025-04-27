@@ -1,33 +1,13 @@
 import React, { useState } from 'react';
 import { useTranslation } from 'react-i18next';
+import { useReviews } from '../../hooks/useReviews';
 import './Reviews.css';
-
-interface Review {
-  id: number;
-  author: string;
-  text: string;
-  rating: number;
-}
+import brokenBottleImage from '../../../public/images/broken-bottle.png'; // Ensure the file exists with this extension
 
 export const Reviews: React.FC = () => {
   const { t } = useTranslation();
   const [currentReview, setCurrentReview] = useState(0);
-
-  const reviews: Review[] = [
-    {
-      id: 1,
-      author: "Александр",
-      text: "Очень доволен сотрудничеством с магазином! Оперативно созвонились, уточнили. Заказ получил на следующий день. Упаковка супер. Успехов и процветания.",
-      rating: 5
-    },
-    {
-        id: 2,
-        author: "Александр",
-        text: "Очень доволен сотрудничеством с магазином! Оперативно созвонились, уточнили. Заказ получил на следующий день. Упаковка супер. Успехов и процветания.",
-        rating: 4
-      },
-    // Add more reviews as needed
-  ];
+  const { reviews, loading, error } = useReviews();
 
   const renderStars = (rating: number) => {
     return [...Array(5)].map((_, index) => (
@@ -36,6 +16,43 @@ export const Reviews: React.FC = () => {
       </span>
     ));
   };
+
+  if (loading) {
+    return (
+      <section className="reviews-section">
+        <div className="container">
+          <div className="loading">Loading...</div>
+        </div>
+      </section>
+    );
+  }
+
+  if (error) {
+    return (
+      <section className="reviews-section">
+        <div className="container error-container">
+          <div className="error">
+            <img 
+              src={brokenBottleImage} 
+              alt="Error occurred" 
+              className="broken-bottle-image"
+            />
+            <p className="error-message">{t('common.error', 'Ошибка')}: {error}</p>
+          </div>
+        </div>
+      </section>
+    );
+  }
+
+  if (!reviews.length) {
+    return (
+      <section className="reviews-section">
+        <div className="container">
+          <div className="no-reviews">{t('reviews.noReviews', 'Нет отзывов')}</div>
+        </div>
+      </section>
+    );
+  }
 
   return (
     <section className="reviews-section">

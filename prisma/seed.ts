@@ -117,106 +117,181 @@ const categoryData = {
     country: ["Австрия", "Германия", "Италия"],
     volume: ["не применимо"],
     strength: ["не применимо"]
+  },
+  confectionery: {
+    manufacturer: ["Lindt", "Godiva", "Ferrero", "Cadbury", "Toblerone"],
+    country: ["Швейцария", "Бельгия", "Италия", "Великобритания"],
+    volume: ["100 г", "200 г", "300 г"],
+    strength: ["не применимо"]
+  },
+  "gift-sets": {
+    manufacturer: ["Various Brands", "Premium Selection", "Luxury Collection"],
+    country: ["Разные страны"],
+    volume: ["разный объем"],
+    strength: ["разная крепость"]
+  },
+  miniatures: {
+    manufacturer: ["Various Brands", "Collector's Edition", "Travel Exclusive"],
+    country: ["Разные страны"],
+    volume: ["0,05 л", "0,1 л"],
+    strength: ["разная крепость"]
   }
 };
 
+
+
+ // Создаем слайды
+ const slides = [
+  {
+    image: '/images/14.03-SHOK-CENA-DOMAINE-BOYAR-3l.webp',
+    title: 'Специално предложение',
+    description: 'Domaine Boyar 3L на шокова цена',
+    link: '/promotions',
+    order: 1,
+  },
+  {
+    image: '/images/01.04-Shok-Cena-Jack-Daniels.webp',
+    title: 'Нови продукти',
+    description: "Jack Daniel's на специална цена",
+    link: '/new',
+    order: 2,
+  },
+  {
+    image: '/images/01.04-Shok-Cena-Uzo-12.webp',
+    title: 'Специална оферта',
+    description: 'Узо 12 на промоционална цена',
+    link: '/promotions',
+    order: 3,
+  },
+  {
+    image: '/images/01.04-Shok-Cena-Jim-Beam-Honey.webp',
+    title: 'Нова промоция',
+    description: 'Jim Beam Honey на специална цена',
+    link: '/promotions',
+    order: 4,
+  },
+];
+
+const reviews = [
+  {
+    author: "Александр",
+    text: "Очень доволен сотрудничеством с магазином! Оперативно созвонились, уточнили. Заказ получил на следующий день. Упаковка супер. Успехов и процветания.",
+    rating: 5,
+    createdAt: new Date()
+  },
+  {
+    author: "Михаил",
+    text: "Отличный сервис, быстрая доставка. Товар соответствует описанию. Рекомендую!",
+    rating: 5,
+    createdAt: new Date()
+  },
+  {
+    author: "Елена",
+    text: "Заказывала подарочный набор. Упаковка красивая, доставка быстрая. Очень довольна!",
+    rating: 5,
+    createdAt: new Date()
+  },
+  {
+    author: "Дмитрий",
+    text: "Хороший выбор, приемлемые цены. Доставка в срок. Буду заказывать еще.",
+    rating: 4,
+    createdAt: new Date()
+  }
+];
+
 async function main() {
-  // Очищаем существующие данные
-  await prisma.slide.deleteMany();
-  await prisma.category.deleteMany();
+  try {
+    console.log('🚀 Starting seed...');
+    
+    // Очистка базы данных
+    console.log('🧹 Clearing database...');
+    await prisma.$transaction([
+      prisma.review.deleteMany(),
+      prisma.category.deleteMany(),
+      prisma.user.deleteMany(),
+      prisma.slide.deleteMany()
+    ]);
+    console.log('✅ Database cleared');
 
-  // Создаем слайды
-  const slides = [
-    {
-      image: '/images/14.03-SHOK-CENA-DOMAINE-BOYAR-3l.webp',
-      title: 'Специално предложение',
-      description: 'Domaine Boyar 3L на шокова цена',
-      link: '/promotions',
-      order: 1,
-    },
-    {
-      image: '/images/01.04-Shok-Cena-Jack-Daniels.webp',
-      title: 'Нови продукти',
-      description: "Jack Daniel's на специална цена",
-      link: '/new',
-      order: 2,
-    },
-    {
-      image: '/images/01.04-Shok-Cena-Uzo-12.webp',
-      title: 'Специална оферта',
-      description: 'Узо 12 на промоционална цена',
-      link: '/promotions',
-      order: 3,
-    },
-    {
-      image: '/images/01.04-Shok-Cena-Jim-Beam-Honey.webp',
-      title: 'Нова промоция',
-      description: 'Jim Beam Honey на специална цена',
-      link: '/promotions',
-      order: 4,
-    },
-  ];
-
-  // Создаем категории
-  for (const [name, displayName] of Object.entries(categoryNames)) {
-    const details = categoryData[name as keyof typeof categoryData] || {
-      manufacturer: [],
-      country: [],
-      volume: [],
-      strength: []
-    };
-
-    await prisma.category.upsert({
-      where: { name },
-      update: {
-        displayName,
-        manufacturer: details.manufacturer,
-        country: details.country,
-        volume: details.volume,
-        strength: details.strength
-      },
-      create: {
-        name,
-        displayName,
-        manufacturer: details.manufacturer,
-        country: details.country,
-        volume: details.volume,
-        strength: details.strength
+    // Создание слайдов
+    console.log('🎯 Creating slides...');
+    for (const slide of slides) {
+      try {
+        const created = await prisma.slide.create({
+          data: slide
+        });
+        console.log(`✅ Created slide: ${created.title}`);
+      } catch (error) {
+        console.error('❌ Failed to create slide:', error);
       }
-    });
+    }
+
+    // Создание отзывов
+    console.log('📝 Creating reviews...');
+    for (const review of reviews) {
+      try {
+        const created = await prisma.review.create({
+          data: review
+        });
+        console.log(`✅ Created review: ${created.id}`);
+      } catch (error) {
+        console.error('❌ Failed to create review:', error);
+      }
+    }
+
+    // Создание категорий - исправляем обращение к переменной
+    console.log('🗂 Creating categories...');
+    for (const [name, displayName] of Object.entries(categoryNames)) {
+      try {
+        // Используем правильное имя переменной categoryData вместо categoryData2
+        const data = categoryData[name as keyof typeof categoryData];
+        if (data) {
+          const created = await prisma.category.create({
+            data: {
+              name,
+              displayName,
+              manufacturer: data.manufacturer,
+              country: data.country,
+              volume: data.volume,
+              strength: data.strength
+            }
+          });
+          console.log(`✅ Created category: ${created.name}`);
+        }
+      } catch (error) {
+        console.error(`❌ Failed to create category ${name}:`, error);
+      }
+    }
+
+    // Создание админа
+    console.log('👤 Creating admin user...');
+    try {
+      const hashedPassword = await bcrypt.hash('admin123', 10);
+      const admin = await prisma.user.create({
+        data: {
+          email: 'admin@example.com',
+          password: hashedPassword,
+          role: Role.ADMIN,
+          firstName: 'Admin',
+          lastName: 'User'
+        }
+      });
+      console.log('✅ Created admin user:', admin.email);
+    } catch (error) {
+      console.error('❌ Failed to create admin:', error);
+    }
+
+    console.log('✨ Seed finished successfully');
+  } catch (error) {
+    console.error('❌ Seed failed:', error);
+    throw error;
+  } finally {
+    await prisma.$disconnect();
   }
-
-  // Создаем слайды
-  for (const slide of slides) {
-    await prisma.slide.create({
-      data: slide,
-    });
-  }
-
-  const hashedPassword = await bcrypt.hash('admin123', 10);
-  
-  const admin = await prisma.user.upsert({
-    where: { email: 'admin@example.com' },
-    update: {},
-    create: {
-      email: 'admin@example.com',
-      password: hashedPassword,
-      role: Role.ADMIN,
-      firstName: 'Admin',
-      lastName: 'User'
-    },
-  });
-
-  console.log({ admin });
-
-  console.log('База данных успешно заполнена');
 }
 
 main()
   .catch((e) => {
     console.error(e);
     process.exit(1);
-  })
-  .finally(async () => {
-    await prisma.$disconnect();
-  }); 
+  });
