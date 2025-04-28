@@ -41,6 +41,7 @@ model Review {
   id        Int      @id @default(autoincrement())
   author    String
   text      String
+  text_key  String
   rating    Int      @default(5)
   createdAt DateTime @default(now())
 }

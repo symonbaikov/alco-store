@@ -176,24 +176,56 @@ const reviews = [
   {
     author: "Александър",
     text: "Много съм доволен от сътрудничеството с магазина! Бързо се свързаха, уточниха всичко. Получих поръчката на следващия ден. Опаковката е перфектна. Успех и просперитет.",
+    text_key: "review1",
     rating: 5,
     createdAt: new Date()
   },
   {
     author: "Михаил",
     text: "Отличен сервиз, бърза доставка. Стоката отговаря на описанието. Препоръчвам!",
+    text_key: "review2",
     rating: 5,
     createdAt: new Date()
   },
   {
     author: "Елена",
     text: "Поръчах подаръчен комплект. Красива опаковка, бърза доставка. Много съм доволна!",
+    text_key: "review3",
     rating: 5,
     createdAt: new Date()
   },
   {
     author: "Димитър",
     text: "Добър избор, приемливи цени. Доставка навреме. Ще поръчвам отново.",
+    text_key: "review4",
+    rating: 4,
+    createdAt: new Date()
+  },
+  {
+    author: "Alexander",
+    text: "Very satisfied with the store cooperation! Quick response, clarified everything. Received the order the next day. Perfect packaging. Success and prosperity.",
+    text_key: "review1",
+    rating: 5,
+    createdAt: new Date()
+  },
+  {
+    author: "Michael",
+    text: "Excellent service, fast delivery. Product matches the description. Recommended!",
+    text_key: "review2",
+    rating: 5,
+    createdAt: new Date()
+  },
+  {
+    author: "Elena",
+    text: "Ordered a gift set. Beautiful packaging, fast delivery. Very satisfied!",
+    text_key: "review3",
+    rating: 5,
+    createdAt: new Date()
+  },
+  {
+    author: "Dimitar",
+    text: "Good choice, reasonable prices. On-time delivery. Will order again.",
+    text_key: "review4",
     rating: 4,
     createdAt: new Date()
   }

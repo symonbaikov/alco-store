@@ -252,7 +252,8 @@
   },
   "reviews": {
     "title": "What People Say",
-    "leaveReview": "WRITE A REVIEW",
+    "leaveReview": "LEAVE A REVIEW",
+    "allReviews": "ALL REVIEWS",
     "noReviews": "No reviews yet",
     "rating": "Rating",
     "goToReview": "Go to review",
@@ -261,7 +262,13 @@
     "writeReview": "Write a review",
     "error": "Error loading reviews",
     "retry": "Try again",
-    "loading": "Loading..."
+    "loading": "Loading...",
+    "texts": {
+      "review1": "Very satisfied with the store cooperation! Quick response, clarified everything. Received the order the next day. Perfect packaging. Success and prosperity.",
+      "review2": "Excellent service, fast delivery. Product matches the description. Recommended!",
+      "review3": "Ordered a gift set. Beautiful packaging, fast delivery. Very satisfied!",
+      "review4": "Good choice, reasonable prices. On-time delivery. Will order again."
+    }
   },
   "links": {
     "wine": "Wine",

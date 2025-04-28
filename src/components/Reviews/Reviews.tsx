@@ -2,12 +2,13 @@ import React, { useState } from 'react';
 import { useTranslation } from 'react-i18next';
 import { useReviews } from '../../hooks/useReviews';
 import ChatIcon from '@mui/icons-material/ChatOutlined';
+import { Loader } from 'lucide-react';
 import './Reviews.css';
 
 export const Reviews: React.FC = () => {
   const { t } = useTranslation();
   const [currentReview, setCurrentReview] = useState(0);
-  const { reviews, loading, error, fetchReviews } = useReviews();
+  const { reviews, loading, error } = useReviews();
 
   const renderStars = (rating: number) => {
     return [...Array(5)].map((_, index) => (
@@ -21,7 +22,7 @@ export const Reviews: React.FC = () => {
     return (
       <section className="reviews-section">
         <div className="container">
-          <div className="loading">{t('common.loading')}</div>
+          <div className="loading"><Loader /></div>
         </div>
       </section>
     );
@@ -38,9 +39,6 @@ export const Reviews: React.FC = () => {
               className="broken-bottle-image"
             />
             <p className="error-message">{t('common.error')}: {error}</p>
-            <button onClick={fetchReviews} className="retry-btn">
-              {t('common.retry')}
-            </button>
           </div>
         </div>
       </section>
@@ -61,13 +59,16 @@ export const Reviews: React.FC = () => {
     <section className="reviews-section">
       <div className="container">
         <div className="reviews-header">
-          <h2>{t('reviews.title')}</h2>
-          <button 
-            className="chat-icon-btn" 
-            aria-label={t('reviews.leaveReview')}
-          >
-            <ChatIcon />
-          </button>
+          <h2 className='reviews-title'>{t('reviews.title')}</h2>
+          <div className="reviews-actions">
+            <a href="#" className="leave-review-link">
+              <ChatIcon className="chat-icon-btn" />
+              {t('reviews.leaveReview')}
+            </a>
+            <a href="/reviews" className="all-reviews-link">
+              {t('reviews.allReviews')}
+            </a>
+          </div>
         </div>
 
         <div className="reviews-slider">

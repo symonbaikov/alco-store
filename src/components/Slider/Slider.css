@@ -55,6 +55,7 @@
   font-size: 32px;
   margin-bottom: 10px;
   font-weight: 600;
+  font-family: "Poppins", sans-serif;
 }
 
 .slide-content p {
@@ -67,8 +68,9 @@
   padding: 12px 30px;
   background: #8b0000;
   color: white;
+  font-family: Poppins, sans-serif;
   text-decoration: none;
-  font-weight: 500;
+  font-weight: 600;
 }
 
 .slider:hover .slider-button {

@@ -95,6 +95,7 @@
   width: 100%;
   padding: 0 8px;
   font-size: 14px;
+  font-family: Poppins, sans-serif;
   color: #333;
 }
 
@@ -270,6 +271,7 @@
   color: #666;
   text-decoration: none;
   font-size: 14px;
+  font-family: "Roboto", sans-serif;
   transition: color 0.3s ease;
 }
 
