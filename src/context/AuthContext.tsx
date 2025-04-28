@@ -7,6 +7,7 @@ interface AuthContextType {
     lastName?: string;     // Make optional to match User type
     email: string;        // Keep required since it's likely always present
     role?: string;        // Already optional
+    googleId?: string
   } | null;
   isLoggedIn: boolean;
   loading: boolean;

@@ -32,7 +32,9 @@ const ProfilePage: React.FC = () => {
 
   useEffect(() => {
     if (user) {
-      setFullName([user.firstName, user.lastName].filter(Boolean).join(' '));
+      const firstName = user.firstName || '';
+      const lastName = user.lastName || '';
+      setFullName([firstName, lastName].filter(Boolean).join(' '));
     }
   }, [user]);
 
@@ -197,11 +199,13 @@ const ProfilePage: React.FC = () => {
                   ) : (
                     <>
                       <h3 className="user-full-name">
-                        {[user.firstName, user.lastName].filter(Boolean).join(' ')}
+                        {user && [user.firstName || '', user.lastName || ''].filter(Boolean).join(' ')}
                       </h3>
                       <button 
                         onClick={() => {
-                          setFullName([user.firstName, user.lastName].filter(Boolean).join(' '));
+                          const firstName = user?.firstName || '';
+                          const lastName = user?.lastName || '';
+                          setFullName([firstName, lastName].filter(Boolean).join(' '));
                           setIsEditingName(true);
                         }}
                         className="inline-button edit"
