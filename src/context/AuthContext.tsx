@@ -3,10 +3,10 @@ import { useAuth } from "../hooks/useAuth";
 
 interface AuthContextType {
   user: {
-    firstName: string;
-    lastName: string;
-    email: string;
-    role?: string; // Add the role property (optional if not always present)
+    firstName?: string;    // Make optional to match User type
+    lastName?: string;     // Make optional to match User type
+    email: string;        // Keep required since it's likely always present
+    role?: string;        // Already optional
   } | null;
   isLoggedIn: boolean;
   loading: boolean;
