@@ -172,7 +172,11 @@
     }
   },
   "common": {
-    "moreInfo": "More Information"
+    "moreInfo": "More Information",
+    "loading": "Loading...",
+    "error": "Error",
+    "retry": "Try again",
+    "refresh": "Refresh"
   },
   "slides": {
     "1": {
@@ -244,36 +248,49 @@
       "cash": "Cash",
       "mastercard": "Mastercard",
       "visa": "Visa"
-    },
-    "links": {
-      "wine": "Wine",
-      "champagne": "Champagne",
-      "cognac": "Cognac",
-      "whiskey": "Whiskey",
-      "vodka": "Vodka",
-      "liquor": "Liquors",
-      "tequila": "Tequila",
-      "brandy": "Brandy",
-      "beer": "Beer",
-      "vermouth": "Vermouth",
-      "rum": "Rum",
-      "about": "About Us",
-      "cooperation": "Cooperation",
-      "rent": "Rent",
-      "reviews": "Reviews",
-      "licenses": "Licenses",
-      "documents": "Documents",
-      "requisites": "Requisites",
-      "contacts": "Contacts",
-      "sommelier": "Sommelier Tips",
-      "events": "Events",
-      "articles": "Articles",
-      "cocktails": "Cocktails",
-      "payment-delivery": "Payment and Delivery",
-      "return-exchange": "Return and Exchange",
-      "public-offer": "Public Offer",
-      "privacy-policy": "Privacy Policy",
-      "loyalty": "Loyalty Program"
     }
+  },
+  "reviews": {
+    "title": "What People Say",
+    "leaveReview": "WRITE A REVIEW",
+    "noReviews": "No reviews yet",
+    "rating": "Rating",
+    "goToReview": "Go to review",
+    "previous": "Previous",
+    "next": "Next",
+    "writeReview": "Write a review",
+    "error": "Error loading reviews",
+    "retry": "Try again",
+    "loading": "Loading..."
+  },
+  "links": {
+    "wine": "Wine",
+    "champagne": "Champagne",
+    "cognac": "Cognac",
+    "whiskey": "Whiskey",
+    "vodka": "Vodka",
+    "liquor": "Liquors",
+    "tequila": "Tequila",
+    "brandy": "Brandy",
+    "beer": "Beer",
+    "vermouth": "Vermouth",
+    "rum": "Rum",
+    "about": "About Us",
+    "cooperation": "Cooperation",
+    "rent": "Rent",
+    "reviews": "Reviews",
+    "licenses": "Licenses",
+    "documents": "Documents",
+    "requisites": "Requisites",
+    "contacts": "Contacts",
+    "sommelier": "Sommelier Tips",
+    "events": "Events",
+    "articles": "Articles",
+    "cocktails": "Cocktails",
+    "payment-delivery": "Payment and Delivery",
+    "return-exchange": "Return and Exchange",
+    "public-offer": "Public Offer",
+    "privacy-policy": "Privacy Policy",
+    "loyalty": "Loyalty Program"
   }
-} 
+}

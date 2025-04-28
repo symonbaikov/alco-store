@@ -1,13 +1,13 @@
 import React, { useState } from 'react';
 import { useTranslation } from 'react-i18next';
 import { useReviews } from '../../hooks/useReviews';
+import ChatIcon from '@mui/icons-material/ChatOutlined';
 import './Reviews.css';
-import brokenBottleImage from '../../../public/images/broken-bottle.png'; // Ensure the file exists with this extension
 
 export const Reviews: React.FC = () => {
   const { t } = useTranslation();
   const [currentReview, setCurrentReview] = useState(0);
-  const { reviews, loading, error } = useReviews();
+  const { reviews, loading, error, fetchReviews } = useReviews();
 
   const renderStars = (rating: number) => {
     return [...Array(5)].map((_, index) => (
@@ -21,7 +21,7 @@ export const Reviews: React.FC = () => {
     return (
       <section className="reviews-section">
         <div className="container">
-          <div className="loading">Loading...</div>
+          <div className="loading">{t('common.loading')}</div>
         </div>
       </section>
     );
@@ -33,11 +33,14 @@ export const Reviews: React.FC = () => {
         <div className="container error-container">
           <div className="error">
             <img 
-              src={brokenBottleImage} 
-              alt="Error occurred" 
+              src="/images/broken-bottle.png"
+              alt={t('common.error')}
               className="broken-bottle-image"
             />
-            <p className="error-message">{t('common.error', 'Ошибка')}: {error}</p>
+            <p className="error-message">{t('common.error')}: {error}</p>
+            <button onClick={fetchReviews} className="retry-btn">
+              {t('common.retry')}
+            </button>
           </div>
         </div>
       </section>
@@ -48,7 +51,7 @@ export const Reviews: React.FC = () => {
     return (
       <section className="reviews-section">
         <div className="container">
-          <div className="no-reviews">{t('reviews.noReviews', 'Нет отзывов')}</div>
+          <div className="no-reviews">{t('reviews.noReviews')}</div>
         </div>
       </section>
     );
@@ -58,9 +61,12 @@ export const Reviews: React.FC = () => {
     <section className="reviews-section">
       <div className="container">
         <div className="reviews-header">
-          <h2>{t('reviews.title', 'О нас пишут')}</h2>
-          <button className="leave-review-btn">
-            {t('reviews.leaveReview', 'ОСТАВИТЬ ОТЗЫВ')}
+          <h2>{t('reviews.title')}</h2>
+          <button 
+            className="chat-icon-btn" 
+            aria-label={t('reviews.leaveReview')}
+          >
+            <ChatIcon />
           </button>
         </div>
 
@@ -68,12 +74,13 @@ export const Reviews: React.FC = () => {
           <button 
             className="slider-arrow prev"
             onClick={() => setCurrentReview(prev => prev > 0 ? prev - 1 : reviews.length - 1)}
+            aria-label={t('reviews.previous')}
           >
             ‹
           </button>
 
-          <div className="review-card">
-            <div className="rating">
+          <div className="review-card" role="article">
+            <div className="rating" aria-label={`${t('reviews.rating')}: ${reviews[currentReview].rating}/5`}>
               {renderStars(reviews[currentReview].rating)}
             </div>
             <h3 className="review-author">{reviews[currentReview].author}</h3>
@@ -83,6 +90,7 @@ export const Reviews: React.FC = () => {
           <button 
             className="slider-arrow next"
             onClick={() => setCurrentReview(prev => (prev + 1) % reviews.length)}
+            aria-label={t('reviews.next')}
           >
             ›
           </button>
