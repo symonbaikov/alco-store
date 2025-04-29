@@ -1,0 +1,26 @@
+{
+  "reviews": {
+    "title": "Отзывы",
+    "leaveReview": "Оставить отзыв",
+    "allReviews": "Все отзывы",
+    "form": {
+      "name": "Имя",
+      "email": "Email",
+      "yourReview": "Ваш отзыв",
+      "attachPhoto": "Прикрепить фото",
+      "photoOptional": "(необязательно)",
+      "submit": "Отправить",
+      "cancel": "Отмена",
+      "rating": "Оценка",
+      "selectRating": "Выберите оценку",
+      "namePlaceholder": "Ваше имя",
+      "emailPlaceholder": "ваш.email@пример.com",
+      "reviewPlaceholder": "Напишите ваш отзыв здесь...",
+      "fileUpload": "Выберите файл",
+      "noFileChosen": "Файл не выбран",
+      "errors": {
+        "ratingRequired": "Пожалуйста, выберите оценку"
+      }
+    }
+  }
+} 

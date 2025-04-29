@@ -3,9 +3,9 @@ import React, { useState } from "react";
 import { useTranslation } from "react-i18next";
 import { useReviews } from "../../hooks/useReviews";
 import ChatIcon from "@mui/icons-material/ChatOutlined";
-import CloseIcon from "@mui/icons-material/Close"; // Import Close icon
 import { Loader } from "lucide-react";
 import Modal from "../Modal/Modal.tsx";
+import { ReviewForm } from "./ReviewForm";
 import "./Reviews.css"; // Make sure to add styles for the new elements here
 
 export const Reviews: React.FC = () => {
@@ -14,65 +14,34 @@ export const Reviews: React.FC = () => {
   const { reviews, loading, error } = useReviews();
   const [isReviewModalOpen, setIsReviewModalOpen] = useState(false);
 
-  // --- State for Form Inputs ---
-  const [reviewerName, setReviewerName] = useState("");
-  const [reviewerEmail, setReviewerEmail] = useState("");
-  const [reviewMessage, setReviewMessage] = useState("");
-  const [reviewFile, setReviewFile] = useState<File | null>(null);
-  // ---
-
   const openReviewModal = () => setIsReviewModalOpen(true);
-  const closeReviewModal = () => {
-    setIsReviewModalOpen(false);
-    // Reset form fields on close
-    setReviewerName("");
-    setReviewerEmail("");
-    setReviewMessage("");
-    setReviewFile(null);
-    // Reset file input visually if needed
-    const fileInput = document.getElementById("reviewFile") as HTMLInputElement;
-    if (fileInput) fileInput.value = "";
-  };
+  const closeReviewModal = () => setIsReviewModalOpen(false);
 
-  const handleFileChange = (event: React.ChangeEvent<HTMLInputElement>) => {
-    if (event.target.files && event.target.files[0]) {
-      setReviewFile(event.target.files[0]);
-    } else {
-      setReviewFile(null);
-    }
-  };
-
-  const handleReviewSubmit = (e: React.FormEvent) => {
-    e.preventDefault();
+  const handleReviewSubmit = async (formData: {
+    name: string;
+    email: string;
+    message: string;
+    file: File | null;
+  }) => {
     // Логика отправки отзыва
-    console.log("Отзыв отправляется с данными:", {
-      name: reviewerName,
-      email: reviewerEmail,
-      message: reviewMessage,
-      file: reviewFile,
-      // Add rating if you collect it in the form too
-    });
+    console.log("Отзыв отправляется с данными:", formData);
 
     // --- Placeholder for actual API call ---
-    // const formData = new FormData();
-    // formData.append('name', reviewerName);
-    // formData.append('email', reviewerEmail);
-    // formData.append('message', reviewMessage);
-    // if (reviewFile) {
-    //   formData.append('attachment', reviewFile);
+    // const formDataObj = new FormData();
+    // formDataObj.append('name', formData.name);
+    // formDataObj.append('email', formData.email);
+    // formDataObj.append('message', formData.message);
+    // if (formData.file) {
+    //   formDataObj.append('attachment', formData.file);
     // }
     // try {
-    //   // await submitReviewApi(formData);
-    //   alert(t('reviews.submitSuccess', 'Review submitted successfully!'));
-    closeReviewModal(); // Закрываем модалку после "отправки"
+    //   // await submitReviewApi(formDataObj);
+    //   alert(t('reviews.submitSuccess'));
+    closeReviewModal();
     // } catch (apiError) {
     //   console.error("Failed to submit review:", apiError);
-    //   alert(t('reviews.submitError', 'Failed to submit review. Please try again.'));
+    //   alert(t('reviews.submitError'));
     // }
-    // --- End Placeholder ---
-
-    // For now, just log and close
-    closeReviewModal();
   };
 
   const renderStars = (rating: number) => {
@@ -199,110 +168,9 @@ export const Reviews: React.FC = () => {
         </div>
       </section>
 
-      {/* --- Updated Modal with Form --- */}
       <Modal isOpen={isReviewModalOpen} onClose={closeReviewModal}>
-        {/* Close Button (X) */}
-        <button
-          type="button"
-          className="modal-close-button" // Add styles for this class in Reviews.css
-          onClick={closeReviewModal}
-          aria-label={t("common.close", "Close")}
-        >
-          <CloseIcon /> {/* Use the imported icon */}
-        </button>
-
-        <h2>{t("reviews.leaveReviewTitle", "Оставить отзыв")}</h2>
-
-        {/* --- Updated Form --- */}
-        <form className="review-form" onSubmit={handleReviewSubmit}>
-          {" "}
-          {/* Add class for styling */}
-          {/* Name Input */}
-          <div className="form-group">
-            <label htmlFor="reviewerName">
-              {t("reviews.form.nameLabel", "Name")}:
-            </label>
-            <input
-              type="text"
-              id="reviewerName"
-              name="name"
-              placeholder={t("reviews.form.namePlaceholder", "Your Name")}
-              value={reviewerName}
-              onChange={(e) => setReviewerName(e.target.value)}
-              required
-            />
-          </div>
-          {/* Email Input */}
-          <div className="form-group">
-            <label htmlFor="reviewerEmail">
-              {t("reviews.form.emailLabel", "Email")}:
-            </label>
-            <input
-              type="email"
-              id="reviewerEmail"
-              name="email"
-              placeholder={t(
-                "reviews.form.emailPlaceholder",
-                "your.email@example.com"
-              )}
-              value={reviewerEmail}
-              onChange={(e) => setReviewerEmail(e.target.value)}
-              required
-            />
-          </div>
-          {/* Message Textarea */}
-          <div className="form-group">
-            <label htmlFor="reviewMessage">
-              {t("reviews.form.messageLabel", "Your Review")}:
-            </label>
-            <textarea
-              id="reviewMessage"
-              name="message"
-              placeholder={t(
-                "reviews.form.messagePlaceholder",
-                "Write your review here..."
-              )}
-              value={reviewMessage}
-              onChange={(e) => setReviewMessage(e.target.value)}
-              required
-              rows={5} // Adjust rows as needed
-            />
-          </div>
-          {/* File Input */}
-          <div className="form-group">
-            <label htmlFor="reviewFile">
-              {t("reviews.form.fileLabel", "Attach Photo (Optional)")}:
-            </label>
-            <input
-              type="file"
-              id="reviewFile" // ID added for resetting
-              name="file"
-              accept="image/*" // Example: accept only images
-              onChange={handleFileChange}
-            />
-            {reviewFile && (
-              <span className="file-name-display">{reviewFile.name}</span>
-            )}{" "}
-            {/* Optional: display selected file name */}
-          </div>
-          {/* Action Buttons */}
-          <div className="form-actions">
-            <button type="submit" className="submit-btn">
-              {t("common.send", "Отправить")}
-            </button>
-            <button
-              type="button"
-              className="cancel-btn"
-              onClick={closeReviewModal}
-              // style removed, prefer classes
-            >
-              {t("common.cancel", "Отмена")}
-            </button>
-          </div>
-        </form>
-        {/* --- End Updated Form --- */}
+        <ReviewForm onSubmit={handleReviewSubmit} onClose={closeReviewModal} />
       </Modal>
-      {/* --- */}
     </>
   );
 };

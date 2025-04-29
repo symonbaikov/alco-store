@@ -251,23 +251,27 @@
     }
   },
   "reviews": {
-    "title": "What People Say",
-    "leaveReview": "LEAVE A REVIEW",
-    "allReviews": "ALL REVIEWS",
-    "noReviews": "No reviews yet",
-    "rating": "Rating",
-    "goToReview": "Go to review",
-    "previous": "Previous",
-    "next": "Next",
-    "writeReview": "Write a review",
-    "error": "Error loading reviews",
-    "retry": "Try again",
-    "loading": "Loading...",
-    "texts": {
-      "review1": "Very satisfied with the store cooperation! Quick response, clarified everything. Received the order the next day. Perfect packaging. Success and prosperity.",
-      "review2": "Excellent service, fast delivery. Product matches the description. Recommended!",
-      "review3": "Ordered a gift set. Beautiful packaging, fast delivery. Very satisfied!",
-      "review4": "Good choice, reasonable prices. On-time delivery. Will order again."
+    "title": "Reviews",
+    "leaveReview": "Leave a Review",
+    "allReviews": "All Reviews",
+    "form": {
+      "name": "Name",
+      "email": "Email",
+      "yourReview": "Your Review",
+      "attachPhoto": "Attach Photo",
+      "photoOptional": "(optional)",
+      "submit": "Submit",
+      "cancel": "Cancel",
+      "rating": "Rating",
+      "selectRating": "Select Rating",
+      "namePlaceholder": "Your Name",
+      "emailPlaceholder": "your.email@example.com",
+      "reviewPlaceholder": "Write your review here...",
+      "fileUpload": "Choose a file",
+      "noFileChosen": "No file chosen",
+      "errors": {
+        "ratingRequired": "Please select a rating"
+      }
     }
   },
   "links": {
