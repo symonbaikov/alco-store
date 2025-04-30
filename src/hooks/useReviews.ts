@@ -5,7 +5,7 @@ interface Review {
   id: number;
   author: string;
   text: string;
-  text_key: string;
+  text_key?: string;
   rating: number;
   createdAt: string;
 }
@@ -41,7 +41,10 @@ export function useReviews() {
             .replace('Михаил', 'Michael')
             .replace('Елена', 'Elena')
             .replace('Димитър', 'Dimitar'),
-        text: i18n.t(`reviews.texts.${review.text_key}`, review.text)
+        // Используем оригинальный текст для болгарского языка
+        text: i18n.language === 'bg' ? review.text : 
+          // Для английского используем перевод если есть text_key, иначе оригинальный текст
+          (review.text_key ? i18n.t(`reviews.texts.${review.text_key}`) : review.text)
       }));
 
       setReviews(translatedReviews);

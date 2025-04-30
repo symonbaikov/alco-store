@@ -9,7 +9,7 @@
     "test": "jest",
     "lint": "eslint .",
     "preview": "vite preview",
-    "server": "ts-node-esm server/index.ts",
+    "server": "tsx server/index.ts",
     "prisma:push": "prisma db push",
     "prisma:studio": "prisma studio",
     "prisma:seed": "npx tsx prisma/seed.ts",

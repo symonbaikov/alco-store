@@ -272,6 +272,12 @@
       "errors": {
         "ratingRequired": "Please select a rating"
       }
+    },
+    "texts": {
+      "review1": "I am very satisfied with the store's cooperation! They contacted me quickly, clarified everything. I received the order the next day. The packaging is perfect. Success and prosperity.",
+      "review2": "Great service and quality products! Fast delivery and excellent customer support.",
+      "review3": "Very professional approach. The prices are reasonable, and the selection is impressive.",
+      "review4": "Excellent store! Quick processing of the order and careful packaging of the goods."
     }
   },
   "links": {

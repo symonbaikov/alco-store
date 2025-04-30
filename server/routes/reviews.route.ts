@@ -8,6 +8,14 @@ const prisma = new PrismaClient();
 router.get('/', async (req, res) => {
   try {
     const reviews = await prisma.review.findMany({
+      select: {
+        id: true,
+        author: true,
+        text: true,
+        text_key: true,
+        rating: true,
+        createdAt: true
+      },
       orderBy: {
         createdAt: 'desc'
       }

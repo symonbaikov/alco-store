@@ -52,16 +52,10 @@
     align-items: center;
     gap: 8px;
     text-decoration: none;
-    background-color: white;
     color: #858383;
+    background-color: transparent;
     font-size: 14px;
     transition: color 0.3s ease;
-  }
-
-  .leave-review-link:hover,
-  .leave-review-link:hover .chat-icon-btn {
-    color: white;
-    background-color: #333;
   }
 
   .chat-icon-btn {
@@ -91,12 +85,6 @@
     cursor: pointer;
     transition: all 0.3s ease;
     color: black;
-  }
-  
-  .leave-review-btn:hover {
-    background: #333;
-    color: white;
-    
   }
   
   .reviews-slider {
