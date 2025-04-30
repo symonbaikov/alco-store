@@ -200,34 +200,6 @@ const reviews = [
     text_key: "review4",
     rating: 4,
     createdAt: new Date()
-  },
-  {
-    author: "Alexander",
-    text: "Very satisfied with the store cooperation! Quick response, clarified everything. Received the order the next day. Perfect packaging. Success and prosperity.",
-    text_key: "review1",
-    rating: 5,
-    createdAt: new Date()
-  },
-  {
-    author: "Michael",
-    text: "Excellent service, fast delivery. Product matches the description. Recommended!",
-    text_key: "review2",
-    rating: 5,
-    createdAt: new Date()
-  },
-  {
-    author: "Elena",
-    text: "Ordered a gift set. Beautiful packaging, fast delivery. Very satisfied!",
-    text_key: "review3",
-    rating: 5,
-    createdAt: new Date()
-  },
-  {
-    author: "Dimitar",
-    text: "Good choice, reasonable prices. On-time delivery. Will order again.",
-    text_key: "review4",
-    rating: 4,
-    createdAt: new Date()
   }
 ];
 

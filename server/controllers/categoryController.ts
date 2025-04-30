@@ -1,5 +1,7 @@
 import { Request, Response } from 'express';
-import prisma from '../utils/prisma';
+import { PrismaClient } from '@prisma/client';
+
+const prisma = new PrismaClient();
 
 export const getAllCategories = async (req: Request, res: Response) => {
   try {
@@ -29,10 +31,11 @@ export const getCategoryById = async (req: Request, res: Response) => {
 
 export const createCategory = async (req: Request, res: Response) => {
   try {
-    const { name, manufacturer, country, volume, strength } = req.body;
+    const { name, displayName, manufacturer, country, volume, strength } = req.body;
     const category = await prisma.category.create({
       data: {
         name,
+        displayName,
         manufacturer,
         country,
         volume,

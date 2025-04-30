@@ -5,18 +5,18 @@ import cookieParser from "cookie-parser";
 import passport from "passport";
 import type { Request, Response } from "express";
 
-import slideRoutes from "./routes/slideRoutes.ts";
-import authRoutes from "./routes/auth.route.ts";
-import registerRoutes from "./routes/register.route.ts";
-import forgotPasswordRoutes from "./routes/forgot-password.route.ts";
-import resetPasswordRoutes from "./routes/reset-password.route.ts";
-import changePasswordRoutes from "./routes/change-password.route.ts";
-import reviewsRouter from './routes/reviews.route.ts';
-import categoryRoutes from "./routes/categories.route.ts";
-import { authenticatedUser } from "./lib/lib.ts";
+import slideRoutes from "./routes/slideRoutes";
+import authRoutes from "./routes/auth.route";
+import registerRoutes from "./routes/register.route";
+import forgotPasswordRoutes from "./routes/forgot-password.route";
+import resetPasswordRoutes from "./routes/reset-password.route";
+import changePasswordRoutes from "./routes/change-password.route";
+import reviewsRouter from './routes/reviews.route';
+import categoryRoutes from "./routes/categories.route";
+import { authenticatedUser } from "./lib/lib";
 
 // Импортируем конфигурацию passport
-import "./config/passport.ts";
+import "./config/passport";
 
 const app = express();
 const port = 3001;

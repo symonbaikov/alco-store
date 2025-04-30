@@ -14,7 +14,7 @@ export function useReviews() {
   const [reviews, setReviews] = useState<Review[]>([]);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState<string | null>(null);
-  const { i18n } = useTranslation();
+  const { i18n, t } = useTranslation();
 
   const fetchReviews = async () => {
     try {
@@ -32,20 +32,29 @@ export function useReviews() {
         throw new Error('Expected array of reviews');
       }
 
-      // Translate reviews based on current language
-      const translatedReviews = data.map((review: Review) => ({
-        ...review,
-        author: i18n.language === 'bg' ? review.author : 
-          review.author
+      // Переводим отзывы в зависимости от текущего языка
+      const translatedReviews = data.map((review: Review) => {
+        let translatedText = review.text;
+        let translatedAuthor = review.author;
+
+        // Если язык не болгарский и есть text_key, используем перевод
+        if (i18n.language !== 'bg' && review.text_key) {
+          translatedText = t(`reviews.texts.${review.text_key}`);
+          
+          // Переводим имена только для не-болгарского языка
+          translatedAuthor = review.author
             .replace('Александър', 'Alexander')
             .replace('Михаил', 'Michael')
             .replace('Елена', 'Elena')
-            .replace('Димитър', 'Dimitar'),
-        // Используем оригинальный текст для болгарского языка
-        text: i18n.language === 'bg' ? review.text : 
-          // Для английского используем перевод если есть text_key, иначе оригинальный текст
-          (review.text_key ? i18n.t(`reviews.texts.${review.text_key}`) : review.text)
-      }));
+            .replace('Димитър', 'Dimitar');
+        }
+
+        return {
+          ...review,
+          author: translatedAuthor,
+          text: translatedText
+        };
+      });
 
       setReviews(translatedReviews);
       setError(null);
@@ -58,10 +67,10 @@ export function useReviews() {
     }
   };
 
-  // Fetch reviews when language changes
+  // Обновляем отзывы при изменении языка
   useEffect(() => {
     fetchReviews();
-  }, [i18n.language]);
+  }, [i18n.language, t]);
 
   return { reviews, loading, error, fetchReviews };
 }
