@@ -42,6 +42,8 @@ model Review {
   author    String
   email     String
   text      String
+  textBg    String?
+  textEn    String?
   text_key  String?
   rating    Int      @default(5)
   createdAt DateTime @default(now())

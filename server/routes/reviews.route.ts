@@ -4,6 +4,7 @@ import nodemailer from 'nodemailer';
 import { authenticatedUser } from '../lib/lib';
 import multer from 'multer';
 import path from 'path';
+import translateService from '../services/translate.service';
 
 interface MulterRequest extends Request {
   file?: Express.Multer.File;
@@ -83,107 +84,43 @@ router.post('/', authenticatedUser, (req: MulterRequest, res: Response, next: Ne
         error: 'Ошибка при загрузке файла'
       });
     } else if (err) {
-      return res.status(400).json({
-        error: err.message
-      });
+      return res.status(500).json({ error: err.message });
     }
 
     try {
-      console.log('Reviews POST - session:', req.session);
-      console.log('Reviews POST - user:', req.session.user);
-      console.log('Reviews POST - request body:', req.body);
-      console.log('Reviews POST - file:', req.file);
+      console.log('[Reviews POST] Starting review creation...');
+      console.log('[Reviews POST] Request body:', req.body);
       
       const { name, email, message, rating } = req.body;
+      const ratingNum = parseInt(rating);
 
-      // Проверяем наличие обязательных полей
-      if (!name?.trim() || !email?.trim() || !message?.trim() || rating === undefined) {
-        res.status(400).json({
-          error: 'Отсутствуют обязательные поля'
-        });
-        return;
+      if (!name || !email || !message || !rating) {
+        console.log('[Reviews POST] Validation failed - missing required fields');
+        return res.status(400).json({ error: 'Все поля обязательны для заполнения' });
       }
 
-      // Валидация email
-      const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
-      if (!emailRegex.test(email)) {
-        res.status(400).json({
-          error: 'Некорректный формат email'
-        });
-        return;
-      }
+      // Переводим текст отзыва
+      console.log('[Reviews POST] Starting translation process for message:', message);
+      const translations = await translateService.translateReview(message);
+      console.log('[Reviews POST] Translation results:', translations);
 
-      // Валидация рейтинга
-      const ratingNum = Number(rating);
-      if (isNaN(ratingNum) || ratingNum < 1 || ratingNum > 5) {
-        res.status(400).json({
-          error: 'Рейтинг должен быть числом от 1 до 5'
-        });
-        return;
-      }
-
-      // Создаем отзыв в базе данных
+      // Создаем отзыв в базе данных с переводами
       const savedReview = await prisma.review.create({
         data: {
           author: name.trim(),
           email: email.trim(),
           text: message.trim(),
+          textBg: translations.bg,
+          textEn: translations.en,
           rating: ratingNum
         }
       });
-      console.log('Отзыв сохранен в БД:', savedReview);
 
-      // Формируем email сообщение
-      const mailOptions: any = {
-        from: {
-          name: 'Alco Store',
-          address: process.env.EMAIL_USER as string
-        },
-        to: process.env.EMAIL_USER as string,
-        subject: 'Новый отзыв на сайте Alco Store',
-        html: `
-          <div style="font-family: Arial, sans-serif; max-width: 600px; margin: 0 auto;">
-            <h2 style="color: #333;">Получен новый отзыв</h2>
-            <div style="background-color: #f5f5f5; padding: 20px; border-radius: 5px;">
-              <p><strong>Имя:</strong> ${name}</p>
-              <p><strong>Email:</strong> ${email}</p>
-              <p><strong>Сообщение:</strong> ${message}</p>
-              <p><strong>Оценка:</strong> ${'⭐'.repeat(ratingNum)}</p>
-            </div>
-          </div>
-        `
-      };
-
-      // Если есть прикрепленный файл, добавляем его к письму
-      if (req.file) {
-        mailOptions.attachments = [{
-          filename: req.file.originalname,
-          content: req.file.buffer,
-          contentType: req.file.mimetype
-        }];
-      }
-
-      try {
-        console.log('Начинаем отправку email...');
-        const mailResult = await transporter.sendMail(mailOptions);
-        console.log('Email отправлен успешно:', mailResult);
-        
-        res.status(201).json({
-          message: 'Отзыв успешно создан и уведомление отправлено',
-          review: savedReview
-        });
-      } catch (emailError) {
-        console.error('Ошибка отправки email:', emailError);
-        res.status(201).json({
-          message: 'Отзыв создан, но возникла проблема с отправкой уведомления',
-          review: savedReview
-        });
-      }
+      console.log('[Reviews POST] Review saved successfully:', savedReview);
+      res.status(201).json(savedReview);
     } catch (error) {
-      console.error('Ошибка при обработке отзыва:', error);
-      res.status(500).json({
-        error: 'Произошла ошибка при сохранении отзыва'
-      });
+      console.error('[Reviews POST] Error creating review:', error);
+      res.status(500).json({ error: 'Failed to create review' });
     }
   });
 });
@@ -199,7 +136,8 @@ router.get('/', async (_req: Request, res: Response, next: NextFunction) => {
         id: true,
         author: true,
         text: true,
-        text_key: true,
+        textBg: true,
+        textEn: true,
         rating: true,
         createdAt: true
       },

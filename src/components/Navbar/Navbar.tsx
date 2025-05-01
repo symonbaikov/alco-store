@@ -23,20 +23,30 @@ const Navbar: React.FC<NavbarProps> = ({ onCartClick, onAuthClick }) => {
   const [isLanguageLoading, setIsLanguageLoading] = useState(false);
   const { isLoggedIn } = useAuthContext();
 
+  // Добавляем эффект для отслеживания текущего языка
+  useEffect(() => {
+    console.log('[Navbar] Current language:', i18n.language);
+    console.log('[Navbar] Stored language:', localStorage.getItem('i18nextLng'));
+  }, [i18n.language]);
+
   const changeLanguage = async (lng: string) => {
     try {
+      console.log('[Navbar] Changing language to:', lng);
       setIsLanguageLoading(true);
+      
+      // Сохраняем выбранный язык в localStorage перед изменением
+      localStorage.setItem('i18nextLng', lng);
+      
       await i18n.changeLanguage(lng);
+      console.log('[Navbar] Language changed successfully to:', lng);
+      
       setIsLanguageMenuOpen(false);
       handleMobileMenuClose();
       
-      // Сохраняем выбранный язык в localStorage
-      localStorage.setItem('i18nextLng', lng);
-      
-      // Перезагружаем страницу
+      // Перезагружаем страницу для применения изменений
       window.location.reload();
     } catch (error) {
-      console.error('Failed to load language:', error);
+      console.error('[Navbar] Failed to change language:', error);
       setIsLanguageLoading(false);
     }
   };

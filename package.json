@@ -24,6 +24,7 @@
     "@auth/express": "^0.9.0",
     "@emotion/react": "^11.14.0",
     "@emotion/styled": "^11.14.0",
+    "@google-cloud/translate": "^9.0.1",
     "@mui/icons-material": "^7.0.1",
     "@mui/material": "^7.0.1",
     "@prisma/client": "^6.5.0",
@@ -31,6 +32,7 @@
     "@types/nodemailer": "^6.4.17",
     "@types/passport": "^1.0.17",
     "@types/passport-google-oauth20": "^2.0.16",
+    "@vitalets/google-translate-api": "^9.2.1",
     "axios": "^1.8.4",
     "bcrypt": "^5.1.1",
     "connect-redis": "^8.0.2",
@@ -60,6 +62,7 @@
     "react-router-dom": "^7.4.1",
     "react-spinners": "^0.17.0",
     "redis": "^4.7.0",
+    "translate-google": "^1.5.0",
     "zustand": "^5.0.3"
   },
   "devDependencies": {

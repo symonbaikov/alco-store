@@ -13,6 +13,7 @@ import resetPasswordRoutes from "./routes/reset-password.route";
 import changePasswordRoutes from "./routes/change-password.route";
 import reviewsRouter from './routes/reviews.route';
 import categoryRoutes from "./routes/categories.route";
+import translateRouter from './routes/translate.route';
 import { authenticatedUser } from "./lib/lib";
 
 // Импортируем конфигурацию passport
@@ -79,6 +80,7 @@ app.use("/api/reset-password", resetPasswordRoutes);
 app.use("/api/change-password", changePasswordRoutes);
 app.use("/api/categories", categoryRoutes);
 app.use('/api/reviews', reviewsRouter);
+app.use('/api/translate', translateRouter);
 
 app.listen(port, () => {
   console.log(`🚀 Server is running on http://localhost:${port}`);
