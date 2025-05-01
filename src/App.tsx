@@ -10,6 +10,7 @@ import Contacts from "./pages/Contacts/Contacts";
 import ForgotPassword from "./components/Auth/ForgotPassword";
 import ResetPassword from "./components/Auth/ResetPassword";
 import ProfilePage from "./pages/Profile/ProfilePage";
+import { ReviewsPage } from "./pages/Reviews/ReviewsPage";
 import Footer from "./components/Footer/Footer";
 import { AuthProvider } from "./context/AuthContext";
 import { useAuthContext } from "./context/AuthContext";
@@ -119,6 +120,7 @@ const App: React.FC = () => {
             <Route path="/contacts" element={<Contacts />} />
             <Route path="/reset-password" element={<ResetPassword />} />
             <Route path="/profile" element={<ProfilePage />} />
+            <Route path="/reviews" element={<ReviewsPage />} />
             <Route path="/login" element={<Home />} />
             <Route path="/register" element={<Home />} />
           </Routes>

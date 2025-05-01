@@ -128,18 +128,7 @@ router.post('/', authenticatedUser, (req: MulterRequest, res: Response, next: Ne
 // GET /api/reviews - получение всех отзывов
 router.get('/', async (req: Request, res: Response, next: NextFunction) => {
   try {
-    const page = parseInt(req.query.page as string) || 1;
-    const limit = parseInt(req.query.limit as string) || 10;
-    const skip = (page - 1) * limit;
-
-    // Устанавливаем заголовки кэширования
-    res.setHeader('Cache-Control', 'public, max-age=300'); // 5 минут
-    res.setHeader('Content-Type', 'application/json');
-
-    // Получаем общее количество отзывов
-    const totalReviews = await prisma.review.count();
-
-    // Получаем отзывы с пагинацией
+    // Получаем отзывы
     const reviews = await prisma.review.findMany({
       select: {
         id: true,
@@ -152,20 +141,10 @@ router.get('/', async (req: Request, res: Response, next: NextFunction) => {
       },
       orderBy: {
         createdAt: 'desc'
-      },
-      skip,
-      take: limit
-    });
-
-    res.json({
-      reviews,
-      pagination: {
-        total: totalReviews,
-        pages: Math.ceil(totalReviews / limit),
-        currentPage: page,
-        perPage: limit
       }
     });
+
+    res.json(reviews);
   } catch (error) {
     console.error('Error fetching reviews:', error);
     res.status(500).json({ error: 'Failed to fetch reviews' });

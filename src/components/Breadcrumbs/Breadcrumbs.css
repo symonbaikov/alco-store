@@ -4,23 +4,98 @@
   font-size: 14px;
   display: flex;
   align-items: center;
+  flex-wrap: wrap;
+  gap: 8px;
+  background: white;
+  border-bottom: 1px solid #eee;
+  margin-bottom: 20px;
 }
 
 .breadcrumbs-link {
-  color: #999;
+  color: #666;
   text-decoration: none;
-  transition: color 0.2s;
+  transition: all 0.2s ease;
+  position: relative;
+  display: inline-flex;
+  align-items: center;
+  font-weight: 500;
 }
 
 .breadcrumbs-link:hover {
   color: #8b0000;
 }
 
+.breadcrumbs-link::after {
+  content: '';
+  position: absolute;
+  bottom: -2px;
+  left: 0;
+  width: 0;
+  height: 1px;
+  background-color: #8b0000;
+  transition: width 0.2s ease;
+}
+
+.breadcrumbs-link:hover::after {
+  width: 100%;
+}
+
 .breadcrumbs-text {
-  color: #999;
+  color: #666;
+  font-weight: 500;
 }
 
 .breadcrumbs-separator {
-  margin: 0 10px;
-  color: #999;
+  margin: 0 8px;
+  color: #ccc;
+  user-select: none;
+  font-weight: 300;
+}
+
+/* Иконка домашней страницы */
+.breadcrumbs-home {
+  color: #666;
+  display: flex;
+  align-items: center;
+  font-size: 16px;
+}
+
+.breadcrumbs-home svg {
+  width: 16px;
+  height: 16px;
+}
+
+/* Стили для мобильных устройств */
+@media (max-width: 768px) {
+  .breadcrumbs {
+    font-size: 13px;
+    padding: 12px 15px;
+    margin-bottom: 15px;
+  }
+  
+  .breadcrumbs-separator {
+    margin: 0 6px;
+  }
+
+  .breadcrumbs-home svg {
+    width: 14px;
+    height: 14px;
+  }
+}
+
+@media (max-width: 480px) {
+  .breadcrumbs {
+    font-size: 12px;
+    padding: 10px 12px;
+    margin-bottom: 10px;
+  }
+
+  .breadcrumbs-separator {
+    margin: 0 4px;
+  }
+
+  .breadcrumbs-home svg {
+    width: 12px;
+    height: 12px;
+  }
 } 

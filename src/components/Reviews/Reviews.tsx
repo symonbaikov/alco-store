@@ -9,6 +9,7 @@ import { ReviewForm } from "./ReviewForm";
 import toast from 'react-hot-toast';
 import { useAuthContext } from "../../context/AuthContext";
 import "./Reviews.css"; // Make sure to add styles for the new elements here
+import { Link } from "react-router-dom";
 
 export const Reviews: React.FC = () => {
   const { t } = useTranslation();
@@ -178,9 +179,9 @@ export const Reviews: React.FC = () => {
                 <ChatIcon className="chat-icon-btn" />
                 {t("reviews.leaveReview")}
               </button>
-              <a href="/reviews" className="all-reviews-link">
+              <Link to="/reviews" className="all-reviews-link">
                 {t("reviews.allReviews")}
-              </a>
+              </Link>
             </div>
           </div>
 
