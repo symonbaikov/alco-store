@@ -1,5 +1,5 @@
 import { Router } from "express";
-import { getSlides } from "../controllers/slideController.ts";
+import { getSlides } from "../controllers/slideController";
 
 const router = Router();
 

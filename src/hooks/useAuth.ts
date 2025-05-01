@@ -15,12 +15,17 @@ export function useAuth() {
     try {
       const res = await fetch("http://localhost:3001/api/auth/profile", {
         credentials: "include",
+        headers: {
+          'Accept': 'application/json',
+          'Content-Type': 'application/json'
+        }
       });
       if (res.ok) {
         const data = await res.json();
         console.log('Fetched user data:', data);
         setUser(data.user);
       } else {
+        console.log('Failed to fetch user data:', res.status);
         setUser(null);
       }
     } catch (err) {
@@ -40,6 +45,10 @@ export function useAuth() {
       await fetch("http://localhost:3001/api/auth/logout", {
         method: "POST",
         credentials: "include",
+        headers: {
+          'Accept': 'application/json',
+          'Content-Type': 'application/json'
+        }
       });
       setUser(null);
     } catch (err) {

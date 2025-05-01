@@ -6,42 +6,99 @@ import ChatIcon from "@mui/icons-material/ChatOutlined";
 import { Loader } from "lucide-react";
 import Modal from "../Modal/Modal.tsx";
 import { ReviewForm } from "./ReviewForm";
+import toast from 'react-hot-toast';
+import { useAuthContext } from "../../context/AuthContext";
 import "./Reviews.css"; // Make sure to add styles for the new elements here
 
 export const Reviews: React.FC = () => {
   const { t } = useTranslation();
   const [currentReview, setCurrentReview] = useState(0);
-  const { reviews, loading, error } = useReviews();
+  const { reviews, loading, error, fetchReviews } = useReviews();
   const [isReviewModalOpen, setIsReviewModalOpen] = useState(false);
+  const { isLoggedIn, user } = useAuthContext();
 
-  const openReviewModal = () => setIsReviewModalOpen(true);
+  const openReviewModal = () => {
+    if (!isLoggedIn) {
+      // Сохраняем состояние модального окна в localStorage
+      localStorage.setItem('pendingReview', 'true');
+      // Открываем модальное окно авторизации
+      window.dispatchEvent(new CustomEvent('openAuth'));
+      return;
+    }
+    setIsReviewModalOpen(true);
+  };
+
   const closeReviewModal = () => setIsReviewModalOpen(false);
+
+  // Проверяем наличие сохраненного отзыва при монтировании компонента
+  React.useEffect(() => {
+    const pendingReview = localStorage.getItem('pendingReview');
+    if (pendingReview === 'true' && isLoggedIn) {
+      setIsReviewModalOpen(true);
+      localStorage.removeItem('pendingReview');
+    }
+  }, [isLoggedIn]);
+
+  // Добавляем эффект для отслеживания данных пользователя
+  React.useEffect(() => {
+    if (isReviewModalOpen) {
+      console.log('Opening review modal with user data:', user);
+    }
+  }, [isReviewModalOpen, user]);
 
   const handleReviewSubmit = async (formData: {
     name: string;
     email: string;
     message: string;
     file: File | null;
+    rating: number;
   }) => {
-    // Логика отправки отзыва
-    console.log("Отзыв отправляется с данными:", formData);
+    try {
+      const loadingToast = toast.loading(t('reviews.submitting'));
 
-    // --- Placeholder for actual API call ---
-    // const formDataObj = new FormData();
-    // formDataObj.append('name', formData.name);
-    // formDataObj.append('email', formData.email);
-    // formDataObj.append('message', formData.message);
-    // if (formData.file) {
-    //   formDataObj.append('attachment', formData.file);
-    // }
-    // try {
-    //   // await submitReviewApi(formDataObj);
-    //   alert(t('reviews.submitSuccess'));
-    closeReviewModal();
-    // } catch (apiError) {
-    //   console.error("Failed to submit review:", apiError);
-    //   alert(t('reviews.submitError'));
-    // }
+      // Создаем FormData для отправки файла
+      const form = new FormData();
+      form.append('name', formData.name.trim());
+      form.append('email', formData.email.trim());
+      form.append('message', formData.message.trim());
+      form.append('rating', formData.rating.toString());
+      if (formData.file) {
+        form.append('file', formData.file);
+      }
+
+      const response = await fetch('http://localhost:3001/api/reviews', {
+        method: 'POST',
+        credentials: 'include',
+        body: form // Отправляем FormData вместо JSON
+      });
+
+      const contentType = response.headers.get("content-type");
+      if (!contentType || !contentType.includes("application/json")) {
+        throw new Error("Ответ сервера не в формате JSON");
+      }
+
+      const result = await response.json();
+      
+      if (!response.ok) {
+        throw new Error(result.error || `Ошибка HTTP: ${response.status}`);
+      }
+
+      console.log('Ответ сервера:', result);
+      
+      closeReviewModal();
+      
+      toast.success(t('reviews.submitSuccess'), {
+        id: loadingToast,
+        duration: 3000
+      });
+      
+      await fetchReviews();
+    } catch (error) {
+      console.error("Ошибка при отправке отзыва:", error);
+      toast.error(t('reviews.submitError'), {
+        duration: 4000
+      });
+    }
   };
 
   const renderStars = (rating: number) => {
@@ -110,7 +167,7 @@ export const Reviews: React.FC = () => {
 
   return (
     <>
-      <section className="reviews-section">
+      <section id="reviews" className="reviews-section">
         <div className="container">
           <div className="reviews-header">
             <h2 className="reviews-title">{t("reviews.title")}</h2>
@@ -169,7 +226,11 @@ export const Reviews: React.FC = () => {
       </section>
 
       <Modal isOpen={isReviewModalOpen} onClose={closeReviewModal}>
-        <ReviewForm onSubmit={handleReviewSubmit} onClose={closeReviewModal} />
+        <ReviewForm 
+          onSubmit={handleReviewSubmit} 
+          onClose={closeReviewModal}
+          userData={user}
+        />
       </Modal>
     </>
   );

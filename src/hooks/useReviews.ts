@@ -20,7 +20,13 @@ export function useReviews() {
     try {
       setLoading(true);
       
-      const response = await fetch('http://localhost:3001/api/reviews');
+      const response = await fetch('http://localhost:3001/api/reviews', {
+        credentials: 'include',
+        headers: {
+          'Accept': 'application/json',
+          'Content-Type': 'application/json'
+        }
+      });
       
       if (!response.ok) {
         throw new Error(`HTTP error! status: ${response.status}`);

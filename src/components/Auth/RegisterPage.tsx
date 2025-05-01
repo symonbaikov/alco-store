@@ -1,8 +1,9 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import Modal from "../Modal/Modal";
-import toast, { Toaster } from 'react-hot-toast';
+import toast from 'react-hot-toast';
 import GoogleIcon from "../Icons/GoogleIcon";
 import { useTranslation } from 'react-i18next';
+import { useAuthContext } from "../../context/AuthContext";
 import "./AuthPage.css";
 
 interface Props {
@@ -45,6 +46,7 @@ const RegisterPage: React.FC<Props> = ({ isOpen, onClose, onLoginClick }) => {
   const [showVerificationModal, setShowVerificationModal] = useState(false);
   const [tempHashedPassword, setTempHashedPassword] = useState("");
   const { t } = useTranslation();
+  const { refetch } = useAuthContext();
 
   const handleRegister = async (e: React.FormEvent) => {
     e.preventDefault();
@@ -69,14 +71,14 @@ const RegisterPage: React.FC<Props> = ({ isOpen, onClose, onLoginClick }) => {
         body: JSON.stringify({ email, password }),
       });
 
+      const data = await res.json();
+
       if (res.ok) {
-        const data = await res.json();
         setTempHashedPassword(data.hashedPassword);
-        setShowVerificationModal(true);
         toast.success(t('register.verificationSent'));
+        setShowVerificationModal(true);
       } else {
-        const err = await res.json();
-        toast.error(t('register.registrationError') + ": " + err.error);
+        toast.error(t('register.registrationError') + ": " + data.error);
       }
     } catch (error) {
       toast.error(t('register.registrationError'));
@@ -99,9 +101,20 @@ const RegisterPage: React.FC<Props> = ({ isOpen, onClose, onLoginClick }) => {
       });
 
       if (res.ok) {
+        await refetch();
         toast.success(t('register.registrationSuccess'));
         setShowVerificationModal(false);
         onClose();
+        
+        // Проверяем, есть ли отложенный отзыв
+        const pendingReview = localStorage.getItem('pendingReview');
+        if (pendingReview === 'true') {
+          // Если есть отложенный отзыв, оставляем его в localStorage
+          // Он будет обработан в компоненте Reviews
+        } else {
+          // Если нет отложенного отзыва, очищаем localStorage
+          localStorage.removeItem('pendingReview');
+        }
       } else {
         const err = await res.json();
         toast.error(t('register.verificationError') + ": " + err.error);
@@ -117,7 +130,6 @@ const RegisterPage: React.FC<Props> = ({ isOpen, onClose, onLoginClick }) => {
 
   return (
     <>
-      <Toaster position="top-center" />
       <Modal isOpen={isOpen && !showVerificationModal} onClose={onClose}>
         <div className="auth">
           <div className="auth-header">

@@ -1,23 +1,8 @@
-import express from "express";
+import express from 'express';
 import bcrypt from "bcrypt";
 import { PrismaClient } from "@prisma/client";
 import passport from "passport";
-import { Session } from "express-session";
-
-// Расширяем типы для Express.Session
-declare module 'express-session' {
-  interface SessionData {
-    user?: {
-      id: string;
-      email: string;
-      googleId?: string;
-    };
-  }
-}
-
-interface TypedRequestBody<T> extends Request {
-  body: T;
-}
+import { SessionUser } from "../../types/session";
 
 interface LoginBody {
   email: string;
@@ -34,45 +19,50 @@ interface UpdateNameBody {
 
 const prisma = new PrismaClient();
 const router = express.Router();
-type RequestHandler = express.RequestHandler;
-type Request = express.Request;
-type Response = express.Response;
 
-// Получение данных текущего пользователя
-const profileHandler: RequestHandler = async (req, res) => {
+const asyncHandler = (fn: Function) => (
+  req: express.Request,
+  res: express.Response,
+  next: express.NextFunction
+) => Promise.resolve(fn(req, res, next)).catch(next);
+
+const profileHandler = asyncHandler(async (req: express.Request, res: express.Response) => {
+  console.log('Profile request - session:', req.session);
+  
   if (!req.session.user) {
+    console.log('Profile request - no user in session');
     res.status(401).json({ message: "auth.invalidCredentials" });
     return;
   }
 
-  try {
-    const user = await prisma.user.findUnique({
-      where: { id: req.session.user.id },
-      select: {
-        id: true,
-        email: true,
-        googleId: true,
-        firstName: true,
-        lastName: true,
-        role: true
-      }
-    });
-
-    if (!user) {
-      res.status(404).json({ message: "User not found" });
-      return;
+  const user = await prisma.user.findUnique({
+    where: { id: req.session.user.id },
+    select: {
+      id: true,
+      email: true,
+      googleId: true,
+      firstName: true,
+      lastName: true,
+      role: true
     }
+  });
 
-    console.log('Profile request - database user:', user);
-    res.json({ user });
-  } catch (error) {
-    console.error('Error fetching user profile:', error);
-    res.status(500).json({ message: "Error fetching profile" });
+  if (!user) {
+    console.log('Profile request - user not found in database');
+    res.status(404).json({ message: "User not found" });
+    return;
   }
-};
+
+  console.log('Profile request - database user:', user);
+  res.json({ user });
+});
 
 // Вход в аккаунт
-const loginHandler: RequestHandler = async (req, res) => {
+const loginHandler = async (
+  req: express.Request,
+  res: express.Response,
+  next: express.NextFunction
+) => {
   try {
     const { email, password } = req.body as LoginBody;
 
@@ -109,7 +99,7 @@ const loginHandler: RequestHandler = async (req, res) => {
     req.session.user = { 
       id: user.id, 
       email: user.email,
-      googleId: user.googleId 
+      googleId: user.googleId ?? undefined
     };
     
     res.json({ message: "auth.success", user: { email: user.email } });
@@ -120,7 +110,11 @@ const loginHandler: RequestHandler = async (req, res) => {
 };
 
 // Регистрация
-const registerHandler: RequestHandler = async (req, res) => {
+const registerHandler = async (
+  req: express.Request,
+  res: express.Response,
+  next: express.NextFunction
+) => {
   const { email, password } = req.body as RegisterBody;
 
   if (!email || !password) {
@@ -148,7 +142,11 @@ const registerHandler: RequestHandler = async (req, res) => {
 };
 
 // Выход из системы
-const logoutHandler: RequestHandler = (req, res) => {
+const logoutHandler = (
+  req: express.Request,
+  res: express.Response,
+  next: express.NextFunction
+) => {
   req.session.destroy((err) => {
     if (err) {
       return res.status(500).json({ message: "auth.somethingWentWrong" });
@@ -158,7 +156,11 @@ const logoutHandler: RequestHandler = (req, res) => {
 };
 
 // Обновление имени пользователя
-const updateNameHandler: RequestHandler = async (req, res) => {
+const updateNameHandler = async (
+  req: express.Request,
+  res: express.Response,
+  next: express.NextFunction
+) => {
   if (!req.session.user) {
     res.status(401).json({ message: "auth.unauthorized" });
     return;
@@ -182,8 +184,8 @@ const updateNameHandler: RequestHandler = async (req, res) => {
     // Обновляем данные в сессии
     req.session.user = {
       ...req.session.user,
-      firstName: updatedUser.firstName,
-      lastName: updatedUser.lastName
+      firstName: updatedUser.firstName ?? undefined,
+      lastName: updatedUser.lastName ?? undefined
     };
 
     res.json({ user: updatedUser });
@@ -194,8 +196,8 @@ const updateNameHandler: RequestHandler = async (req, res) => {
 };
 
 router.get("/profile", profileHandler);
-router.post("/login", loginHandler);
-router.post("/register", registerHandler);
+router.post("/login", asyncHandler(loginHandler));
+router.post("/register", asyncHandler(registerHandler));
 
 // Google OAuth маршруты
 router.get(
@@ -210,6 +212,9 @@ router.get(
   passport.authenticate("google", { failureRedirect: "/login" }),
   (req: any, res) => {
     // После успешной аутентификации через Google
+    console.log('Google callback - req.user:', req.user);
+    console.log('Google callback - req.session before:', req.session);
+    
     if (req.user) {
       console.log('Google auth callback - user data:', req.user);
       // Устанавливаем пользователя в сессию
@@ -217,24 +222,29 @@ router.get(
         id: req.user.id,
         email: req.user.email,
         googleId: req.user.googleId,
-        firstName: req.user.firstName,
-        lastName: req.user.lastName
+        firstName: req.user.firstName || '',
+        lastName: req.user.lastName || ''
       };
+      
+      console.log('Google callback - req.session after:', req.session);
+      
       req.session.save((err) => {
         if (err) {
           console.error('Ошибка сохранения сессии:', err);
           res.redirect("http://localhost:5173?auth=error");
         } else {
+          console.log('Session saved successfully');
           res.redirect("http://localhost:5173?auth=success");
         }
       });
     } else {
+      console.log('No user data in request');
       res.redirect("http://localhost:5173?auth=error");
     }
   }
 );
 
 router.post("/logout", logoutHandler);
-router.post("/update-name", updateNameHandler);
+router.post("/update-name", asyncHandler(updateNameHandler));
 
 export default router;

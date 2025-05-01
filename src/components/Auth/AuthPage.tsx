@@ -5,6 +5,7 @@ import GoogleIcon from "../Icons/GoogleIcon";
 import toast, { Toaster } from 'react-hot-toast';
 import { useTranslation } from 'react-i18next';
 import { useAuthContext } from "../../context/AuthContext";
+import authService from "../../services/auth.service";
 import "./AuthPage.css";
 
 interface AuthPageProps {
@@ -25,39 +26,25 @@ const AuthPage: React.FC<AuthPageProps> = ({
   const { t } = useTranslation();
   const { refetch } = useAuthContext();
 
-  const handleLogin = async (e: React.FormEvent) => {
+  const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
     
-    // Валидация на клиенте
     if (!email || !password) {
-      toast.error(t('auth.allFieldsRequired'));
+      toast.error(t('auth.fillAllFields'));
       return;
     }
 
-    try {
-      const res = await fetch("http://localhost:3001/api/auth/login", {
-        method: "POST",
-        credentials: "include",
-        headers: {
-          "Content-Type": "application/json",
-        },
-        body: JSON.stringify({ email, password }),
-      });
+    const result = await authService.login(email, password);
 
-      const data = await res.json();
-
-      if (res.ok) {
-        console.log("✅ Вход успешен:", data);
-        await refetch();
-        toast.success(t('auth.success'));
-        onClose();
-      } else {
-        console.error("Ошибка входа:", data);
-        toast.error(t(data.message) || t('auth.somethingWentWrong'));
+    if (result) {
+      await refetch();
+      onClose();
+      
+      // Проверяем, есть ли отложенный отзыв
+      const pendingReview = localStorage.getItem('pendingReview');
+      if (pendingReview === 'true') {
+        localStorage.removeItem('pendingReview');
       }
-    } catch (err) {
-      console.error("Login error:", err);
-      toast.error(t('auth.somethingWentWrong'));
     }
   };
 
@@ -65,30 +52,28 @@ const AuthPage: React.FC<AuthPageProps> = ({
     window.location.href = 'http://localhost:3001/api/auth/google';
   };
 
-  // Добавляем обработку параметров URL для Google Auth
-  React.useEffect(() => {
-    const params = new URLSearchParams(window.location.search);
-    const authStatus = params.get('auth');
-    
-    if (authStatus === 'error') {
-      toast.error(t('auth.googleError'));
+  const handleClose = () => {
+    onClose();
+    const pendingReview = localStorage.getItem('pendingReview');
+    if (pendingReview === 'true') {
+      localStorage.removeItem('pendingReview');
     }
-  }, [t]);
+  };
 
   return (
     <>
       <Toaster position="top-center" />
-      <Modal isOpen={isOpen} onClose={onClose}>
+      <Modal isOpen={isOpen} onClose={handleClose}>
         <div className="auth">
           <div className="auth-header">
             <h2 className="auth-title">{t('auth.title')}</h2>
-            <button className="close-button" onClick={onClose}>
+            <button className="close-button" onClick={handleClose}>
               &times;
             </button>
           </div>
 
           <div className="auth-body">
-            <form className="auth-form" onSubmit={handleLogin}>
+            <form className="auth-form" onSubmit={handleSubmit}>
               <div className="form-group">
                 <input
                   type="text"
@@ -145,5 +130,6 @@ const AuthPage: React.FC<AuthPageProps> = ({
     </>
   );
 };
+
 export default AuthPage;
 

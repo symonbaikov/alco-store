@@ -270,9 +270,17 @@
       "fileUpload": "Choose a file",
       "noFileChosen": "No file chosen",
       "errors": {
-        "ratingRequired": "Please select a rating"
+        "ratingRequired": "Please select a rating",
+        "nameRequired": "Please enter your name",
+        "emailRequired": "Please enter your email",
+        "emailInvalid": "Please enter a valid email address",
+        "messageRequired": "Please write your review"
       }
     },
+    "submitting": "Submitting review...",
+    "submitSuccess": "Thank you! Your review has been successfully submitted",
+    "submitError": "An error occurred while submitting your review. Please try again later",
+    "authRequired": "Please log in to leave a review",
     "texts": {
       "review1": "I am very satisfied with the store's cooperation! They contacted me quickly, clarified everything. I received the order the next day. The packaging is perfect. Success and prosperity.",
       "review2": "Great service and quality products! Fast delivery and excellent customer support.",

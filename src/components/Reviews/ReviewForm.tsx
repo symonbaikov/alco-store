@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { useTranslation } from "react-i18next";
 import CloseIcon from "@mui/icons-material/Close";
 import StarIcon from "@mui/icons-material/Star";
@@ -13,9 +13,16 @@ interface ReviewFormProps {
     rating: number;
   }) => void;
   onClose: () => void;
+  userData: {
+    firstName?: string;
+    lastName?: string;
+    email: string;
+    role?: string;
+    googleId?: string;
+  } | null;
 }
 
-export const ReviewForm: React.FC<ReviewFormProps> = ({ onSubmit, onClose }) => {
+export const ReviewForm: React.FC<ReviewFormProps> = ({ onSubmit, onClose, userData }) => {
   const { t } = useTranslation();
   const [reviewerName, setReviewerName] = useState("");
   const [reviewerEmail, setReviewerEmail] = useState("");
@@ -25,7 +32,56 @@ export const ReviewForm: React.FC<ReviewFormProps> = ({ onSubmit, onClose }) => 
   const [hoveredRating, setHoveredRating] = useState(0);
   const [errors, setErrors] = useState<{
     rating?: string;
+    name?: string;
+    email?: string;
+    message?: string;
   }>({});
+
+  // Инициализация формы при монтировании или изменении userData
+  useEffect(() => {
+    if (userData) {
+      const fullName = [userData.firstName, userData.lastName]
+        .filter(Boolean)
+        .join(' ')
+        .trim();
+      setReviewerName(fullName);
+      setReviewerEmail(userData.email);
+    }
+  }, [userData]);
+
+  // Очистка формы при закрытии
+  const handleClose = () => {
+    setReviewerName("");
+    setReviewerEmail("");
+    setReviewMessage("");
+    setReviewFile(null);
+    setRating(0);
+    setErrors({});
+    onClose();
+  };
+
+  // Восстанавливаем данные формы из localStorage при монтировании
+  useEffect(() => {
+    if (userData) {
+      const fullName = [userData.firstName, userData.lastName]
+        .filter(Boolean)
+        .join(' ')
+        .trim();
+      setReviewerName(fullName);
+      setReviewerEmail(userData.email);
+    }
+  }, [userData]);
+
+  // Сохраняем данные формы в localStorage при изменении
+  useEffect(() => {
+    const formData = {
+      name: reviewerName,
+      email: reviewerEmail,
+      message: reviewMessage,
+      rating
+    };
+    localStorage.setItem('reviewFormData', JSON.stringify(formData));
+  }, [reviewerName, reviewerEmail, reviewMessage, rating]);
 
   const handleFileChange = (event: React.ChangeEvent<HTMLInputElement>) => {
     if (event.target.files && event.target.files[0]) {
@@ -38,7 +94,27 @@ export const ReviewForm: React.FC<ReviewFormProps> = ({ onSubmit, onClose }) => 
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
     
-    const newErrors: { rating?: string } = {};
+    const newErrors: { 
+      rating?: string;
+      name?: string;
+      email?: string;
+      message?: string;
+    } = {};
+    
+    // Проверяем все обязательные поля
+    if (!reviewerName.trim()) {
+      newErrors.name = t("reviews.form.errors.nameRequired");
+    }
+    
+    if (!reviewerEmail.trim()) {
+      newErrors.email = t("reviews.form.errors.emailRequired");
+    } else if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(reviewerEmail)) {
+      newErrors.email = t("reviews.form.errors.emailInvalid");
+    }
+    
+    if (!reviewMessage.trim()) {
+      newErrors.message = t("reviews.form.errors.messageRequired");
+    }
     
     if (rating === 0) {
       newErrors.rating = t("reviews.form.errors.ratingRequired");
@@ -49,13 +125,17 @@ export const ReviewForm: React.FC<ReviewFormProps> = ({ onSubmit, onClose }) => 
       return;
     }
 
+    // Отправляем только нужные данные
     onSubmit({
-      name: reviewerName,
-      email: reviewerEmail,
-      message: reviewMessage,
+      name: reviewerName.trim(),
+      email: reviewerEmail.trim(),
+      message: reviewMessage.trim(),
       file: reviewFile,
       rating,
     });
+
+    // Очищаем localStorage после успешной отправки
+    localStorage.removeItem('reviewFormData');
 
     // Reset form
     setReviewerName("");
@@ -93,7 +173,7 @@ export const ReviewForm: React.FC<ReviewFormProps> = ({ onSubmit, onClose }) => 
       <button
         type="button"
         className="modal-close-button"
-        onClick={onClose}
+        onClick={handleClose}
         aria-label={t("common.close")}
       >
         <CloseIcon />
@@ -112,6 +192,7 @@ export const ReviewForm: React.FC<ReviewFormProps> = ({ onSubmit, onClose }) => 
           onChange={(e) => setReviewerName(e.target.value)}
           required
         />
+        {errors.name && <div className="error-message">{errors.name}</div>}
       </div>
 
       <div className="form-group">
@@ -125,6 +206,7 @@ export const ReviewForm: React.FC<ReviewFormProps> = ({ onSubmit, onClose }) => 
           onChange={(e) => setReviewerEmail(e.target.value)}
           required
         />
+        {errors.email && <div className="error-message">{errors.email}</div>}
       </div>
 
       <div className="form-group rating-group">
@@ -146,6 +228,7 @@ export const ReviewForm: React.FC<ReviewFormProps> = ({ onSubmit, onClose }) => 
           required
           rows={5}
         />
+        {errors.message && <div className="error-message">{errors.message}</div>}
       </div>
 
       <div className="form-group">
@@ -174,7 +257,7 @@ export const ReviewForm: React.FC<ReviewFormProps> = ({ onSubmit, onClose }) => 
         <button type="submit" className="submit-btn">
           {t("reviews.form.submit")}
         </button>
-        <button type="button" className="cancel-btn" onClick={onClose}>
+        <button type="button" className="cancel-btn" onClick={handleClose}>
           {t("reviews.form.cancel")}
         </button>
       </div>
