@@ -3,6 +3,7 @@ import { useTranslation } from "react-i18next";
 import CloseIcon from "@mui/icons-material/Close";
 import StarIcon from "@mui/icons-material/Star";
 import StarBorderIcon from "@mui/icons-material/StarBorder";
+import AttachFileIcon from "@mui/icons-material/AttachFile";
 
 interface ReviewFormProps {
   onSubmit: (formData: {
@@ -235,6 +236,7 @@ export const ReviewForm: React.FC<ReviewFormProps> = ({ onSubmit, onClose, userD
         <label>{t("reviews.form.attachPhoto")}</label>
         <span className="optional-label">{t("reviews.form.photoOptional")}</span>
         <label className="file-upload-label" htmlFor="reviewFile">
+          <AttachFileIcon className="attach-icon" />
           {t("reviews.form.fileUpload")}
         </label>
         <input

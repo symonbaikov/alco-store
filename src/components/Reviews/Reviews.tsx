@@ -1,5 +1,5 @@
 // /Users/symonbaikov/Projects/alco-store/src/components/Reviews/Reviews.tsx
-import React, { useState } from "react";
+import React, { useState, useCallback } from "react";
 import { useTranslation } from "react-i18next";
 import { useReviews } from "../../hooks/useReviews";
 import ChatIcon from "@mui/icons-material/ChatOutlined";
@@ -16,6 +16,7 @@ export const Reviews: React.FC = () => {
   const { reviews, loading, error, fetchReviews } = useReviews();
   const [isReviewModalOpen, setIsReviewModalOpen] = useState(false);
   const { isLoggedIn, user } = useAuthContext();
+  const [currentPage, setCurrentPage] = useState(1);
 
   const openReviewModal = () => {
     if (!isLoggedIn) {
@@ -72,18 +73,16 @@ export const Reviews: React.FC = () => {
         body: form // Отправляем FormData вместо JSON
       });
 
-      const contentType = response.headers.get("content-type");
-      if (!contentType || !contentType.includes("application/json")) {
-        throw new Error("Ответ сервера не в формате JSON");
-      }
-
-      const result = await response.json();
-      
       if (!response.ok) {
-        throw new Error(result.error || `Ошибка HTTP: ${response.status}`);
+        const contentType = response.headers.get("content-type");
+        if (contentType && contentType.includes("application/json")) {
+          const errorData = await response.json();
+          throw new Error(errorData.error || `HTTP error: ${response.status}`);
+        }
+        throw new Error(`HTTP error: ${response.status}`);
       }
 
-      console.log('Ответ сервера:', result);
+      console.log('Ответ сервера:', response);
       
       closeReviewModal();
       
@@ -115,7 +114,7 @@ export const Reviews: React.FC = () => {
       <section className="reviews-section">
         <div className="container">
           <div className="loading">
-            <Loader />
+            <Loader className="animate-spin" />
           </div>
         </div>
       </section>

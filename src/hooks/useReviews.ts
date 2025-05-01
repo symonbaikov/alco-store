@@ -1,4 +1,4 @@
-import { useState, useEffect } from 'react';
+import { useState, useEffect, useCallback } from 'react';
 import { useTranslation } from 'react-i18next';
 
 interface Review {
@@ -11,111 +11,109 @@ interface Review {
   createdAt: string;
 }
 
+const CACHE_KEY = 'reviews_cache';
+const CACHE_DURATION = 5 * 60 * 1000; // 5 минут
+
+interface CacheData {
+  reviews: Review[];
+  timestamp: number;
+}
+
 export function useReviews() {
   const [reviews, setReviews] = useState<Review[]>([]);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState<string | null>(null);
   const { i18n } = useTranslation();
 
-  const translateReviewText = async (text: string, targetLang: string): Promise<string> => {
-    try {
-      const response = await fetch('http://localhost:3001/api/translate', {
-        method: 'POST',
-        headers: {
-          'Content-Type': 'application/json',
-        },
-        body: JSON.stringify({ text, targetLang }),
-      });
-
-      if (!response.ok) {
-        throw new Error('Translation failed');
-      }
-
-      const data = await response.json();
-      return data.translation;
-    } catch (error) {
-      console.error('Translation error:', error);
-      return text;
-    }
-  };
-
-  const getLocalizedText = async (review: Review): Promise<string> => {
-    // Если текст уже есть в нужном языке, используем его
+  const getLocalizedText = useCallback((review: Review): string => {
+    // Используем уже переведенный текст, если он есть
     if (i18n.language === 'en' && review.textEn) {
       return review.textEn;
     } else if (i18n.language === 'bg' && review.textBg) {
       return review.textBg;
     }
+    return review.text;
+  }, [i18n.language]);
 
-    // Если нет перевода, переводим на лету
-    return await translateReviewText(review.text, i18n.language);
-  };
+  const getCachedReviews = useCallback((): Review[] | null => {
+    const cached = localStorage.getItem(CACHE_KEY);
+    if (!cached) return null;
 
-  const fetchReviews = async () => {
-    let timeoutId: NodeJS.Timeout | undefined;
+    const { reviews, timestamp }: CacheData = JSON.parse(cached);
+    const isExpired = Date.now() - timestamp > CACHE_DURATION;
 
+    if (isExpired) {
+      localStorage.removeItem(CACHE_KEY);
+      return null;
+    }
+
+    return reviews;
+  }, []);
+
+  const setCachedReviews = useCallback((reviews: Review[]) => {
+    const cacheData: CacheData = {
+      reviews,
+      timestamp: Date.now()
+    };
+    localStorage.setItem(CACHE_KEY, JSON.stringify(cacheData));
+  }, []);
+
+  const fetchReviews = useCallback(async () => {
     try {
       setLoading(true);
-      
-      const timeoutPromise = new Promise((_, reject) => {
-        timeoutId = setTimeout(() => {
-          reject(new Error('Timeout: Failed to fetch reviews'));
-        }, 10000);
-      });
-      
-      const fetchPromise = fetch('http://localhost:3001/api/reviews', {
+
+      // Проверяем кэш
+      const cachedReviews = getCachedReviews();
+      if (cachedReviews) {
+        const localizedReviews = cachedReviews.map(review => ({
+          ...review,
+          text: getLocalizedText(review)
+        }));
+        setReviews(localizedReviews);
+        setLoading(false);
+        return;
+      }
+
+      const response = await fetch('http://localhost:3001/api/reviews', {
         credentials: 'include',
         headers: {
           'Accept': 'application/json',
           'Content-Type': 'application/json'
         }
       });
-      
-      const response = await Promise.race([fetchPromise, timeoutPromise]) as Response;
-      
+
       if (!response.ok) {
         throw new Error(`HTTP error! status: ${response.status}`);
       }
-      
+
       const data = await response.json();
-      
+
       if (!Array.isArray(data)) {
         throw new Error('Expected array of reviews');
       }
 
-      if (data.length === 0) {
-        setReviews([]);
-        setError(null);
-        return;
-      }
+      // Локализуем отзывы
+      const localizedReviews = data.map(review => ({
+        ...review,
+        text: getLocalizedText(review)
+      }));
 
-      // Переводим все отзывы на текущий язык
-      const translatedReviews = await Promise.all(
-        data.map(async (review: Review) => ({
-          ...review,
-          text: await getLocalizedText(review)
-        }))
-      );
-
-      setReviews(translatedReviews);
+      setReviews(localizedReviews);
+      setCachedReviews(data); // Кэшируем оригинальные данные
       setError(null);
     } catch (err) {
       console.error('[useReviews] Error:', err);
       setError(err instanceof Error ? err.message : 'Failed to fetch reviews');
       setReviews([]);
     } finally {
-      if (timeoutId) {
-        clearTimeout(timeoutId);
-      }
       setLoading(false);
     }
-  };
+  }, [getLocalizedText, getCachedReviews, setCachedReviews]);
 
   // Загружаем отзывы при монтировании и при изменении языка
   useEffect(() => {
-    console.log('[useReviews] Language changed to:', i18n.language);
     fetchReviews();
-  }, [i18n.language]);
+  }, [i18n.language, fetchReviews]);
 
   return { reviews, loading, error, fetchReviews };
 }

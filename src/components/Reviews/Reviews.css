@@ -499,7 +499,9 @@
   }
 
   .file-upload-label {
-    display: inline-block;
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
     padding: 10px 15px;
     background: #fff;
     border: 1px solid #e0e0e0;
@@ -512,6 +514,11 @@
 
   .file-upload-label:hover {
     background: #f5f5f5;
+  }
+
+  .file-upload-label .attach-icon {
+    font-size: 20px;
+    color: #666;
   }
 
   .file-name-display {
