@@ -1,5 +1,5 @@
 // /Users/symonbaikov/Projects/alco-store/src/components/Reviews/Reviews.tsx
-import React, { useState, useCallback } from "react";
+import React, { useState } from "react";
 import { useTranslation } from "react-i18next";
 import { useReviews } from "../../hooks/useReviews";
 import ChatIcon from "@mui/icons-material/ChatOutlined";
@@ -16,7 +16,6 @@ export const Reviews: React.FC = () => {
   const { reviews, loading, error, fetchReviews } = useReviews();
   const [isReviewModalOpen, setIsReviewModalOpen] = useState(false);
   const { isLoggedIn, user } = useAuthContext();
-  const [currentPage, setCurrentPage] = useState(1);
 
   const openReviewModal = () => {
     if (!isLoggedIn) {

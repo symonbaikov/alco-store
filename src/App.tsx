@@ -1,5 +1,5 @@
 import "./App.css";
-import React, { useEffect } from "react";
+import React, { useEffect, useRef } from "react";
 import { Routes, Route, useNavigate } from "react-router-dom";
 import Navbar from "./components/Navbar/Navbar";
 import Cart from "./components/Cart/Cart";
@@ -14,8 +14,7 @@ import Footer from "./components/Footer/Footer";
 import { AuthProvider } from "./context/AuthContext";
 import { useAuthContext } from "./context/AuthContext";
 import { useTranslation } from 'react-i18next';
-import toast, { Toaster } from 'react-hot-toast';
-import authService from "./services/auth.service";
+import toast from 'react-hot-toast';
 
 const App: React.FC = () => {
   const [isCartOpen, setIsCartOpen] = React.useState(false);
@@ -23,6 +22,7 @@ const App: React.FC = () => {
   const [isRegisterOpen, setIsRegisterOpen] = React.useState(false);
   const [isForgotPasswordOpen, setIsForgotPasswordOpen] = React.useState(false);
   const [isAuthInProgress, setIsAuthInProgress] = React.useState(false);
+  const authSuccessHandled = useRef(false);
   const navigate = useNavigate();
   const { refetch } = useAuthContext();
   const { t } = useTranslation();
@@ -52,7 +52,8 @@ const App: React.FC = () => {
     const params = new URLSearchParams(window.location.search);
     const authStatus = params.get('auth');
     
-    if (authStatus === 'success' && !isAuthInProgress) {
+    if (authStatus === 'success' && !isAuthInProgress && !authSuccessHandled.current) {
+      authSuccessHandled.current = true;
       setIsAuthInProgress(true);
       (async () => {
         await refetch();
@@ -73,8 +74,6 @@ const App: React.FC = () => {
         setIsAuthInProgress(false);
       })();
     } else if (authStatus === 'error') {
-      toast.error(t('auth.googleError'));
-      // Очищаем URL от параметров
       navigate('/', { replace: true });
     }
   }, [t, refetch, navigate, isAuthInProgress]);
@@ -108,7 +107,6 @@ const App: React.FC = () => {
   return (
     <AuthProvider>
       <div className="app">
-        <Toaster position="top-center" />
         <Navbar
           onCartClick={() => setIsCartOpen(true)}
           onAuthClick={() => setIsAuthOpen(true)}
