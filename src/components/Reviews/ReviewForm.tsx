@@ -1,9 +1,10 @@
 import React, { useState, useEffect } from "react";
 import { useTranslation } from "react-i18next";
-import CloseIcon from "@mui/icons-material/Close";
 import StarIcon from "@mui/icons-material/Star";
 import StarBorderIcon from "@mui/icons-material/StarBorder";
 import AttachFileIcon from "@mui/icons-material/AttachFile";
+import SendIcon from '@mui/icons-material/Send';
+import CancelIcon from '@mui/icons-material/Cancel';
 
 interface ReviewFormProps {
   onSubmit: (formData: {
@@ -170,20 +171,20 @@ export const ReviewForm: React.FC<ReviewFormProps> = ({ onSubmit, onClose, userD
   };
 
   return (
-    <form className="review-form" onSubmit={handleSubmit}>
-      <button
-        type="button"
-        className="modal-close-button"
-        onClick={handleClose}
-        aria-label={t("common.close")}
-      >
-        <CloseIcon />
-      </button>
-
-      <h2 className="modal-title">{t("reviews.leaveReview")}</h2>
-
+    <form className="review-form" onSubmit={handleSubmit} style={{borderRadius: 16, boxShadow: '0 4px 24px rgba(0,0,0,0.10)', background: '#fff', padding: 32, maxWidth: 500, margin: '0 auto'}}>
+      <div className="modal-header">
+        <h2 className="review-modal-title">{t("reviews.leaveReview")}</h2>
+        <button
+          type="button"
+          className="modal-close-button"
+          onClick={handleClose}
+          aria-label={t("common.close")}
+        >
+          <CancelIcon />
+        </button>
+      </div>
       <div className="form-group">
-        <label htmlFor="reviewerName">{t("reviews.form.name")}:</label>
+        <label htmlFor="reviewerName">{t("reviews.form.name")} <span style={{color:'#d32f2f'}}>*</span>:</label>
         <input
           type="text"
           id="reviewerName"
@@ -192,12 +193,12 @@ export const ReviewForm: React.FC<ReviewFormProps> = ({ onSubmit, onClose, userD
           value={reviewerName}
           onChange={(e) => setReviewerName(e.target.value)}
           required
+          className={errors.name ? 'input-error' : ''}
         />
         {errors.name && <div className="error-message">{errors.name}</div>}
       </div>
-
       <div className="form-group">
-        <label htmlFor="reviewerEmail">{t("reviews.form.email")}:</label>
+        <label htmlFor="reviewerEmail">{t("reviews.form.email")} <span style={{color:'#d32f2f'}}>*</span>:</label>
         <input
           type="email"
           id="reviewerEmail"
@@ -206,20 +207,19 @@ export const ReviewForm: React.FC<ReviewFormProps> = ({ onSubmit, onClose, userD
           value={reviewerEmail}
           onChange={(e) => setReviewerEmail(e.target.value)}
           required
+          className={errors.email ? 'input-error' : ''}
         />
         {errors.email && <div className="error-message">{errors.email}</div>}
       </div>
-
       <div className="form-group rating-group">
-        <label>{t("reviews.form.rating")}:</label>
+        <label>{t("reviews.form.rating")} <span style={{color:'#d32f2f'}}>*</span>:</label>
         <div className="stars-container">
           {renderStars()}
         </div>
         {errors.rating && <div className="error-message">{errors.rating}</div>}
       </div>
-
       <div className="form-group">
-        <label htmlFor="reviewMessage">{t("reviews.form.yourReview")}:</label>
+        <label htmlFor="reviewMessage">{t("reviews.form.yourReview")} <span style={{color:'#d32f2f'}}>*</span>:</label>
         <textarea
           id="reviewMessage"
           name="message"
@@ -228,10 +228,10 @@ export const ReviewForm: React.FC<ReviewFormProps> = ({ onSubmit, onClose, userD
           onChange={(e) => setReviewMessage(e.target.value)}
           required
           rows={5}
+          className={errors.message ? 'input-error' : ''}
         />
         {errors.message && <div className="error-message">{errors.message}</div>}
       </div>
-
       <div className="form-group">
         <label>{t("reviews.form.attachPhoto")}</label>
         <span className="optional-label">{t("reviews.form.photoOptional")}</span>
@@ -254,12 +254,13 @@ export const ReviewForm: React.FC<ReviewFormProps> = ({ onSubmit, onClose, userD
           </span>
         )}
       </div>
-
       <div className="form-actions">
-        <button type="submit" className="submit-btn">
+        <button type="submit" className="submit-btn" style={{display:'flex',alignItems:'center',gap:8}}>
+          <SendIcon style={{fontSize:20}} />
           {t("reviews.form.submit")}
         </button>
-        <button type="button" className="cancel-btn" onClick={handleClose}>
+        <button type="button" className="cancel-btn" onClick={handleClose} style={{display:'flex',alignItems:'center',gap:8}}>
+          <CancelIcon style={{fontSize:20}} />
           {t("reviews.form.cancel")}
         </button>
       </div>

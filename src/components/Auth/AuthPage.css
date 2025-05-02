@@ -318,50 +318,6 @@ form {
   background: #fff5f5;
 }
 
-@media (max-width: 480px) {
-  .modal-overlay {
-    background: white;
-    padding: 0;
-  }
-
-  .modal-content {
-    max-width: 100%;
-    height: 100vh;
-    display: flex;
-    flex-direction: column;
-  }
-
-  form {
-    flex: 1;
-    display: flex;
-    flex-direction: column;
-    justify-content: flex-start;
-    padding-top: 40px;
-  }
-
-  .modal-header {
-    padding: 15px;
-    position: fixed;
-    top: 0;
-    left: 0;
-    right: 0;
-    background: white;
-    z-index: 1;
-    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
-  }
-
-  .close-button {
-    padding: 10px;
-  }
-
-  .form-group input,
-  .submit-button,
-  .register-button,
-  .google-button {
-    height: 50px;
-  }
-}
-
 .auth {
   min-height: 300px;
   display: flex;

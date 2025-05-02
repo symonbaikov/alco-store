@@ -1,135 +1,135 @@
 .review-modal {
-  background: white;
-  border-radius: 8px;
-  padding: 40px;
-  width: 800px;
-  max-width: 90%;
-  position: fixed;
-  top: 50%;
-  left: 50%;
-  transform: translate(-50%, -50%);
-  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.15);
-  max-height: 90vh;
-  overflow-y: auto;
-}
-
-.review-modal-header {
-  position: relative;
-  margin-bottom: 30px;
-  padding-right: 40px;
-}
-
-.review-modal-author {
-  font-size: 28px;
-  color: #333;
-  margin: 0 0 12px 0;
-  font-weight: 500;
-}
-
-.review-modal-rating {
-  display: flex;
-  gap: 4px;
-  margin-bottom: 20px;
-}
-
-.review-modal-rating .star {
-  font-size: 24px;
-}
-
-.review-modal-rating .star.filled {
-  color: #ffd700;
-}
-
-.modal-close-button {
-  position: absolute;
-  top: 0;
-  right: 0;
-  background: transparent;
-  border: none;
-  cursor: pointer;
-  width: 32px;
-  height: 32px;
-  border-radius: 50%;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  color: #666;
-  transition: all 0.2s ease;
-  z-index: 10;
-  padding: 20px;
-  margin-top: 20px;
-  margin-right: 15px;
-}
-
-.modal-close-button:hover {
-  color: #8b0000;
-  transform: rotate(90deg);
-}
-
-.modal-close-button svg {
-  width: 24px;
-  height: 24px;
-}
-
-.review-modal-text {
-  font-size: 17px;
-  line-height: 1.8;
-  color: #444;
-  margin: 0;
-  padding: 20px 0;
-  white-space: pre-wrap;
-  border-top: 1px solid #eee;
-  border-bottom: 1px solid #eee;
-}
-
-.review-modal-date {
-  font-size: 14px;
-  color: #999;
-  text-align: right;
-  margin-top: 20px;
-}
-
-@media (max-width: 768px) {
-  .review-modal {
-    width: 95%;
-    padding: 30px;
-    margin: 20px;
+    background: white;
+    border-radius: 8px;
+    padding: 40px;
+    width: 800px;
+    max-width: 90%;
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.15);
+    max-height: 90vh;
+    overflow-y: auto;
   }
-
+  
+  .review-modal-header {
+    position: relative;
+    margin-bottom: 30px;
+    padding-right: 40px;
+  }
+  
   .review-modal-author {
-    font-size: 24px;
-    margin-bottom: 10px;
+    font-size: 28px;
+    color: #333;
+    margin: 0 0 12px 0;
+    font-weight: 500;
   }
-
+  
+  .review-modal-rating {
+    display: flex;
+    gap: 4px;
+    margin-bottom: 20px;
+  }
+  
   .review-modal-rating .star {
-    font-size: 22px;
+    font-size: 24px;
   }
-
+  
+  .review-modal-rating .star.filled {
+    color: #ffd700;
+  }
+  
   .modal-close-button {
-    top: -15px;
-    right: -15px;
-  }
-}
-
-@media (max-width: 480px) {
-  .review-modal {
-    width: 100%;
-    height: 100vh;
-    margin: 0;
-    border-radius: 0;
+    position: absolute;
+    top: 0;
+    right: 0;
+    background: transparent;
+    border: none;
+    cursor: pointer;
+    width: 32px;
+    height: 32px;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: #666;
+    transition: all 0.2s ease;
+    z-index: 10;
     padding: 20px;
+    margin-top: 20px;
+    margin-right: 15px;
   }
-
-  .review-modal-author {
-    font-size: 22px;
+  
+  .modal-close-button:hover {
+    color: #8b0000;
+    transform: rotate(90deg);
   }
-
+  
+  .modal-close-button svg {
+    width: 24px;
+    height: 24px;
+  }
+  
   .review-modal-text {
-    font-size: 15px;
-    line-height: 1.5;
+    font-size: 17px;
+    line-height: 1.8;
+    color: #444;
+    margin: 0;
+    padding: 20px 0;
+    white-space: pre-wrap;
+    border-top: 1px solid #eee;
+    border-bottom: 1px solid #eee;
   }
-
-  .modal-close-button {
-    padding: 15px;
+  
+  .review-modal-date {
+    font-size: 14px;
+    color: #999;
+    text-align: right;
+    margin-top: 20px;
   }
-} 
+  
+  @media (max-width: 768px) {
+    .review-modal {
+      width: 95%;
+      padding: 30px;
+      margin: 20px;
+    }
+  
+    .review-modal-author {
+      font-size: 24px;
+      margin-bottom: 10px;
+    }
+  
+    .review-modal-rating .star {
+      font-size: 22px;
+    }
+  
+    .modal-close-button {
+      top: -15px;
+      right: -15px;
+    }
+  }
+  
+  @media (max-width: 480px) {
+    .review-modal {
+      width: 100%;
+      height: 100vh;
+      margin: 0;
+      border-radius: 0;
+      padding: 20px;
+    }
+  
+    .review-modal-author {
+      font-size: 22px;
+    }
+  
+    .review-modal-text {
+      font-size: 15px;
+      line-height: 1.5;
+    }
+  
+    .modal-close-button {
+      padding: 15px;
+    }
+  } 

@@ -11,6 +11,7 @@ import Modal from '../../components/Modal/Modal';
 import { useAuthContext } from '../../context/AuthContext';
 import './ReviewsPage.css';
 import toast from 'react-hot-toast';
+import WarningAmberIcon from '@mui/icons-material/WarningAmber';
 
 interface Review {
   id: number;
@@ -202,14 +203,30 @@ export const ReviewsPage: React.FC = () => {
           review={selectedReview}
         />
         <Modal isOpen={deleteModalOpen} onClose={() => setDeleteModalOpen(false)}>
-          <div style={{padding: 24, minWidth: 300, textAlign: 'center'}}>
-            <p className="modal-confirm-text">{t('reviews.confirmDelete', 'Вы действительно хотите удалить отзыв из базы данных?')}</p>
-            <button onClick={handleDeleteConfirm} style={{marginRight: 16, background: '#8b0000', color: 'white', border: 'none', padding: '8px 20px', borderRadius: 4}}>
-              {t('common.yes', 'Да')}
-            </button>
-            <button onClick={() => setDeleteModalOpen(false)} style={{background: '#eee', color: '#333', border: 'none', padding: '8px 20px', borderRadius: 4}}>
-              {t('common.no', 'Нет')}
-            </button>
+          <div style={{padding: 32, minWidth: 320, textAlign: 'center', borderRadius: 12, background: '#fff', boxShadow: '0 4px 24px rgba(0,0,0,0.10)'}}>
+            <WarningAmberIcon style={{color: '#d32f2f', fontSize: 48, marginBottom: 12}} />
+            <p className="modal-confirm-text" style={{marginBottom: 32}}>
+              {t('reviews.confirmDelete', i18n.language === 'bg' ? 'Наистина ли искате да изтриете този отзив?' : 'Are you sure you want to delete this review?')}
+            </p>
+            <div style={{display: 'flex', justifyContent: 'center', gap: 16}}>
+              <button
+                onClick={handleDeleteConfirm}
+                style={{
+                  background: '#d32f2f', color: 'white', border: 'none', padding: '12px 32px', borderRadius: 6, fontWeight: 600, fontSize: 16, display: 'flex', alignItems: 'center', gap: 8, boxShadow: '0 2px 8px rgba(211,47,47,0.08)', transition: 'background 0.2s', cursor: 'pointer'
+                }}
+              >
+                <DeleteOutlineIcon style={{fontSize: 22}} />
+                {i18n.language === 'bg' ? 'Да, изтрий' : 'Yes, delete'}
+              </button>
+              <button
+                onClick={() => setDeleteModalOpen(false)}
+                style={{
+                  background: '#f5f5f5', color: '#333', border: 'none', padding: '12px 32px', borderRadius: 6, fontWeight: 500, fontSize: 16, transition: 'background 0.2s', cursor: 'pointer'
+                }}
+              >
+                {i18n.language === 'bg' ? 'Не' : 'No'}
+              </button>
+            </div>
           </div>
         </Modal>
       </div>

@@ -617,3 +617,14 @@
     font-size: 12px;
     margin-left: 8px;
   }
+
+  .review-modal-title {
+    color: #000 !important;
+  }
+
+  @media (max-width: 430px) {
+    .review-form {
+      max-height: 100vh !important;
+      overflow-y: auto !important;
+    }
+  }

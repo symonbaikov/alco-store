@@ -1,4 +1,4 @@
-import { useState, useEffect } from 'react';
+import { useState, useEffect, useCallback } from 'react';
 import { useLocation } from 'react-router-dom';
 
 interface NavigationItem {
@@ -12,7 +12,10 @@ interface PathConfig {
 }
 
 export const useNavigationHistory = () => {
-  const [history, setHistory] = useState<NavigationItem[]>([]);
+  const [history, setHistory] = useState<NavigationItem[]>([{
+    path: '/',
+    label: 'navbar.home',
+  }]);
   const location = useLocation();
 
   // Конфигурация путей с указанием родительских разделов
@@ -51,36 +54,51 @@ export const useNavigationHistory = () => {
     '/strong/tequila': { label: 'categories.strong.tequila', parent: '/strong' }
   };
 
-  // Функция для получения полного пути навигации
-  const getFullPath = (path: string): NavigationItem[] => {
-    const result: NavigationItem[] = [];
-    let currentPath = path;
-
-    // Всегда добавляем главную страницу
-    result.unshift({ path: '/', label: pathConfig['/'].label });
-
-    while (currentPath && currentPath !== '/') {
-      const config = pathConfig[currentPath];
-      if (config) {
-        result.push({ path: currentPath, label: config.label });
-        currentPath = config.parent || '';
-      } else {
-        // Если путь не найден в конфигурации, добавляем его как есть
-        result.push({
-          path: currentPath,
-          label: currentPath.split('/').pop() || currentPath
-        });
-        break;
-      }
-    }
-
-    return result;
+  // Получить label для пути
+  const getLabel = (path: string): string => {
+    return pathConfig[path]?.label || path.split('/').pop() || path;
   };
 
+  // Добавлять в историю только уникальные переходы
   useEffect(() => {
-    const fullPath = getFullPath(location.pathname);
-    setHistory(fullPath);
-  }, [location]);
+    setHistory(prev => {
+      const existingIndex = prev.findIndex(item => item.path === location.pathname);
+      let newHistory;
+      if (existingIndex !== -1) {
+        newHistory = prev.slice(0, existingIndex + 1);
+      } else {
+        newHistory = [
+          ...prev,
+          {
+            path: location.pathname,
+            label: getLabel(location.pathname)
+          }
+        ];
+      }
+      // Ограничиваем историю пятью последними элементами
+      if (newHistory.length > 5) {
+        newHistory = newHistory.slice(newHistory.length - 5);
+      }
+      return newHistory;
+    });
+    // eslint-disable-next-line
+  }, [location.pathname]);
 
-  return history;
+  // Функция для перехода назад по крошкам
+  const goToBreadcrumb = useCallback((path: string) => {
+    setHistory(prev => {
+      const idx = prev.findIndex(item => item.path === path);
+      let newHistory = prev;
+      if (idx !== -1) {
+        newHistory = prev.slice(0, idx + 1);
+      }
+      // Ограничиваем историю пятью последними элементами
+      if (newHistory.length > 5) {
+        newHistory = newHistory.slice(newHistory.length - 5);
+      }
+      return newHistory;
+    });
+  }, []);
+
+  return [history, goToBreadcrumb] as const;
 }; 

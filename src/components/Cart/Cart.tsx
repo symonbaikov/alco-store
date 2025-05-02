@@ -20,8 +20,16 @@ const Cart: React.FC<CartProps> = ({ isOpen, onClose }) => {
 
         <div className="cart-body">
           <div className="cart-empty">
-            <div className="cart-empty-message">Корзина пуста</div>
-            <button className="cart-continue-button" onClick={onClose}>
+            <img
+              src="/images/box.png"
+              alt="Пустая корзина"
+              className="cart-empty-image"
+              style={{ width: 120, margin: '0 auto 16px', display: 'block', opacity: 0.85 }}
+            />
+            <div className="cart-empty-message" style={{ marginBottom: 12, color: '#666', fontSize: 18 }}>
+              Корзина пуста
+            </div>
+            <button className="cart-continue-button" onClick={onClose} style={{ color: '#8b0000', textDecoration: 'underline', fontWeight: 500, background: 'none', border: 'none', fontSize: 16, cursor: 'pointer' }}>
               Продолжить выбор товаров
             </button>
           </div>
