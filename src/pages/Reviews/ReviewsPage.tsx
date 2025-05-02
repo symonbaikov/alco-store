@@ -1,15 +1,16 @@
 import React, { useState } from 'react';
 import { useTranslation } from 'react-i18next';
-import { Link } from 'react-router-dom';
 import { useReviews } from '../../hooks/useReviews';
 import { Loader } from 'lucide-react';
 import StarIcon from '@mui/icons-material/Star';
-import StarBorderIcon from '@mui/icons-material/StarBorder';
-import HomeIcon from '@mui/icons-material/Home';
-import NavigateNextIcon from '@mui/icons-material/NavigateNext';
+import StarBorderIcon from '@mui/icons-material/StarBorder';   
 import { ReviewModal } from '../../components/Reviews/ReviewModal';
 import Breadcrumbs from '../../components/Breadcrumbs/Breadcrumbs';
+import DeleteOutlineIcon from '@mui/icons-material/DeleteOutline';
+import Modal from '../../components/Modal/Modal';
+import { useAuthContext } from '../../context/AuthContext';
 import './ReviewsPage.css';
+import toast from 'react-hot-toast';
 
 interface Review {
   id: number;
@@ -22,11 +23,14 @@ interface Review {
 const MAX_PREVIEW_LENGTH = 150;
 
 export const ReviewsPage: React.FC = () => {
-  const { t } = useTranslation();
-  const { reviews, loading, error } = useReviews();
+  const { t, i18n } = useTranslation();
+  const { reviews, loading, error, fetchReviews } = useReviews();
   const [currentPage, setCurrentPage] = useState(1);
   const [selectedReview, setSelectedReview] = useState<Review | null>(null);
   const [isModalOpen, setIsModalOpen] = useState(false);
+  const [deleteModalOpen, setDeleteModalOpen] = useState(false);
+  const [reviewToDelete, setReviewToDelete] = useState<Review | null>(null);
+  const { user } = useAuthContext();
   const reviewsPerPage = 6;
 
   const truncateText = (text: string) => {
@@ -42,6 +46,36 @@ export const ReviewsPage: React.FC = () => {
   const handleCloseModal = () => {
     setIsModalOpen(false);
     setSelectedReview(null);
+  };
+
+  const handleDeleteClick = (review: Review) => {
+    setReviewToDelete(review);
+    setDeleteModalOpen(true);
+  };
+
+  const handleDeleteConfirm = async () => {
+    if (!reviewToDelete) return;
+    try {
+      const response = await fetch(`http://localhost:3001/api/reviews/${reviewToDelete.id}`, {
+        method: 'DELETE',
+        credentials: 'include',
+      });
+      if (!response.ok) throw new Error('Ошибка удаления');
+      localStorage.removeItem('reviews_cache');
+      await fetchReviews();
+      // Показываем мультиязычный тост
+      const lang = i18n.language;
+      if (lang === 'bg') {
+        toast.success('Отзивът беше успешно изтрит!');
+      } else {
+        toast.success('Review deleted successfully!');
+      }
+    } catch (e) {
+      alert('Ошибка удаления отзыва');
+    } finally {
+      setDeleteModalOpen(false);
+      setReviewToDelete(null);
+    }
   };
 
   // Вычисляем отзывы для текущей страницы
@@ -119,7 +153,19 @@ export const ReviewsPage: React.FC = () => {
                   handleReviewClick(review);
                 }
               }}
+              style={{position: 'relative'}}
             >
+              {user?.role === 'ADMIN' && (
+                <div className="review-delete-btn-wrapper">
+                  <button
+                    className="delete-review-btn"
+                    onClick={e => { e.stopPropagation(); handleDeleteClick(review); }}
+                    aria-label={t('reviews.delete')}
+                  >
+                    <DeleteOutlineIcon style={{color: '#8b0000', fontSize: 24}} />
+                  </button>
+                </div>
+              )}
               <div className="review-header">
                 <h3 className="review-author">{review.author}</h3>
                 <div className="review-rating">
@@ -155,6 +201,17 @@ export const ReviewsPage: React.FC = () => {
           onClose={handleCloseModal}
           review={selectedReview}
         />
+        <Modal isOpen={deleteModalOpen} onClose={() => setDeleteModalOpen(false)}>
+          <div style={{padding: 24, minWidth: 300, textAlign: 'center'}}>
+            <p className="modal-confirm-text">{t('reviews.confirmDelete', 'Вы действительно хотите удалить отзыв из базы данных?')}</p>
+            <button onClick={handleDeleteConfirm} style={{marginRight: 16, background: '#8b0000', color: 'white', border: 'none', padding: '8px 20px', borderRadius: 4}}>
+              {t('common.yes', 'Да')}
+            </button>
+            <button onClick={() => setDeleteModalOpen(false)} style={{background: '#eee', color: '#333', border: 'none', padding: '8px 20px', borderRadius: 4}}>
+              {t('common.no', 'Нет')}
+            </button>
+          </div>
+        </Modal>
       </div>
     </div>
   );

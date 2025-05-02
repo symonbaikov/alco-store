@@ -1,5 +1,5 @@
 import type { Request, Response, NextFunction } from "express";
-import { SessionUser } from '../../types/session';
+import { SessionUser } from '../types/session';
 
 export function authenticatedUser(
   req: Request,

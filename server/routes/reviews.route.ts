@@ -151,4 +151,22 @@ router.get('/', async (req: Request, res: Response, next: NextFunction) => {
   }
 });
 
+router.delete('/:id', authenticatedUser, async (req: Request, res: Response) => {
+  try {
+    const reviewId = Number(req.params.id);
+    if (isNaN(reviewId)) {
+      res.status(400).json({ error: 'Некорректный id' });
+    }
+
+    const deleted = await prisma.review.delete({
+      where: { id: reviewId }
+    });
+
+    res.json({ success: true, deleted });
+  } catch (error) {
+    console.error('[Reviews DELETE] Error:', error);
+    res.status(404).json({ error: 'Отзыв не найден или уже удалён' });
+  }
+});
+
 export default router;

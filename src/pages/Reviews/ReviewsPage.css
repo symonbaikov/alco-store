@@ -284,4 +284,52 @@
   .review-text {
     font-size: 0.85rem;
   }
+}
+
+.review-card {
+  position: relative;
+}
+
+.review-delete-btn-wrapper {
+  position: absolute;
+  bottom: 10px;
+  left: 10px;
+  z-index: 3;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: rgba(255,255,255,0.85);
+  border-radius: 50%;
+  width: 36px;
+  height: 36px;
+  box-shadow: 0 2px 8px rgba(0,0,0,0.08);
+}
+
+.delete-review-btn {
+  background: none;
+  border: none;
+  cursor: pointer;
+  padding: 0;
+  width: 36px;
+  height: 36px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 50%;
+  transition: background 0.2s;
+}
+
+.delete-review-btn:hover {
+  background: #ffeaea;
+}
+
+.delete-review-btn svg {
+  width: 24px;
+  height: 24px;
+}
+
+.modal-confirm-text {
+  color: #222;
+  font-size: 1.1rem;
+  margin-bottom: 24px;
 } 

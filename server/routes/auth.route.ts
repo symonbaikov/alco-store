@@ -2,7 +2,7 @@ import express from 'express';
 import bcrypt from "bcrypt";
 import { PrismaClient } from "@prisma/client";
 import passport from "passport";
-import { SessionUser } from "../../types/session";
+import { SessionUser } from "../types/session";
 
 interface LoginBody {
   email: string;
