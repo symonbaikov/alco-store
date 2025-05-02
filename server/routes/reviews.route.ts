@@ -5,6 +5,7 @@ import { authenticatedUser } from '../lib/lib';
 import multer from 'multer';
 import path from 'path';
 import translateService from '../services/translate.service';
+import { sendReviewEmail } from '../services/send-review-email.service';
 
 interface MulterRequest extends Request {
   file?: Express.Multer.File;
@@ -115,6 +116,13 @@ router.post('/', authenticatedUser, (req: MulterRequest, res: Response, next: Ne
           rating: ratingNum
         }
       });
+
+      // Отправляем письмо админу о новом отзыве через сервис
+      try {
+        await sendReviewEmail({ name, email, message, rating });
+      } catch (mailErr) {
+        console.error('[Reviews POST] Error sending email:', mailErr);
+      }
 
       console.log('[Reviews POST] Review saved successfully:', savedReview);
       res.status(201).json(savedReview);

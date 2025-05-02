@@ -5,7 +5,7 @@ import GoogleIcon from "../Icons/GoogleIcon";
 import toast, { Toaster } from 'react-hot-toast';
 import { useTranslation } from 'react-i18next';
 import { useAuthContext } from "../../context/AuthContext";
-import authService from "../../services/auth.service";
+import authService from "../../../server/services/auth.service";
 import "./AuthPage.css";
 
 interface AuthPageProps {
