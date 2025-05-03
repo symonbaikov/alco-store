@@ -317,5 +317,97 @@
     "public-offer": "Public Offer",
     "privacy-policy": "Privacy Policy",
     "loyalty": "Loyalty Program"
+  },
+  "cards": {
+    "trends2025": {
+      "title": "5 Main Trends in the Wine Industry in 2025",
+      "date": "March 17, 2025"
+    },
+    "goodWine": {
+      "title": "How Much Should Good Wine Cost and How Are Cheap Wines Different from Expensive Ones",
+      "date": "April 10, 2018"
+    },
+    "kisloeVino": {
+      "title": "How to Love 'Sour' Wine or 5 Arguments in Favor of Dry Wines",
+      "date": "April 6, 2018"
+    },
+    "autohtonnieSorta": {
+      "title": "What Are Autochthonous Grape Varieties and Why Are They Important",
+      "date": "April 4, 2018"
+    }
+  },
+  "blog": {
+    "title": "Blog",
+    "cards": {
+      "trends2025": {
+        "title": "5 Main Trends in the Wine Industry in 2025",
+        "date": "March 17, 2025"
+      },
+      "goodWine": {
+        "title": "How Much Should Good Wine Cost and How Are Cheap Wines Different from Expensive Ones",
+        "date": "April 10, 2018"
+      },
+      "kisloeVino": {
+        "title": "How to Love 'Sour' Wine or 5 Arguments in Favor of Dry Wines",
+        "date": "April 6, 2018"
+      },
+      "autohtonnieSorta": {
+        "title": "What Are Autochthonous Grape Varieties and Why Are They Important",
+        "date": "April 4, 2018"
+      }
+    },
+    "trends2025": {
+      "title": "5 Main Trends in the Wine Industry in 2025",
+      "date": "March 17, 2025",
+      "content1": "The wine industry is changing rapidly. Here are the five most important trends that will shape the market in 2025:",
+      "list": [
+        "Sustainable production and organic wines",
+        "Digitalization of sales and tastings",
+        "Growth of low-alcohol and non-alcoholic wines",
+        "Personalized customer offers",
+        "Increased focus on local grape varieties"
+      ],
+      "content2": "Follow these trends to stay up to date with the wine world!"
+    },
+    "goodWine": {
+      "title": "How Much Should Good Wine Cost and How Are Cheap Wines Different from Expensive Ones",
+      "date": "April 10, 2018",
+      "content1": "The price of wine depends on many factors: grape variety, region, production technology, and even marketing.",
+      "content2": "Here's what affects the price:",
+      "list": [
+        "Quality of raw materials",
+        "Age of the vineyards",
+        "Vinification methods",
+        "Aging in barrels",
+        "Brand and reputation"
+      ],
+      "content3": "Expensive wine is not always better, but it often offers a more complex taste and a longer aftertaste."
+    },
+    "kisloeVino": {
+      "title": "How to Love 'Sour' Wine or 5 Arguments in Favor of Dry Wines",
+      "date": "April 6, 2018",
+      "content1": "Many people consider sour wine a flaw, but in fact, acidity is an important part of the taste and style of wine. Here are 5 reasons to love dry and more acidic wines:",
+      "list": [
+        "Refreshing taste: such wines are great for summer and as an aperitif.",
+        "Better with food: acidity enhances the taste of dishes.",
+        "Longer life: acidic wines are better stored and develop in the bottle.",
+        "Less sugar — fewer calories.",
+        "It's trendy: modern winemakers focus on freshness and naturalness."
+      ],
+      "content2": "Try different styles and find your perfect dry wine!"
+    },
+    "autohtonnieSorta": {
+      "title": "What Are Autochthonous Grape Varieties and Why Are They Important",
+      "date": "April 4, 2018",
+      "content1": "Autochthonous grape varieties are unique, local varieties grown only in certain regions. They give wine a special character and taste, reflecting the terroir and traditions.",
+      "content2": "Why are autochthonous varieties important:",
+      "list": [
+        "Preserve winemaking traditions and cultural heritage.",
+        "Give unique flavors not found in mass varieties.",
+        "Resistant to local climate and diseases.",
+        "Interesting for wine enthusiasts and collectors."
+      ],
+      "content3": "Try wines from autochthonous varieties — it's a great way to discover new flavors and support local producers!"
+    }
   }
 }

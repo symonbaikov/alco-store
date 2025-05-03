@@ -5,6 +5,7 @@ import Categories from "../../components/Categories/Categories";
 import PopularCategories from "../../components/PopularCategories/PopularCategories";
 import { DrinkCategories } from "../../components/DrinkCategories/DrinkCategories";
 import { Reviews } from '../../components/Reviews/Reviews';
+import { Blog } from '../../components/Blog/Blog';
 import "./Home.css";
 
 const Home: React.FC = () => {
@@ -16,6 +17,7 @@ const Home: React.FC = () => {
       <PopularCategories />
       <DrinkCategories />
       <Reviews />
+      <Blog />
     </div>
   );
 };

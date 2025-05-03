@@ -16,6 +16,10 @@ import { AuthProvider } from "./context/AuthContext";
 import { useAuthContext } from "./context/AuthContext";
 import { useTranslation } from 'react-i18next';
 import toast from 'react-hot-toast';
+import GoodWine from './pages/Blog/GoodWine';
+import Trends2025 from './pages/Blog/Trends2025';
+import KisloeVino from './pages/Blog/KisloeVino';
+import AutohtonnieSorta from './pages/Blog/AutohtonnieSorta';
 
 const App: React.FC = () => {
   const [isCartOpen, setIsCartOpen] = React.useState(false);
@@ -123,6 +127,10 @@ const App: React.FC = () => {
             <Route path="/reviews" element={<ReviewsPage />} />
             <Route path="/login" element={<Home />} />
             <Route path="/register" element={<Home />} />
+            <Route path="/blog/skolko-dolzhno-stoit-vino" element={<GoodWine />} />
+            <Route path="/blog/5-trendov-2025" element={<Trends2025 />} />
+            <Route path="/blog/kak-polyubit-kisloe-vino" element={<KisloeVino />} />
+            <Route path="/blog/autohtonnie-sorta" element={<AutohtonnieSorta />} />
           </Routes>
         </main>
         <Cart isOpen={isCartOpen} onClose={() => setIsCartOpen(false)} />
