@@ -1,0 +1,445 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Reviews snapshot: renders error state 1`] = `
+<DocumentFragment>
+  <section
+    class="reviews-section"
+    id="reviews"
+  >
+    <div
+      class="container"
+    >
+      <div
+        class="reviews-header"
+      >
+        <h2
+          class="reviews-title"
+        >
+          reviews.title
+        </h2>
+        <div
+          class="reviews-actions"
+        >
+          <button
+            class="leave-review-link"
+            type="button"
+          >
+            <svg
+              aria-hidden="true"
+              class="MuiSvgIcon-root MuiSvgIcon-fontSizeMedium chat-icon-btn css-1umw9bq-MuiSvgIcon-root"
+              data-testid="ChatOutlinedIcon"
+              focusable="false"
+              viewBox="0 0 24 24"
+            >
+              <path
+                d="M4 4h16v12H5.17L4 17.17zm0-2c-1.1 0-1.99.9-1.99 2L2 22l4-4h14c1.1 0 2-.9 2-2V4c0-1.1-.9-2-2-2zm2 10h8v2H6zm0-3h12v2H6zm0-3h12v2H6z"
+              />
+            </svg>
+            reviews.leaveReview
+          </button>
+          <a
+            class="all-reviews-link"
+            href="/reviews"
+          >
+            reviews.allReviews
+          </a>
+        </div>
+      </div>
+      <div
+        class="reviews-slider"
+      >
+        <button
+          aria-label="reviews.previous"
+          class="slider-arrow prev"
+        >
+          ‹
+        </button>
+        <div
+          class="review-card"
+          role="article"
+        >
+          <div
+            aria-label="reviews.rating: 5/5"
+            class="rating"
+          >
+            <span
+              class="star filled"
+            >
+              ★
+            </span>
+            <span
+              class="star filled"
+            >
+              ★
+            </span>
+            <span
+              class="star filled"
+            >
+              ★
+            </span>
+            <span
+              class="star filled"
+            >
+              ★
+            </span>
+            <span
+              class="star filled"
+            >
+              ★
+            </span>
+          </div>
+          <h3
+            class="review-author"
+          >
+            Иван Иванов
+          </h3>
+          <p
+            class="review-text"
+          >
+            Отличный магазин!
+          </p>
+        </div>
+        <button
+          aria-label="reviews.next"
+          class="slider-arrow next"
+        >
+          ›
+        </button>
+      </div>
+    </div>
+  </section>
+</DocumentFragment>
+`;
+
+exports[`Reviews snapshot: renders loading state 1`] = `
+<DocumentFragment>
+  <section
+    class="reviews-section"
+    id="reviews"
+  >
+    <div
+      class="container"
+    >
+      <div
+        class="reviews-header"
+      >
+        <h2
+          class="reviews-title"
+        >
+          reviews.title
+        </h2>
+        <div
+          class="reviews-actions"
+        >
+          <button
+            class="leave-review-link"
+            type="button"
+          >
+            <svg
+              aria-hidden="true"
+              class="MuiSvgIcon-root MuiSvgIcon-fontSizeMedium chat-icon-btn css-1umw9bq-MuiSvgIcon-root"
+              data-testid="ChatOutlinedIcon"
+              focusable="false"
+              viewBox="0 0 24 24"
+            >
+              <path
+                d="M4 4h16v12H5.17L4 17.17zm0-2c-1.1 0-1.99.9-1.99 2L2 22l4-4h14c1.1 0 2-.9 2-2V4c0-1.1-.9-2-2-2zm2 10h8v2H6zm0-3h12v2H6zm0-3h12v2H6z"
+              />
+            </svg>
+            reviews.leaveReview
+          </button>
+          <a
+            class="all-reviews-link"
+            href="/reviews"
+          >
+            reviews.allReviews
+          </a>
+        </div>
+      </div>
+      <div
+        class="reviews-slider"
+      >
+        <button
+          aria-label="reviews.previous"
+          class="slider-arrow prev"
+        >
+          ‹
+        </button>
+        <div
+          class="review-card"
+          role="article"
+        >
+          <div
+            aria-label="reviews.rating: 5/5"
+            class="rating"
+          >
+            <span
+              class="star filled"
+            >
+              ★
+            </span>
+            <span
+              class="star filled"
+            >
+              ★
+            </span>
+            <span
+              class="star filled"
+            >
+              ★
+            </span>
+            <span
+              class="star filled"
+            >
+              ★
+            </span>
+            <span
+              class="star filled"
+            >
+              ★
+            </span>
+          </div>
+          <h3
+            class="review-author"
+          >
+            Иван Иванов
+          </h3>
+          <p
+            class="review-text"
+          >
+            Отличный магазин!
+          </p>
+        </div>
+        <button
+          aria-label="reviews.next"
+          class="slider-arrow next"
+        >
+          ›
+        </button>
+      </div>
+    </div>
+  </section>
+</DocumentFragment>
+`;
+
+exports[`Reviews snapshot: renders with no reviews 1`] = `
+<DocumentFragment>
+  <section
+    class="reviews-section"
+    id="reviews"
+  >
+    <div
+      class="container"
+    >
+      <div
+        class="reviews-header"
+      >
+        <h2
+          class="reviews-title"
+        >
+          reviews.title
+        </h2>
+        <div
+          class="reviews-actions"
+        >
+          <button
+            class="leave-review-link"
+            type="button"
+          >
+            <svg
+              aria-hidden="true"
+              class="MuiSvgIcon-root MuiSvgIcon-fontSizeMedium chat-icon-btn css-1umw9bq-MuiSvgIcon-root"
+              data-testid="ChatOutlinedIcon"
+              focusable="false"
+              viewBox="0 0 24 24"
+            >
+              <path
+                d="M4 4h16v12H5.17L4 17.17zm0-2c-1.1 0-1.99.9-1.99 2L2 22l4-4h14c1.1 0 2-.9 2-2V4c0-1.1-.9-2-2-2zm2 10h8v2H6zm0-3h12v2H6zm0-3h12v2H6z"
+              />
+            </svg>
+            reviews.leaveReview
+          </button>
+          <a
+            class="all-reviews-link"
+            href="/reviews"
+          >
+            reviews.allReviews
+          </a>
+        </div>
+      </div>
+      <div
+        class="reviews-slider"
+      >
+        <button
+          aria-label="reviews.previous"
+          class="slider-arrow prev"
+        >
+          ‹
+        </button>
+        <div
+          class="review-card"
+          role="article"
+        >
+          <div
+            aria-label="reviews.rating: 5/5"
+            class="rating"
+          >
+            <span
+              class="star filled"
+            >
+              ★
+            </span>
+            <span
+              class="star filled"
+            >
+              ★
+            </span>
+            <span
+              class="star filled"
+            >
+              ★
+            </span>
+            <span
+              class="star filled"
+            >
+              ★
+            </span>
+            <span
+              class="star filled"
+            >
+              ★
+            </span>
+          </div>
+          <h3
+            class="review-author"
+          >
+            Иван Иванов
+          </h3>
+          <p
+            class="review-text"
+          >
+            Отличный магазин!
+          </p>
+        </div>
+        <button
+          aria-label="reviews.next"
+          class="slider-arrow next"
+        >
+          ›
+        </button>
+      </div>
+    </div>
+  </section>
+</DocumentFragment>
+`;
+
+exports[`Reviews snapshot: renders with reviews 1`] = `
+<DocumentFragment>
+  <section
+    class="reviews-section"
+    id="reviews"
+  >
+    <div
+      class="container"
+    >
+      <div
+        class="reviews-header"
+      >
+        <h2
+          class="reviews-title"
+        >
+          reviews.title
+        </h2>
+        <div
+          class="reviews-actions"
+        >
+          <button
+            class="leave-review-link"
+            type="button"
+          >
+            <svg
+              aria-hidden="true"
+              class="MuiSvgIcon-root MuiSvgIcon-fontSizeMedium chat-icon-btn css-1umw9bq-MuiSvgIcon-root"
+              data-testid="ChatOutlinedIcon"
+              focusable="false"
+              viewBox="0 0 24 24"
+            >
+              <path
+                d="M4 4h16v12H5.17L4 17.17zm0-2c-1.1 0-1.99.9-1.99 2L2 22l4-4h14c1.1 0 2-.9 2-2V4c0-1.1-.9-2-2-2zm2 10h8v2H6zm0-3h12v2H6zm0-3h12v2H6z"
+              />
+            </svg>
+            reviews.leaveReview
+          </button>
+          <a
+            class="all-reviews-link"
+            href="/reviews"
+          >
+            reviews.allReviews
+          </a>
+        </div>
+      </div>
+      <div
+        class="reviews-slider"
+      >
+        <button
+          aria-label="reviews.previous"
+          class="slider-arrow prev"
+        >
+          ‹
+        </button>
+        <div
+          class="review-card"
+          role="article"
+        >
+          <div
+            aria-label="reviews.rating: 5/5"
+            class="rating"
+          >
+            <span
+              class="star filled"
+            >
+              ★
+            </span>
+            <span
+              class="star filled"
+            >
+              ★
+            </span>
+            <span
+              class="star filled"
+            >
+              ★
+            </span>
+            <span
+              class="star filled"
+            >
+              ★
+            </span>
+            <span
+              class="star filled"
+            >
+              ★
+            </span>
+          </div>
+          <h3
+            class="review-author"
+          >
+            Иван Иванов
+          </h3>
+          <p
+            class="review-text"
+          >
+            Отличный магазин!
+          </p>
+        </div>
+        <button
+          aria-label="reviews.next"
+          class="slider-arrow next"
+        >
+          ›
+        </button>
+      </div>
+    </div>
+  </section>
+</DocumentFragment>
+`;
