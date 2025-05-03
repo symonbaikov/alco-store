@@ -235,7 +235,10 @@ async function main() {
     for (const review of reviews) {
       try {
         const created = await prisma.review.create({
-          data: review
+          data: {
+            ...review,
+            email: 'anonymous@example.com' // Adding required email field
+          }
         });
         console.log(`✅ Created review: ${created.id}`);
       } catch (error) {
