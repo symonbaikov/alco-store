@@ -1,87 +1,96 @@
-# React + TypeScript + Vite
+# 🍷 Alco Store — современный онлайн-магазин алкогольных напитков
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
-
-Currently, two official plugins are available:
-
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react/README.md) uses [Babel](https://babeljs.io/) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
-
-## Expanding the ESLint configuration
-
-If you are developing a production application, we recommend updating the configuration to enable type-aware lint rules:
-
-```js
-export default tseslint.config({
-  extends: [
-    // Remove ...tseslint.configs.recommended and replace with this
-    ...tseslint.configs.recommendedTypeChecked,
-    // Alternatively, use this for stricter rules
-    ...tseslint.configs.strictTypeChecked,
-    // Optionally, add this for stylistic rules
-    ...tseslint.configs.stylisticTypeChecked,
-  ],
-  languageOptions: {
-    // other options...
-    parserOptions: {
-      project: ['./tsconfig.node.json', './tsconfig.app.json'],
-      tsconfigRootDir: import.meta.dirname,
-    },
-  },
-})
-```
-
-You can also install [eslint-plugin-react-x](https://github.com/Rel1cx/eslint-react/tree/main/packages/plugins/eslint-plugin-react-x) and [eslint-plugin-react-dom](https://github.com/Rel1cx/eslint-react/tree/main/packages/plugins/eslint-plugin-react-dom) for React-specific lint rules:
-
-```js
-// eslint.config.js
-import reactX from 'eslint-plugin-react-x'
-import reactDom from 'eslint-plugin-react-dom'
-
-export default tseslint.config({
-  plugins: {
-    // Add the react-x and react-dom plugins
-    'react-x': reactX,
-    'react-dom': reactDom,
-  },
-  rules: {
-    // other rules...
-    // Enable its recommended typescript rules
-    ...reactX.configs['recommended-typescript'].rules,
-    ...reactDom.configs.recommended.rules,
-  },
-})
-```
+Добро пожаловать в Alco Store! Это современное fullstack-приложение на React/Node.js с поддержкой мультиязычности, отзывов, блога, регистрации, авторизации и красивым UI.
 
 ---
 
-## Running the Project with Docker
+## 🚀 Основные функции приложения
 
-This project provides Dockerfiles for both the frontend (`alco-store`) and backend (`server`) applications, along with a `docker-compose.yml` for easy orchestration.
+### 📰 Мультиязычный блог
+- **Динамические статьи**: статьи и изображения берутся из базы данных.
+- **Мультиязычность**: поддержка русского, болгарского, английского языков. Переводы подтягиваются по slug статьи.
+- **Универсальный роутинг**: каждая статья доступна по `/blog/:slug`.
+- **Fallback**: если нет перевода — показывается оригинальный заголовок и дата.
 
-### Requirements
-- Docker and Docker Compose installed
-- The project uses Node.js version `22.13.1` (as specified in the Dockerfiles)
+### 💬 Отзывы
+- **Оставить отзыв**: форма с возможностью прикрепить файл (например, фото чека).
+- **Отправка на email**: отзыв и файл отправляются на почту администратору.
+- **Мгновенное отображение**: новые отзывы появляются без перезагрузки.
+- **Мультиязычность**: все тексты отзывов переводятся.
 
-### Services and Ports
-- **Frontend (`ts-alco-store`)**: Exposes port **3000**
-- **Backend (`ts-server`)**: Exposes port **3001**
+### 👤 Регистрация и вход
+- **Регистрация с подтверждением email**: после регистрации приходит письмо с кодом подтверждения.
+- **Вход по email/паролю или через Google**.
+- **Восстановление пароля**: форма для отправки письма на email.
+- **Валидация паролей**: проверка длины, наличия цифр и букв.
 
-### Environment Variables
-- If you have environment-specific settings, create `.env` files in `./alco-store` and/or `./server` as needed. Uncomment the `env_file` lines in `docker-compose.yml` to enable them.
+### 🛒 Корзина и каталог
+- **Каталог товаров**: удобная навигация по категориям (вино, крепкий алкоголь, пиво и т.д.).
+- **Корзина**: добавление и удаление товаров, отображение количества.
+- **Сравнение товаров**: отдельный раздел для сравнения.
 
-### Build and Run
-From the root of the project, run:
+### 🏷️ Мультиязычность всего сайта
+- **Переключение языка**: в любой момент, с сохранением выбора.
+- **Локализация всех разделов**: Navbar, Footer, Blog, Reviews, Profile и др.
 
-```sh
-docker compose up --build
-```
+### 👤 Профиль пользователя
+- **Редактирование имени**: поддержка Google-аккаунта и email/пароль.
+- **Смена пароля**: с валидацией и уведомлениями.
+- **Выход из аккаунта**.
 
-This will build and start both the frontend and backend containers. The frontend will be available at [http://localhost:3000](http://localhost:3000), and the backend at [http://localhost:3001](http://localhost:3001).
+### 🛡️ Админ-функции
+- **Роль администратора**: отображение бейджа, доступ к расширенным функциям (например, управление блогом/отзывами).
 
-### Special Configuration
-- Both services run as non-root users for improved security.
-- The frontend depends on the backend and will wait for it to be available.
-- If you need to connect to a database or add additional services, update the `docker-compose.yml` accordingly.
+### 📦 Тесты
+- **Юнит-тесты**: для всех ключевых компонентов (Blog, Reviews, Navbar, Footer, Auth, Register, ForgotPassword).
+- **Покрытие сценариев**: рендер, валидация, успешные и ошибочные кейсы, переходы между формами.
 
 ---
+
+## 🛠️ Технологии
+- **Frontend**: React, TypeScript, Vite, i18next, react-hot-toast, react-router-dom
+- **Backend**: Node.js, Express, Prisma, PostgreSQL
+- **Тесты**: Jest, @testing-library/react
+- **Docker**: для локального и продакшн запуска
+
+---
+
+## 📚 Как запустить проект
+
+1. **Локально**
+   ```sh
+   npm install
+   npm run dev
+   ```
+   - Фронтенд: http://localhost:3000
+   - Бэкенд: http://localhost:3001
+
+2. **Через Docker**
+   ```sh
+   docker compose up --build
+   ```
+   - Все сервисы стартуют автоматически.
+
+---
+
+## 📝 Структура кода
+- `src/components/` — UI-компоненты (Blog, Reviews, Auth, Navbar, Footer и др.)
+- `src/pages/` — страницы сайта
+- `server/` — серверная логика, API, Prisma
+- `public/locales/` — переводы для i18n
+- `prisma/` — миграции и схема БД
+
+---
+
+## 💡 Особенности
+- Красивый и адаптивный дизайн
+- Полная поддержка мультиязычности
+- Реальные email-уведомления для отзывов и регистрации
+- Современные best practices React/Node
+- Покрытие тестами всех ключевых сценариев
+
+---
+
+## 🏁 Приятного пользования Alco Store!
+
+Если есть вопросы — смело открывайте issue или пишите в поддержку 🍷
