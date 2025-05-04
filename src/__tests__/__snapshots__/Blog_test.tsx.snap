@@ -1,0 +1,52 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Blog component рендерится корректно (snapshot) 1`] = `
+<DocumentFragment>
+  <section
+    class="blog-section"
+  >
+    <div
+      class="container"
+    >
+      <h2
+        class="blog-title"
+      >
+        blog.title
+      </h2>
+      <div
+        class="blog-list"
+      >
+        <a
+          class="blog-card"
+          data-discover="true"
+          href="/blog/5-trendov-2025"
+        >
+          <div
+            class="blog-card-image-wrapper"
+          >
+            <img
+              alt="blog.cards.5-trendov-2025.title"
+              class="blog-card-image"
+              src="/images/trends-2025.jpg"
+            />
+          </div>
+          <div
+            class="blog-card-content"
+          >
+            <div
+              class="blog-card-date"
+            >
+              3/17/2025
+            </div>
+            <div
+              class="blog-card-title"
+            >
+              5 Main Trends in the Wine Industry in 2025
+            </div>
+          </div>
+        </a>
+      </div>
+    </div>
+  </section>
+</DocumentFragment>
+`;

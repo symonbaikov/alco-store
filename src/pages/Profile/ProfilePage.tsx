@@ -15,8 +15,6 @@ const ProfilePage: React.FC = () => {
   const { t } = useTranslation();
   const navigate = useNavigate();
   
-  console.log('User data in profile:', user);
-  
   const [isChangingPassword, setIsChangingPassword] = useState(false);
   const [currentPassword, setCurrentPassword] = useState('');
   const [newPassword, setNewPassword] = useState('');

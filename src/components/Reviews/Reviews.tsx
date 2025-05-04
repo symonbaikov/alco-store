@@ -39,13 +39,6 @@ export const Reviews: React.FC = () => {
     }
   }, [isLoggedIn]);
 
-  // Добавляем эффект для отслеживания данных пользователя
-  React.useEffect(() => {
-    if (isReviewModalOpen) {
-      console.log('Opening review modal with user data:', user);
-    }
-  }, [isReviewModalOpen, user]);
-
   const handleReviewSubmit = async (formData: {
     name: string;
     email: string;
@@ -80,8 +73,6 @@ export const Reviews: React.FC = () => {
         }
         throw new Error(`HTTP error: ${response.status}`);
       }
-
-      console.log('Ответ сервера:', response);
       
       closeReviewModal();
       

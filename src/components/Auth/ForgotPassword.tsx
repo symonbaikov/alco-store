@@ -26,7 +26,6 @@ const ForgotPassword: React.FC<Props> = ({ isOpen, onClose, onLoginClick }) => {
 
     if (res.ok) {
       const data = await res.json();
-      console.log("✅ Password recovery sent to email:", data);
       toast.success(t('forgotPassword.success'));
       onClose();
     } else {
