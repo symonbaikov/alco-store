@@ -138,10 +138,39 @@ const categoryData = {
   }
 };
 
+const blogPosts = [
+  {
+    title: '5 Main Trends in the Wine Industry in 2025',
+    date: new Date('2025-03-17'),
+    image: '/images/trends-2025.jpg',
+    link: '/blog/5-trendov-2025',
+    slug: '5-trendov-2025',
+  },
+  {
+    title: 'How Much Should Good Wine Cost and How Are Cheap Wines Different from Expensive Ones',
+    date: new Date('2018-04-10'),
+    image: '/images/Good-wine.jpg',
+    link: '/blog/skolko-dolzhno-stoit-vino',
+    slug: 'skolko-dolzhno-stoit-vino',
+  },
+  {
+    title: "How to Love 'Sour' Wine or 5 Arguments in Favor of Dry Wines",
+    date: new Date('2018-04-06'),
+    image: '/images/wine.jpg',
+    link: '/blog/kak-polyubit-kisloe-vino',
+    slug: 'kak-polyubit-kisloe-vino',
+  },
+  {
+    title: 'What Are Autochthonous Grape Varieties and Why Are They Important',
+    date: new Date('2018-04-04'),
+    image: '/images/zg292c6yc7wsdt7uxyukv8klc6yxhvms.jpg',
+    link: '/blog/autohtonnie-sorta',
+    slug: 'autohtonnie-sorta',
+  },
+];
 
-
- // Создаем слайды
- const slides = [
+// Создаем слайды
+const slides = [
   {
     image: '/images/14.03-SHOK-CENA-DOMAINE-BOYAR-3l.webp',
     title: 'Специално предложение',
@@ -213,7 +242,8 @@ async function main() {
       prisma.review.deleteMany(),
       prisma.category.deleteMany(),
       prisma.user.deleteMany(),
-      prisma.slide.deleteMany()
+      prisma.slide.deleteMany(),
+      prisma.blog.deleteMany()
     ]);
     console.log('✅ Database cleared');
 
@@ -267,6 +297,19 @@ async function main() {
         }
       } catch (error) {
         console.error(`❌ Failed to create category ${name}:`, error);
+      }
+    }
+
+    // Создание блогов
+    console.log('📰 Creating blog posts...');
+    for (const post of blogPosts) {
+      try {
+        const created = await prisma.blog.create({
+          data: post
+        });
+        console.log(`✅ Created blog post: ${created.title}`);
+      } catch (error) {
+        console.error('❌ Failed to create blog post:', error);
       }
     }
 

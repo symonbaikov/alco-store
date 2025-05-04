@@ -339,21 +339,21 @@
   "blog": {
     "title": "Blog",
     "cards": {
-      "trends2025": {
+      "5-trendov-2025": {
         "title": "5 Main Trends in the Wine Industry in 2025",
-        "date": "March 17, 2025"
+        "date": "17.03.2025"
       },
-      "goodWine": {
+      "skolko-dolzhno-stoit-vino": {
         "title": "How Much Should Good Wine Cost and How Are Cheap Wines Different from Expensive Ones",
-        "date": "April 10, 2018"
+        "date": "10.04.2018"
       },
-      "kisloeVino": {
+      "kak-polyubit-kisloe-vino": {
         "title": "How to Love 'Sour' Wine or 5 Arguments in Favor of Dry Wines",
-        "date": "April 6, 2018"
+        "date": "06.04.2018"
       },
-      "autohtonnieSorta": {
+      "autohtonnie-sorta": {
         "title": "What Are Autochthonous Grape Varieties and Why Are They Important",
-        "date": "April 4, 2018"
+        "date": "04.04.2018"
       }
     },
     "trends2025": {

@@ -14,6 +14,7 @@ import changePasswordRoutes from "./routes/change-password.route";
 import reviewsRouter from './routes/reviews.route';
 import categoryRoutes from "./routes/categories.route";
 import translateRouter from './routes/translate.route';
+import blogRoutes from './routes/blog.route';
 import { authenticatedUser } from "./lib/lib";
 
 // Импортируем конфигурацию passport
@@ -81,6 +82,7 @@ app.use("/api/change-password", changePasswordRoutes);
 app.use("/api/categories", categoryRoutes);
 app.use('/api/reviews', reviewsRouter);
 app.use('/api/translate', translateRouter);
+app.use('/api/blogs', blogRoutes);
 
 app.listen(port, () => {
   console.log(`🚀 Server is running on http://localhost:${port}`);
