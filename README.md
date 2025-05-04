@@ -1,96 +1,96 @@
-# 🍷 Alco Store — современный онлайн-магазин алкогольных напитков
+# 🍷 Alco Store — Modern Online Alcohol Store
 
-Добро пожаловать в Alco Store! Это современное fullstack-приложение на React/Node.js с поддержкой мультиязычности, отзывов, блога, регистрации, авторизации и красивым UI.
-
----
-
-## 🚀 Основные функции приложения
-
-### 📰 Мультиязычный блог
-- **Динамические статьи**: статьи и изображения берутся из базы данных.
-- **Мультиязычность**: поддержка русского, болгарского, английского языков. Переводы подтягиваются по slug статьи.
-- **Универсальный роутинг**: каждая статья доступна по `/blog/:slug`.
-- **Fallback**: если нет перевода — показывается оригинальный заголовок и дата.
-
-### 💬 Отзывы
-- **Оставить отзыв**: форма с возможностью прикрепить файл (например, фото чека).
-- **Отправка на email**: отзыв и файл отправляются на почту администратору.
-- **Мгновенное отображение**: новые отзывы появляются без перезагрузки.
-- **Мультиязычность**: все тексты отзывов переводятся.
-
-### 👤 Регистрация и вход
-- **Регистрация с подтверждением email**: после регистрации приходит письмо с кодом подтверждения.
-- **Вход по email/паролю или через Google**.
-- **Восстановление пароля**: форма для отправки письма на email.
-- **Валидация паролей**: проверка длины, наличия цифр и букв.
-
-### 🛒 Корзина и каталог
-- **Каталог товаров**: удобная навигация по категориям (вино, крепкий алкоголь, пиво и т.д.).
-- **Корзина**: добавление и удаление товаров, отображение количества.
-- **Сравнение товаров**: отдельный раздел для сравнения.
-
-### 🏷️ Мультиязычность всего сайта
-- **Переключение языка**: в любой момент, с сохранением выбора.
-- **Локализация всех разделов**: Navbar, Footer, Blog, Reviews, Profile и др.
-
-### 👤 Профиль пользователя
-- **Редактирование имени**: поддержка Google-аккаунта и email/пароль.
-- **Смена пароля**: с валидацией и уведомлениями.
-- **Выход из аккаунта**.
-
-### 🛡️ Админ-функции
-- **Роль администратора**: отображение бейджа, доступ к расширенным функциям (например, управление блогом/отзывами).
-
-### 📦 Тесты
-- **Юнит-тесты**: для всех ключевых компонентов (Blog, Reviews, Navbar, Footer, Auth, Register, ForgotPassword).
-- **Покрытие сценариев**: рендер, валидация, успешные и ошибочные кейсы, переходы между формами.
+Welcome to Alco Store! This is a modern fullstack application built with React/Node.js featuring multilingual support, reviews, blog, registration, authentication, and a beautiful UI.
 
 ---
 
-## 🛠️ Технологии
+## 🚀 Main Features
+
+### 📰 Multilingual Blog
+- **Dynamic articles**: Articles and images are loaded from the database.
+- **Multilingual**: Supports Russian, Bulgarian, and English. Translations are matched by article slug.
+- **Universal routing**: Each article is available at `/blog/:slug`.
+- **Fallback**: If translation is missing, the original title and date are shown.
+
+### 💬 Reviews
+- **Leave a review**: Form with file attachment support (e.g., photo of a receipt).
+- **Email delivery**: Review and file are sent to the admin's email.
+- **Instant display**: New reviews appear without page reload.
+- **Multilingual**: All review texts are translated.
+
+### 👤 Registration & Login
+- **Email confirmation**: After registration, a confirmation code is sent to your email.
+- **Login via email/password or Google**.
+- **Password recovery**: Form to send a recovery email.
+- **Password validation**: Checks for length, digits, and letters.
+
+### 🛒 Cart & Catalog
+- **Product catalog**: Easy navigation by categories (wine, spirits, beer, etc.).
+- **Cart**: Add/remove products, view item count.
+- **Product comparison**: Separate section for comparing products.
+
+### 🏷️ Full Site Multilingual Support
+- **Language switcher**: Change language at any time, with preference saved.
+- **Localization**: All sections (Navbar, Footer, Blog, Reviews, Profile, etc.) are translated.
+
+### 👤 User Profile
+- **Edit name**: Supports Google account and email/password.
+- **Change password**: With validation and notifications.
+- **Logout**.
+
+### 🛡️ Admin Features
+- **Admin role**: Badge display, access to advanced features (e.g., blog/review management).
+
+### 📦 Tests
+- **Unit tests**: For all key components (Blog, Reviews, Navbar, Footer, Auth, Register, ForgotPassword).
+- **Scenario coverage**: Render, validation, success/error cases, form transitions.
+
+---
+
+## 🛠️ Technologies
 - **Frontend**: React, TypeScript, Vite, i18next, react-hot-toast, react-router-dom
 - **Backend**: Node.js, Express, Prisma, PostgreSQL
-- **Тесты**: Jest, @testing-library/react
-- **Docker**: для локального и продакшн запуска
+- **Testing**: Jest, @testing-library/react
+- **Docker**: For local and production deployment
 
 ---
 
-## 📚 Как запустить проект
+## 📚 How to Run the Project
 
-1. **Локально**
+1. **Locally**
    ```sh
    npm install
    npm run dev
    ```
-   - Фронтенд: http://localhost:3000
-   - Бэкенд: http://localhost:3001
+   - Frontend: http://localhost:3000
+   - Backend: http://localhost:3001
 
-2. **Через Docker**
+2. **With Docker**
    ```sh
    docker compose up --build
    ```
-   - Все сервисы стартуют автоматически.
+   - All services will start automatically.
 
 ---
 
-## 📝 Структура кода
-- `src/components/` — UI-компоненты (Blog, Reviews, Auth, Navbar, Footer и др.)
-- `src/pages/` — страницы сайта
-- `server/` — серверная логика, API, Prisma
-- `public/locales/` — переводы для i18n
-- `prisma/` — миграции и схема БД
+## 📝 Code Structure
+- `src/components/` — UI components (Blog, Reviews, Auth, Navbar, Footer, etc.)
+- `src/pages/` — Site pages
+- `server/` — Server logic, API, Prisma
+- `public/locales/` — i18n translations
+- `prisma/` — DB migrations and schema
 
 ---
 
-## 💡 Особенности
-- Красивый и адаптивный дизайн
-- Полная поддержка мультиязычности
-- Реальные email-уведомления для отзывов и регистрации
-- Современные best practices React/Node
-- Покрытие тестами всех ключевых сценариев
+## 💡 Highlights
+- Beautiful and responsive design
+- Full multilingual support
+- Real email notifications for reviews and registration
+- Modern React/Node best practices
+- Unit test coverage for all key scenarios
 
 ---
 
-## 🏁 Приятного пользования Alco Store!
+## 🏁 Enjoy using Alco Store!
 
-Если есть вопросы — смело открывайте issue или пишите в поддержку 🍷
+If you have any questions — feel free to open an issue or contact support 🍷
