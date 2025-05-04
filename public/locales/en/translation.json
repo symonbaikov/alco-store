@@ -408,6 +408,100 @@
         "Interesting for wine enthusiasts and collectors."
       ],
       "content3": "Try wines from autochthonous varieties — it's a great way to discover new flavors and support local producers!"
+    },
+    "wine_and_chocolate": {
+      "title": "How to pair wine and chocolate (part 2)",
+      "desc": "Tips for the perfect combination of wine and chocolate for your table.",
+      "intro_title": "Introduction",
+      "intro": "Pairing wine and chocolate is an art that can bring new sensations to your table. The right combination enhances the taste of both products.",
+      "pairing_title": "Best Pairings",
+      "pair1": "Dark chocolate goes well with Cabernet Sauvignon and Merlot.",
+      "pair2": "Milk chocolate is best with Pinot Noir or light sparkling wines.",
+      "pair3": "White chocolate is perfectly complemented by sweet dessert wines.",
+      "tips_title": "Tips for a Perfect Pairing",
+      "tips": "Always choose quality chocolate and wine. Start with lighter flavors and move to more intense ones. Don't be afraid to experiment!",
+      "conclusion_title": "Conclusion",
+      "conclusion": "Wine and chocolate can create a real holiday for your taste buds. Try different combinations and find your perfect match!"
+    }
+  },
+  "bulgarianShowcase": {
+    "label": "About the company",
+    "title": "Online showcase of TRAMONTI stores.",
+    "desc": "For more than a year, we have been delighting residents of Bulgaria with direct deliveries of wines and strong alcoholic beverages directly from the producers.",
+    "button": "TRAMONTI — Your alcohol supplier"
+  },
+  "article": {
+    "johnnie_walker": {
+      "title": "Johnnie Walker. The story of the world-famous Scotch whisky",
+      "desc": "Discover the history of the legendary Johnnie Walker whisky, its origins and global recognition.",
+      "history_title": "History of Johnnie Walker",
+      "history": "Johnnie Walker is one of the most iconic whisky brands in the world. The story began in 1820, when John Walker opened a small grocery store in Kilmarnock, Scotland. He started blending his own whisky, which quickly gained popularity among locals. Over the years, the brand grew, and by the end of the 19th century, Johnnie Walker was already exported to many countries around the world.",
+      "legacy_title": "Legacy and Recognition",
+      "legacy": "The famous walking man logo and the slanted label became symbols of quality and innovation. Johnnie Walker is known for its unique blends, including Red Label, Black Label, Green Label, Gold Label, and Blue Label. Each blend has its own character and taste, appreciated by connoisseurs and collectors.",
+      "facts_title": "Interesting Facts",
+      "fact1": "Johnnie Walker is sold in more than 180 countries.",
+      "fact2": "The brand's slogan is 'Keep Walking', symbolizing progress and movement forward.",
+      "fact3": "Johnnie Walker Blue Label is considered one of the most prestigious and expensive blends in the world.",
+      "conclusion_title": "Conclusion",
+      "conclusion": "Johnnie Walker is not just whisky, but a whole era in the world of spirits. Its history, traditions, and quality make it a true legend among Scotch whiskies."
+    },
+    "merlot_vs_cabernet": {
+      "title": "Merlot and Cabernet – main differences (part 2)",
+      "desc": "A detailed comparison of Merlot and Cabernet wines: taste, aroma, and food pairing.",
+      "intro_title": "Introduction",
+      "intro": "Merlot and Cabernet Sauvignon are two of the most popular red wine varieties in the world. Despite their similarities, they have distinct characteristics that make each unique.",
+      "taste_title": "Taste Differences",
+      "taste": "Merlot is known for its soft, velvety texture and notes of plum, cherry, and chocolate. Cabernet Sauvignon, on the other hand, is more robust, with flavors of blackcurrant, cedar, and sometimes green pepper.",
+      "aroma_title": "Aroma and Structure",
+      "aroma": "Merlot wines tend to have a fruitier, rounder aroma, while Cabernet Sauvignon is more tannic and structured, often requiring more aging to reach its peak.",
+      "food_title": "Food Pairing",
+      "food1": "Merlot pairs well with poultry, pork, and soft cheeses.",
+      "food2": "Cabernet Sauvignon is ideal with red meats, grilled dishes, and hard cheeses.",
+      "food3": "Both wines can be enjoyed with pasta and Mediterranean cuisine.",
+      "conclusion_title": "Conclusion",
+      "conclusion": "Choosing between Merlot and Cabernet depends on your taste preferences and the occasion. Both offer a rich palette of flavors and aromas for true wine lovers."
+    },
+    "wine_and_chocolate": {
+      "title": "How to pair wine and chocolate (part 2)",
+      "desc": "Tips for the perfect combination of wine and chocolate for your table.",
+      "intro_title": "Introduction",
+      "intro": "Pairing wine and chocolate is an art that can bring new sensations to your table. The right combination enhances the taste of both products.",
+      "pairing_title": "Best Pairings",
+      "pair1": "Dark chocolate goes well with Cabernet Sauvignon and Merlot.",
+      "pair2": "Milk chocolate is best with Pinot Noir or light sparkling wines.",
+      "pair3": "White chocolate is perfectly complemented by sweet dessert wines.",
+      "tips_title": "Tips for a Perfect Pairing",
+      "tips": "Always choose quality chocolate and wine. Start with lighter flavors and move to more intense ones. Don't be afraid to experiment!",
+      "conclusion_title": "Conclusion",
+      "conclusion": "Wine and chocolate can create a real holiday for your taste buds. Try different combinations and find your perfect match!"
+    },
+    "courvoisier": {
+      "title": "Courvoisier – interesting facts and types of cognacs",
+      "desc": "Learn about the history, varieties, and unique features of Courvoisier cognacs.",
+      "intro_title": "Introduction",
+      "intro": "Courvoisier is one of the most famous cognac houses in France, founded in 1809. The brand is known for its refined style and high quality, which have earned it worldwide recognition.",
+      "varieties_title": "Main Varieties",
+      "variety1": "Courvoisier VS – young, fresh, with notes of fruit and flowers.",
+      "variety2": "Courvoisier VSOP – more mature, with aromas of vanilla, oak, and dried fruits.",
+      "variety3": "Courvoisier XO – rich, complex, with hints of chocolate, leather, and spices.",
+      "facts_title": "Interesting Facts",
+      "facts": "Courvoisier was the official supplier to the court of Napoleon Bonaparte. The brand is often called the 'Cognac of Napoleon'.",
+      "conclusion_title": "Conclusion",
+      "conclusion": "Courvoisier is a symbol of French elegance and tradition. Its cognacs are appreciated by connoisseurs all over the world for their unique taste and history."
+    },
+    "kvint": {
+      "title": "Kvint: review of the cognac line",
+      "desc": "Overview of the Kvint cognac line: taste, production, and recommendations.",
+      "intro_title": "Introduction",
+      "intro": "Kvint is a legendary producer of cognac and brandy from Moldova, with a history dating back to 1897. The brand is known for its high quality and unique taste.",
+      "production_title": "Production Features",
+      "production": "Kvint uses only selected grapes and traditional methods of distillation and aging. The cognacs are aged in oak barrels, which gives them a rich aroma and deep color.",
+      "varieties_title": "Main Varieties",
+      "variety1": "Kvint 3 Years – light, with notes of vanilla and dried fruits.",
+      "variety2": "Kvint 5 Years – more mature, with aromas of honey, nuts, and spices.",
+      "variety3": "Kvint 10 Years – complex, with hints of chocolate, tobacco, and oak.",
+      "conclusion_title": "Conclusion",
+      "conclusion": "Kvint cognacs are a true pride of Moldova. Their taste and quality are appreciated by connoisseurs all over the world."
     }
   }
 }

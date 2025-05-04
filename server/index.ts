@@ -4,6 +4,7 @@ import session from "express-session";
 import cookieParser from "cookie-parser";
 import passport from "passport";
 import type { Request, Response } from "express";
+import { PrismaClient } from '@prisma/client';
 
 import slideRoutes from "./routes/slideRoutes";
 import authRoutes from "./routes/auth.route";
@@ -22,6 +23,7 @@ import "./config/passport";
 
 const app = express();
 const port = 3001;
+const prisma = new PrismaClient();
 
 // Middleware
 app.use(cors({ 
@@ -83,6 +85,17 @@ app.use("/api/categories", categoryRoutes);
 app.use('/api/reviews', reviewsRouter);
 app.use('/api/translate', translateRouter);
 app.use('/api/blogs', blogRoutes);
+
+// Showcase route
+app.get('/api/showcase', async (req, res) => {
+  try {
+    const showcase = await prisma.showcase.findFirst();
+    if (!showcase) return res.status(404).json({ error: 'Showcase not found' });
+    res.json(showcase);
+  } catch (error) {
+    res.status(500).json({ error: 'Failed to fetch showcase' });
+  }
+});
 
 app.listen(port, () => {
   console.log(`🚀 Server is running on http://localhost:${port}`);

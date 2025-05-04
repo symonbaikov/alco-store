@@ -232,6 +232,12 @@ const reviews = [
   }
 ];
 
+const showcase = {
+  title: 'Bulgarian Showcase',
+  image: '/images/880o7ikcklnlil10heao4xv7l2dkz7qd.png',
+  description: 'For more than a year, we have been delighting residents of Bulgaria with direct deliveries of wines and strong alcoholic beverages directly from the producers.'
+};
+
 async function main() {
   try {
     console.log('🚀 Starting seed...');
@@ -243,7 +249,8 @@ async function main() {
       prisma.category.deleteMany(),
       prisma.user.deleteMany(),
       prisma.slide.deleteMany(),
-      prisma.blog.deleteMany()
+      prisma.blog.deleteMany(),
+      prisma.showcase.deleteMany()
     ]);
     console.log('✅ Database cleared');
 
@@ -329,6 +336,15 @@ async function main() {
       console.log('✅ Created admin user:', admin.email);
     } catch (error) {
       console.error('❌ Failed to create admin:', error);
+    }
+
+    // Создание showcase
+    console.log('🖼 Creating showcase...');
+    try {
+      await prisma.showcase.create({ data: showcase });
+      console.log('✅ Created showcase');
+    } catch (error) {
+      console.error('❌ Failed to create showcase:', error);
     }
 
     console.log('✨ Seed finished successfully');
