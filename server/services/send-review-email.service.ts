@@ -17,14 +17,21 @@ const transporter = nodemailer.createTransport({
   logger: true
 });
 
-export async function sendReviewEmail({ name, email, message, rating }: { name: string, email: string, message: string, rating: number }) {
+export async function sendReviewEmail({ name, email, message, rating, file }: { name: string, email: string, message: string, rating: number, file?: Express.Multer.File }) {
   try {
-    await transporter.sendMail({
+    const mailOptions: any = {
       from: process.env.EMAIL_USER,
       to: process.env.EMAIL_USER, // или другой email для получения отзывов
       subject: 'Новый отзыв на сайте',
       text: `Имя: ${name}\nEmail: ${email}\nОценка: ${rating}\nСообщение: ${message}`
-    });
+    };
+    if (file) {
+      mailOptions.attachments = [{
+        filename: file.originalname,
+        content: file.buffer
+      }];
+    }
+    await transporter.sendMail(mailOptions);
     console.log('[sendReviewEmail] Email sent successfully');
   } catch (mailErr) {
     console.error('[sendReviewEmail] Error sending email:', mailErr);

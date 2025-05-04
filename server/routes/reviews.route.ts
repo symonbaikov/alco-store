@@ -119,7 +119,7 @@ router.post('/', authenticatedUser, (req: MulterRequest, res: Response, next: Ne
 
       // Отправляем письмо админу о новом отзыве через сервис
       try {
-        await sendReviewEmail({ name, email, message, rating });
+        await sendReviewEmail({ name, email, message, rating, file: req.file });
       } catch (mailErr) {
         console.error('[Reviews POST] Error sending email:', mailErr);
       }
