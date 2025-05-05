@@ -1,27 +1,31 @@
 import { render } from '@testing-library/react';
 import { Reviews } from '../components/Reviews/Reviews';
 
-// Мокаем useReviews
+// --- Mock data and helpers ---
+let mockReviews = [
+  {
+    id: 1,
+    author: 'Иван Иванов',
+    text: 'Отличный магазин!',
+    rating: 5,
+    createdAt: '2024-05-01T12:00:00Z',
+  },
+  {
+    id: 2,
+    author: 'Петр Петров',
+    text: 'Быстрая доставка!',
+    rating: 4,
+    createdAt: '2024-05-02T12:00:00Z',
+  },
+];
+let mockLoading = false;
+let mockError: string | null = null;
+
 jest.mock('../hooks/useReviews', () => ({
   useReviews: () => ({
-    reviews: [
-      {
-        id: 1,
-        author: 'Иван Иванов',
-        text: 'Отличный магазин!',
-        rating: 5,
-        createdAt: '2024-05-01T12:00:00Z',
-      },
-      {
-        id: 2,
-        author: 'Петр Петров',
-        text: 'Быстрая доставка!',
-        rating: 4,
-        createdAt: '2024-05-02T12:00:00Z',
-      },
-    ],
-    loading: false,
-    error: null,
+    reviews: mockReviews,
+    loading: mockLoading,
+    error: mockError,
     fetchReviews: jest.fn(),
   })
 }));
@@ -34,50 +38,51 @@ jest.mock('../context/AuthContext', () => ({
   useAuthContext: () => ({ isLoggedIn: true, user: { firstName: 'Test', lastName: 'User', email: 'test@example.com' } })
 }));
 
-// Снапшот с отзывами
+// --- Reset mocks before each test ---
+beforeEach(() => {
+  mockReviews = [
+    {
+      id: 1,
+      author: 'Иван Иванов',
+      text: 'Отличный магазин!',
+      rating: 5,
+      createdAt: '2024-05-01T12:00:00Z',
+    },
+    {
+      id: 2,
+      author: 'Петр Петров',
+      text: 'Быстрая доставка!',
+      rating: 4,
+      createdAt: '2024-05-02T12:00:00Z',
+    },
+  ];
+  mockLoading = false;
+  mockError = null;
+  jest.clearAllMocks();
+});
+
+// --- Tests ---
 it('Reviews snapshot: renders with reviews', () => {
   const { asFragment } = render(<Reviews />);
   expect(asFragment()).toMatchSnapshot();
 });
 
-// Снапшот без отзывов
 it('Reviews snapshot: renders with no reviews', () => {
-  jest.mock('../hooks/useReviews', () => ({
-    useReviews: () => ({
-      reviews: [],
-      loading: false,
-      error: null,
-      fetchReviews: jest.fn(),
-    })
-  }));
+  mockReviews = [];
   const { asFragment } = render(<Reviews />);
   expect(asFragment()).toMatchSnapshot();
 });
 
-// Снапшот при загрузке
 it('Reviews snapshot: renders loading state', () => {
-  jest.mock('../hooks/useReviews', () => ({
-    useReviews: () => ({
-      reviews: [],
-      loading: true,
-      error: null,
-      fetchReviews: jest.fn(),
-    })
-  }));
+  mockReviews = [];
+  mockLoading = true;
   const { asFragment } = render(<Reviews />);
   expect(asFragment()).toMatchSnapshot();
 });
 
-// Снапшот при ошибке
 it('Reviews snapshot: renders error state', () => {
-  jest.mock('../hooks/useReviews', () => ({
-    useReviews: () => ({
-      reviews: [],
-      loading: false,
-      error: 'Ошибка сервера',
-      fetchReviews: jest.fn(),
-    })
-  }));
+  mockReviews = [];
+  mockError = 'Ошибка сервера';
   const { asFragment } = render(<Reviews />);
   expect(asFragment()).toMatchSnapshot();
 }); 
