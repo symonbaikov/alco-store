@@ -1,13 +1,12 @@
-import React from 'react';
-import renderer from 'react-test-renderer';
-import { ArticleCard } from '../components/Article';
+import { render } from '@testing-library/react';
 import { MemoryRouter } from 'react-router-dom';
+import ArticleList from '../components/Article/Article';
 
-describe('ArticleCard', () => {
-  it('renders correctly', () => {
-    const tree = renderer.create(
+describe('ArticleList', () => {
+  it('renders correctly with all props', () => {
+    const { asFragment } = render(
       <MemoryRouter>
-        <ArticleCard
+        <ArticleList
           id="johnnie-walker"
           title="article.johnnie_walker.title"
           date="14 января 2021"
@@ -15,7 +14,22 @@ describe('ArticleCard', () => {
           description="article.johnnie_walker.desc"
         />
       </MemoryRouter>
-    ).toJSON();
-    expect(tree).toMatchSnapshot();
+    );
+    expect(asFragment()).toMatchSnapshot();
+  });
+
+  it('renders correctly with another article', () => {
+    const { asFragment } = render(
+      <MemoryRouter>
+        <ArticleList
+          id="kvint"
+          title="article.kvint.title"
+          date="22 сентября 2020"
+          image="/images/5cv4mhwhzjwq02m6449mgqlu05g65e0p.jpg"
+          description="article.kvint.desc"
+        />
+      </MemoryRouter>
+    );
+    expect(asFragment()).toMatchSnapshot();
   });
 }); 

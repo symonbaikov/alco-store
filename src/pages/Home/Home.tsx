@@ -8,6 +8,7 @@ import { Reviews } from '../../components/Reviews/Reviews';
 import { Blog } from '../../components/Blog/Blog';
 import BulgarianShowcase from '../../components/BulgarianShowcase/BulgarianShowcase';
 import ArticleList from '../../components/Article/Article';
+import InfoSection from '../../components/InfoSection/InfoSection';
 import "./Home.css";
 
 const Home: React.FC = () => {
@@ -22,6 +23,7 @@ const Home: React.FC = () => {
       <Blog />
       <BulgarianShowcase />
       <ArticleList />
+      <InfoSection />
     </div>
   );
 };

@@ -22,6 +22,10 @@ src/
       Article.tsx
       Article.css
       index.ts
+    InfoSection/
+      InfoSection.tsx
+      InfoSection.css
+      index.ts
   pages/
     Blog/
       KisloeVino.tsx

@@ -6,7 +6,7 @@ import passport from "passport";
 import type { Request, Response } from "express";
 import { PrismaClient } from '@prisma/client';
 
-import slideRoutes from "./routes/slideRoutes";
+import slideRoutes from "./routes/slide.route";
 import authRoutes from "./routes/auth.route";
 import registerRoutes from "./routes/register.route";
 import forgotPasswordRoutes from "./routes/forgot-password.route";
