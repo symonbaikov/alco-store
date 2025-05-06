@@ -274,7 +274,9 @@
         "nameRequired": "Please enter your name",
         "emailRequired": "Please enter your email",
         "emailInvalid": "Please enter a valid email address",
-        "messageRequired": "Please write your review"
+        "messageRequired": "Please write your review",
+        "messageTooLong": "The review is too long (maximum 500 characters)",
+        "messageProfanity": "Please do not use profanity in your review"
       }
     },
     "submitting": "Submitting review...",

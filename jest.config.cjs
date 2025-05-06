@@ -12,7 +12,7 @@ module.exports = {
     '^.+\\.(ts|tsx)$': 'ts-jest',
   },
   transformIgnorePatterns: [
-    "/node_modules/(?!bad-words|bad-words-list).+\\.js$"
+    "/node_modules/(?!bad-words|badwords-list).+\\.js$"
   ],
   testMatch: [
     '<rootDir>/src/**/__tests__/**/*.{js,jsx,ts,tsx}',
