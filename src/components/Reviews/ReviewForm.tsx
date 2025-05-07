@@ -5,7 +5,7 @@ import StarBorderIcon from "@mui/icons-material/StarBorder";
 import AttachFileIcon from "@mui/icons-material/AttachFile";
 import SendIcon from '@mui/icons-material/Send';
 import CancelIcon from '@mui/icons-material/Cancel';
-import { Filter } from 'bad-words';
+import { validateReviewMessage, MAX_REVIEW_LENGTH } from '../../utils/reviewValidation';
 
 interface ReviewFormProps {
   onSubmit: (formData: {
@@ -39,8 +39,6 @@ export const ReviewForm: React.FC<ReviewFormProps> = ({ onSubmit, onClose, userD
     email?: string;
     message?: string;
   }>({});
-
-  const filter = new Filter();
 
   // Инициализация формы при монтировании или изменении userData
   useEffect(() => {
@@ -119,10 +117,11 @@ export const ReviewForm: React.FC<ReviewFormProps> = ({ onSubmit, onClose, userD
     
     if (!reviewMessage.trim()) {
       newErrors.message = t("reviews.form.errors.messageRequired");
-    } else if (reviewMessage.length > 500) {
-      newErrors.message = t("reviews.form.errors.messageTooLong");
-    } else if (filter.isProfane(reviewMessage)) {
-      newErrors.message = t("reviews.form.errors.messageProfanity");
+    } else {
+      const validationError = validateReviewMessage(reviewMessage, t);
+      if (validationError) {
+        newErrors.message = validationError;
+      }
     }
     
     if (rating === 0) {

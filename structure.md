@@ -26,6 +26,13 @@ src/
       InfoSection.tsx
       InfoSection.css
       index.ts
+    ProductCatalog/
+      ProductCard.tsx
+      ProductCard.css
+      ProductCatalog.css
+      ProductCatalog.tsx
+      mock.ts
+      types.ts
   pages/
     Blog/
       KisloeVino.tsx
@@ -35,6 +42,11 @@ src/
       BlogArticle.css
       BlogArticle.tsx
     Reviews/
+      ReviewForm.tsx
+      Reviews.tsx
+      Reviews.css
+      ReviewModal.css
+      ReviewModal.tsx
     Profile/
     Contacts/
     Home/
@@ -62,6 +74,9 @@ src/
   lib/
   assets/
   __mocks__/
+  utils/
+    utils.ts
+    reviewValidation.ts
 public/
   images/
     (список файлов изображений)

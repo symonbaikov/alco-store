@@ -1,0 +1,55 @@
+.catalogSection {
+  padding: 32px 0;
+}
+.container {
+  max-width: 1280px;
+  margin: 0 auto;
+  padding: 0 12px;
+}
+.grid {
+  display: flex;
+  gap: 16px;
+  overflow-x: auto;
+  padding-bottom: 8px;
+  scroll-snap-type: x mandatory;
+  -webkit-overflow-scrolling: touch;
+}
+.grid::-webkit-scrollbar {
+  display: none;
+}
+.card {
+  min-width: 220px;
+  max-width: 240px;
+  flex: 0 0 auto;
+  scroll-snap-align: start;
+}
+@media (min-width: 900px) {
+  .grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, 300px);
+    gap: 0;
+    overflow-x: unset;
+    padding-bottom: 0;
+    justify-content: center;
+  }
+  .container {
+    padding: 0;
+  }
+  .card {
+    min-width: 300px;
+    max-width: 300px;
+    width: 300px;
+    flex: unset;
+    scroll-snap-align: unset;
+  }
+}
+@media (min-width: 1200px) {
+  .grid {
+    grid-template-columns: repeat(5, 1fr);
+  }
+}
+.title {
+  font-size: 2rem;
+  font-weight: bold;
+  margin-bottom: 24px;
+} 
