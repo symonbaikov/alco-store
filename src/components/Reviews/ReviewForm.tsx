@@ -3,9 +3,8 @@ import { useTranslation } from "react-i18next";
 import StarIcon from "@mui/icons-material/Star";
 import StarBorderIcon from "@mui/icons-material/StarBorder";
 import AttachFileIcon from "@mui/icons-material/AttachFile";
-import SendIcon from '@mui/icons-material/Send';
-import CancelIcon from '@mui/icons-material/Cancel';
-import { validateReviewMessage, MAX_REVIEW_LENGTH } from '../../utils/reviewValidation';
+import CloseIcon from '@mui/icons-material/Close';
+import { validateReviewMessage } from '../../utils/reviewValidation';
 
 interface ReviewFormProps {
   onSubmit: (formData: {
@@ -177,7 +176,7 @@ export const ReviewForm: React.FC<ReviewFormProps> = ({ onSubmit, onClose, userD
   };
 
   return (
-    <form className="review-form" onSubmit={handleSubmit} style={{borderRadius: 16, boxShadow: '0 4px 24px rgba(0,0,0,0.10)', background: '#fff', padding: 32, maxWidth: 500, margin: '0 auto'}}>
+    <form className="review-form" onSubmit={handleSubmit} style={{boxShadow: '0 4px 24px rgba(0,0,0,0.10)', background: '#fff', padding: 32, maxWidth: 500, margin: '0 auto'}}>
       <div className="modal-header">
         <h2 className="review-modal-title">{t("reviews.leaveReview")}</h2>
         <button
@@ -186,7 +185,7 @@ export const ReviewForm: React.FC<ReviewFormProps> = ({ onSubmit, onClose, userD
           onClick={handleClose}
           aria-label={t("common.close")}
         >
-          <CancelIcon />
+          <CloseIcon />
         </button>
       </div>
       <div className="form-group">
@@ -262,11 +261,9 @@ export const ReviewForm: React.FC<ReviewFormProps> = ({ onSubmit, onClose, userD
       </div>
       <div className="form-actions">
         <button type="submit" className="submit-btn" style={{display:'flex',alignItems:'center',gap:8}}>
-          <SendIcon style={{fontSize:20}} />
           {t("reviews.form.submit")}
         </button>
         <button type="button" className="cancel-btn" onClick={handleClose} style={{display:'flex',alignItems:'center',gap:8}}>
-          <CancelIcon style={{fontSize:20}} />
           {t("reviews.form.cancel")}
         </button>
       </div>

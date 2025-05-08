@@ -3,7 +3,6 @@ import Modal from '../Modal/Modal';
 import { useTranslation } from 'react-i18next';
 import StarIcon from '@mui/icons-material/Star';
 import StarBorderIcon from '@mui/icons-material/StarBorder';
-import CloseIcon from '@mui/icons-material/Close';
 import './ReviewModal.css';
 
 interface ReviewModalProps {
@@ -43,7 +42,10 @@ export const ReviewModal: React.FC<ReviewModalProps> = ({ isOpen, onClose, revie
             {renderStars(review.rating)}
           </div>
           <button className="modal-close-button" onClick={onClose} aria-label={t('common.close')}>
-            <CloseIcon />
+            <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="square" strokeLinejoin="miter">
+              <line x1="5" y1="5" x2="19" y2="19" />
+              <line x1="19" y1="5" x2="5" y2="19" />
+            </svg>
           </button>
         </div>
         <div className="review-modal-content">

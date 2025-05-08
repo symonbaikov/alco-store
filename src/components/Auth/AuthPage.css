@@ -186,9 +186,9 @@
 
 .modal-header {
   display: flex;
-  justify-content: space-between;
-  align-items: center;
-  padding: 20px;
+  align-items: left;
+  margin-bottom: 20px;
+  padding-bottom: 15px;
   border-bottom: 1px solid #eee;
 }
 

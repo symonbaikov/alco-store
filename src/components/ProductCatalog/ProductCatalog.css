@@ -83,14 +83,7 @@
   font-weight: 400;
   transition: color 0.2s;
 }
-.catalog-category.active {
-  color: #8b0000;
-  font-weight: 700;
-  background: none;
-}
-.catalog-category:hover {
-  color: #8b0000;
-}
+
 @media (max-width: 900px) {
   .catalog-header {
     flex-direction: column;

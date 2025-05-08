@@ -473,10 +473,8 @@
 
   .submit-btn,
   .cancel-btn {
-    padding: 10px 25px;
     border: none;
-    border-radius: 4px;
-    font-size: 14px;
+    font-size: 20px;
     cursor: pointer;
     transition: all 0.3s ease;
     text-transform: none;
@@ -485,7 +483,6 @@
   .submit-btn {
     background-color: #8b0000;
     color: white;
-    min-width: 120px;
   }
 
   .submit-btn:hover {
@@ -496,7 +493,6 @@
     background-color: #fff;
     color: #666;
     border: 1px solid #e0e0e0;
-    min-width: 120px;
   }
 
   .cancel-btn:hover {
