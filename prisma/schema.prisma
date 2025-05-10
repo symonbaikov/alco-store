@@ -76,6 +76,7 @@ model Category {
   strength     String[]
   createdAt    DateTime @default(now())
   updatedAt    DateTime @updatedAt
+  products     Product[]
 }
 
 model Blog {
@@ -96,4 +97,24 @@ model Showcase {
   description String
   createdAt   DateTime @default(now())
   updatedAt   DateTime @updatedAt
+}
+
+model Product {
+  id              Int      @id @default(autoincrement())
+  name            String
+  description     String?
+  price           Int
+  oldPrice        Int?
+  image           String?
+  inStock         Boolean  @default(true)
+  availableText   String   @default("Есть в наличии")
+  article         String   @unique
+  discountPercent Int?
+  economy         Int?
+  isClub          Boolean  @default(false)
+  isPromo         Boolean  @default(false)
+  category        Category @relation(fields: [categoryId], references: [id])
+  categoryId      Int
+  createdAt       DateTime @default(now())
+  updatedAt       DateTime @updatedAt
 }

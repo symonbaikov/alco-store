@@ -1,5 +1,6 @@
 import { PrismaClient, Role } from '@prisma/client';
 import * as bcrypt from 'bcrypt';
+import products from './data/products.json';
 
 const prisma = new PrismaClient();
 
@@ -246,6 +247,7 @@ async function main() {
     console.log('🧹 Clearing database...');
     await prisma.$transaction([
       prisma.review.deleteMany(),
+      prisma.product.deleteMany(),
       prisma.category.deleteMany(),
       prisma.user.deleteMany(),
       prisma.slide.deleteMany(),
@@ -285,9 +287,9 @@ async function main() {
 
     // Создание категорий - исправляем обращение к переменной
     console.log('🗂 Creating categories...');
+    const createdCategories: Record<string, { id: number }> = {};
     for (const [name, displayName] of Object.entries(categoryNames)) {
       try {
-        // Используем правильное имя переменной categoryData вместо categoryData2
         const data = categoryData[name as keyof typeof categoryData];
         if (data) {
           const created = await prisma.category.create({
@@ -300,10 +302,28 @@ async function main() {
               strength: data.strength
             }
           });
+          createdCategories[name] = { id: created.id };
           console.log(`✅ Created category: ${created.name}`);
         }
       } catch (error) {
         console.error(`❌ Failed to create category ${name}:`, error);
+      }
+    }
+
+    // Генерация товаров
+    console.log('🍾 Creating products...');
+    for (const product of products) {
+      try {
+        const categoryId = createdCategories[product.categoryKey]?.id;
+        if (!categoryId) {
+          console.warn(`⚠️ Category not found for product: ${product.name}`);
+          continue;
+        }
+        const { categoryKey, ...productData } = product;
+        await prisma.product.create({ data: { ...productData, categoryId } });
+        console.log(`✅ Created product: ${product.name}`);
+      } catch (error) {
+        console.error('❌ Failed to create product:', error);
       }
     }
 

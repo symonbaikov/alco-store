@@ -16,6 +16,7 @@ import reviewsRouter from './routes/reviews.route';
 import categoryRoutes from "./routes/categories.route";
 import translateRouter from './routes/translate.route';
 import blogRoutes from './routes/blog.route';
+import productsRoutes from './routes/products.route';
 import { authenticatedUser } from "./lib/lib";
 
 // Импортируем конфигурацию passport
@@ -85,6 +86,7 @@ app.use("/api/categories", categoryRoutes);
 app.use('/api/reviews', reviewsRouter);
 app.use('/api/translate', translateRouter);
 app.use('/api/blogs', blogRoutes);
+app.use('/api/products', productsRoutes);
 
 // Showcase route
 app.get('/api/showcase', async (req, res) => {
