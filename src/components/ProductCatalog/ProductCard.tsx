@@ -1,4 +1,5 @@
 import { useState } from 'react';
+import { Link } from 'react-router-dom';
 import { Product } from './types';
 import { isValidProduct, incrementCount, decrementCount } from '../../utils/cardValidation';
 import './ProductCard.css';
@@ -20,7 +21,7 @@ export function ProductCard({ product }: ProductCardProps) {
       : product.name;
 
   return (
-    <div className="card">
+    <Link to={`/product/${product.id}`} className="card" style={{ textDecoration: 'none', color: 'inherit' }}>
       {/* Бейджи */}
       <div className="badges">
         {product.isClub && (
@@ -68,7 +69,7 @@ export function ProductCard({ product }: ProductCardProps) {
         </div>
       )}
       {/* Счетчик и кнопка */}
-      <div className="actions">
+      <div className="actions" onClick={e => e.preventDefault()}>
         <div className="counter">
           <button
             className="counterBtn"
@@ -94,6 +95,6 @@ export function ProductCard({ product }: ProductCardProps) {
           {product.inStock ? 'В корзину' : 'Нет в наличии'}
         </button>
       </div>
-    </div>
+    </Link>
   );
 } 

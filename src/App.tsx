@@ -21,6 +21,7 @@ import Trends2025 from './pages/Blog/Trends2025';
 import KisloeVino from './pages/Blog/KisloeVino';
 import AutohtonnieSorta from './pages/Blog/AutohtonnieSorta';
 import { JohnnieWalker, MerlotVsCabernet, WineAndChocolate, Courvoisier, Kvint } from './pages/Article';
+import { ProductPage } from './pages/Product';
 
 const App: React.FC = () => {
   const [isCartOpen, setIsCartOpen] = React.useState(false);
@@ -137,6 +138,7 @@ const App: React.FC = () => {
             <Route path="/article/wine-and-chocolate" element={<WineAndChocolate />} />
             <Route path="/article/courvoisier" element={<Courvoisier />} />
             <Route path="/article/kvint" element={<Kvint />} />
+            <Route path="/product/:id" element={<ProductPage />} />
           </Routes>
         </main>
         <Cart isOpen={isCartOpen} onClose={() => setIsCartOpen(false)} />

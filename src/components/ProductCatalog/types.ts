@@ -1,14 +1,16 @@
 export interface Product {
-  id: string;
+  id: number;
   name: string;
-  image: string;
+  description?: string;
   price: number;
   oldPrice?: number;
+  image?: string;
   inStock: boolean;
+  availableText: string;
   article: string;
-  isClub: boolean;
-  isPromo: boolean;
   discountPercent?: number;
   economy?: number;
-  availableText?: string;
+  isClub?: boolean;
+  isPromo?: boolean;
+  categoryId?: number;
 } 
