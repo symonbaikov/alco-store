@@ -177,7 +177,7 @@ export const ReviewsPage: React.FC = () => {
             className="leave-review-btn-main"
             onClick={openReviewModalWithAuth}
           >
-            Оставить свой отзыв
+            {t('reviews.leaveReview')}
           </button>
         </div>
         <hr className="reviews-header-divider" />
