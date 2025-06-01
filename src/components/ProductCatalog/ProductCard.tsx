@@ -3,12 +3,14 @@ import { Link } from 'react-router-dom';
 import { Product } from './types';
 import { isValidProduct, incrementCount, decrementCount } from '../../utils/cardValidation';
 import './ProductCard.css';
+import { useTranslation } from 'react-i18next';
 
 interface ProductCardProps {
   product: Product;
 }
 
 export function ProductCard({ product }: ProductCardProps) {
+  const { t } = useTranslation();
   if (!isValidProduct(product)) {
     return null;
   }
@@ -21,7 +23,7 @@ export function ProductCard({ product }: ProductCardProps) {
       : product.name;
 
   return (
-    <Link to={`/product/${product.id}`} className="card" style={{ textDecoration: 'none', color: 'inherit' }}>
+    <Link to={`/${product.slug}/`} className="card" style={{ textDecoration: 'none', color: 'inherit' }}>
       {/* Бейджи */}
       <div className="badges">
         {product.isClub && (
@@ -44,7 +46,13 @@ export function ProductCard({ product }: ProductCardProps) {
         />
       </div>
       {/* Название */}
-      <div className="name" title={product.name}>{displayName}</div>
+      <div className="name" title={product.name}>
+        {product.slug
+          ? t(`product.${product.slug}.name`)
+          : product.translationKey
+            ? t(`product.${product.translationKey}.name`)
+            : product.name}
+      </div>
       {/* Наличие, артикул */}
       <div className="meta">
         <span className={product.inStock ? "inStock" : "outStock"}>{product.availableText}</span>
@@ -52,9 +60,9 @@ export function ProductCard({ product }: ProductCardProps) {
       </div>
       {/* Цена */}
       <div className="priceRow">
-        <span className="price">{product.price} грн</span>
+        <span className="price">{product.price} лв.</span>
         {product.oldPrice && (
-          <span className="oldPrice">{product.oldPrice} грн</span>
+          <span className="oldPrice">{product.oldPrice} лв.</span>
         )}
       </div>
       {/* Экономия и скидка */}

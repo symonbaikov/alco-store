@@ -102,6 +102,13 @@
     align-items: right;
     justify-content: right;
   }
+  .reviews-slider .review-card {
+    background: transparent !important;
+    box-shadow: none !important;
+    border-radius: 0 !important;
+    padding: 0;
+    min-height: unset;
+  }
   .review-card {
     padding: 2rem;
     width: 100%;

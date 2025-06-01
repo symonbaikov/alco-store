@@ -138,7 +138,7 @@ const App: React.FC = () => {
             <Route path="/article/wine-and-chocolate" element={<WineAndChocolate />} />
             <Route path="/article/courvoisier" element={<Courvoisier />} />
             <Route path="/article/kvint" element={<Kvint />} />
-            <Route path="/product/:id" element={<ProductPage />} />
+            <Route path="/:slug/" element={<ProductPage />} />
           </Routes>
         </main>
         <Cart isOpen={isCartOpen} onClose={() => setIsCartOpen(false)} />

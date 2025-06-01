@@ -36,4 +36,4 @@ async function updateReviews() {
   }
 }
 
-updateReviews(); 
+updateReviews();

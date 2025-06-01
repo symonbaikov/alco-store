@@ -522,5 +522,31 @@
     "how_p2": "You can pay in a way convenient for you – by card, cash on delivery or bank transfer.",
     "how_p3": "We deliver throughout Bulgaria by courier service. Orders for Sofia are fulfilled within the day, and for the country – within 1-2 days.",
     "how_p4": "Tramonti – quality alcohol, fast delivery and excellent service!"
+  },
+  "product": {
+    "glen-grant-10-years-old-box": {
+      "name": "Glen Grant 10 Years Old (Box)",
+      "description": "Single malt Scotch whisky aged 10 years. Rich taste with notes of apple, vanilla, and honey."
+    },
+    "finlandia-vodka-05l": {
+      "name": "Finlandia Vodka 0.5L",
+      "description": "Classic Finnish vodka, crystal clear and smooth taste."
+    },
+    "absolut-vodka-07l": {
+      "name": "Absolut Vodka 0.7L",
+      "description": "Premium Swedish vodka, perfect for cocktails."
+    },
+    "paulaner-hefe-weissbier-05l": {
+      "name": "Paulaner Hefe-Weissbier 0.5L",
+      "description": "Traditional German unfiltered wheat beer with fruity notes."
+    },
+    "guinness-draught-044l": {
+      "name": "Guinness Draught 0.44L",
+      "description": "Famous Irish stout with a rich taste and creamy foam."
+    },
+    "homemade-chacha-05l": {
+      "name": "Homemade Chacha 0.5L",
+      "description": "Traditional Georgian strong drink made from grapes."
+    }
   }
 }

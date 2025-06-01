@@ -12,6 +12,9 @@ import { useAuthContext } from '../../context/AuthContext';
 import './ReviewsPage.css';
 import toast from 'react-hot-toast';
 import WarningAmberIcon from '@mui/icons-material/WarningAmber';
+import { ReviewForm } from '../../components/Reviews/ReviewForm';
+import { useAuthAndReviewModal } from '../../hooks/useAuthAndReviewModal';
+import AccountCircleIcon from '@mui/icons-material/AccountCircle';
 
 interface Review {
   id: number;
@@ -19,6 +22,7 @@ interface Review {
   text: string;
   rating: number;
   createdAt: string;
+  photo?: string | null;
 }
 
 const MAX_PREVIEW_LENGTH = 150;
@@ -31,8 +35,13 @@ export const ReviewsPage: React.FC = () => {
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [deleteModalOpen, setDeleteModalOpen] = useState(false);
   const [reviewToDelete, setReviewToDelete] = useState<Review | null>(null);
-  const { user } = useAuthContext();
-  const reviewsPerPage = 6;
+  const reviewsPerPage = 5;
+  const {
+    user,
+    isReviewFormOpen,
+    openReviewModalWithAuth,
+    closeReviewModal
+  } = useAuthAndReviewModal();
 
   const truncateText = (text: string) => {
     if (text.length <= MAX_PREVIEW_LENGTH) return text;
@@ -102,6 +111,34 @@ export const ReviewsPage: React.FC = () => {
     window.scrollTo(0, 0);
   };
 
+  const handleReviewFormSubmit = async (formData: {
+    name: string;
+    email: string;
+    message: string;
+    file: File | null;
+    rating: number;
+  }) => {
+    try {
+      const loadingToast = toast.loading(t('reviews.submitting'));
+      const form = new FormData();
+      form.append('name', formData.name.trim());
+      form.append('email', formData.email.trim());
+      form.append('message', formData.message.trim());
+      form.append('rating', formData.rating.toString());
+      if (formData.file) form.append('file', formData.file);
+      const response = await fetch('http://localhost:3001/api/reviews', {
+        method: 'POST',
+        credentials: 'include',
+        body: form
+      });
+      if (!response.ok) throw new Error('Ошибка отправки');
+      toast.success(t('reviews.submitSuccess'), { id: loadingToast, duration: 3000 });
+      await fetchReviews();
+    } catch (error) {
+      toast.error(t('reviews.submitError'), { duration: 4000 });
+    }
+  };
+
   if (loading) {
     return (
       <div className="reviews-page">
@@ -133,102 +170,114 @@ export const ReviewsPage: React.FC = () => {
 
   return (
     <div className="reviews-page">
-      <div className="breadcrumbs-container">
-        <div className="content-wrapper">
-          <Breadcrumbs />
+      <div className="reviews-header-bar">
+        <div className="reviews-header-main">
           <h1 className="page-title">{t("reviews.title")}</h1>
+          <button
+            className="leave-review-btn-main"
+            onClick={openReviewModalWithAuth}
+          >
+            Оставить свой отзыв
+          </button>
         </div>
+        <hr className="reviews-header-divider" />
       </div>
-
-      <div className="container">
-        <div className="reviews-grid">
-          {currentReviews.map((review) => (
-            <div 
-              key={review.id} 
-              className="review-card"
-              onClick={() => handleReviewClick(review)}
-              role="button"
-              tabIndex={0}
-              onKeyPress={(e) => {
-                if (e.key === 'Enter' || e.key === ' ') {
-                  handleReviewClick(review);
-                }
-              }}
-              style={{position: 'relative'}}
-            >
-              {user?.role === 'ADMIN' && (
-                <div className="review-delete-btn-wrapper">
-                  <button
-                    className="delete-review-btn"
-                    onClick={e => { e.stopPropagation(); handleDeleteClick(review); }}
-                    aria-label={t('reviews.delete')}
+      <div className="reviews-layout reviews-layout-grid">
+        <div className="reviews-main-content" style={{ gridColumn: '1 / -1' }}>
+          <div className="container">
+            <div className="reviews-grid">
+              {currentReviews.map((review) => (
+                <div key={review.id} style={{display: 'flex', alignItems: 'center'}}>
+                  <div className="review-avatar desktop-only">
+                    {(review as any).photo ? (
+                      <img src={(review as any).photo} alt={review.author} className="avatar-img" />
+                    ) : (
+                      <AccountCircleIcon style={{ fontSize: 44, color: '#c1c1c1' }} />
+                    )}
+                  </div>
+                  <div 
+                    className="review-card"
+                    onClick={() => handleReviewClick(review)}
+                    role="button"
+                    tabIndex={0}
+                    onKeyPress={(e) => {
+                      if (e.key === 'Enter' || e.key === ' ') {
+                        handleReviewClick(review);
+                      }
+                    }}
+                    style={{position: 'relative', flex: 1}}
                   >
-                    <DeleteOutlineIcon style={{color: '#8b0000', fontSize: 24}} />
-                  </button>
+                    {user?.role === 'ADMIN' && (
+                      <div className="review-delete-btn-wrapper">
+                        <button
+                          className="delete-review-btn"
+                          onClick={e => { e.stopPropagation(); handleDeleteClick(review); }}
+                          aria-label={t('reviews.delete')}
+                        >
+                          <DeleteOutlineIcon style={{color: '#8b0000', fontSize: 24}} />
+                        </button>
+                      </div>
+                    )}
+                    <div className="review-header">
+                      <h3 className="review-author">{review.author}</h3>
+                      <div className="review-rating">
+                        {renderStars(review.rating)}
+                      </div>
+                    </div>
+                    <p className="review-text">{truncateText(review.text)}</p>
+                    <div className="review-footer">
+                      <span className="review-date">
+                        {new Date(review.createdAt).toLocaleDateString()}
+                      </span>
+                    </div>
+                  </div>
                 </div>
-              )}
-              <div className="review-header">
-                <h3 className="review-author">{review.author}</h3>
-                <div className="review-rating">
-                  {renderStars(review.rating)}
-                </div>
-              </div>
-              <p className="review-text">{truncateText(review.text)}</p>
-              <div className="review-footer">
-                <span className="review-date">
-                  {new Date(review.createdAt).toLocaleDateString()}
-                </span>
-              </div>
+              ))}
             </div>
-          ))}
+            {totalPages > 1 && (
+              <div className="pagination">
+                <button
+                  className="pagination-button"
+                  onClick={() => handlePageChange(currentPage - 1)}
+                  disabled={currentPage === 1}
+                >
+                  ‹
+                </button>
+                <div className="pagination-current-red">{currentPage}</div>
+                <button
+                  className="pagination-button"
+                  onClick={() => handlePageChange(currentPage + 1)}
+                  disabled={currentPage === totalPages}
+                >
+                  ›
+                </button>
+              </div>
+            )}
+            <ReviewModal
+              isOpen={isModalOpen}
+              onClose={handleCloseModal}
+              review={selectedReview}
+            />
+            <Modal isOpen={deleteModalOpen} onClose={() => setDeleteModalOpen(false)}>
+              <div className="modal-confirm-text">
+                {t('reviews.deleteConfirm', 'Вы уверены, что хотите удалить этот отзыв?')}
+              </div>
+              <div style={{ display: 'flex', gap: 16, justifyContent: 'flex-end' }}>
+                <button className="cancel-btn" onClick={() => setDeleteModalOpen(false)}>{t('common.cancel')}</button>
+                <button className="submit-btn" onClick={handleDeleteConfirm}>{t('common.delete', 'Удалить')}</button>
+              </div>
+            </Modal>
+            {isReviewFormOpen && (
+              <Modal isOpen={isReviewFormOpen} onClose={closeReviewModal}>
+                <ReviewForm
+                  onSubmit={handleReviewFormSubmit}
+                  onClose={closeReviewModal}
+                  userData={user}
+                />
+              </Modal>
+            )}
+          </div>
         </div>
-
-        {totalPages > 1 && (
-          <div className="pagination">
-            {[...Array(totalPages)].map((_, index) => (
-              <button
-                key={index + 1}
-                className={`pagination-button ${currentPage === index + 1 ? 'active' : ''}`}
-                onClick={() => handlePageChange(index + 1)}
-              >
-                {index + 1}
-              </button>
-            ))}
-          </div>
-        )}
-
-        <ReviewModal
-          isOpen={isModalOpen}
-          onClose={handleCloseModal}
-          review={selectedReview}
-        />
-        <Modal isOpen={deleteModalOpen} onClose={() => setDeleteModalOpen(false)}>
-          <div style={{padding: 32, minWidth: 320, textAlign: 'center', borderRadius: 12, background: '#fff', boxShadow: '0 4px 24px rgba(0,0,0,0.10)'}}>
-            <WarningAmberIcon style={{color: '#d32f2f', fontSize: 48, marginBottom: 12}} />
-            <p className="modal-confirm-text" style={{marginBottom: 32}}>
-              {t('reviews.confirmDelete', i18n.language === 'bg' ? 'Наистина ли искате да изтриете този отзив?' : 'Are you sure you want to delete this review?')}
-            </p>
-            <div style={{display: 'flex', justifyContent: 'center', gap: 16}}>
-              <button
-                onClick={handleDeleteConfirm}
-                style={{
-                  background: '#d32f2f', color: 'white', border: 'none', padding: '12px 32px', borderRadius: 6, fontWeight: 600, fontSize: 16, display: 'flex', alignItems: 'center', gap: 8, boxShadow: '0 2px 8px rgba(211,47,47,0.08)', transition: 'background 0.2s', cursor: 'pointer'
-                }}
-              >
-                <DeleteOutlineIcon style={{fontSize: 22}} />
-                {i18n.language === 'bg' ? 'Да, изтрий' : 'Yes, delete'}
-              </button>
-              <button
-                onClick={() => setDeleteModalOpen(false)}
-                style={{
-                  background: '#f5f5f5', color: '#333', border: 'none', padding: '12px 32px', borderRadius: 6, fontWeight: 500, fontSize: 16, transition: 'background 0.2s', cursor: 'pointer'
-                }}
-              >
-                {i18n.language === 'bg' ? 'Не' : 'No'}
-              </button>
-            </div>
-          </div>
-        </Modal>
       </div>
     </div>
   );
