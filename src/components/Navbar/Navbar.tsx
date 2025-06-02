@@ -5,6 +5,7 @@ import { ROUTES, PHONE_NUMBERS } from "../../../server/config/routes";
 import { useAuthContext } from "../../context/AuthContext";
 import "./Navbar.css";
 import Catalog from "../Catalog/Catalog";
+import { MobileMenu } from './MobileMenu/MobileMenu';
 
 interface NavbarProps {
   onCartClick: () => void;
@@ -39,6 +40,17 @@ const Navbar: React.FC<NavbarProps> = ({ onCartClick, onAuthClick }) => {
     window.addEventListener("scroll", handleScroll);
     return () => window.removeEventListener("scroll", handleScroll);
   }, []);
+
+  useEffect(() => {
+    if (isMobileMenuOpen) {
+      document.body.style.overflow = 'hidden';
+    } else {
+      document.body.style.overflow = '';
+    }
+    return () => {
+      document.body.style.overflow = '';
+    };
+  }, [isMobileMenuOpen]);
 
   const changeLanguage = async (lng: string) => {
     try {
@@ -199,102 +211,21 @@ const Navbar: React.FC<NavbarProps> = ({ onCartClick, onAuthClick }) => {
         </div>
       )}
 
-      {/* Меню для мобильных */}
-      <div className={`mobile-menu ${isMobileMenuOpen ? "open" : ""}`}>
-        <div
-          className="language-selector"
-          onClick={() => setIsLanguageMenuOpen(true)}
-        >
-          <div className="language-icon">
-            <i className={`fas ${isLanguageLoading ? 'fa-spinner fa-spin' : 'fa-globe'}`}></i>
-          </div>
-          <div className="language-content">
-            <div className="language-title">{i18n.language === 'bg' ? 'Български' : 'English'}</div>
-            <div className="language-subtitle">{t('navbar.language')}</div>
-          </div>
-          <i className="fas fa-chevron-right"></i>
-        </div>
-
-        <div className={`language-menu ${isLanguageMenuOpen ? "open" : ""}`}>
-          <div className="language-menu-header">
-            <button
-              className="back-button"
-              onClick={() => setIsLanguageMenuOpen(false)}
-            >
-              <i className="fas fa-arrow-left"></i>
-              {t('navbar.back')}
-            </button>
-          </div>
-          <div className="language-options">
-            <div 
-              className={`language-option ${i18n.language === 'bg' ? 'active' : ''}`}
-              onClick={() => !isLanguageLoading && changeLanguage('bg')}
-            >
-              <span>Български</span>
-              {i18n.language === 'bg' && <i className="fas fa-check"></i>}
-            </div>
-            <div 
-              className={`language-option ${i18n.language === 'en' ? 'active' : ''}`}
-              onClick={() => !isLanguageLoading && changeLanguage('en')}
-            >
-              <span>English</span>
-              {i18n.language === 'en' && <i className="fas fa-check"></i>}
-            </div>
-          </div>
-        </div>
-
-        <div className="mobile-catalog">
-          <ul className="mobile-catalog-list">
-            <li>
-              <div className="mobile-catalog-item" onClick={() => handleNavLinkClick(ROUTES.WINE)}>{t('navbar.wine')}</div>
-            </li>
-            <li>
-              <div className="mobile-catalog-item" onClick={() => handleNavLinkClick(ROUTES.STRONG)}>{t('navbar.strong')}</div>
-            </li>
-            <li>
-              <div className="mobile-catalog-item" onClick={() => handleNavLinkClick(ROUTES.LIQUOR)}>{t('navbar.liquor')}</div>
-            </li>
-            <li>
-              <div className="mobile-catalog-item" onClick={() => handleNavLinkClick(ROUTES.DRINKS)}>{t('navbar.drinks')}</div>
-            </li>
-            <li>
-              <div className="mobile-footer-item" onClick={() => handleNavLinkClick(ROUTES.PROFILE)}>
-                <i className="fas fa-user"></i>
-                <span>{t('navbar.profile')}</span>
-              </div>
-            </li>
-            <li>
-              <div className="mobile-footer-item" onClick={() => { onCartClick(); handleMobileMenuClose(); }}>
-                <i className="fas fa-shopping-cart"></i>
-                <span>{t('navbar.cart')}</span>
-                <span className="cart-badge">0</span>
-              </div>
-            </li>
-            <li>
-              <div className="mobile-footer-item" onClick={() => handleNavLinkClick(ROUTES.COMPARE)}>
-                <i className="fas fa-chart-bar"></i>
-                <span>{t('navbar.compare')}</span>
-                <span className="compare-badge">0</span>
-              </div>
-            </li>
-            <li>
-              <div className="mobile-catalog-item" onClick={() => handleNavLinkClick(ROUTES.BEER)}>{t('navbar.beer')}</div>
-            </li>
-            <li>
-              <div className="mobile-catalog-item" onClick={() => handleNavLinkClick(ROUTES.SNACKS)}>{t('navbar.snacks')}</div>
-            </li>
-            <li>
-              <div className="mobile-catalog-item" onClick={() => handleNavLinkClick(ROUTES.CONFECTIONERY)}>{t('navbar.confectionery')}</div>
-            </li>
-            <li>
-              <div className="mobile-catalog-item" onClick={() => handleNavLinkClick(ROUTES.SALES)}>{t('navbar.sales')}</div>
-            </li>
-            <li>
-              <div className="mobile-catalog-item" onClick={() => handleNavLinkClick(ROUTES.CONTACTS)}>{t('navbar.contacts')}</div>
-            </li>
-          </ul>
-        </div>
-      </div>
+      {/* Новое мобильное меню */}
+      <MobileMenu
+        isOpen={isMobileMenuOpen}
+        onClose={handleMobileMenuClose}
+        onCartClick={onCartClick}
+        onAuthClick={onAuthClick}
+        isLanguageMenuOpen={isLanguageMenuOpen}
+        setIsLanguageMenuOpen={setIsLanguageMenuOpen}
+        isLanguageLoading={isLanguageLoading}
+        i18n={i18n}
+        t={t}
+        changeLanguage={changeLanguage}
+        handleNavLinkClick={handleNavLinkClick}
+        ROUTES={ROUTES}
+      />
 
       {/* Компактное меню */}
       <div className={`compact-nav ${isScrolled ? "show" : ""}`}>

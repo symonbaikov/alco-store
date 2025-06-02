@@ -1,0 +1,243 @@
+/* Overlay для мобильного меню */
+.mobile-menu-overlay {
+  position: fixed;
+  left: 0;
+  right: 0;
+  top: 0;
+  width: 100vw;
+  min-width: 100vw;
+  max-width: 100vw;
+  height: 100vh;
+  background: rgba(0,0,0,0.35);
+  z-index: 9999;
+  display: flex;
+  justify-content: flex-start;
+  align-items: flex-start;
+  pointer-events: auto;
+  box-sizing: border-box;
+}
+
+.mobile-menu {
+  display: none;
+  background: #fff;
+  color: #333;
+}
+
+.mobile-menu.open {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  width: 100vw;
+  min-width: 100vw;
+  max-width: 100vw;
+  height: 100vh;
+  min-height: 100vh;
+  max-height: 100vh;
+  background: #fff;
+  box-shadow: 2px 0 16px rgba(0,0,0,0.10);
+  z-index: 10000;
+  overflow-y: auto;
+  padding-bottom: 32px;
+  display: flex;
+  flex-direction: column;
+  box-sizing: border-box;
+}
+
+.mobile-menu-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 0 16px;
+  height: 56px;
+  border-bottom: 1px solid #eee;
+  background: #fff;
+  position: sticky;
+  top: 0;
+  z-index: 10001;
+}
+
+.mobile-menu-logo {
+  font-size: 24px;
+  font-weight: 700;
+  color: #222;
+  text-decoration: none;
+  font-family: "Cinzel", serif;
+  letter-spacing: 2px;
+  text-transform: uppercase;
+  line-height: 56px;
+  display: flex;
+  align-items: center;
+}
+
+.mobile-menu-close {
+  background: none;
+  border: none;
+  font-size: 28px;
+  color: #333;
+  cursor: pointer;
+  padding: 0 0 0 16px;
+  height: 56px;
+  width: 48px;
+  display: flex;
+  align-items: center;
+  justify-content: flex-end;
+}
+
+.language-selector {
+  padding: 15px;
+  border-bottom: 1px solid #eee;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.language-icon {
+  width: 40px;
+  height: 40px;
+  background: #f5f5f5;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: #666;
+}
+
+.language-content {
+  flex: 1;
+}
+
+.language-title {
+  font-size: 16px;
+  color: #333;
+  margin-bottom: 4px;
+}
+
+.language-subtitle {
+  font-size: 13px;
+  color: #666;
+}
+
+.language-menu {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: white;
+  z-index: 1010;
+  transform: translateX(100%);
+  transition: transform 0.3s ease;
+}
+
+.language-menu.open {
+  transform: translateX(0);
+}
+
+.language-menu-header {
+  padding: 15px;
+  border-bottom: 1px solid #eee;
+  display: flex;
+  align-items: center;
+  background: #fff;
+}
+
+.back-button {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  background: none;
+  border: none;
+  cursor: pointer;
+  font-size: 16px;
+  color: #333;
+  padding: 0;
+}
+
+.language-options {
+  padding: 15px;
+}
+
+.language-options .language-option {
+  padding: 15px;
+  border-radius: 8px;
+  margin-bottom: 10px;
+  cursor: pointer;
+  transition: background-color 0.2s ease;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.language-options .language-option:hover {
+  background-color: #f5f5f5;
+}
+
+.language-options .language-option.active {
+  background-color: #f0f0f0;
+}
+
+.language-options .language-option span {
+  font-size: 16px;
+  color: #333;
+}
+
+.language-options .language-option .fa-check {
+  color: #8b0000;
+}
+
+.mobile-catalog {
+  border-top: 1px solid #eee;
+}
+
+.mobile-catalog-list {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+}
+
+.mobile-catalog-list li {
+  border-bottom: 1px solid #eee;
+}
+
+.mobile-catalog-item {
+  color: #333;
+  text-decoration: none;
+  padding: 15px 20px;
+  font-size: 16px;
+  display: block;
+  cursor: pointer;
+}
+
+.mobile-footer-item {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  padding: 12px 20px;
+  color: #333;
+  text-decoration: none;
+  font-weight: 500;
+  cursor: pointer;
+}
+
+.mobile-footer-item i {
+  color: #666;
+  width: 20px;
+  text-align: center;
+}
+
+.cart-badge,
+.compare-badge {
+  background: #666;
+  color: white;
+  padding: 2px 6px;
+  border-radius: 12px;
+  font-size: 12px;
+  margin-left: 10px;
+}
+
+@media (max-width: 420px) {
+  .mobile-menu.open {
+    max-width: 100vw;
+  }
+} 
